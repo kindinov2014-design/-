@@ -16,12 +16,21 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            background: radial-gradient(circle at 50% 0%, #1a0000 0%, #0a0a0f 60%);
         }
 
-        #particles-canvas {
+        /* АНИМИРОВАННЫЙ ФОН */
+        #bg-canvas {
             position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: -1; pointer-events: none; opacity: 0.5;
+            z-index: -1; pointer-events: none;
+        }
+        #bg-glow {
+            position: fixed; top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -2; pointer-events: none;
+            background: radial-gradient(circle 600px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 51, 51, 0.08), transparent 80%);
+            transition: background 0.1s ease;
         }
 
         /* ===== TOPBAR ===== */
@@ -108,17 +117,9 @@
         /* ===== HERO ===== */
         .hero {
             position: relative; height: 85vh; min-height: 600px;
-            background: linear-gradient(135deg, #1a0000 0%, #050508 100%);
+            background: linear-gradient(135deg, rgba(26,0,0,0.5) 0%, rgba(5,5,8,0.5) 100%);
             overflow: hidden; display: flex; align-items: flex-end;
-            padding: 80px 60px;
-        }
-        .hero::before {
-            content: ''; position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background:
-                radial-gradient(circle at 30% 50%, rgba(139, 0, 0, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 80% 20%, rgba(179, 0, 0, 0.2) 0%, transparent 50%);
-            z-index: 1;
+            padding: 80px 60px; backdrop-filter: blur(5px);
         }
         .hero-content { position: relative; z-index: 2; max-width: 700px; }
         .hero h1 {
@@ -175,10 +176,11 @@
         /* ===== PREDICTION ===== */
         .prediction-section { max-width: 1200px; margin: 40px auto; padding: 0 60px; text-align: center; }
         .prediction-box {
-            background: linear-gradient(145deg, #1a0a0a 0%, #0a0a0f 100%);
+            background: linear-gradient(145deg, rgba(26,10,10,0.8) 0%, rgba(10,10,15,0.8) 100%);
             border: 2px solid rgba(255, 51, 51, 0.3);
             border-radius: 20px; padding: 40px; position: relative;
             overflow: hidden; box-shadow: 0 0 60px rgba(255, 51, 51, 0.15);
+            backdrop-filter: blur(10px);
         }
         .prediction-box::before {
             content: ''; position: absolute; top: -50%; left: -50%;
@@ -211,10 +213,11 @@
         .map-title { font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 25px; letter-spacing: 1px; }
         .map-title span { color: #ff3333; }
         .map-container {
-            background: linear-gradient(145deg, #0a0a0f 0%, #050508 100%);
+            background: linear-gradient(145deg, rgba(10,10,15,0.8) 0%, rgba(5,5,8,0.8) 100%);
             border: 2px solid rgba(255, 51, 51, 0.3);
             border-radius: 24px; padding: 30px; position: relative;
             overflow: hidden; box-shadow: 0 0 80px rgba(255, 51, 51, 0.15);
+            backdrop-filter: blur(10px);
         }
         .map-svg { width: 100%; height: 600px; display: block; border-radius: 16px; }
         .map-line { stroke-dasharray: 8 6; animation: dash 2s linear infinite; }
@@ -225,7 +228,7 @@
         .map-point text { transition: all 0.3s ease; pointer-events: none; }
         .map-point:hover text { fill: #fff; font-weight: bold; font-size: 16px; }
         .map-info {
-            background: linear-gradient(145deg, #1a0505, #0a0a0f);
+            background: linear-gradient(145deg, rgba(26,5,5,0.9), rgba(10,10,15,0.9));
             border: 1px solid #ff3333; border-radius: 16px;
             padding: 25px 30px; margin-top: 20px; text-align: center;
             color: #fff; min-height: 80px; transition: opacity 0.3s ease, transform 0.3s ease;
@@ -266,11 +269,12 @@
         .showcase-content.active { display: block; opacity: 1; transform: translateY(0); animation: showcaseFadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
         @keyframes showcaseFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .showcase-description {
-            background: linear-gradient(145deg, #1a0505, #0a0a0f);
+            background: linear-gradient(145deg, rgba(26,5,5,0.8), rgba(10,10,15,0.8));
             border-left: 4px solid #ff3333; border-radius: 0 16px 16px 0;
             padding: 25px 30px; margin-bottom: 25px; color: #ccc;
             font-size: 0.95rem; line-height: 1.8;
             box-shadow: 0 0 30px rgba(255, 51, 51, 0.1);
+            backdrop-filter: blur(10px);
         }
         .showcase-description strong { color: #ff3333; font-size: 1.1rem; letter-spacing: 1px; }
 
@@ -284,7 +288,7 @@
         .carousel::-webkit-scrollbar-thumb { background: #ff3333; border-radius: 3px; }
 
         .card {
-            flex: 0 0 300px; background: #0f0f15;
+            flex: 0 0 300px; background: rgba(15, 15, 21, 0.9);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 16px; overflow: hidden;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -293,7 +297,7 @@
         .card:hover { transform: translateY(-10px) scale(1.02); border-color: #ff3333; box-shadow: 0 20px 50px rgba(255, 51, 51, 0.4); }
         .card-image {
             width: 100%; height: 180px;
-            background: linear-gradient(135deg, #1a0000, #0a0a0f);
+            background: linear-gradient(135deg, rgba(26,0,0,0.8), rgba(10,10,15,0.8));
             display: flex; align-items: center; justify-content: center;
             font-size: 3.5rem; position: relative; overflow: hidden;
         }
@@ -320,10 +324,10 @@
         /* ===== BIG BANNER ===== */
         .big-banner { max-width: 1200px; margin: 60px auto; padding: 0 60px; }
         .big-banner-inner {
-            background: linear-gradient(135deg, #1a0000 0%, #0a0a0f 100%);
+            background: linear-gradient(135deg, rgba(26,0,0,0.8) 0%, rgba(10,10,15,0.8) 100%);
             border: 1px solid rgba(255, 51, 51, 0.3);
             border-radius: 20px; padding: 60px; text-align: center;
-            position: relative; overflow: hidden;
+            position: relative; overflow: hidden; backdrop-filter: blur(10px);
         }
         .big-banner-inner::before {
             content: ''; position: absolute; top: 0; left: 0;
@@ -340,7 +344,7 @@
             gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 60px;
         }
         .shop-item {
-            background: #0f0f15; border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(15, 15, 21, 0.9); border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 16px; padding: 30px; text-align: center;
             transition: all 0.3s ease; cursor: pointer; position: relative;
         }
@@ -375,7 +379,7 @@
             gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 60px;
         }
         .music-item {
-            background: #0f0f15; border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(15, 15, 21, 0.9); border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 16px; padding: 25px; transition: all 0.3s ease; cursor: pointer;
         }
         .music-item:hover { transform: translateY(-5px); border-color: #ff3333; }
@@ -386,7 +390,7 @@
         /* ===== COOP ===== */
         .coop-section { max-width: 800px; margin: 0 auto; padding: 0 60px; }
         .coop-form {
-            background: #0f0f15; border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(15, 15, 21, 0.9); border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 20px; padding: 40px;
         }
         .coop-form h3 { color: #fff; font-size: 1.5rem; margin-bottom: 25px; }
@@ -412,7 +416,7 @@
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
         }
         .about-image {
-            background: linear-gradient(135deg, #1a0000, #0a0a0f);
+            background: linear-gradient(135deg, rgba(26,0,0,0.8), rgba(10,10,15,0.8));
             border-radius: 20px; height: 400px;
             display: flex; align-items: center; justify-content: center;
             font-size: 6rem;
@@ -437,7 +441,7 @@
             gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 60px;
         }
         .char-card {
-            background: #0f0f15; border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(15, 15, 21, 0.9); border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 18px; padding: 25px 20px; text-align: center;
             cursor: pointer; transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative; overflow: hidden;
@@ -456,7 +460,7 @@
         .char-avatar {
             width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 15px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 2.8rem; background: linear-gradient(145deg, #1a0505, #0a0a0f);
+            font-size: 2.8rem; background: linear-gradient(145deg, rgba(26,5,5,0.8), rgba(10,10,15,0.8));
             border: 3px solid var(--char-color, #ff3333);
             box-shadow: 0 0 25px var(--char-glow, rgba(255,51,51,0.4));
             overflow: hidden;
@@ -477,10 +481,10 @@
         /* ===== LORE ===== */
         .lore-accordion-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
         .lore-item {
-            background: linear-gradient(145deg, #1a0505, #0a0a0f);
+            background: linear-gradient(145deg, rgba(26,5,5,0.8), rgba(10,10,15,0.8));
             border: 2px solid rgba(255, 51, 51, 0.2);
             border-radius: 16px; margin-bottom: 15px; overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease; backdrop-filter: blur(10px);
         }
         .lore-item.active { border-color: #ff3333; box-shadow: 0 0 40px rgba(255, 51, 51, 0.3); }
         .lore-header {
@@ -507,10 +511,10 @@
         /* ===== SEASONS ACCORDION ===== */
         .season-accordion-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
         .season-accordion-item {
-            background: linear-gradient(145deg, #1a0505, #0a0a0f);
+            background: linear-gradient(145deg, rgba(26,5,5,0.8), rgba(10,10,15,0.8));
             border: 2px solid rgba(255, 51, 51, 0.2);
             border-radius: 16px; margin-bottom: 15px; overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease; backdrop-filter: blur(10px);
         }
         .season-accordion-item.active { border-color: #ff3333; box-shadow: 0 0 40px rgba(255, 51, 51, 0.3); }
         .season-header {
@@ -568,7 +572,7 @@
         }
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal {
-            background: linear-gradient(145deg, #111 0%, #050508 100%);
+            background: linear-gradient(145deg, rgba(17,17,17,0.95) 0%, rgba(5,5,8,0.95) 100%);
             border: 1px solid rgba(255, 51, 51, 0.4);
             border-radius: 20px; padding: 40px; max-width: 450px; width: 100%;
             position: relative; box-shadow: 0 0 100px rgba(255, 51, 51, 0.2);
@@ -617,7 +621,7 @@
         .error-msg { color: #ff3333; font-size: 0.85rem; text-align: center; margin-top: 10px; min-height: 20px; }
 
         .promo-modal {
-            background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0f 100%);
+            background: linear-gradient(145deg, rgba(26,26,26,0.95) 0%, rgba(10,10,15,0.95) 100%);
             border: 2px solid #ffd700; border-radius: 20px;
             padding: 50px 40px; max-width: 500px; width: 100%;
             text-align: center; box-shadow: 0 0 100px rgba(255, 215, 0, 0.4);
@@ -645,7 +649,7 @@
         .promo-modal-btn:hover { transform: scale(1.05); box-shadow: 0 10px 40px rgba(255, 215, 0, 0.8); }
 
         .auth-required {
-            background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0f 100%);
+            background: linear-gradient(145deg, rgba(26,26,26,0.95) 0%, rgba(10,10,15,0.95) 100%);
             border: 2px solid #ff3333; border-radius: 20px;
             padding: 50px 40px; max-width: 500px; width: 100%;
             text-align: center; box-shadow: 0 0 100px rgba(255, 51, 51, 0.4);
@@ -667,7 +671,7 @@
 
         /* ===== CHARACTER MODAL ===== */
         .char-modal {
-            background: linear-gradient(145deg, #111 0%, #050508 100%);
+            background: linear-gradient(145deg, rgba(17,17,17,0.95) 0%, rgba(5,5,8,0.95) 100%);
             border: 2px solid var(--char-color, #ff3333);
             border-radius: 20px; padding: 40px; max-width: 600px; width: 100%;
             position: relative; box-shadow: 0 0 100px var(--char-glow, rgba(255,51,51,0.3));
@@ -677,7 +681,7 @@
         .char-modal-avatar {
             width: 100px; height: 100px; border-radius: 50%; flex-shrink: 0;
             display: flex; align-items: center; justify-content: center;
-            font-size: 3rem; background: linear-gradient(145deg, #1a0505, #0a0a0f);
+            font-size: 3rem; background: linear-gradient(145deg, rgba(26,5,5,0.8), rgba(10,10,15,0.8));
             border: 3px solid var(--char-color, #ff3333);
             box-shadow: 0 0 30px var(--char-glow, rgba(255,51,51,0.5));
             overflow: hidden;
@@ -700,7 +704,7 @@
 
         /* ===== EPISODE MODAL ===== */
         .episode-modal-content {
-            background: linear-gradient(145deg, #111 0%, #050508 100%);
+            background: linear-gradient(145deg, rgba(17,17,17,0.95) 0%, rgba(5,5,8,0.95) 100%);
             border: 2px solid #ff3333; border-radius: 20px;
             padding: 30px; max-width: 900px; width: 100%;
             position: relative; box-shadow: 0 0 100px rgba(255,51,51,0.3);
@@ -719,7 +723,7 @@
         .video-placeholder {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, #1a0505, #0a0a0f);
+            background: linear-gradient(135deg, rgba(26,5,5,0.8), rgba(10,10,15,0.8));
             color: #aaa; text-align: center; padding: 20px;
         }
         .video-placeholder-emoji { font-size: 4rem; margin-bottom: 10px; opacity: 0.6; }
@@ -731,7 +735,7 @@
         /* ===== NOTIFICATIONS ===== */
         .notification {
             position: fixed; top: 80px; right: 30px;
-            background: linear-gradient(145deg, #1a1a1a, #0a0a0f);
+            background: linear-gradient(145deg, rgba(26,26,26,0.95), rgba(10,10,15,0.95));
             border: 1px solid #ff3333; border-radius: 12px;
             padding: 18px 25px; color: #fff; font-weight: 700; font-size: 0.95rem;
             z-index: 2000; box-shadow: 0 10px 40px rgba(255, 51, 51, 0.5);
@@ -925,7 +929,8 @@
 </head>
 <body>
 
-    <canvas id="particles-canvas"></canvas>
+    <canvas id="bg-canvas"></canvas>
+    <div id="bg-glow"></div>
 
     <!-- TOPBAR -->
     <div class="topbar">
@@ -1400,37 +1405,84 @@
         const TELEGRAM_CHANNEL = "https://t.me/The_MisterAki2";
 
         function initParticles() {
-            const canvas = document.getElementById('particles-canvas');
+            const canvas = document.getElementById('bg-canvas');
             const ctx = canvas.getContext('2d');
+            const glow = document.getElementById('bg-glow');
+            
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            
             const particles = [];
-            for (let i = 0; i < 60; i++) {
+            const particleCount = window.innerWidth < 768 ? 30 : 70;
+
+            let mouse = { x: null, y: null, radius: 150 };
+
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+                glow.style.setProperty('--mouse-x', `${e.clientX}px`);
+                glow.style.setProperty('--mouse-y', `${e.clientY}px`);
+            });
+
+            window.addEventListener('mouseout', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            for (let i = 0; i < particleCount; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    radius: Math.random() * 2 + 0.5,
-                    speedX: (Math.random() - 0.5) * 0.5,
-                    speedY: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 0.8,
+                    speedY: (Math.random() - 0.5) * 0.8,
                     opacity: Math.random() * 0.5 + 0.2
                 });
             }
+
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+
                 particles.forEach(p => {
-                    p.x += p.speedX; p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+
                     if (p.x < 0) p.x = canvas.width;
                     if (p.x > canvas.width) p.x = 0;
                     if (p.y < 0) p.y = canvas.height;
                     if (p.y > canvas.height) p.y = 0;
+
+                    if (mouse.x != null) {
+                        let dx = mouse.x - p.x;
+                        let dy = mouse.y - p.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < mouse.radius) {
+                            let forceDirectionX = dx / distance;
+                            let forceDirectionY = dy / distance;
+                            let maxDistance = mouse.radius;
+                            let force = (maxDistance - distance) / maxDistance;
+                            
+                            p.x -= forceDirectionX * force * 5;
+                            p.y -= forceDirectionY * force * 5;
+                            
+                            p.opacity = Math.min(1, p.opacity + 0.05);
+                        } else {
+                            p.opacity = Math.max(0.2, p.opacity - 0.02);
+                        }
+                    }
+
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                     ctx.fillStyle = `rgba(255, 51, 51, ${p.opacity})`;
                     ctx.fill();
                 });
+
                 requestAnimationFrame(animate);
             }
+            
             animate();
+            
             window.addEventListener('resize', () => {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
@@ -1503,8 +1555,10 @@
         const SEASONS = [
             { number: 1, title: 'Аномалия',  status: 'В разработке', isDev: true },
             { number: 2, title: 'Тишина',    status: 'В разработке', isDev: true },
-            { number: 3, title: 'Без силы',  status: 'Скоро', isDev: false },
-            { number: 4, title: 'Свидетели', status: 'Скоро', isDev: false }
+            { number: 3, title: 'Без силы',  status: 'В разработке', isDev: true },
+            { number: 4, title: 'Свидетели', status: 'В разработке', isDev: true },
+            { number: 5, title: 'Война',     status: 'В разработке', isDev: true },
+            { number: 6, title: 'Новая эра', status: 'В разработке', isDev: true }
         ];
 
         function renderSeasons() {
@@ -1538,22 +1592,26 @@
                 `;
                 wrapper.appendChild(item);
                 const epsContainer = document.getElementById('season-eps-' + season.number);
-                eps.forEach(ep => {
-                    const epEl = document.createElement('div');
-                    epEl.className = 'season-episode-item';
-                    epEl.innerHTML = `
-                        <div>
-                            <div class="season-episode-title">${ep.emoji} ${ep.title}</div>
-                            <div class="season-episode-sub">${ep.sub}</div>
-                        </div>
-                        <div style="color:#ff3333; font-weight:900;">→</div>
-                    `;
-                    epEl.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        openEpisode(ep.sub, ep.title);
+                if (eps.length > 0) {
+                    eps.forEach(ep => {
+                        const epEl = document.createElement('div');
+                        epEl.className = 'season-episode-item';
+                        epEl.innerHTML = `
+                            <div>
+                                <div class="season-episode-title">${ep.emoji} ${ep.title}</div>
+                                <div class="season-episode-sub">${ep.sub}</div>
+                            </div>
+                            <div style="color:#ff3333; font-weight:900;">→</div>
+                        `;
+                        epEl.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            openEpisode(ep.sub, ep.title);
+                        });
+                        epsContainer.appendChild(epEl);
                     });
-                    epsContainer.appendChild(epEl);
-                });
+                } else {
+                    epsContainer.innerHTML = `<p style="color:#888; font-style:italic;">Арки этого сезона ещё в разработке...</p>`;
+                }
                 const header = item.querySelector('.season-header');
                 header.addEventListener('click', () => {
                     const isActive = item.classList.contains('active');
@@ -2196,6 +2254,174 @@
         renderWatchlist();
         renderShop();
         renderSeasons();
+
+        // ===== CHARACTERS DATA =====
+        const CHARACTERS = [
+            { id: 'aki', name: 'Аки', emoji: '🎭', role: 'Главный герой', age: '19 лет', status: 'alive', statusText: '🟢 Жив', color: '#ff3333', glow: 'rgba(255,51,51,0.4)', group: 'main', short: 'Обычный человек. Без силы. С реверсом и опытом.', full: 'Любопытный, упрямый, но боится показывать слабость. Цель — выжить и узнать правду об аномалиях. Всегда проверяет реверс перед миссией (кроме рокового дня). Обычный человек, как половина Эпсилона. У него нет силы — только опыт и реверс.', tags: ['Главный герой', 'Агент Эпсилона', 'Реверс'] },
+            { id: 'alice', name: 'Алиса', emoji: '🕶️', role: 'Глава Эпсилона', age: '35 лет', status: 'alive', statusText: '🟢 Жива', color: '#b388ff', glow: 'rgba(179,136,255,0.4)', group: 'epsilon', short: 'Холодная, расчётливая, но справедливая. Знает больше, чем говорит.', full: 'Глава Эпсилона. Холодная, расчётливая, но справедливая. Знает больше об аномалиях, чем говорит. Цель — использовать Аки для своих планов. Боится потерять своих агентов, как потеряла других.', tags: ['Глава', 'Совет', 'Тайна'] },
+            { id: 'kai', name: 'Кай', emoji: '🛡️', role: 'Напарник Аки', age: '22 года', status: 'dead', statusText: '🔴 Погиб', color: '#4a90e2', glow: 'rgba(74,144,226,0.4)', group: 'main', short: 'Спокойный, опытный, циничный. Наставник Аки.', full: 'Первый напарник Аки и его наставник. Спокойный, опытный, немного циничный. Погиб в 3-й арке, защищая Аки. Его смерть стала переломным моментом для главного героя.', tags: ['Напарник', 'Наставник', 'Погиб в арке 3'] },
+            { id: 'ren', name: 'Рен', emoji: '🗡️', role: 'Агент-антагонист', age: '28 лет', status: 'alive', statusText: '🟢 Жив', color: '#ff6b00', glow: 'rgba(255,107,0,0.4)', group: 'epsilon', short: 'Жестокий, амбициозный, завистливый. Считает Аки угрозой.', full: 'Агент Эпсилона, который считает Аки угрозой. Жестокий, амбициозный, завистливый. Цель — убить Аки и занять его место. В арке 15 именно он ловит Аки и не убивает его, чтобы поймать Алису.', tags: ['Антагонист', 'Эпсилон', 'Зависть'] },
+            { id: 'lira', name: 'Лира', emoji: '🌸', role: 'Напарница Аки', age: '20 лет', status: 'alive', statusText: '🟢 Жива', color: '#e24a90', glow: 'rgba(226,74,144,0.4)', group: 'main', short: 'Добрая, но сильная. Уважает Аки.', full: 'Новый напарник Аки после исчезновения Эпсилона. Добрая, но сильная. Уважает Аки. Помогает ему в 3-м сезоне. В арке 7 именно с ней Аки проводит последний мирный день.', tags: ['Напарница', 'Сезон 3', 'Друг'] },
+            { id: 'wayne', name: 'Доктор Вейн', emoji: '🧪', role: 'Учёный Эпсилона', age: '50 лет', status: 'unknown', statusText: '🟡 Неизвестно', color: '#00bcd4', glow: 'rgba(0,188,212,0.4)', group: 'epsilon', short: 'Одержим наукой. Хочет использовать Аки для экспериментов.', full: 'Учёный Эпсилона. Одержим наукой, эмоционально отстранён. Изучает аномалии и монстров. Тайно хочет использовать Аки для экспериментов. Позже раскаялся, но всё ещё врёт. Входит в состав «Свидетелей».', tags: ['Учёный', 'Эксперименты', 'Свидетели'] },
+            
+            { id: 'tim', name: 'Тим', emoji: '👦', role: 'Друг Аки', age: '19 лет', status: 'alive', statusText: '🟢 Жив', color: '#4caf50', glow: 'rgba(76,175,80,0.4)', group: 'main', short: 'Обычный парень. Друг детства Аки.', full: 'Друг детства Аки. Пошёл с ним в заброшенную лабораторию в арке 1. Именно он помог вытащить Аки от разлома и принёс домой. Не знает о существовании Эпсилона, но подозревает, что с Аки что-то не так.', tags: ['Друг', 'Арка 1', 'Гражданский'] },
+            { id: 'rok', name: 'Рок', emoji: '🧢', role: 'Друг Аки', age: '20 лет', status: 'alive', statusText: '🟢 Жив', color: '#ff9800', glow: 'rgba(255,152,0,0.4)', group: 'main', short: 'Трусливый, но верный. Друг Аки.', full: 'Друг Аки, который пошёл с ним и Тимом в заброшку. Ему было очень страшно, и он постоянно предлагал уйти. Но когда Аки пострадал, именно Рок помог его вытащить.', tags: ['Друг', 'Арка 1', 'Гражданский'] },
+            { id: 'scientist', name: 'Учёный-создатель', emoji: '☣️', role: 'Создатель «Эхо»', age: 'неизвестно', status: 'dead', statusText: '🔴 Погиб', color: '#9c27b0', glow: 'rgba(156,39,176,0.4)', group: 'epsilon', short: 'Безумный гений, создавший вирус «Эхо».', full: 'Учёный, который создал вирус «Эхо» для Эпсилона, чтобы стирать память врагам. Вирус вышел из-под контроля и заразил его самого. Аки и Лира нашли его в старом секторе (арка 6). Перед смертью он передал Аки формулу антивируса.', tags: ['Учёный', 'Вирус «Эхо»', 'Арка 6'] },
+
+            { id: 'zein', name: 'Зейн', emoji: '🕵️', role: 'Лидер Свидетелей', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', color: '#5865F2', glow: 'rgba(88,101,242,0.4)', group: 'witnesses', short: 'Бывший агент Эпсилона. Холодный, расчётливый. Врёт Аки.', full: 'Лидер «Свидетелей». Бывший агент Эпсилона. Холодный, расчётливый. Врёт Аки, используя его для своих целей. Считает, что Эпсилон создал монстров и скрывает правду. Готов избавиться от Аки, когда тот станет не нужен.', tags: ['Лидер', 'Свидетели', 'Предатель'] },
+            { id: 'mira', name: 'Мира', emoji: '💉', role: 'Свидетель-медик', age: 'неизвестно', status: 'alive', statusText: '🟢 Жива', color: '#00bfa5', glow: 'rgba(0,191,165,0.4)', group: 'witnesses', short: 'Бывший медик. Добрая, но сломленная.', full: 'Бывший медик Эпсилона. Добрая, но сломленная. Одна из немногих Свидетелей, кто не давит на Аки. Говорит ему: «Правда — внутри тебя. Не снаружи».', tags: ['Свидетели', 'Медик', 'Добрая'] },
+            { id: 'korv', name: 'Корв', emoji: '💻', role: 'Свидетель-техник', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', color: '#00e676', glow: 'rgba(0,230,118,0.4)', group: 'witnesses', short: 'Бывший техник. Гений. Параноик.', full: 'Бывший техник Эпсилона. Гений, параноик. Давит на Аки: «Правда не важна. Важно действие». В арке 14 Аки слышит, как Корв и Зейн обсуждают, что избавятся от него.', tags: ['Свидетели', 'Техник', 'Параноик'] },
+            { id: 'ten', name: 'Тень', emoji: '🌑', role: 'Свидетель-стиратель', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', color: '#424242', glow: 'rgba(100,100,100,0.4)', group: 'witnesses', short: 'Бывший «стиратель». Молчаливый, опасный.', full: 'Бывший «стиратель» памяти Эпсилона. Молчаливый и опасный. О нём мало что известно. Входит в состав «Свидетелей».', tags: ['Свидетели', 'Стиратель', 'Молчаливый'] }
+        ];
+
+        let currentCharFilter = 'all';
+
+        function renderCharacters() {
+            const grid = document.getElementById('charGrid');
+            grid.innerHTML = '';
+            const filtered = CHARACTERS.filter(c => currentCharFilter === 'all' || c.group === currentCharFilter);
+            filtered.forEach(char => {
+                const card = document.createElement('div');
+                card.className = 'char-card';
+                card.style.setProperty('--char-color', char.color);
+                card.style.setProperty('--char-glow', char.glow);
+                card.innerHTML = `
+                    <div class="char-avatar">${char.emoji}</div>
+                    <div class="char-name">${char.name}</div>
+                    <div class="char-role">${char.role}</div>
+                    <div class="char-desc">${char.short}</div>
+                    <span class="char-badge ${char.status}">${char.statusText}</span>
+                `;
+                card.addEventListener('click', () => openCharModal(char));
+                grid.appendChild(card);
+            });
+        }
+        function filterChars(group, event) {
+            currentCharFilter = group;
+            document.querySelectorAll('#page-characters .showcase-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            renderCharacters();
+        }
+        function openCharModal(char) {
+            const modal = document.getElementById('charModal');
+            const content = document.getElementById('charModalContent');
+            const body = document.getElementById('charModalBody');
+            content.style.setProperty('--char-color', char.color);
+            content.style.setProperty('--char-glow', char.glow);
+            body.innerHTML = `
+                <div class="char-modal-header">
+                    <div class="char-modal-avatar">${char.emoji}</div>
+                    <div class="char-modal-title">
+                        <h2>${char.name}</h2>
+                        <div class="char-modal-role">${char.role}${char.age ? ' · ' + char.age : ''}</div>
+                    </div>
+                </div>
+                <div class="char-modal-section"><h4>Статус</h4><span class="char-badge ${char.status}">${char.statusText}</span></div>
+                <div class="char-modal-section"><h4>Описание</h4><p>${char.full}</p></div>
+                <div class="char-modal-section"><h4>Теги</h4><div class="char-modal-tags">${char.tags.map(t => `<span class="char-tag">${t}</span>`).join('')}</div></div>
+            `;
+            modal.classList.add('active');
+        }
+        function closeCharModal() { document.getElementById('charModal').classList.remove('active'); }
+
+        // ===== LORE DATA =====
+        const LORE_SECTIONS = [
+            { icon: '🌍', title: 'Мир', body: `
+                <p><strong>Аномалии</strong> — зоны, где реальность искажена. В этих зонах появляются <strong>монстры</strong> — мутировавшие существа. Причина аномалий неизвестна. Но Эпсилон знает больше, чем говорит.</p>
+                <p><strong>Монстры</strong> — существа из аномальных зон. Разные: быстрые, сильные, умные. Их нельзя вылечить. Их можно только убить.</p>
+                <p><strong>Реверс</strong> — оружие, созданное Эпсилоном. Работает от себя и может работать вечно. Эффективен против монстров. Может использовать любой, кто умеет.</p>` },
+            { icon: '🕶️', title: 'Организация Эпсилон', body: `
+                <p><strong>Эпсилон</strong> — тайная организация, основанная <strong>30 лет назад</strong>. Её цель — спасать мир от монстров и аномалий. Тайно. Жёстко. Без благодарности. О ней никто не знает, кроме агентов.</p>
+                <p><strong>Форма:</strong> чёрный пиджак (по желанию можно снять на задании), белая рубашка, чёрный галстук, чёрные штаны, белые ботинки.</p>
+                <p><strong>Чип:</strong> вживляется в шею при вступлении. Может отключить или убить агента. Его нельзя вытащить. Его не видно даже через сканер. Если личность агента всплывает — его отключают навсегда. Второй шанс дают очень редко.</p>
+                <p><strong>Численность:</strong> 100+ агентов. Разбросаны по нескольким базам. Каждый знает только свой отдел.</p>
+                <p><strong>Иерархия:</strong></p>
+                <ul>
+                    <li><strong>Совет</strong> — 3–5 человек. Высшее руководство.</li>
+                    <li><strong>Глава</strong> — Алиса. Исполнитель.</li>
+                    <li><strong>Старшие агенты</strong> — 20–30 человек.</li>
+                    <li><strong>Младшие агенты</strong> — 70–100 человек.</li>
+                    <li><strong>Учёные</strong> — 10–15 человек. Вейн и его команда.</li>
+                    <li><strong>«Тени»</strong> — 5–10 человек. Стирают память.</li>
+                    <li><strong>Техники</strong> — 10–15 человек. Чипы, реверсы, системы.</li>
+                </ul>` },
+            { icon: '👁️', title: 'Что такое «Омега»?', body: `
+                <p><strong>«Омега»</strong> — это тайная группировка, которая знает правду об Эпсилоне. Они не просто враги, они — другая сторона конфликта. Они люди в чёрной броне с красным символом.</p>
+                <p>В 3-м сезоне они похищают Алису, чтобы «поговорить». Именно они раскрывают Аки правду о том, что <strong>Эпсилон сам создал аномалии и монстров</strong> в результате экспериментов.</p>
+                <p>Их лидер — <strong>Зейн</strong>, бывший агент Эпсилона.</p>` },
+            { icon: '🕰️', title: 'Хронология событий', body: `
+                <ul>
+                    <li><strong>За 5 лет до начала:</strong> Эпсилон основан. Начинаются исследования аномалий.</li>
+                    <li><strong>За 1 год до начала:</strong> Первая крупная аномалия. Монстры появляются в лесах.</li>
+                    <li><strong>Сезон 1:</strong> Аки находит аномалию. Вступает в Эпсилон. Умирает. Воскресает.</li>
+                    <li><strong>Сезон 2:</strong> Вирус «Эхо». Печать. Мирная арка.</li>
+                    <li><strong>Сезон 3:</strong> Аки теряет силу. «Омега». Поиски Алисы.</li>
+                    <li><strong>Сезон 4:</strong> «Свидетели». Аки думает. Правда раскрывается. Аки выживает в 15-й арке.</li>
+                </ul>` },
+            { icon: '👥', title: 'Кто такие «Свидетели»?', body: `
+                <p><strong>«Свидетели»</strong> — это бывшие агенты Эпсилона, которые узнали правду о том, что организация создала монстров, и ушли. Они не убивают — они свидетельствуют. Но у них своя правда, и они используют Аки в своих целях.</p>
+                <p><strong>Состав:</strong></p>
+                <ul>
+                    <li><strong>Зейн</strong> — лидер. Холодный, расчётливый. Врёт Аки.</li>
+                    <li><strong>Мира</strong> — бывший медик. Добрая, но сломленная.</li>
+                    <li><strong>Корв</strong> — бывший техник. Гений-параноик.</li>
+                    <li><strong>Тень</strong> — бывший «стиратель» памяти.</li>
+                    <li><strong>Вейн</strong> — бывший учёный. Раскаялся, но всё ещё врёт.</li>
+                </ul>` },
+            { icon: '🩸', title: 'Сезон 1: «Аномалия»', body: `
+                <ul>
+                    <li><strong>Арка 1 «Аномалия»:</strong> Заброшка, разлом, заражение.</li>
+                    <li><strong>Арка 2 «Эпсилон»:</strong> Допрос Алисы, первое задание с Каем.</li>
+                    <li><strong>Арка 3 «Смерть и воскрешение»:</strong> Забытый реверс, смерть, рога, лаборатория Вейна.</li>
+                    <li><strong>Арка 4 «Конфликт»:</strong> Рен, правда об аномалии.</li>
+                    <li><strong>Арка 5 «Потеря силы»:</strong> Повторная смерть, аномалия ушла, новая сила.</li>
+                </ul>` },
+            { icon: '🌙', title: 'Сезон 2: «Тишина»', body: `
+                <ul>
+                    <li><strong>Арка 6 «Печать»:</strong> Вирус «Эхо» стирает личности. Аки создаёт печати.</li>
+                    <li><strong>Арка 7 «Тишина перед бурей»:</strong> Приказ Алисы об отдыхе, дом Аки, вечер у костра, красная луна, записка кровью.</li>
+                </ul>` },
+            { icon: '🕳️', title: 'Сезон 3: «Без силы»', body: `
+                <ul>
+                    <li><strong>Арка 8 «Пустота»:</strong> Пробуждение в плену у «Омеги», побег без силы.</li>
+                    <li><strong>Арка 9 «Поиски»:</strong> Разрушенный штаб, встреча с Лирой.</li>
+                    <li><strong>Арка 10 «Поиски (продолжение)»:</strong> Координаты «Сектор 7», встреча с Зейном.</li>
+                    <li><strong>Арка 11 «Разговор»:</strong> Зейн раскрывает правду: Эпсилон создал монстров.</li>
+                </ul>` },
+            { icon: '❓', title: 'Сезон 4: «Свидетели»', body: `
+                <ul>
+                    <li><strong>Арка 12 «Сомнение»:</strong> Встреча со Свидетелями, разговор с Вейном.</li>
+                    <li><strong>Арка 13 «Давление»:</strong> Эпсилон ищет Аки, Корв давит, Мира поддерживает.</li>
+                    <li><strong>Арка 14 «Один»:</strong> Аки находит документы «Проект Эхо».</li>
+                    <li><strong>Арка 15 «Попытка»:</strong> Бой с Реном, Алиса убегает, Аки выживает.</li>
+                </ul>` }
+        ];
+
+        function renderLore() {
+            const wrapper = document.getElementById('loreAccordion');
+            wrapper.innerHTML = '';
+            LORE_SECTIONS.forEach(section => {
+                const item = document.createElement('div');
+                item.className = 'lore-item';
+                item.innerHTML = `
+                    <div class="lore-header">
+                        <div class="lore-header-left">
+                            <div class="lore-icon">${section.icon}</div>
+                            <div class="lore-header-title">${section.title}</div>
+                        </div>
+                        <div class="lore-header-icon">▼</div>
+                    </div>
+                    <div class="lore-body"><div class="lore-body-inner">${section.body}</div></div>
+                `;
+                wrapper.appendChild(item);
+                const header = item.querySelector('.lore-header');
+                header.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    document.querySelectorAll('.lore-item').forEach(i => i.classList.remove('active'));
+                    if (!isActive) item.classList.add('active');
+                });
+            });
+        }
     </script>
 </body>
 </html>
