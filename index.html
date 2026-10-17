@@ -33,21 +33,14 @@
         }
         body.theme-light { background: radial-gradient(circle at 50% 0%, #ffe5e5 0%, var(--bg) 60%); }
 
-        /* АНИМИРОВАННЫЙ ФОН */
-        #bg-canvas {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1; pointer-events: none;
-        }
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
         #bg-glow {
-            position: fixed; top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -2; pointer-events: none;
             background: radial-gradient(circle 600px at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--accent-glow), transparent 80%);
             transition: background 0.1s ease;
         }
 
-        /* ===== TOPBAR ===== */
         .topbar {
             background-color: rgba(10, 10, 15, 0.85);
             padding: 10px 30px;
@@ -55,103 +48,40 @@
             border-bottom: 1px solid var(--border);
             position: sticky; top: 0; z-index: 100;
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            transition: background-color 0.4s ease;
         }
         body.theme-light .topbar { background-color: rgba(245,245,247,0.85); }
-        .logo {
-            font-size: 1.5rem; font-weight: 900; color: var(--text);
-            letter-spacing: 1px; display: flex; align-items: center;
-            gap: 5px; cursor: pointer; white-space: nowrap;
-            user-select: none;
-        }
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: 1px; display: flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; user-select: none; }
         .logo span { color: var(--accent); font-size: 1.7rem; }
-        .topbar-nav {
-            display: flex; gap: 5px;
-            background: var(--border);
-            padding: 6px 10px; border-radius: 30px;
-            border: 1px solid var(--border);
-        }
-        .nav-btn {
-            background: transparent; border: none; color: var(--text-muted);
-            padding: 8px 16px; border-radius: 20px; font-weight: 600;
-            font-size: 0.82rem; cursor: pointer; transition: all 0.3s ease;
-            font-family: inherit; white-space: nowrap;
-        }
+        .topbar-nav { display: flex; gap: 5px; background: var(--border); padding: 6px 10px; border-radius: 30px; border: 1px solid var(--border); }
+        .nav-btn { background: transparent; border: none; color: var(--text-muted); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; cursor: pointer; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; }
         .nav-btn:hover { color: var(--text); background: var(--border); }
         .nav-btn.active { background: var(--accent); color: #fff; box-shadow: 0 0 20px var(--accent-glow); }
         .topbar-right { display: flex; align-items: center; gap: 10px; }
 
-        .icon-btn {
-            background: var(--border);
-            border: 1px solid var(--border-soft);
-            color: var(--text); width: 40px; height: 40px; border-radius: 50%;
-            cursor: pointer; font-size: 1rem; transition: all 0.3s ease; position: relative;
-            display: inline-flex; align-items: center; justify-content: center;
-        }
-        .icon-btn:hover {
-            background: color-mix(in srgb, var(--accent) 20%, transparent);
-            border-color: var(--accent); transform: scale(1.08);
-        }
+        .icon-btn { background: var(--border); border: 1px solid var(--border-soft); color: var(--text); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1rem; transition: all 0.3s ease; position: relative; display: inline-flex; align-items: center; justify-content: center; }
+        .icon-btn:hover { background: color-mix(in srgb, var(--accent) 20%, transparent); border-color: var(--accent); transform: scale(1.08); }
         .cart-btn { background: var(--accent); border: none; }
         .cart-btn:hover { background: var(--accent-hover); box-shadow: 0 0 20px var(--accent-glow); }
-        .cart-count {
-            position: absolute; top: -3px; right: -3px;
-            background: #fff; color: var(--accent); font-size: 0.7rem;
-            font-weight: 900; width: 18px; height: 18px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .user-btn {
-            display: flex; align-items: center; gap: 8px;
-            background: linear-gradient(145deg, #8b0000, var(--accent));
-            color: #fff; padding: 8px 16px; border-radius: 30px;
-            border: none; cursor: pointer; font-weight: 700;
-            font-size: 0.85rem; transition: all 0.3s ease; font-family: inherit;
-        }
+        .cart-count { position: absolute; top: -3px; right: -3px; background: #fff; color: var(--accent); font-size: 0.7rem; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .user-btn { display: flex; align-items: center; gap: 8px; background: linear-gradient(145deg, #8b0000, var(--accent)); color: #fff; padding: 8px 16px; border-radius: 30px; border: none; cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: all 0.3s ease; font-family: inherit; }
         .user-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px var(--accent-glow); }
-        .user-btn .avatar {
-            width: 28px; height: 28px; border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.9rem; overflow: hidden;
-        }
+        .user-btn .avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; overflow: hidden; }
         .user-btn .avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .lang-btn {
-            background: var(--border); border: 1px solid var(--border-soft);
-            color: var(--text); padding: 8px 12px; border-radius: 30px;
-            cursor: pointer; font-weight: 700; font-size: 0.8rem;
-            transition: all 0.3s ease; font-family: inherit; min-width: 60px;
-        }
+        .lang-btn { background: var(--border); border: 1px solid var(--border-soft); color: var(--text); padding: 8px 12px; border-radius: 30px; cursor: pointer; font-weight: 700; font-size: 0.8rem; transition: all 0.3s ease; font-family: inherit; min-width: 60px; }
         .lang-btn:hover { border-color: var(--accent); background: rgba(255,51,51,0.1); }
         .theme-btn { font-size: 1.1rem; }
 
-        /* ===== PAGES ===== */
         .page { display: none; animation: pageFade 0.5s ease; }
         .page.active { display: block; }
         @keyframes pageFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ===== HERO ===== */
-        .hero {
-            position: relative; height: 85vh; min-height: 600px;
-            background: linear-gradient(135deg, rgba(26,0,0,0.5) 0%, rgba(5,5,8,0.5) 100%);
-            overflow: hidden; display: flex; align-items: flex-end;
-            padding: 80px 60px; backdrop-filter: blur(5px);
-        }
+        .hero { position: relative; height: 85vh; min-height: 600px; background: linear-gradient(135deg, rgba(26,0,0,0.5) 0%, rgba(5,5,8,0.5) 100%); overflow: hidden; display: flex; align-items: flex-end; padding: 80px 60px; backdrop-filter: blur(5px); }
         .hero-content { position: relative; z-index: 2; max-width: 700px; }
-        .hero h1 {
-            font-size: 4.5rem; font-weight: 900; color: #fff;
-            text-shadow: 0 0 40px #8b0000, 0 0 80px #8b0000;
-            letter-spacing: 4px; margin-bottom: 20px; line-height: 1;
-        }
+        .hero h1 { font-size: 4.5rem; font-weight: 900; color: #fff; text-shadow: 0 0 40px #8b0000, 0 0 80px #8b0000; letter-spacing: 4px; margin-bottom: 20px; line-height: 1; }
         .hero p { font-size: 1.05rem; color: #ccc; margin-bottom: 30px; line-height: 1.7; max-width: 600px; }
         .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
 
-        /* ===== BUTTONS ===== */
-        .btn-primary, .btn-secondary, .btn-discord {
-            padding: 16px 40px; border: none; border-radius: 30px;
-            font-weight: 800; font-size: 0.95rem; letter-spacing: 1px;
-            text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;
-            text-decoration: none; display: inline-block; font-family: inherit; text-align: center;
-        }
+        .btn-primary, .btn-secondary, .btn-discord { padding: 16px 40px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; font-family: inherit; text-align: center; }
         .btn-primary { background: var(--accent); color: #fff; }
         .btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 10px 30px var(--accent-glow); }
         .btn-secondary { background: var(--border); color: var(--text); border: 1px solid var(--border-soft); }
@@ -159,20 +89,9 @@
         .btn-discord { background: var(--discord); color: #fff; }
         .btn-discord:hover { background: #4752C4; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(88,101,242,0.6); }
 
-        /* ===== TIMER ===== */
         .timer-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
-        .timer-box {
-            background: linear-gradient(145deg, var(--panel-2), var(--bg));
-            border: 2px solid var(--accent); border-radius: 20px; padding: 30px;
-            text-align: center; box-shadow: 0 0 50px var(--accent-glow);
-            position: relative; overflow: hidden;
-        }
-        .timer-box::before {
-            content: ''; position: absolute; top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle at 50% 50%, rgba(255,51,51,0.08) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
+        .timer-box { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 0 50px var(--accent-glow); position: relative; overflow: hidden; }
+        .timer-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 50%, rgba(255,51,51,0.08) 0%, transparent 70%); animation: rotate 20s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .timer-label { color: var(--accent); font-size: 0.85rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; position: relative; z-index: 2; }
         .timer-title { font-size: 1.6rem; color: var(--text); font-weight: 900; margin-bottom: 20px; position: relative; z-index: 2; }
@@ -182,90 +101,31 @@
         .timer-num { font-size: 2.2rem; font-weight: 900; color: var(--accent); line-height: 1; text-shadow: 0 0 20px var(--accent-glow); }
         .timer-cell-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 6px; font-weight: 700; }
 
-        /* ===== МИНИ-ИГРА ===== */
         .game-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
-        .game-box {
-            background: linear-gradient(145deg, var(--panel-2), var(--bg));
-            border: 2px solid var(--accent); border-radius: 20px; padding: 30px;
-            text-align: center; box-shadow: 0 0 50px var(--accent-glow);
-            position: relative; overflow: hidden;
-        }
+        .game-box { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 0 50px var(--accent-glow); position: relative; overflow: hidden; }
         .game-title { font-size: 1.5rem; color: var(--accent); font-weight: 900; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
         .game-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
-        
-        .game-area {
-            position: relative; width: 100%; height: 300px;
-            background: var(--panel); border: 1px solid var(--border-soft);
-            border-radius: 16px; overflow: hidden; margin-bottom: 20px;
-            cursor: crosshair; user-select: none;
-        }
-
-        /* === УЛУЧШЕННЫЕ МОНСТРЫ === */
-        .game-target {
-            position: absolute; width: 40px; height: 40px;
-            border-radius: 50%; background: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow), inset 0 0 10px rgba(0,0,0,0.5);
-            cursor: pointer; transition: transform 0.1s;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; color: #fff;
-            animation: target-pulse 0.5s infinite alternate;
-            border: 2px solid #fff;
-        }
-        .game-target.fast {
-            background: #ffd700;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), inset 0 0 10px rgba(0,0,0,0.5);
-            width: 30px; height: 30px; font-size: 1rem;
-        }
-        .game-target.boss {
-            background: #8b0000;
-            box-shadow: 0 0 30px #ff3333, inset 0 0 20px #000;
-            width: 60px; height: 60px; font-size: 2rem;
-            border: 3px solid #ffd700;
-        }
+        .game-area { position: relative; width: 100%; height: 300px; background: var(--panel); border: 1px solid var(--border-soft); border-radius: 16px; overflow: hidden; margin-bottom: 20px; cursor: crosshair; user-select: none; }
+        .game-target { position: absolute; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 20px var(--accent-glow), inset 0 0 10px rgba(0,0,0,0.5); cursor: pointer; transition: transform 0.1s; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #fff; animation: target-pulse 0.5s infinite alternate; border: 2px solid #fff; }
+        .game-target.fast { background: #ffd700; box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), inset 0 0 10px rgba(0,0,0,0.5); width: 30px; height: 30px; font-size: 1rem; }
+        .game-target.boss { background: #8b0000; box-shadow: 0 0 30px #ff3333, inset 0 0 20px #000; width: 60px; height: 60px; font-size: 2rem; border: 3px solid #ffd700; }
         @keyframes target-pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
         .game-target:active { transform: scale(0.8); }
-
-        /* === ЭФФЕКТ БРЫЗГ === */
-        .splatter {
-            position: absolute; width: 10px; height: 10px;
-            background: #ff3333; border-radius: 50%;
-            pointer-events: none; z-index: 10;
-            animation: splatter-anim 0.5s ease-out forwards;
-        }
-        @keyframes splatter-anim {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(3); opacity: 0; }
-        }
-
+        .splatter { position: absolute; width: 10px; height: 10px; background: #ff3333; border-radius: 50%; pointer-events: none; z-index: 10; animation: splatter-anim 0.5s ease-out forwards; }
+        @keyframes splatter-anim { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
         .game-stats { display: flex; justify-content: center; gap: 30px; margin-bottom: 15px; flex-wrap: wrap; }
         .game-stat { text-align: center; }
         .game-stat-val { font-size: 1.8rem; font-weight: 900; color: var(--accent); }
         .game-stat-lbl { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-        .game-combo {
-            font-size: 1.2rem; color: #ffd700; font-weight: 900;
-            height: 30px; opacity: 0; transition: opacity 0.2s;
-            text-shadow: 0 0 10px #ffd700;
-        }
+        .game-combo { font-size: 1.2rem; color: #ffd700; font-weight: 900; height: 30px; opacity: 0; transition: opacity 0.2s; text-shadow: 0 0 10px #ffd700; }
         .game-combo.active { opacity: 1; animation: combo-pop 0.3s ease; }
         @keyframes combo-pop { 0% { transform: scale(1.5); } 100% { transform: scale(1); } }
-        
-        .game-start-btn {
-            background: var(--accent); color: #fff; padding: 14px 40px;
-            border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem;
-            letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
-            transition: all 0.3s ease; font-family: inherit;
-        }
+        .game-start-btn { background: var(--accent); color: #fff; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
         .game-start-btn:hover { background: var(--accent-hover); transform: scale(1.05); }
-        .game-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); display: flex; flex-direction: column;
-            align-items: center; justify-content: center; z-index: 20;
-            color: #fff; text-align: center; padding: 20px;
-        }
+        .game-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20; color: #fff; text-align: center; padding: 20px; }
         .game-overlay h3 { font-size: 2rem; margin-bottom: 10px; color: var(--accent); }
         .game-overlay p { font-size: 1rem; margin-bottom: 20px; }
 
-        /* ===== ОСТАЛЬНОЕ (НЕ ТРОГАЕМ) ===== */
         .promo { max-width: 1200px; margin: 40px auto; padding: 0 60px; display: flex; gap: 15px; }
         .promo-input { flex: 1; background: rgba(20,20,30,0.9); border: 1px solid var(--border-soft); border-radius: 15px; padding: 20px 30px; color: var(--text); font-size: 0.95rem; transition: all 0.3s ease; text-align: center; font-family: inherit; }
         .promo-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 30px rgba(255,51,51,0.2); }
@@ -284,7 +144,7 @@
         .map-title { font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 25px; letter-spacing: 1px; }
         .map-title span { color: var(--accent); }
         .map-container { background: linear-gradient(145deg, var(--bg) 0%, var(--bg-2) 100%); border: 2px solid rgba(255,51,51,0.3); border-radius: 24px; padding: 30px; position: relative; overflow: hidden; box-shadow: 0 0 80px rgba(255,51,51,0.15); }
-        .map-svg { width: 100%; height: 600px; display: block; border-radius: 16px; }
+        .map-svg { width: 100%; height: auto; display: block; border-radius: 16px; min-height: 600px; }
         .map-line { stroke-dasharray: 8 6; animation: dash 2s linear infinite; }
         @keyframes dash { to { stroke-dashoffset: -28; } }
         .map-point { cursor: pointer; transition: all 0.3s ease; }
@@ -525,16 +385,8 @@
         .bottom-nav-item .bn-icon { font-size: 1.2rem; line-height: 1; }
         .bottom-nav-item.active { color: var(--accent); }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-
-        @keyframes flashFade {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
-        }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); } 20%, 40%, 60%, 80% { transform: translateX(5px); } }
+        @keyframes flashFade { 0% { opacity: 1; } 100% { opacity: 0; } }
 
         @media (max-width: 1100px) { .topbar-nav { display: none; } }
         @media (max-width: 1024px) {
@@ -718,10 +570,11 @@
             </div>
         </div>
 
+        <!-- ОБНОВЛЁННАЯ КАРТА -->
         <div class="map-section">
             <h2 class="map-title">🗺️ <span>КАРТА ЭПСИЛОНА</span></h2>
             <div class="map-container">
-                <svg class="map-svg" viewBox="0 0 800 600">
+                <svg class="map-svg" viewBox="0 0 900 700">
                     <defs>
                         <radialGradient id="mapGlow" cx="50%" cy="50%" r="50%">
                             <stop offset="0%" stop-color="#1a0505"/><stop offset="100%" stop-color="#050508"/>
@@ -750,73 +603,153 @@
                         <radialGradient id="ruinsGlow" cx="50%" cy="50%" r="50%">
                             <stop offset="0%" stop-color="rgba(100,100,100,0.4)"/><stop offset="100%" stop-color="transparent"/>
                         </radialGradient>
+                        <!-- Новые градиенты -->
+                        <radialGradient id="cryosGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="rgba(0,188,212,0.4)"/><stop offset="100%" stop-color="transparent"/>
+                        </radialGradient>
+                        <radialGradient id="forestGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="rgba(50,100,50,0.4)"/><stop offset="100%" stop-color="transparent"/>
+                        </radialGradient>
+                        <radialGradient id="cityGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="rgba(150,150,150,0.4)"/><stop offset="100%" stop-color="transparent"/>
+                        </radialGradient>
+                        <radialGradient id="shipGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="rgba(0,80,150,0.4)"/><stop offset="100%" stop-color="transparent"/>
+                        </radialGradient>
+                        <radialGradient id="abyssGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="rgba(200,0,0,0.5)"/><stop offset="100%" stop-color="transparent"/>
+                        </radialGradient>
+                        <radialGradient id="hospitalGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="rgba(100,50,100,0.4)"/><stop offset="100%" stop-color="transparent"/>
+                        </radialGradient>
                     </defs>
-                    <rect width="800" height="600" fill="url(#mapGlow)"/>
-                    <circle cx="180" cy="130" r="120" fill="url(#labGlow)"/>
-                    <circle cx="400" cy="300" r="150" fill="url(#baseGlow)"/>
-                    <circle cx="620" cy="150" r="120" fill="url(#sectorGlow)"/>
-                    <circle cx="250" cy="450" r="110" fill="url(#factoryGlow)"/>
-                    <circle cx="560" cy="440" r="110" fill="url(#bunkerGlow)"/>
-                    <circle cx="660" cy="300" r="100" fill="url(#homeGlow)"/>
-                    <circle cx="140" cy="300" r="100" fill="url(#campGlow)"/>
-                    <circle cx="500" cy="200" r="100" fill="url(#ruinsGlow)"/>
+                    
+                    <rect width="900" height="700" fill="url(#mapGlow)"/>
+                    
+                    <!-- Зоны -->
+                    <circle cx="400" cy="350" r="200" fill="url(#baseGlow)"/>
+                    <circle cx="180" cy="150" r="100" fill="url(#labGlow)"/>
+                    <circle cx="650" cy="150" r="100" fill="url(#sectorGlow)"/>
+                    <circle cx="250" cy="500" r="100" fill="url(#factoryGlow)"/>
+                    <circle cx="580" cy="500" r="100" fill="url(#bunkerGlow)"/>
+                    <circle cx="750" cy="300" r="100" fill="url(#homeGlow)"/>
+                    <circle cx="150" cy="300" r="100" fill="url(#campGlow)"/>
+                    <circle cx="550" cy="200" r="100" fill="url(#ruinsGlow)"/>
+                    
+                    <!-- Новые зоны -->
+                    <circle cx="100" cy="100" r="120" fill="url(#cryosGlow)"/>
+                    <circle cx="750" cy="550" r="120" fill="url(#forestGlow)"/>
+                    <circle cx="800" cy="100" r="100" fill="url(#cityGlow)"/>
+                    <circle cx="100" cy="600" r="120" fill="url(#shipGlow)"/>
+                    <circle cx="400" cy="650" r="120" fill="url(#abyssGlow)"/>
+                    <circle cx="300" cy="100" r="100" fill="url(#hospitalGlow)"/>
 
-                    <line x1="180" y1="130" x2="400" y2="300" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
-                    <line x1="400" y1="300" x2="620" y2="150" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
-                    <line x1="400" y1="300" x2="250" y2="450" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
-                    <line x1="400" y1="300" x2="560" y2="440" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
-                    <line x1="400" y1="300" x2="660" y2="300" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
-                    <line x1="400" y1="300" x2="140" y2="300" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
-                    <line x1="400" y1="300" x2="500" y2="200" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
+                    <!-- Линии -->
+                    <line x1="180" y1="150" x2="400" y2="350" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
+                    <line x1="400" y1="350" x2="650" y2="150" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
+                    <line x1="400" y1="350" x2="250" y2="500" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
+                    <line x1="400" y1="350" x2="580" y2="500" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
+                    <line x1="400" y1="350" x2="750" y2="300" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
+                    <line x1="400" y1="350" x2="150" y2="300" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
+                    <line x1="400" y1="350" x2="550" y2="200" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
+                    
+                    <!-- Новые линии -->
+                    <line x1="400" y1="350" x2="100" y2="100" class="map-line" stroke="#00bcd4" stroke-width="2" opacity="0.6"/>
+                    <line x1="400" y1="350" x2="750" y2="550" class="map-line" stroke="#4caf50" stroke-width="2" opacity="0.6"/>
+                    <line x1="400" y1="350" x2="800" y2="100" class="map-line" stroke="#9e9e9e" stroke-width="2" opacity="0.6"/>
+                    <line x1="400" y1="350" x2="100" y2="600" class="map-line" stroke="#0050a0" stroke-width="2" opacity="0.6"/>
+                    <line x1="400" y1="350" x2="400" y2="650" class="map-line" stroke="#ff0000" stroke-width="3" opacity="0.8"/>
+                    <line x1="400" y1="350" x2="300" y2="100" class="map-line" stroke="#9c27b0" stroke-width="2" opacity="0.6"/>
 
-                    <text x="180" y="70" font-size="40" text-anchor="middle" opacity="0.5">🧪</text>
-                    <text x="400" y="240" font-size="40" text-anchor="middle" opacity="0.5">🏢</text>
-                    <text x="620" y="90" font-size="40" text-anchor="middle" opacity="0.5">🌲</text>
-                    <text x="250" y="390" font-size="40" text-anchor="middle" opacity="0.5">🏭</text>
-                    <text x="560" y="380" font-size="40" text-anchor="middle" opacity="0.5">🏚️</text>
-                    <text x="660" y="240" font-size="40" text-anchor="middle" opacity="0.5">🏠</text>
-                    <text x="140" y="240" font-size="40" text-anchor="middle" opacity="0.5">🔥</text>
-                    <text x="500" y="140" font-size="40" text-anchor="middle" opacity="0.5">🏗️</text>
+                    <!-- Иконки фона -->
+                    <text x="180" y="90" font-size="40" text-anchor="middle" opacity="0.5">🧪</text>
+                    <text x="400" y="300" font-size="50" text-anchor="middle" opacity="0.5">🏢</text>
+                    <text x="650" y="90" font-size="40" text-anchor="middle" opacity="0.5">🌲</text>
+                    <text x="250" y="450" font-size="40" text-anchor="middle" opacity="0.5">🏭</text>
+                    <text x="580" y="450" font-size="40" text-anchor="middle" opacity="0.5">🏚️</text>
+                    <text x="750" y="240" font-size="40" text-anchor="middle" opacity="0.5">🏠</text>
+                    <text x="150" y="240" font-size="40" text-anchor="middle" opacity="0.5">🔥</text>
+                    <text x="550" y="140" font-size="40" text-anchor="middle" opacity="0.5">🏗️</text>
+                    
+                    <text x="100" y="60" font-size="40" text-anchor="middle" opacity="0.5">❄️</text>
+                    <text x="750" y="490" font-size="40" text-anchor="middle" opacity="0.5">🌲</text>
+                    <text x="800" y="60" font-size="40" text-anchor="middle" opacity="0.5">🏙️</text>
+                    <text x="100" y="540" font-size="40" text-anchor="middle" opacity="0.5">🚢</text>
+                    <text x="400" y="600" font-size="50" text-anchor="middle" opacity="0.6">🌋</text>
+                    <text x="300" y="60" font-size="40" text-anchor="middle" opacity="0.5">🏥</text>
 
-                    <g class="map-point" onclick="showMapInfo('Заброшенная лаборатория', 'Здесь Аки заразился аномалией (арка 1). Позже нашёл документы «Проект Эхо» (арка 14). Место начала всей истории.')">
-                        <circle cx="180" cy="130" r="14" fill="#8b0000" opacity="0.9"/>
-                        <circle cx="180" cy="130" r="7" fill="#fff"/>
-                        <text x="180" y="110" fill="#fff" font-size="13" text-anchor="middle" font-weight="bold">Лаборатория</text>
+                    <!-- Старые точки -->
+                    <g class="map-point" onclick="showMapInfo('Заброшенная лаборатория', 'Здесь Аки заразился аномалией (арка 1). Позже нашёл документы «Проект Эхо» (арка 14).')">
+                        <circle cx="180" cy="150" r="14" fill="#8b0000" opacity="0.9"/>
+                        <circle cx="180" cy="150" r="7" fill="#fff"/>
+                        <text x="180" y="130" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Лаборатория</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Штаб Эпсилона', 'Секретная база. Иерархия: Совет, Алиса, старшие и младшие агенты, учёные, «Тени», техники. Здесь Аки получил чип и стал агентом.')">
-                        <circle cx="400" cy="300" r="22" fill="#ff3333"/>
-                        <circle cx="400" cy="300" r="10" fill="#fff"/>
-                        <text x="400" y="275" fill="#fff" font-size="16" text-anchor="middle" font-weight="bold">Штаб Эпсилона</text>
+                    <g class="map-point" onclick="showMapInfo('Штаб Эпсилона', 'Секретная база. Здесь Аки получил чип и стал агентом. Совет, Алиса, учёные.')">
+                        <circle cx="400" cy="350" r="24" fill="#ff3333"/>
+                        <circle cx="400" cy="350" r="12" fill="#fff"/>
+                        <text x="400" y="320" fill="#fff" font-size="18" text-anchor="middle" font-weight="bold">Штаб Эпсилона</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Старый сектор', 'Заброшенные лаборатории, где создали вирус «Эхо» (арка 6). Аки и Лира нашли первого заражённого учёного.')">
-                        <circle cx="620" cy="150" r="14" fill="#006400" opacity="0.9"/>
-                        <circle cx="620" cy="150" r="7" fill="#fff"/>
-                        <text x="620" y="130" fill="#fff" font-size="13" text-anchor="middle" font-weight="bold">Старый сектор</text>
+                    <g class="map-point" onclick="showMapInfo('Старый сектор', 'Заброшенные лаборатории, где создали вирус «Эхо» (арка 6).')">
+                        <circle cx="650" cy="150" r="14" fill="#006400" opacity="0.9"/>
+                        <circle cx="650" cy="150" r="7" fill="#fff"/>
+                        <text x="650" y="130" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Старый сектор</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Старый завод (Сектор 7)', 'Место, где всё началось. Здесь Аки встретил Зейна и узнал правду об «Омеге» (арки 10–11).')">
-                        <circle cx="250" cy="450" r="14" fill="#666" opacity="0.9"/>
-                        <circle cx="250" cy="450" r="7" fill="#fff"/>
-                        <text x="250" y="430" fill="#fff" font-size="13" text-anchor="middle" font-weight="bold">Завод</text>
+                    <g class="map-point" onclick="showMapInfo('Старый завод (Сектор 7)', 'Место, где Аки встретил Зейна и узнал правду об «Омеге».')">
+                        <circle cx="250" cy="500" r="14" fill="#666" opacity="0.9"/>
+                        <circle cx="250" cy="500" r="7" fill="#fff"/>
+                        <text x="250" y="480" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Завод</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Бункер «Свидетелей»', 'Убежище Свидетелей: Зейн, Мира, Корв, Тень, Вейн (арки 12–13).')">
-                        <circle cx="560" cy="440" r="14" fill="#004a7c" opacity="0.9"/>
-                        <circle cx="560" cy="440" r="7" fill="#fff"/>
-                        <text x="560" y="420" fill="#fff" font-size="13" text-anchor="middle" font-weight="bold">Бункер</text>
+                    <g class="map-point" onclick="showMapInfo('Бункер «Свидетелей»', 'Убежище Зейна, Миры, Корва, Тени и Вейна.')">
+                        <circle cx="580" cy="500" r="14" fill="#004a7c" opacity="0.9"/>
+                        <circle cx="580" cy="500" r="7" fill="#fff"/>
+                        <text x="580" y="480" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Бункер</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Дом Аки', 'Здесь Аки отдыхал после заданий (арка 7). Здесь он скрывался от Эпсилона.')">
-                        <circle cx="660" cy="300" r="14" fill="#c89600" opacity="0.9"/>
-                        <circle cx="660" cy="300" r="7" fill="#fff"/>
-                        <text x="660" y="280" fill="#fff" font-size="13" text-anchor="middle" font-weight="bold">Дом Аки</text>
+                    <g class="map-point" onclick="showMapInfo('Дом Аки', 'Здесь Аки отдыхал после заданий и скрывался от Эпсилона.')">
+                        <circle cx="750" cy="300" r="14" fill="#c89600" opacity="0.9"/>
+                        <circle cx="750" cy="300" r="7" fill="#fff"/>
+                        <text x="750" y="280" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Дом Аки</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Лес у костра', 'Аки, Лира и другие агенты отдыхали здесь в арке 7. Костёр, картошка, звёзды. Последний мирный день.')">
-                        <circle cx="140" cy="300" r="14" fill="#009688" opacity="0.9"/>
-                        <circle cx="140" cy="300" r="7" fill="#fff"/>
-                        <text x="140" y="280" fill="#fff" font-size="13" text-anchor="middle" font-weight="bold">Костёр</text>
+                    <g class="map-point" onclick="showMapInfo('Лес у костра', 'Аки, Лира и другие отдыхали здесь в 7-й арке. Последний мирный день.')">
+                        <circle cx="150" cy="300" r="14" fill="#009688" opacity="0.9"/>
+                        <circle cx="150" cy="300" r="7" fill="#fff"/>
+                        <text x="150" y="280" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Костёр</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Руины Эпсилона', 'То, что осталось от Штаба после финальной битвы 6-го сезона. Здесь Аки находит секретные файлы Синдиката.')">
-                        <circle cx="500" cy="200" r="14" fill="#555" opacity="0.9"/>
-                        <circle cx="500" cy="200" r="7" fill="#fff"/>
-                        <text x="500" y="180" fill="#fff" font-size="13" text-anchor="middle" font-weight="bold">Руины</text>
+                    <g class="map-point" onclick="showMapInfo('Руины Эпсилона', 'Остатки старого штаба. Здесь Аки находит файлы Синдиката.')">
+                        <circle cx="550" cy="200" r="14" fill="#555" opacity="0.9"/>
+                        <circle cx="550" cy="200" r="7" fill="#fff"/>
+                        <text x="550" y="180" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Руины</text>
+                    </g>
+
+                    <!-- Новые точки -->
+                    <g class="map-point" onclick="showMapInfo('Ледяная тюрьма «Криос»', 'Секретная тюрьма Эпсилона. Здесь держат мутантов, которых нельзя убить.')">
+                        <circle cx="100" cy="100" r="14" fill="#00bcd4" opacity="0.9"/>
+                        <circle cx="100" cy="100" r="7" fill="#fff"/>
+                        <text x="100" y="80" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Криос</text>
+                    </g>
+                    <g class="map-point" onclick="showMapInfo('Гнилой Лес', 'Зона аномалии. Деревья-мутанты, споры, агрессивные монстры.')">
+                        <circle cx="750" cy="550" r="14" fill="#4caf50" opacity="0.9"/>
+                        <circle cx="750" cy="550" r="7" fill="#fff"/>
+                        <text x="750" y="530" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Гнилой лес</text>
+                    </g>
+                    <g class="map-point" onclick="showMapInfo('Город-призрак «Сектор 0»', 'Мегаполис, уничтоженный аномалией. Убежище Психотерапевта.')">
+                        <circle cx="800" cy="100" r="14" fill="#9e9e9e" opacity="0.9"/>
+                        <circle cx="800" cy="100" r="7" fill="#fff"/>
+                        <text x="800" y="80" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Сектор 0</text>
+                    </g>
+                    <g class="map-point" onclick="showMapInfo('Корабль-ковчег «Ноев»', 'Затонувший лайнер с артефактами и монстрами. Локация 5-го сезона.')">
+                        <circle cx="100" cy="600" r="14" fill="#0050a0" opacity="0.9"/>
+                        <circle cx="100" cy="600" r="7" fill="#fff"/>
+                        <text x="100" y="580" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Корабль</text>
+                    </g>
+                    <g class="map-point" onclick="showMapInfo('Разлом «Бездна»', 'Гигантская трещина, ведущая к источнику аномалии. Арена финальной битвы.')">
+                        <circle cx="400" cy="650" r="18" fill="#ff0000" opacity="0.9"/>
+                        <circle cx="400" cy="650" r="9" fill="#fff"/>
+                        <text x="400" y="625" fill="#fff" font-size="16" text-anchor="middle" font-weight="bold">Бездна</text>
+                    </g>
+                    <g class="map-point" onclick="showMapInfo('Госпиталь «Мира»', 'Заброшенная больница. Место экспериментов Вейна и создания вируса «Эхо».')">
+                        <circle cx="300" cy="100" r="14" fill="#9c27b0" opacity="0.9"/>
+                        <circle cx="300" cy="100" r="7" fill="#fff"/>
+                        <text x="300" y="80" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Госпиталь</text>
                     </g>
                 </svg>
                 <div class="map-info" id="mapInfo">
@@ -1226,19 +1159,16 @@
                 if (gameTime <= 0) endGame();
             }, 1000);
 
-            // Запускаем бесконечный спавн
             spawnTarget();
         }
 
         function spawnTarget() {
             if (!gameActive) return;
 
-            // Разрешаем до 6 монстров одновременно
             if (gameArea.querySelectorAll('.game-target').length < 6) {
                 const target = document.createElement('div');
                 target.className = 'game-target';
                 
-                // Рандомный тип монстра
                 const rand = Math.random();
                 let points = 1;
                 let timeToLive = 1500;
@@ -1266,7 +1196,6 @@
                     e.stopPropagation();
                     if (!gameActive) return;
                     
-                    // Логика комбо
                     if (comboTimer) clearTimeout(comboTimer);
                     gameScore += points * currentCombo;
                     document.getElementById('gameScore').textContent = gameScore;
@@ -1282,7 +1211,6 @@
                         gameComboEl.classList.remove('active');
                     }, 1000);
 
-                    // Эффект брызг
                     createSplatter(e.clientX - gameArea.getBoundingClientRect().left, e.clientY - gameArea.getBoundingClientRect().top, target.classList.contains('fast') ? '#ffd700' : (target.classList.contains('boss') ? '#8b0000' : '#ff3333'));
 
                     target.remove();
@@ -1291,7 +1219,6 @@
                 setTimeout(() => { if (target.parentNode) target.remove(); }, timeToLive);
             }
             
-            // Спавним нового монстра каждые 300-500 мс
             setTimeout(spawnTarget, Math.random() * 200 + 300);
         }
 
@@ -1302,7 +1229,6 @@
                 splat.style.left = (x - 5) + 'px';
                 splat.style.top = (y - 5) + 'px';
                 splat.style.backgroundColor = color;
-                // Разбрасываем в разные стороны
                 splat.style.transform = `translate(${Math.random()*30-15}px, ${Math.random()*30-15}px)`;
                 gameArea.appendChild(splat);
                 setTimeout(() => splat.remove(), 500);
