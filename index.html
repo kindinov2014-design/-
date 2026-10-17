@@ -33,25 +33,7 @@
         }
         body.theme-light { background: radial-gradient(circle at 50% 0%, #ffe5e5 0%, var(--bg) 60%); }
 
-        /* ИМБОВЫЕ ЭФФЕКТЫ */
-        /* 1. Кастомный курсор */
-        body { cursor: none; }
-        #custom-cursor {
-            position: fixed; width: 20px; height: 20px;
-            border: 2px solid var(--accent); border-radius: 50%;
-            pointer-events: none; z-index: 9999;
-            transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
-            box-shadow: 0 0 15px var(--accent);
-            transform: translate(-50%, -50%);
-            mix-blend-mode: difference;
-        }
-        #custom-cursor.hover {
-            width: 50px; height: 50px;
-            background: rgba(255,51,51,0.2);
-            border-width: 3px;
-        }
-
-        /* 2. Сканирующая линия */
+        /* 1. Сканирующая линия */
         .scan-line {
             position: fixed; top: 0; left: 0; width: 100%; height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
@@ -65,7 +47,7 @@
             100% { top: 100%; }
         }
 
-        /* 3. Глитч-эффект */
+        /* 2. Глитч-эффект (только для заголовка) */
         .glitch {
             position: relative; display: inline-block;
         }
@@ -94,7 +76,7 @@
             100% { clip-path: inset(50% 0 30% 0); }
         }
 
-        /* 4. Эффект аномалии при скролле */
+        /* 3. Эффект аномалии при скролле */
         .anomaly-active {
             animation: anomaly 0.5s ease-in-out;
         }
@@ -677,10 +659,7 @@
 </head>
 <body>
 
-    <!-- ИМБОВЫЕ ЭФФЕКТЫ -->
-    <div id="custom-cursor"></div>
     <div class="scan-line"></div>
-
     <canvas id="bg-canvas"></canvas>
     <div id="bg-glow"></div>
 
@@ -734,7 +713,7 @@
         <div class="timer-section">
             <div class="timer-box">
                 <div class="timer-label">⏳ Ближайший релиз</div>
-                <div class="timer-title" id="timerTitle">Арка 8: <span>Пустота</span></div>
+                <div class="timer-title" id="timerTitle">1 арка 1 сезона</div>
                 <div class="timer-grid">
                     <div class="timer-cell"><div class="timer-num" id="timerDays">00</div><div class="timer-cell-label">Дней</div></div>
                     <div class="timer-cell"><div class="timer-num" id="timerHours">00</div><div class="timer-cell-label">Часов</div></div>
@@ -1250,25 +1229,14 @@
         const TELEGRAM_CHANNEL = "https://t.me/The_MisterAki2";
 
         // ===== ИМБОВЫЕ ЭФФЕКТЫ =====
-        // 1. Кастомный курсор
-        const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-        document.querySelectorAll('a, button, .nav-btn, .showcase-tab, .card, .music-item, .shop-item, .game-target').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-
-        // 2. Звук при клике
+        // 1. Звук при клике
         const clickSound = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');
         document.addEventListener('click', () => {
             clickSound.currentTime = 0;
             clickSound.play().catch(() => {});
         });
 
-        // 3. Эффект аномалии при скролле
+        // 2. Эффект аномалии при скролле
         let scrollTimeout;
         window.addEventListener('scroll', () => {
             if (scrollTimeout) return;
@@ -1279,7 +1247,7 @@
             }, 200);
         });
 
-        // 4. Мини-игра "Реверс"
+        // 3. Мини-игра "Реверс"
         let gameActive = false, gameScore = 0, gameTime = 20, gameTimer = null;
         const gameArea = document.getElementById('gameArea');
         const gameOverlay = document.getElementById('gameOverlay');
@@ -1349,13 +1317,12 @@
 
         // ===== ТАЙМЕР =====
         const NEXT_RELEASE = {
-            title: "Тёмное отражение",
-            arc: "Арка 36",
-            date: "2026-12-01T18:00:00"
+            title: "1 арка 1 сезона",
+            date: "2026-11-01T19:10:00"
         };
         let timerInterval = null;
         function startTimer() {
-            document.getElementById('timerTitle').innerHTML = `${NEXT_RELEASE.arc}: <span>${NEXT_RELEASE.title}</span>`;
+            document.getElementById('timerTitle').innerHTML = `<span>${NEXT_RELEASE.title}</span>`;
             const target = new Date(NEXT_RELEASE.date).getTime();
             function tick() {
                 const now = Date.now(); let diff = target - now; if (diff < 0) diff = 0;
@@ -1739,7 +1706,7 @@
                 showcase_all: "Все", showcase_aki: "Аки", showcase_epsilon: "Эпсилон", showcase_chronicles: "Свидетели",
                 watchlist_title: "📌 БУДУ СМОТРЕТЬ",
                 banner_title: "СЛЕДИ ЗА ПРОЕКТОМ",
-                banner_desc: "Подписывайся на Telegram и YouTube, чтобы не пропустить выход новых серий",
+                banner_desc: "Подписывайся на Telegram, YouTube и Discord, чтобы не пропустить выход новых серий",
                 footer_text: "© 2026 Аки и Эпсилон. Все права защищены.",
                 modal_register: "Регистрация", modal_login: "Вход",
                 label_nick: "Никнейм", label_pass: "Пароль", label_gender: "Пол",
@@ -2324,8 +2291,6 @@
         renderShop();
         renderSeasons();
         updateGameRecord();
-        animateBg();
-        initCustomCursor();
 
         // ===== ЧАСТИЦЫ =====
         function initParticles() {
@@ -2413,15 +2378,6 @@
                 canvas.height = window.innerHeight;
             });
         }
-
-        function initCustomCursor() {
-            document.querySelectorAll('a, button, .nav-btn, .showcase-tab, .card, .music-item, .shop-item, .game-target').forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-            });
-        }
-
-        function animateBg() {}
 
         // ===== CHARACTERS DATA =====
         const CHARACTERS = [
