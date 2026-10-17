@@ -144,6 +144,13 @@
             align-items: center;
             justify-content: center;
             font-size: 0.9rem;
+            overflow: hidden;
+        }
+
+        .user-btn .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .lang-btn {
@@ -1577,6 +1584,11 @@
                     <label data-i18n="label_pass">Пароль</label>
                     <input type="password" id="regPass" placeholder="Минимум 4 символа">
                 </div>
+                <!-- НОВОЕ ПОЛЕ: ССЫЛКА НА АВАТАРКУ -->
+                <div class="form-group">
+                    <label>Ссылка на аватарку (URL)</label>
+                    <input type="text" id="regAvatar" placeholder="https://example.com/image.jpg (не обязательно)">
+                </div>
                 <div class="form-group">
                     <label data-i18n="label_gender">Пол</label>
                     <select id="regGender">
@@ -1744,7 +1756,7 @@
             }, 300);
         }
 
-        // ===== ВСЕ СЕРИИ (РАСШИРЕННЫЕ) =====
+        // ===== ВСЕ СЕРИИ =====
         const EPISODES = [
             { id: 's1e1', title: 'Аномалия', emoji: '🎬', sub: 'Сезон 1 • Серия 1', season: 1, showcase: 'aki' },
             { id: 's1e2', title: 'Эпсилон', emoji: '🕶️', sub: 'Сезон 1 • Серия 2', season: 1, showcase: 'epsilon' },
@@ -2405,13 +2417,13 @@
         function register() {
             const nick = document.getElementById('regNick').value.trim();
             const pass = document.getElementById('regPass').value;
+            const avatarUrl = document.getElementById('regAvatar').value.trim();
             const gender = document.getElementById('regGender').value;
             const errorEl = document.getElementById('regError');
 
-            // СЕКРЕТНЫЙ ПАРОЛЬ ДЛЯ АДМИНА (можешь поменять на свой)
+            // СЕКРЕТНЫЙ ПАРОЛЬ ДЛЯ АДМИНА
             const ADMIN_SECRET = "superadmin123"; 
 
-            // Проверка: если это твой ник и введен НЕ секретный пароль
             if (nick.toLowerCase() === 'the_misteraki' && pass !== ADMIN_SECRET) {
                 errorEl.textContent = 'Извините, вы не успели. Этот ник уже занят.';
                 return;
@@ -2432,22 +2444,22 @@
 
             const users = getUsers();
             
-            // Если ник уже кем-то занят (даже тобой), выдаем ошибку
             if (users[nick]) {
                 errorEl.textContent = currentLang === 'ru' ? 'Этот ник уже занят' : 'Nickname taken';
                 return;
             }
 
-            // Если пароль админский, сохраняем его как обычный пароль, чтобы потом можно было войти
             let finalPass = pass;
             if (nick.toLowerCase() === 'the_misteraki' && pass === ADMIN_SECRET) {
-                 // Пароль для входа в аккаунт. Можешь поменять его на любой.
                  finalPass = "mypassword123"; 
             }
 
-            users[nick] = { password: finalPass, gender: gender };
+            // Сохраняем аватарку
+            users[nick] = { password: finalPass, gender: gender, avatar: avatarUrl || null };
             saveUsers(users);
-            setCurrentUser({ nickname: nick, gender: gender });
+            
+            // Сразу логиним с аватаркой
+            setCurrentUser({ nickname: nick, gender: gender, avatar: avatarUrl || null });
 
             errorEl.textContent = '';
             closeAuth();
@@ -2475,7 +2487,14 @@
                 errorEl.textContent = currentLang === 'ru' ? 'Неверный пароль' : 'Wrong password';
                 return;
             }
-            setCurrentUser({ nickname: nick, gender: users[nick].gender });
+            
+            // Передаем аватарку при входе
+            setCurrentUser({ 
+                nickname: nick, 
+                gender: users[nick].gender, 
+                avatar: users[nick].avatar || null 
+            });
+            
             errorEl.textContent = '';
             closeAuth();
             updateUserArea();
@@ -2499,13 +2518,20 @@
             const userArea = document.getElementById('userArea');
             const user = getCurrentUser();
             const t = translations[currentLang];
+            
             if (user) {
-                const genderIcon = user.gender === 'male' ? '👨' : '👩';
                 const genderColor = user.gender === 'male' ? '#4a90e2' : '#e24a90';
+                const genderIcon = user.gender === 'male' ? '👨' : '👩';
+                
+                // Если есть ссылка на аватар, ставим картинку. Если нет - ставим иконку пола.
+                const avatarHTML = user.avatar 
+                    ? `<img src="${user.avatar}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='${genderIcon}';">`
+                    : genderIcon;
+
                 userArea.innerHTML = `
                     <button class="user-btn" onclick="logout()">
-                        <span class="avatar" style="background: linear-gradient(145deg, ${genderColor}, #8b0000);">
-                            ${genderIcon}
+                        <span class="avatar" style="background: linear-gradient(145deg, ${genderColor}, #8b0000); overflow: hidden; padding: 0;">
+                            ${avatarHTML}
                         </span>
                         <span class="name">${user.nickname}</span>
                     </button>
