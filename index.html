@@ -365,179 +365,6 @@
         .cart-item-remove { background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 1rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: inherit; transition: all 0.2s ease; }
         .cart-item-remove:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: scale(1.08); }
 
-        /* ===== АКРИЛ + ВОДЯНАЯ ОБВОДКА ===== */
-        .acrylic {
-            position: relative;
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(18px) saturate(140%);
-            -webkit-backdrop-filter: blur(18px) saturate(140%);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow:
-                0 8px 32px rgba(0, 0, 0, 0.35),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        body.theme-light .acrylic {
-            background: rgba(255, 255, 255, 0.55);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow:
-                0 8px 32px rgba(0, 0, 0, 0.12),
-                inset 0 1px 0 rgba(255, 255, 255, 0.7);
-        }
-
-        .acrylic::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: inherit;
-            padding: 2px;
-            background:
-                linear-gradient(120deg,
-                    rgba(0, 229, 255, 0.55),
-                    rgba(179, 136, 255, 0.55),
-                    rgba(255, 51, 51, 0.55),
-                    rgba(0, 229, 255, 0.55));
-            background-size: 300% 300%;
-            -webkit-mask:
-                linear-gradient(#000 0 0) content-box,
-                linear-gradient(#000 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            animation: waterFlow 6s linear infinite;
-            pointer-events: none;
-            filter: blur(0.4px);
-            opacity: 0.9;
-        }
-        .acrylic::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background:
-                radial-gradient(120% 80% at 10% 0%, rgba(0, 229, 255, 0.12), transparent 60%),
-                radial-gradient(120% 80% at 90% 100%, rgba(179, 136, 255, 0.12), transparent 60%);
-            pointer-events: none;
-            mix-blend-mode: screen;
-        }
-
-        @keyframes waterFlow {
-            0%   { background-position: 0% 50%; }
-            50%  { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .timer-box.acrylic,
-        .game-box.acrylic,
-        .prediction-box.acrylic,
-        .map-container.acrylic,
-        .showcase-description.acrylic,
-        .big-banner-inner.acrylic,
-        .shop-item.acrylic,
-        .char-card.acrylic,
-        .lore-item.acrylic,
-        .season-accordion-item.acrylic,
-        .modal.acrylic,
-        .cart-item.acrylic,
-        .profile-modal.acrylic,
-        .char-modal.acrylic,
-        .auth-required.acrylic,
-        .promo-modal.acrylic {
-            background-clip: padding-box;
-        }
-
-        /* ===== ФОРМА ПРЕДЛОЖЕНИЯ ===== */
-        .suggest-section {
-            max-width: 900px;
-            margin: 60px auto;
-            padding: 0 60px;
-        }
-        .suggest-box {
-            padding: 40px;
-            text-align: center;
-        }
-        .suggest-title {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: var(--text);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-        .suggest-title span { color: var(--accent); }
-        .suggest-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-        }
-        .suggest-form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .suggest-input,
-        .suggest-textarea {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 12px;
-            padding: 14px 18px;
-            color: var(--text);
-            font-size: 1rem;
-            font-family: inherit;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        body.theme-light .suggest-input,
-        body.theme-light .suggest-textarea {
-            background: rgba(255, 255, 255, 0.6);
-            border-color: rgba(0, 0, 0, 0.15);
-        }
-        .suggest-input:focus,
-        .suggest-textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
-        .suggest-textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        .suggest-btn {
-            background: linear-gradient(120deg, var(--accent), #b388ff);
-            color: #fff;
-            padding: 16px 40px;
-            border: none;
-            border-radius: 30px;
-            font-weight: 800;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            font-family: inherit;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.3s;
-        }
-        .suggest-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px var(--accent-glow);
-        }
-        .suggest-btn::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-        .suggest-btn:hover::after {
-            transform: translateX(100%);
-        }
-
         @keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); } 20%, 40%, 60%, 80% { transform: translateX(5px); } }
         @keyframes flashFade { 0% { opacity: 1; } 100% { opacity: 0; } }
 
@@ -617,10 +444,6 @@
             .promo-modal, .auth-required { padding: 30px 22px; max-height: 90vh; max-height: 90svh; overflow-y: auto; } .promo-title { font-size: 1.3rem; } .promo-emoji, .auth-required-emoji { font-size: 3.5rem; } .auth-required-title { font-size: 1.2rem; } .auth-required-buttons { flex-direction: column; } .auth-required-btn { width: 100%; }
 
             .notification { top: auto; bottom: 80px; right: 12px; left: 12px; max-width: none; font-size: 0.85rem; padding: 14px 18px; transform: translateY(120px); } .notification.show { transform: translateY(0); }
-
-            .suggest-section { padding: 0 20px; margin: 40px auto; }
-            .suggest-box { padding: 26px 20px; }
-            .suggest-title { font-size: 1.2rem; }
         }
         @media (max-width: 420px) {
             .shop-grid, .music-grid, .char-grid { grid-template-columns: 1fr; }
@@ -679,7 +502,7 @@
 
         <!-- TIMER -->
         <div class="timer-section">
-            <div class="timer-box acrylic">
+            <div class="timer-box">
                 <div class="timer-label">⏳ Ближайший релиз</div>
                 <div class="timer-title" id="timerTitle">1 арка 1 сезона</div>
                 <div class="timer-grid">
@@ -693,7 +516,7 @@
 
         <!-- МИНИ-ИГРА "РЕВЕРС" -->
         <div class="game-section">
-            <div class="game-box acrylic">
+            <div class="game-box">
                 <div class="game-title">🎮 РЕВЕРС</div>
                 <div class="game-desc">Кликай по аномалиям. Успей за 40 секунд! Жёлтые — быстрые, Красные — боссы.</div>
                 <div class="game-stats">
@@ -718,7 +541,7 @@
         </div>
 
         <div class="prediction-section">
-            <div class="prediction-box acrylic">
+            <div class="prediction-box">
                 <div class="prediction-title">🔮 Предсказание от Алисы</div>
                 <div class="prediction-text" id="predictionText">Нажми на кнопку, чтобы узнать свою судьбу...</div>
                 <button class="prediction-btn" onclick="getPrediction()">Получить предсказание</button>
@@ -728,7 +551,7 @@
         <!-- КАРТА -->
         <div class="map-section">
             <h2 class="map-title" data-i18n="map_title">🗺️ <span>КАРТА ЭПСИЛОНА</span></h2>
-            <div class="map-container acrylic">
+            <div class="map-container">
                 <svg class="map-svg" viewBox="0 0 900 700">
                     <defs>
                         <radialGradient id="mapGlow" cx="50%" cy="50%" r="50%">
@@ -919,49 +742,49 @@
         </div>
 
         <div class="section-wrapper showcase-content active" id="showcase-all">
-            <div class="showcase-description acrylic">
+            <div class="showcase-description">
                 <strong>ВСЕ АРКИ</strong><br>
                 Полный список арок «Аки и Эпсилон» — от заражения в лаборатории до 35-й арки.
             </div>
             <div class="carousel" id="allGrid"></div>
         </div>
         <div class="section-wrapper showcase-content" id="showcase-aki">
-            <div class="showcase-description acrylic">
+            <div class="showcase-description">
                 <strong>КТО ТАКОЙ АКИ?</strong><br>
                 Аки — 19-летний парень, который любил исследовать заброшки. Нашёл странный камень, заразился аномалией, вступил в Эпсилон, умер, воскрес — но потерял силу. Теперь он обычный человек с реверсом и опытом. Его путь — от жертвы до героя, который сам себе оружие.
             </div>
             <div class="carousel" id="akiGrid"></div>
         </div>
         <div class="section-wrapper showcase-content" id="showcase-epsilon">
-            <div class="showcase-description acrylic">
+            <div class="showcase-description">
                 <strong>ЧТО ТАКОЕ ЭПСИЛОН?</strong><br>
                 Тайная организация, основанная 30 лет назад. Спасает мир от аномалий и монстров. Тайно. Жёстко. Без благодарности. 100+ агентов, несколько баз. У каждого — чип в шее, который может отключить или убить. Форма: чёрный пиджак, белая рубашка, чёрный галстук, чёрные штаны, белые ботинки. Девиз: «Мы — последний рубеж».
             </div>
             <div class="carousel" id="epsilonGrid"></div>
         </div>
         <div class="section-wrapper showcase-content" id="showcase-chronicles">
-            <div class="showcase-description acrylic">
+            <div class="showcase-description">
                 <strong>СВИДЕТЕЛИ</strong><br>
                 «Свидетели» — бывшие агенты Эпсилона, которые узнали правду и ушли. Зейн, Мира, Корв, Тень, Вейн. Они не убивают — они свидетельствуют. Но у них своя правда, и Аки ещё предстоит понять, кому верить.
             </div>
             <div class="carousel" id="chroniclesGrid"></div>
         </div>
         <div class="section-wrapper showcase-content" id="showcase-season6">
-            <div class="showcase-description acrylic">
+            <div class="showcase-description">
                 <strong>СЕЗОН 6: «НОВАЯ ЭРА»</strong><br>
                 Финал истории. Война закончена. Эпсилон больше не будет прежним. Аки должен решить, каким будет мир после. Арки 21–25.
             </div>
             <div class="carousel" id="season6Grid"></div>
         </div>
         <div class="section-wrapper showcase-content" id="showcase-season7">
-            <div class="showcase-description acrylic">
+            <div class="showcase-description">
                 <strong>СЕЗОН 7: «ЭХО ПРОШЛОГО»</strong><br>
                 После падения Эпсилона Аки пытается жить обычной жизнью, но появляется «Синдикат». Арки 26–30.
             </div>
             <div class="carousel" id="season7Grid"></div>
         </div>
         <div class="section-wrapper showcase-content" id="showcase-season8">
-            <div class="showcase-description acrylic">
+            <div class="showcase-description">
                 <strong>СЕЗОН 8: «ТЁМНОЕ ОТРАЖЕНИЕ»</strong><br>
                 Новый Эпсилон, маньяк, голоса в голове и цена героизма. Арки 31–35.
             </div>
@@ -977,21 +800,8 @@
             <div class="carousel" id="watchlistGrid"></div>
         </div>
 
-        <!-- ПРЕДЛОЖЕНИЕ ОТ ЧЕЛОВЕКА -->
-        <div class="suggest-section">
-            <div class="suggest-box acrylic">
-                <h2 class="suggest-title">💡 <span>ПРЕДЛОЖИ ИДЕЮ</span></h2>
-                <p class="suggest-desc">Есть идея для сюжета, персонажа или аномалии? Напиши — лучшие предложения попадут в проект!</p>
-                <div class="suggest-form">
-                    <input type="text" class="suggest-input" id="suggestName" placeholder="Твой ник (не обязательно)">
-                    <textarea class="suggest-textarea" id="suggestText" placeholder="Опиши свою идею..."></textarea>
-                    <button class="suggest-btn" onclick="sendSuggestion()">Отправить предложение</button>
-                </div>
-            </div>
-        </div>
-
         <div class="big-banner">
-            <div class="big-banner-inner acrylic">
+            <div class="big-banner-inner">
                 <h2 data-i18n="banner_title">СЛЕДИ ЗА ПРОЕКТОМ</h2>
                 <p data-i18n="banner_desc">Подписывайся на Telegram, YouTube и Discord, чтобы не пропустить выход новых серий</p>
                 <div class="hero-buttons" style="justify-content: center;">
@@ -1028,7 +838,7 @@
         <div class="section-wrapper" style="margin-top: 40px;">
             <h2 class="section-title" data-i18n="shop_title">🛒 <span>МАГАЗИН</span></h2>
         </div>
-        <div class="showcase-description acrylic" style="max-width: 1200px; margin: 0 auto 25px; margin-left: 60px; margin-right: 60px;">
+        <div class="showcase-description" style="max-width: 1200px; margin: 0 auto 25px; margin-left: 60px; margin-right: 60px;">
             <strong>ВНИМАНИЕ:</strong> весь мерч — <strong>вымышленный</strong>. Цен нет, в реальной жизни он не продаётся. Пока что. 😉
         </div>
         <div class="shop-grid" id="shopGrid"></div>
@@ -1047,7 +857,7 @@
         <div class="section-wrapper" style="margin-top: 40px;">
             <h2 class="section-title" data-i18n="music_title">🎵 <span>МУЗЫКА</span></h2>
         </div>
-        <div class="showcase-description acrylic" style="max-width: 1200px; margin: 0 auto 25px; margin-left: 60px; margin-right: 60px; text-align: center; border-left: none; border: 2px dashed rgba(255, 51, 51, 0.4); border-radius: 16px;">
+        <div class="showcase-description" style="max-width: 1200px; margin: 0 auto 25px; margin-left: 60px; margin-right: 60px; text-align: center; border-left: none; border: 2px dashed rgba(255, 51, 51, 0.4); border-radius: 16px;">
             <strong>ВНИМАНИЕ:</strong> музыкальный раздел находится в разработке. Скоро здесь появятся треки! 🎧
         </div>
         <div class="music-grid">
@@ -1090,7 +900,7 @@
             <h2 class="section-title" data-i18n="coop_title">🤝 <span>СОТРУДНИЧЕСТВО</span></h2>
         </div>
         <div class="coop-section">
-            <div class="coop-form acrylic">
+            <div class="coop-form">
                 <h3 data-i18n="coop_form_title">Напишите нам</h3>
                 <input type="text" placeholder="Ваше имя" data-i18n-placeholder="coop_name">
                 <input type="email" placeholder="Email" data-i18n-placeholder="coop_email">
@@ -1107,7 +917,7 @@
             <h2 class="section-title" data-i18n="about_title">📖 <span>О ПРОЕКТЕ</span></h2>
         </div>
         <div class="about-section">
-            <div class="about-image acrylic">🎬</div>
+            <div class="about-image">🎬</div>
             <div class="about-text">
                 <h2 data-i18n="about_heading">Аки и Эпсилон</h2>
                 <p data-i18n="about_text">
@@ -1150,164 +960,171 @@
         <button class="bottom-nav-item" data-page="shop" onclick="showPage('shop')">
             <span class="bn-icon">🛒</span><span data-i18n="nav_shop">Магазин</span>
         </button>
-    </nav>    <!-- ============ CHARACTERS ============ -->
-    <div class="page" id="page-characters">
-        <div class="section-wrapper" style="margin-top: 40px;">
-            <h2 class="section-title">🎭 <span>ПЕРСОНАЖИ</span></h2>
-        </div>
-        <div class="showcase-tabs">
-            <button class="showcase-tab active" onclick="filterChars('all', event)">Все</button>
-            <button class="showcase-tab" onclick="filterChars('main', event)">Основные</button>
-            <button class="showcase-tab" onclick="filterChars('epsilon', event)">Эпсилон</button>
-            <button class="showcase-tab" onclick="filterChars('witnesses', event)">Свидетели</button>
-        </div>
-        <div class="char-grid" id="charGrid"></div>
-    </div>
-
-    <!-- ============ LORE ============ -->
-    <div class="page" id="page-lore">
-        <div class="section-wrapper" style="margin-top: 40px;">
-            <h2 class="section-title">📖 <span>ЛОР</span></h2>
-        </div>
-        <div class="lore-accordion-wrapper" id="loreAccordion"></div>
-    </div>
-
-    <!-- ============ SHOP ============ -->
-    <div class="page" id="page-shop">
-        <div class="section-wrapper" style="margin-top: 40px;">
-            <h2 class="section-title" data-i18n="shop_title">🛒 <span>МАГАЗИН</span></h2>
-        </div>
-        <div class="showcase-description acrylic" style="max-width: 1200px; margin: 0 auto 25px; margin-left: 60px; margin-right: 60px;">
-            <strong>ВНИМАНИЕ:</strong> весь мерч — <strong>вымышленный</strong>. Цен нет, в реальной жизни он не продаётся. Пока что. 😉
-        </div>
-        <div class="shop-grid" id="shopGrid"></div>
-    </div>
-
-    <!-- ============ SEASONS ============ -->
-    <div class="page" id="page-seasons">
-        <div class="section-wrapper" style="margin-top: 40px;">
-            <h2 class="section-title">📺 <span>СЕЗОНЫ</span></h2>
-        </div>
-        <div class="season-accordion-wrapper" id="seasonsAccordion"></div>
-    </div>
-
-    <!-- ============ MUSIC ============ -->
-    <div class="page" id="page-music">
-        <div class="section-wrapper" style="margin-top: 40px;">
-            <h2 class="section-title" data-i18n="music_title">🎵 <span>МУЗЫКА</span></h2>
-        </div>
-        <div class="showcase-description acrylic" style="max-width: 1200px; margin: 0 auto 25px; margin-left: 60px; margin-right: 60px; text-align: center; border-left: none; border: 2px dashed rgba(255, 51, 51, 0.4); border-radius: 16px;">
-            <strong>ВНИМАНИЕ:</strong> музыкальный раздел находится в разработке. Скоро здесь появятся треки! 🎧
-        </div>
-        <div class="music-grid">
-            <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
-                <div class="music-cover">🎵</div>
-                <div class="music-name" data-i18n="music_1">Aki Theme</div>
-                <div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
+    </nav>    <!-- ===== MODALS ===== -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeAuth()">×</button>
+            <h2 id="modalTitle" data-i18n="modal_register">Регистрация</h2>
+            <div id="registerForm">
+                <div class="form-group">
+                    <label data-i18n="label_nick">Никнейм</label>
+                    <input type="text" id="regNick" placeholder="Введи свой ник" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="label_pass">Пароль</label>
+                    <input type="password" id="regPass" placeholder="Минимум 4 символа">
+                </div>
+                <div class="form-group">
+                    <label>Ссылка на аватарку (URL)</label>
+                    <input type="text" id="regAvatar" placeholder="https://example.com/image.jpg (не обязательно)">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="label_gender">Пол</label>
+                    <select id="regGender">
+                        <option value="" data-i18n="gender_choose">Выбери пол</option>
+                        <option value="male" data-i18n="gender_male">Мужской</option>
+                        <option value="female" data-i18n="gender_female">Женский</option>
+                    </select>
+                </div>
+                <button class="modal-btn" onclick="register()" data-i18n="btn_create">Создать аккаунт</button>
+                <div class="error-msg" id="regError"></div>
+                <div class="modal-switch">
+                    <span data-i18n="have_account">Уже есть аккаунт?</span> <a onclick="switchForm('login')" data-i18n="btn_login_link">Войти</a>
+                </div>
             </div>
-            <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
-                <div class="music-cover">🎶</div>
-                <div class="music-name" data-i18n="music_2">Epsilon March</div>
-                <div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
-            </div>
-            <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
-                <div class="music-cover">🎧</div>
-                <div class="music-name" data-i18n="music_3">Anomaly</div>
-                <div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
-            </div>
-            <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
-                <div class="music-cover">🎼</div>
-                <div class="music-name" data-i18n="music_4">Resurrection</div>
-                <div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
-            </div>
-            <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
-                <div class="music-cover">🎹</div>
-                <div class="music-name" data-i18n="music_5">Witnesses</div>
-                <div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
-            </div>
-            <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
-                <div class="music-cover">🥁</div>
-                <div class="music-name" data-i18n="music_6">Final Battle</div>
-                <div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============ COOP ============ -->
-    <div class="page" id="page-coop">
-        <div class="section-wrapper" style="margin-top: 40px;">
-            <h2 class="section-title" data-i18n="coop_title">🤝 <span>СОТРУДНИЧЕСТВО</span></h2>
-        </div>
-        <div class="coop-section">
-            <div class="coop-form acrylic">
-                <h3 data-i18n="coop_form_title">Напишите нам</h3>
-                <input type="text" placeholder="Ваше имя" data-i18n-placeholder="coop_name">
-                <input type="email" placeholder="Email" data-i18n-placeholder="coop_email">
-                <textarea placeholder="Ваше сообщение" data-i18n-placeholder="coop_message"></textarea>
-                <button class="btn-primary" style="width: 100%;" onclick="sendCoop()" data-i18n="coop_send">Отправить</button>
-            </div>
-            <p class="coop-discord">Или напиши нам в <a href="https://discord.gg/5vbQ9sMb3" target="_blank" rel="noopener">Discord</a> — там мы отвечаем быстрее всего 💬</p>
-        </div>
-    </div>
-
-    <!-- ============ ABOUT ============ -->
-    <div class="page" id="page-about">
-        <div class="section-wrapper" style="margin-top: 40px;">
-            <h2 class="section-title" data-i18n="about_title">📖 <span>О ПРОЕКТЕ</span></h2>
-        </div>
-        <div class="about-section">
-            <div class="about-image acrylic">🎬</div>
-            <div class="about-text">
-                <h2 data-i18n="about_heading">Аки и Эпсилон</h2>
-                <p data-i18n="about_text">
-                    Это история о парне по имени Аки, который заразился аномалией, вступил в тайную организацию Эпсилон и умер... но вернулся. Теперь он — часть системы, и его сила ещё не раскрыта. Мы создаём анимацию по этому лору на YouTube.
-                </p>
-                <p>Мир, где аномалии искажают реальность, монстры вырываются из зон, а Эпсилон исправляет свои ошибки ценой жизней агентов. Аки прошёл через смерть, воскрешение, вирус «Эхо», потерю силы, предательство Свидетелей и плен. И это только начало.</p>
-                <div class="about-socials">
-                    <a href="https://t.me/The_MisterAki2" target="_blank" rel="noopener" class="tg">✈️ Telegram</a>
-                    <a href="https://youtube.com/@the_misteraki?si=i-DJ63jZH8Hk8waX" target="_blank" rel="noopener" class="yt">▶️ YouTube</a>
-                    <a href="https://discord.gg/5vbQ9sMb3" target="_blank" rel="noopener" class="ds">💬 Discord</a>
+            <div id="loginForm" style="display:none;">
+                <div class="form-group">
+                    <label data-i18n="label_nick">Никнейм</label>
+                    <input type="text" id="logNick" placeholder="Введи свой ник">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="label_pass">Пароль</label>
+                    <input type="password" id="logPass" placeholder="Введи пароль">
+                </div>
+                <button class="modal-btn" onclick="login()" data-i18n="btn_login">Войти</button>
+                <div class="error-msg" id="logError"></div>
+                <div class="modal-switch">
+                    <span data-i18n="no_account">Нет аккаунта?</span> <a onclick="switchForm('register')" data-i18n="btn_register_link">Зарегистрироваться</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-socials">
-            <a href="https://t.me/The_MisterAki2" target="_blank" rel="noopener" class="footer-social tg" title="Telegram">✈️ Telegram</a>
-            <a href="https://youtube.com/@the_misteraki?si=i-DJ63jZH8Hk8waX" target="_blank" rel="noopener" class="footer-social yt" title="YouTube">▶️ YouTube</a>
-            <a href="https://discord.gg/5vbQ9sMb3" target="_blank" rel="noopener" class="footer-social ds" title="Discord">💬 Discord</a>
+    <div class="modal-overlay" id="promoModal">
+        <div class="promo-modal">
+            <div class="promo-emoji">🎁</div>
+            <div class="promo-title" data-i18n="promo_modal_title">Промокод активирован!</div>
+            <div class="promo-reward" id="promoReward">+1 товар в корзину</div>
+            <button class="promo-modal-btn" onclick="closePromoModal()" data-i18n="promo_modal_btn">Отлично!</button>
         </div>
-        <p data-i18n="footer_text">© 2026 Аки и Эпсилон. Все права защищены.</p>
-    </footer>
+    </div>
 
-    <!-- BOTTOM NAV (MOBILE) -->
-    <nav class="bottom-nav" id="bottomNav">
-        <button class="bottom-nav-item active" data-page="home" onclick="showPage('home')">
-            <span class="bn-icon">🏠</span><span data-i18n="nav_home">Главная</span>
-        </button>
-        <button class="bottom-nav-item" data-page="characters" onclick="showPage('characters')">
-            <span class="bn-icon">🎭</span><span data-i18n="nav_characters">Персонажи</span>
-        </button>
-        <button class="bottom-nav-item" data-page="seasons" onclick="showPage('seasons')">
-            <span class="bn-icon">📺</span><span data-i18n="nav_seasons">Сезоны</span>
-        </button>
-        <button class="bottom-nav-item" data-page="lore" onclick="showPage('lore')">
-            <span class="bn-icon">📖</span><span data-i18n="nav_lore">Лор</span>
-        </button>
-        <button class="bottom-nav-item" data-page="shop" onclick="showPage('shop')">
-            <span class="bn-icon">🛒</span><span data-i18n="nav_shop">Магазин</span>
-        </button>
-    </nav>    <script>
+    <div class="modal-overlay" id="authRequiredModal">
+        <div class="auth-required">
+            <div class="auth-required-emoji">🔒</div>
+            <div class="auth-required-title" data-i18n="auth_required_title">Требуется вход</div>
+            <div class="auth-required-text" data-i18n="auth_required_text">Чтобы это сделать, войди или зарегистрируйся в аккаунт.</div>
+            <div class="auth-required-buttons">
+                <button class="auth-required-btn primary" onclick="closeAuthRequired(); openAuth('login')" data-i18n="btn_login">Войти</button>
+                <button class="auth-required-btn secondary" onclick="closeAuthRequired(); openAuth('register')" data-i18n="btn_register_link">Регистрация</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="searchModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeSearch()">×</button>
+            <h2 data-i18n="search_title">🔍 Поиск</h2>
+            <input type="text" style="width:100%; background:var(--bg); border:1px solid var(--border-soft); border-radius:10px; padding:14px 18px; color:var(--text); font-size:1rem; font-family:inherit; margin-bottom:15px;" id="searchInput" placeholder="Поиск..." data-i18n-placeholder="search_placeholder">
+            <button class="modal-btn" onclick="doSearch()" data-i18n="search_btn">Найти</button>
+        </div>
+    </div>
+
+    <!-- НОВАЯ КОРЗИНА -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal" style="max-width: 500px;">
+            <button class="modal-close" onclick="closeCart()">×</button>
+            <h2 data-i18n="cart_title">🛒 Корзина</h2>
+            <div id="cartItemsList" style="max-height: 45vh; overflow-y: auto; margin-bottom: 20px;"></div>
+            <div id="cartEmptyMsg" style="color:var(--text-muted); text-align:center; padding: 30px 0; font-size: 0.95rem;">
+                Корзина пуста
+            </div>
+            <div id="cartTotalRow" style="display:none; justify-content:space-between; align-items:center; padding: 12px 0; border-top: 1px dashed var(--border-soft); margin-bottom: 15px; font-weight: 800;">
+                <span>Всего товаров:</span>
+                <span id="cartTotalCount" style="color: var(--accent);">0</span>
+            </div>
+            <button class="modal-btn" onclick="closeCart()" data-i18n="cart_btn">Закрыть</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="episodeModal">
+        <div class="cinema-modal">
+            <button class="modal-close" onclick="closeEpisode()">×</button>
+            <div class="cinema-wrap">
+                <div id="videoPlayerPlaceholder" style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#111;color:#666;font-size:1.2rem;font-weight:700;">
+                    🎬 Видео появится здесь (вставь iframe YouTube в код)
+                </div>
+                <!-- Сюда ты сможешь вставить iframe с YouTube: 
+                <iframe src="https://www.youtube.com/embed/ТВОЙ_КОД" allowfullscreen></iframe> 
+                -->
+            </div>
+            <h2 id="episodeTitle" style="color:#fff; text-align:center; margin-top:10px;">Название серии</h2>
+            <p id="episodeInfo" style="color:var(--text-muted); text-align:center; font-size:0.9rem;">Информация</p>
+        </div>
+    </div>
+
+    <!-- ПРОФИЛЬ -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="profile-modal">
+            <button class="modal-close" onclick="closeProfile()">×</button>
+            <h2 style="font-size:1.3rem; color:var(--text); margin-bottom:20px; text-align:center; letter-spacing:2px; text-transform:uppercase;">⚙️ Настройки профиля</h2>
+
+            <div class="profile-preview">
+                <div class="profile-avatar-large" id="profilePreviewAvatar">👤</div>
+                <div class="profile-preview-name" id="profilePreviewName">Ник</div>
+                <div class="profile-preview-badge" id="profilePreviewBadge">Агент Эпсилона</div>
+            </div>
+
+            <!-- Полоска опыта -->
+            <div class="xp-container">
+                <div class="xp-header">
+                    <span>Уровень:</span>
+                    <span class="xp-level" id="xpLevelText">1 - Новобранец</span>
+                </div>
+                <div class="xp-bar-bg">
+                    <div class="xp-bar-fill" id="xpBarFill"></div>
+                </div>
+                <div class="xp-text" id="xpText">0 / 100 XP</div>
+            </div>
+
+            <div class="profile-section-title">🎨 Цвет ника</div>
+            <div class="color-options" id="colorOptions"></div>
+            <div class="profile-section-title">🖼️ Рамка аватарки</div>
+            <div class="frame-options" id="frameOptions"></div>
+            <div class="profile-section-title">🏷️ Статус</div>
+            <div class="status-options" id="statusOptions"></div>
+            <button class="modal-btn" onclick="saveProfileCustomization()" style="margin-top:25px;">Сохранить</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="charModal">
+        <div class="char-modal" id="charModalContent">
+            <button class="modal-close" onclick="closeCharModal()">×</button>
+            <div id="charModalBody"></div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer" style="display:none;"></audio>    <script>
         const TELEGRAM_CHANNEL = "https://t.me/The_MisterAki2";
 
-        // ===== КУРСОР =====
+        // ===== ОПТИМИЗАЦИЯ КУРСОРА =====
         let lastMouseX = 0, lastMouseY = 0, ticking = false;
         const bgGlow = document.getElementById('bg-glow');
+
         window.addEventListener('mousemove', (e) => {
             lastMouseX = e.clientX;
             lastMouseY = e.clientY;
+
             if (!ticking) {
                 window.requestAnimationFrame(() => {
                     bgGlow.style.setProperty('--mouse-x', `${lastMouseX}px`);
@@ -1318,7 +1135,7 @@
             }
         });
 
-        // ===== XP =====
+        // ===== СИСТЕМА ДОСТИЖЕНИЙ (XP) =====
         const XP_LEVELS = [
             { xp: 0, name: 'Новобранец', name_en: 'Recruit' },
             { xp: 100, name: 'Агент', name_en: 'Agent' },
@@ -1326,41 +1143,50 @@
             { xp: 600, name: 'Ветеран', name_en: 'Veteran' },
             { xp: 1000, name: 'Легенда Эпсилона', name_en: 'Epsilon Legend' }
         ];
+
         function getUserXP() {
             const user = getCurrentUser();
             if (!user) return 0;
             return parseInt(localStorage.getItem('aki_xp_' + user.nickname) || 0);
         }
+
         function addXP(amount) {
             const user = getCurrentUser();
             if (!user) return;
             let xp = getUserXP() + amount;
             localStorage.setItem('aki_xp_' + user.nickname, xp);
+
             const oldLevel = getLevelIndex(getUserXP() - amount);
             const newLevel = getLevelIndex(xp);
+
             if (newLevel > oldLevel) {
                 showNotification(currentLang === 'ru' ? `🏆 Новый уровень: ${XP_LEVELS[newLevel].name}!` : `🏆 New level: ${XP_LEVELS[newLevel].name_en}!`, 'success');
             }
             updateXPBar();
         }
+
         function getLevelIndex(xp) {
             for (let i = XP_LEVELS.length - 1; i >= 0; i--) {
                 if (xp >= XP_LEVELS[i].xp) return i;
             }
             return 0;
         }
+
         function updateXPBar() {
             const user = getCurrentUser();
             const xpContainer = document.querySelector('.xp-container');
             if (!user) { if (xpContainer) xpContainer.style.display = 'none'; return; }
             if (xpContainer) xpContainer.style.display = 'block';
+
             const xp = getUserXP();
             const levelIndex = getLevelIndex(xp);
             const currentLevel = XP_LEVELS[levelIndex];
             const nextLevel = XP_LEVELS[levelIndex + 1] || { xp: currentLevel.xp + 1000 };
+
             const levelName = currentLang === 'ru' ? currentLevel.name : currentLevel.name_en;
             const levelEl = document.getElementById('xpLevelText');
             if (levelEl) levelEl.textContent = `Ур. ${levelIndex + 1} — ${levelName}`;
+
             const progress = ((xp - currentLevel.xp) / (nextLevel.xp - currentLevel.xp)) * 100;
             const fillEl = document.getElementById('xpBarFill');
             if (fillEl) fillEl.style.width = `${Math.min(100, progress)}%`;
@@ -1372,6 +1198,7 @@
         let gameActive = false, gameScore = 0, gameTime = 40;
         let currentCombo = 1;
         let spawnTimeout = null, comboTimer = null, gameTimerInterval = null;
+
         const gameArea = document.getElementById('gameArea');
         const gameOverlay = document.getElementById('gameOverlay');
         const gameComboEl = document.getElementById('gameCombo');
@@ -1381,6 +1208,7 @@
             const el = document.getElementById('gameRecord');
             if (el) el.textContent = record;
         }
+
         function startGame() {
             gameActive = true; gameScore = 0; gameTime = 40;
             currentCombo = 1;
@@ -1390,14 +1218,17 @@
             gameOverlay.style.display = 'none';
             gameArea.innerHTML = '';
             updateGameRecord();
+
             if (gameTimerInterval) clearInterval(gameTimerInterval);
             gameTimerInterval = setInterval(() => {
                 gameTime--;
                 document.getElementById('gameTime').textContent = gameTime;
                 if (gameTime <= 0) endGame();
             }, 1000);
+
             spawnTarget();
         }
+
         function spawnTarget() {
             if (!gameActive) return;
             if (gameArea.querySelectorAll('.game-target').length < 6) {
@@ -1406,6 +1237,7 @@
                 const rand = Math.random();
                 let points = 1;
                 let timeToLive = 1500;
+
                 if (rand > 0.85) {
                     target.classList.add('boss');
                     target.textContent = '👹';
@@ -1419,25 +1251,30 @@
                 } else {
                     target.textContent = '💥';
                 }
+
                 const maxX = gameArea.clientWidth - 50;
                 const maxY = gameArea.clientHeight - 50;
                 target.style.left = Math.max(0, Math.random() * maxX) + 'px';
                 target.style.top = Math.max(0, Math.random() * maxY) + 'px';
+
                 target.onclick = (e) => {
                     e.stopPropagation();
                     if (!gameActive) return;
                     if (comboTimer) clearTimeout(comboTimer);
                     gameScore += points * currentCombo;
                     document.getElementById('gameScore').textContent = gameScore;
+
                     if (currentCombo > 1) {
                         gameComboEl.classList.add('active');
                         gameComboEl.textContent = `КОМБО x${currentCombo}`;
                     }
+
                     currentCombo++;
                     comboTimer = setTimeout(() => {
                         currentCombo = 1;
                         gameComboEl.classList.remove('active');
                     }, 1000);
+
                     const splat = document.createElement('div');
                     splat.className = 'splatter';
                     splat.style.left = (e.clientX - gameArea.getBoundingClientRect().left - 5) + 'px';
@@ -1445,6 +1282,7 @@
                     splat.style.backgroundColor = target.classList.contains('fast') ? '#ffd700' : (target.classList.contains('boss') ? '#8b0000' : '#ff3333');
                     gameArea.appendChild(splat);
                     setTimeout(() => splat.remove(), 500);
+
                     target.remove();
                 };
                 gameArea.appendChild(target);
@@ -1452,17 +1290,22 @@
             }
             spawnTimeout = setTimeout(spawnTarget, Math.random() * 200 + 300);
         }
+
         function endGame() {
             gameActive = false;
             if (gameTimerInterval) clearInterval(gameTimerInterval);
             if (spawnTimeout) clearTimeout(spawnTimeout);
             if (comboTimer) clearTimeout(comboTimer);
+
             gameArea.querySelectorAll('.game-target').forEach(t => t.remove());
             gameArea.querySelectorAll('.splatter').forEach(s => s.remove());
+
             const record = parseInt(localStorage.getItem('aki_game_record') || 0);
             if (gameScore > record) localStorage.setItem('aki_game_record', gameScore);
             updateGameRecord();
+
             addXP(Math.floor(gameScore / 2));
+
             gameOverlay.style.display = 'flex';
             gameOverlay.innerHTML = `
                 <h3>ВРЕМЯ ВЫШЛО</h3>
@@ -1532,6 +1375,7 @@
                 "The truth is different for everyone."
             ]
         };
+
         function getPrediction() {
             const textEl = document.getElementById('predictionText');
             textEl.style.opacity = '0';
@@ -1579,18 +1423,21 @@
                 default: 'Click on any point on the map to learn more about the location'
             }
         };
+
         function showMapInfo(key) {
             const info = document.getElementById('mapInfo');
             info.style.opacity = '0';
             setTimeout(() => {
                 const data = MAP_DATA[currentLang][key] || MAP_DATA[currentLang].default;
-                if (typeof data === 'string') info.innerHTML = data;
-                else info.innerHTML = `<strong>${data.t}</strong>${data.d}`;
+                if (typeof data === 'string') {
+                    info.innerHTML = data;
+                } else {
+                    info.innerHTML = `<strong>${data.t}</strong>${data.d}`;
+                }
                 info.style.opacity = '1';
             }, 200);
         }
 
-        // ===== ЭПИЗОДЫ =====
         const EPISODES = [
             { id: 'a1',  title: 'Аномалия',              emoji: '🩸', sub: 'Сезон 1 • Арка 1',  season: 1, showcase: 'aki', title_en: 'Anomaly', sub_en: 'Season 1 • Arc 1' },
             { id: 'a2',  title: 'Эпсилон',               emoji: '🕶️', sub: 'Сезон 1 • Арка 2',  season: 1, showcase: 'epsilon', title_en: 'Epsilon', sub_en: 'Season 1 • Arc 2' },
@@ -1647,7 +1494,7 @@
             SEASONS.forEach(season => {
                 const eps = EPISODES.filter(e => e.season === season.number);
                 const item = document.createElement('div');
-                item.className = 'season-accordion-item acrylic';
+                item.className = 'season-accordion-item';
                 const badgeClass = season.isDev ? 'badge-dev' : 'badge-soon';
                 const badgeIcon = season.isDev ? '🟡' : '🔴';
                 const title = currentLang === 'ru' ? season.title : season.title_en;
@@ -1715,7 +1562,7 @@
             { id: 7, name: 'Кепка «Омега»',         emoji: '🧢', name_en: 'Omega Cap' },
             { id: 8, name: 'Футболка Аки',          emoji: '🎽', name_en: 'Aki T-Shirt' },
             { id: 9, name: 'Худи Аки',              emoji: '🧥', name_en: 'Aki Hoodie' },
-            { id: 10, name: 'Постер Аки',           emoji: '🖼️', name            { id: 10, name: 'Постер Аки',           emoji: '🖼️', name_en: 'Aki Poster' },
+            { id: 10, name: 'Постер Аки',           emoji: '🖼️', name_en: 'Aki Poster' },
             { id: 11, name: 'Кружка «Аки»',         emoji: '☕', name_en: 'Aki Mug' },
             { id: 12, name: 'Кепка Аки',            emoji: '🧢', name_en: 'Aki Cap' },
             { id: 13, name: 'Стикерпак',            emoji: '🎨', free: true, name_en: 'Sticker Pack' }
@@ -1729,6 +1576,7 @@
             'Witnesses':     'https://cdn.pixabay.com/audio/2022/03/10/audio_2c2c1c1c1c.mp3',
             'Final Battle':  'https://cdn.pixabay.com/audio/2022/03/15/audio_8cb8b8e4a8.mp3'
         };
+
         let currentTrackName = null;
 
         function renderEpisodeCard(ep, container) {
@@ -1738,6 +1586,7 @@
             const inWatchlist = user && getWatchlist().includes(ep.id);
             const title = currentLang === 'ru' ? ep.title : ep.title_en;
             const sub = currentLang === 'ru' ? ep.sub : ep.sub_en;
+
             card.innerHTML = `
                 <button class="card-add ${inWatchlist ? 'added' : ''}" data-ep="${ep.id}">${inWatchlist ? '✓' : '+'}</button>
                 <div class="card-image">${ep.emoji}</div>
@@ -1766,6 +1615,7 @@
             const season6Grid = document.getElementById('season6Grid');
             const season7Grid = document.getElementById('season7Grid');
             const season8Grid = document.getElementById('season8Grid');
+
             if (allGrid) allGrid.innerHTML = '';
             if (akiGrid) akiGrid.innerHTML = '';
             if (epsilonGrid) epsilonGrid.innerHTML = '';
@@ -1773,6 +1623,7 @@
             if (season6Grid) season6Grid.innerHTML = '';
             if (season7Grid) season7Grid.innerHTML = '';
             if (season8Grid) season8Grid.innerHTML = '';
+
             EPISODES.forEach(ep => {
                 if (allGrid) renderEpisodeCard(ep, allGrid);
                 if (ep.showcase === 'aki' && akiGrid) renderEpisodeCard(ep, akiGrid);
@@ -1832,6 +1683,7 @@
             saveWatchlist(list);
             renderWatchlist();
         }
+
         function renderWatchlist() {
             const user = getCurrentUser();
             const section = document.getElementById('watchlistSection');
@@ -1847,6 +1699,7 @@
                 if (ep) renderEpisodeCard(ep, grid);
             });
         }
+
         function showShowcase(name, event) {
             document.querySelectorAll('.showcase-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.showcase-tab').forEach(t => t.classList.remove('active'));
@@ -1867,7 +1720,7 @@
                 }
                 const pName = currentLang === 'ru' ? product.name : product.name_en;
                 const item = document.createElement('div');
-                item.className = 'shop-item acrylic';
+                item.className = 'shop-item';
                 item.innerHTML = `
                     ${priceHTML}
                     <div class="shop-emoji">${product.emoji}</div>
@@ -2023,7 +1876,7 @@
             }
         }
 
-        // ===== КОРЗИНА =====
+        // ===== КОРЗИНА (НОВАЯ) =====
         function getCart() {
             const user = getCurrentUser();
             if (!user) return [];
@@ -2089,6 +1942,7 @@
             const totalCount = document.getElementById('cartTotalCount');
             if (!list || !empty || !totalRow || !totalCount) return;
             const cart = getCart();
+
             list.innerHTML = '';
             if (cart.length === 0) {
                 empty.style.display = 'block';
@@ -2097,6 +1951,7 @@
             }
             empty.style.display = 'none';
             totalRow.style.display = 'flex';
+
             cart.forEach(item => {
                 const name = currentLang === 'ru' ? item.name : item.name_en;
                 const row = document.createElement('div');
@@ -2156,31 +2011,6 @@
         function sendCoop() {
             showNotification(currentLang === 'ru' ? 'Сообщение отправлено!' : 'Message sent!', 'success');
             addXP(15);
-        }
-
-        // ===== ПРЕДЛОЖЕНИЕ ОТ ЧЕЛОВЕКА =====
-        function sendSuggestion() {
-            const textEl = document.getElementById('suggestText');
-            const nameEl = document.getElementById('suggestName');
-            const text = textEl ? textEl.value.trim() : '';
-            const name = nameEl ? nameEl.value.trim() : '';
-            if (!text || text.length < 5) {
-                showNotification(currentLang === 'ru' ? 'Напиши идею (минимум 5 символов)' : 'Write an idea (min 5 chars)', 'error');
-                return;
-            }
-            const user = getCurrentUser();
-            const key = 'aki_suggestions';
-            const all = JSON.parse(localStorage.getItem(key) || '[]');
-            all.push({
-                name: name || (user ? user.nickname : 'Аноним'),
-                text: text,
-                date: new Date().toISOString()
-            });
-            localStorage.setItem(key, JSON.stringify(all));
-            if (textEl) textEl.value = '';
-            if (nameEl) nameEl.value = '';
-            addXP(25);
-            showNotification(currentLang === 'ru' ? '💡 Спасибо! Идея отправлена.' : '💡 Thanks! Idea sent.', 'success');
         }
 
         function openEpisode(sub, title) {
@@ -2279,7 +2109,10 @@
                 if (document.getElementById('page-characters').classList.contains('active')) renderCharacters();
                 if (document.getElementById('page-lore').classList.contains('active')) renderLore();
                 document.getElementById('mapInfo').innerHTML = MAP_DATA[currentLang].default;
-                elements.forEach(el => { el.style.opacity = '1'; });
+
+                elements.forEach(el => {
+                    el.style.opacity = '1';
+                });
                 setTimeout(() => { isSwitching = false; }, 300);
             }, 200);
         }
@@ -2471,6 +2304,7 @@
             { id: 'newbie',    label: 'Новобранец' },
             { id: 'veteran',   label: 'Ветеран' }
         ];
+
         function getCustomization() {
             const user = getCurrentUser();
             if (!user) return { color: 'default', frame: 'basic', status: 'agent' };
@@ -2508,7 +2342,9 @@
                 previewAvatar.textContent = genderIcon;
             }
             document.getElementById('profilePreviewName').textContent = user.nickname;
+
             updateXPBar();
+
             const colorOpts = document.getElementById('colorOptions');
             colorOpts.innerHTML = '';
             NAME_COLORS.forEach(cOpt => {
@@ -2596,6 +2432,7 @@
             "Свидетели наблюдают за тобой.",
             "Ты нашёл секрет. Но правда скрыта глубже."
         ];
+
         document.getElementById('easterEggLogo').addEventListener('click', (e) => {
             logoClicks++;
             if (clickTimer) clearTimeout(clickTimer);
@@ -2605,11 +2442,14 @@
                 triggerEasterEgg();
             }
         });
+
         function triggerEasterEgg() {
             document.body.style.animation = 'shake 0.5s ease-in-out';
             setTimeout(() => { document.body.style.animation = ''; }, 500);
+
             const randomMsg = easterEggMessages[Math.floor(Math.random() * easterEggMessages.length)];
             showNotification(randomMsg, 'error');
+
             const flash = document.createElement('div');
             flash.style.position = 'fixed';
             flash.style.top = '0';
@@ -2622,6 +2462,7 @@
             flash.style.animation = 'flashFade 0.6s ease-out forwards';
             document.body.appendChild(flash);
             setTimeout(() => flash.remove(), 600);
+
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 const oscillator = audioCtx.createOscillator();
@@ -2637,6 +2478,7 @@
                 oscillator.stop(audioCtx.currentTime + 0.5);
             } catch (err) {}
         }
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeAuth(); closePromoModal(); closeAuthRequired();
@@ -2680,12 +2522,13 @@
             const filtered = CHARACTERS.filter(c => currentCharFilter === 'all' || c.group === currentCharFilter);
             filtered.forEach(char => {
                 const card = document.createElement('div');
-                card.className = 'char-card acrylic';
+                card.className = 'char-card';
                 card.style.setProperty('--char-color', char.color);
                 const name = currentLang === 'ru' ? char.name : char.name_en;
                 const role = currentLang === 'ru' ? char.role : char.role_en;
                 const desc = currentLang === 'ru' ? char.short : char.short_en;
                 const status = currentLang === 'ru' ? char.statusText : char.statusText_en;
+
                 card.innerHTML = `
                     <div class="char-avatar">${char.emoji}</div>
                     <div class="char-name">${name}</div>
@@ -2709,11 +2552,13 @@
             const body = document.getElementById('charModalBody');
             if (!modal || !content || !body) return;
             content.style.setProperty('--char-color', char.color);
+
             const name = currentLang === 'ru' ? char.name : char.name_en;
             const role = currentLang === 'ru' ? char.role : char.role_en;
             const status = currentLang === 'ru' ? char.statusText : char.statusText_en;
             const full = currentLang === 'ru' ? char.full : char.full_en;
             const tags = currentLang === 'ru' ? char.tags : char.tags_en;
+
             body.innerHTML = `
                 <div class="char-modal-header">
                     <div class="char-modal-avatar">${char.emoji}</div>
@@ -2952,9 +2797,10 @@
             wrapper.innerHTML = '';
             LORE_SECTIONS.forEach(section => {
                 const item = document.createElement('div');
-                item.className = 'lore-item acrylic';
+                item.className = 'lore-item';
                 const title = currentLang === 'ru' ? section.title : section.title_en;
                 const body = currentLang === 'ru' ? section.body : section.body_en;
+
                 item.innerHTML = `
                     <div class="lore-header">
                         <div class="lore-header-left">
