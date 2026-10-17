@@ -1107,12 +1107,13 @@
             <button class="showcase-tab" onclick="showShowcase('chronicles', event)" data-i18n="showcase_chronicles">Свидетели</button>
             <button class="showcase-tab" onclick="showShowcase('season6', event)">Сезон 6</button>
             <button class="showcase-tab" onclick="showShowcase('season7', event)">Сезон 7</button>
+            <button class="showcase-tab" onclick="showShowcase('season8', event)">Сезон 8</button>
         </div>
 
         <div class="section-wrapper showcase-content active" id="showcase-all">
             <div class="showcase-description">
                 <strong>ВСЕ АРКИ</strong><br>
-                Полный список арок «Аки и Эпсилон» — от заражения в лаборатории до 30-й (финальной) арки.
+                Полный список арок «Аки и Эпсилон» — от заражения в лаборатории до 35-й арки.
             </div>
             <div class="carousel" id="allGrid"></div>
         </div>
@@ -1150,6 +1151,13 @@
                 После падения Эпсилона Аки пытается жить обычной жизнью, но появляется «Синдикат». Арки 26–30.
             </div>
             <div class="carousel" id="season7Grid"></div>
+        </div>
+        <div class="section-wrapper showcase-content" id="showcase-season8">
+            <div class="showcase-description">
+                <strong>СЕЗОН 8: «ТЁМНОЕ ОТРАЖЕНИЕ»</strong><br>
+                Новый Эпсилон, маньяк, голоса в голове и цена героизма. Арки 31–35.
+            </div>
+            <div class="carousel" id="season8Grid"></div>
         </div>
 
         <div class="section-wrapper" id="continueSection" style="display: none;">
@@ -1220,33 +1228,36 @@
         <div class="section-wrapper" style="margin-top: 40px;">
             <h2 class="section-title" data-i18n="music_title">🎵 <span>МУЗЫКА</span></h2>
         </div>
+        <div class="showcase-description" style="max-width: 1200px; margin: 0 auto 25px; margin-left: 60px; margin-right: 60px; text-align: center; border-left: none; border: 2px dashed rgba(255, 51, 51, 0.4); border-radius: 16px;">
+            <strong>ВНИМАНИЕ:</strong> музыкальный раздел находится в разработке. Скоро здесь появятся треки! 🎧
+        </div>
         <div class="music-grid">
-            <div class="music-item" onclick="playTrack('Aki Theme')">
+            <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
                 <div class="music-cover">🎵</div>
                 <div class="music-name" data-i18n="music_1">Aki Theme</div>
                 <div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
             </div>
-            <div class="music-item" onclick="playTrack('Epsilon March')">
+            <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
                 <div class="music-cover">🎶</div>
                 <div class="music-name" data-i18n="music_2">Epsilon March</div>
                 <div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
             </div>
-            <div class="music-item" onclick="playTrack('Anomaly')">
+            <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
                 <div class="music-cover">🎧</div>
                 <div class="music-name" data-i18n="music_3">Anomaly</div>
                 <div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
             </div>
-            <div class="music-item" onclick="playTrack('Resurrection')">
+            <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
                 <div class="music-cover">🎼</div>
                 <div class="music-name" data-i18n="music_4">Resurrection</div>
                 <div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
             </div>
-            <div class="music-item" onclick="playTrack('Witnesses')">
+            <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
                 <div class="music-cover">🎹</div>
                 <div class="music-name" data-i18n="music_5">Witnesses</div>
                 <div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
             </div>
-            <div class="music-item" onclick="playTrack('Final Battle')">
+            <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
                 <div class="music-cover">🥁</div>
                 <div class="music-name" data-i18n="music_6">Final Battle</div>
                 <div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
@@ -1595,7 +1606,13 @@
             { id: 'a27', title: 'Синдикат',              emoji: '🦅', sub: 'Сезон 7 • Арка 27', season: 7, showcase: 'epsilon' },
             { id: 'a28', title: 'Иерихон',               emoji: '🧬', sub: 'Сезон 7 • Арка 28', season: 7, showcase: 'aki' },
             { id: 'a29', title: 'Хакер',                 emoji: '💻', sub: 'Сезон 7 • Арка 29', season: 7, showcase: 'chronicles' },
-            { id: 'a30', title: 'Новый Эпсилон',         emoji: '🛡️', sub: 'Сезон 7 • Арка 30', season: 7, showcase: 'season7' }
+            { id: 'a30', title: 'Новый Эпсилон',         emoji: '🛡️', sub: 'Сезон 7 • Арка 30', season: 7, showcase: 'season7' },
+
+            { id: 'a31', title: 'Тёмное отражение',      emoji: '🪞', sub: 'Сезон 8 • Арка 31', season: 8, showcase: 'aki' },
+            { id: 'a32', title: 'Кукловод',              emoji: '🎭', sub: 'Сезон 8 • Арка 32', season: 8, showcase: 'chronicles' },
+            { id: 'a33', title: 'Голоса',                emoji: '👂', sub: 'Сезон 8 • Арка 33', season: 8, showcase: 'aki' },
+            { id: 'a34', title: 'Близнецы',              emoji: '👥', sub: 'Сезон 8 • Арка 34', season: 8, showcase: 'epsilon' },
+            { id: 'a35', title: 'Финальная жертва',      emoji: '💔', sub: 'Сезон 8 • Арка 35', season: 8, showcase: 'season8' }
         ];
 
         const SEASONS = [
@@ -1605,7 +1622,8 @@
             { number: 4, title: 'Свидетели', status: 'В разработке', isDev: true },
             { number: 5, title: 'Война',     status: 'В разработке', isDev: true },
             { number: 6, title: 'Новая эра', status: 'В разработке', isDev: true },
-            { number: 7, title: 'Эхо прошлого', status: 'В разработке', isDev: true }
+            { number: 7, title: 'Эхо прошлого', status: 'В разработке', isDev: true },
+            { number: 8, title: 'Тёмное отражение', status: 'В разработке', isDev: true }
         ];
 
         function renderSeasons() {
@@ -1727,6 +1745,7 @@
             const chroniclesGrid = document.getElementById('chroniclesGrid');
             const season6Grid = document.getElementById('season6Grid');
             const season7Grid = document.getElementById('season7Grid');
+            const season8Grid = document.getElementById('season8Grid');
             
             allGrid.innerHTML = '';
             akiGrid.innerHTML = '';
@@ -1734,6 +1753,7 @@
             chroniclesGrid.innerHTML = '';
             season6Grid.innerHTML = '';
             season7Grid.innerHTML = '';
+            season8Grid.innerHTML = '';
 
             EPISODES.forEach(ep => {
                 renderEpisodeCard(ep, allGrid);
@@ -1742,6 +1762,7 @@
                 if (ep.showcase === 'chronicles') renderEpisodeCard(ep, chroniclesGrid);
                 if (ep.season === 6) renderEpisodeCard(ep, season6Grid);
                 if (ep.season === 7) renderEpisodeCard(ep, season7Grid);
+                if (ep.season === 8) renderEpisodeCard(ep, season8Grid);
             });
         }
 
@@ -2324,12 +2345,18 @@
             { id: 'scientist', name: 'Учёный-создатель', emoji: '☣️', role: 'Создатель «Эхо»', age: 'неизвестно', status: 'dead', statusText: '🔴 Погиб', color: '#9c27b0', glow: 'rgba(156,39,176,0.4)', group: 'epsilon', short: 'Безумный гений, создавший вирус «Эхо».', full: 'Учёный, который создал вирус «Эхо» для Эпсилона, чтобы стирать память врагам. Вирус вышел из-под контроля и заразил его самого. Аки и Лира нашли его в старом секторе (арка 6). Перед смертью он передал Аки формулу антивируса.', tags: ['Учёный', 'Вирус «Эхо»', 'Арка 6'] },
 
             { id: 'holt', name: 'Советник Холт', emoji: '⚖️', role: 'Совет Эпсилона', age: '60 лет', status: 'unknown', statusText: '🟡 Неизвестно', color: '#9e9e9e', glow: 'rgba(158,158,158,0.4)', group: 'epsilon', short: 'Глава Совета. Тот, кто отдаёт приказы Алисе.', full: 'Один из трёх членов Совета Эпсилона. Старый, хитрый и безжалостный. Именно он приказал создать вирус «Эхо» и скрыть правду об аномалиях. Алиса подчиняется ему, но боится. В 6-м сезоне он попытается уничтожить всех свидетелей, чтобы сохранить тайну.', tags: ['Совет', 'Антагонист', 'Сезон 6'] },
-            { id: 'Anastasia', name: 'Анастасия', emoji: '👁️‍🗨️', role: 'Лидер «Омеги»', age: '30 лет', status: 'alive', statusText: '🟢 Жива', color: '#000000', glow: 'rgba(255,51,51,0.6)', group: 'witnesses', short: 'Фанатичка. Считает, что мир должен быть очищен.', full: 'Истинный лидер группировки «Омега» (Зейн был лишь пешкой). Фанатичка, которая считает, что человечество погрязло в грехах, и аномалии — это кара. Она хочет уничтожить Эпсилон и всех, кто связан с аномалиями, чтобы начать «новую эру» с нуля. Очень опасна.', tags: ['Омега', 'Фанатик', 'Главный злодей'] },
+            { id: 'eva', name: 'Анастасия', emoji: '👁️‍🗨️', role: 'Лидер «Омеги»', age: '30 лет', status: 'alive', statusText: '🟢 Жива', color: '#000000', glow: 'rgba(255,51,51,0.6)', group: 'witnesses', short: 'Фанатичка. Считает, что мир должен быть очищен.', full: 'Истинный лидер группировки «Омега» (Зейн был лишь пешкой). Фанатичка, которая считает, что человечество погрязло в грехах, и аномалии — это кара. Она хочет уничтожить Эпсилон и всех, кто связан с аномалиями, чтобы начать «новую эру» с нуля. Очень опасна.', tags: ['Омега', 'Фанатик', 'Главный злодей'] },
             { id: 'kronos', name: 'Кронос', emoji: '👹', role: 'Мутант-разумник', age: '35 лет', status: 'alive', statusText: '🟢 Жив', color: '#8b0000', glow: 'rgba(139,0,0,0.5)', group: 'main', short: 'Бывший напарник Кая. Стал монстром, но сохранил разум.', full: 'Бывший агент Эпсилона и напарник Кая. Считался погибшим на задании, но на самом деле был захвачен аномалией. Мутировал в монстра, но, в отличие от остальных, сохранил человеческий разум. Он ненавидит Эпсилон за то, что его бросили, и хочет отомстить. В 6-м сезоне становится союзником Аки.', tags: ['Монстр', 'Напарник Кая', 'Сезон 6'] },
 
             { id: 'markus', name: 'Маркус', emoji: '🦅', role: 'Лидер Синдиката', age: '40 лет', status: 'alive', statusText: '🟢 Жив', color: '#ffd700', glow: 'rgba(255,215,0,0.4)', group: 'epsilon', short: 'Бывший агент. Хочет создать новый порядок.', full: 'Бывший агент Эпсилона, который считает, что организация была слишком мягкой. Он основал «Синдикат» — группировку, которая хочет использовать аномалии для контроля над миром. Харизматичный, жестокий и умный.', tags: ['Синдикат', 'Антагонист', 'Сезон 7'] },
             { id: 'jess', name: 'Джесс', emoji: '💻', role: 'Хакер', age: '22 года', status: 'alive', statusText: '🟢 Жива', color: '#00e5ff', glow: 'rgba(0,229,255,0.4)', group: 'main', short: 'Воровка и хакер. Помогает Аки за защиту.', full: 'Молодая хакерша, которая взломала базы Эпсилона. Она знает всё о Синдикате и помогает Аки в обмен на защиту. У неё есть свои секреты, и она не так проста, как кажется.', tags: ['Хакер', 'Союзник', 'Сезон 7'] },
             { id: 'jericho', name: 'Иерихон', emoji: '🧬', role: 'Идеальный агент', age: '1 год', status: 'unknown', statusText: '🟡 Неизвестно', color: '#b388ff', glow: 'rgba(179,136,255,0.4)', group: 'main', short: 'Мутант, созданный из ДНК Аки и Кроноса.', full: 'Искусственно созданный мутант, который считает себя «сыном» Аки и Кроноса. Он невероятно силён, но не понимает, что его создали как оружие. В 7-м сезоне он играет ключевую роль в конфликте.', tags: ['Мутант', 'Создан искусственно', 'Сезон 7'] },
+
+            { id: 'therapist', name: 'Психотерапевт', emoji: '🧠', role: 'Маньяк-учёный', age: '45 лет', status: 'alive', statusText: '🟢 Жив', color: '#d32f2f', glow: 'rgba(211,47,47,0.5)', group: 'epsilon', short: 'Бывший учёный. Хочет "вылечить" Аки от героизма.', full: 'Бывший учёный Эпсилона, который сошёл с ума после экспериментов с аномалиями. Он считает, что героизм Аки — это болезнь, и хочет "вылечить" его, заставив страдать. Убивает агентов "Нового Эпсилона" и оставляет послания кровью.', tags: ['Учёный', 'Маньяк', 'Сезон 8'] },
+            { id: 'agent_zero', name: 'Агент Ноль', emoji: '🤖', role: 'Идеальный агент', age: '25 лет', status: 'alive', statusText: '🟢 Жив', color: '#607d8b', glow: 'rgba(96,125,139,0.4)', group: 'epsilon', short: 'Без эмоций. Без страха. Полная противоположность Аки.', full: 'Идеальный агент "Нового Эпсилона". Он был создан как машина для убийств, но внешне выглядит как человек. У него нет эмоций, он не чувствует боли и страха. Аки видит в нём своё "тёмное отражение".', tags: ['Агент', 'Без эмоций', 'Сезон 8'] },
+            { id: 'vera', name: 'Вера', emoji: '👧', role: 'Скрытый мутант', age: '20 лет', status: 'alive', statusText: '🟢 Жива', color: '#e91e63', glow: 'rgba(233,30,99,0.4)', group: 'main', short: 'Сестра-близнец Агента Ноль. Добрая, но нестабильная.', full: 'Сестра-близнец Агента Ноль. В отличие от брата, она сохранила человеческие эмоции, но её тело мутировало из-за экспериментов. Она добрая и хочет помочь Аки, но боится, что потеряет контроль над своей силой.', tags: ['Мутант', 'Сестра', 'Сезон 8'] },
+            { id: 'crow', name: 'Доктор Кроу', emoji: '🐦', role: 'Новый учёный', age: '35 лет', status: 'unknown', statusText: '🟡 Неизвестно', color: '#00bcd4', glow: 'rgba(0,188,212,0.4)', group: 'epsilon', short: 'Изучает аномалию в теле Аки. Может стать другом или врагом.', full: 'Новый учёный "Нового Эпсилона". Он пытается понять, как аномалия повлияла на Аки и почему он всё ещё жив. Он одержим наукой, как и Вейн, но более человечен. Его цель — спасти Аки, но он готов на жертвы.', tags: ['Учёный', 'Исследователь', 'Сезон 8'] },
+            { id: 'voice', name: 'Голос', emoji: '🗣️', role: 'Сущность', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', color: '#9c27b0', glow: 'rgba(156,39,176,0.4)', group: 'main', short: 'Остаточная аномалия в голове Аки, обретшая сознание.', full: 'Таинственная сущность, которая появляется в голове Аки в 8-м сезоне. Это остаточная аномалия, которая обрела сознание после его воскрешения. Она говорит с Аки и пытается склонить его на свою сторону, обещая силу и правду.', tags: ['Аномалия', 'Голос в голове', 'Сезон 8'] },
 
             { id: 'zein', name: 'Зейн', emoji: '🕵️', role: 'Лидер Свидетелей', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', color: '#5865F2', glow: 'rgba(88,101,242,0.4)', group: 'witnesses', short: 'Бывший агент Эпсилона. Холодный, расчётливый. Врёт Аки.', full: 'Лидер «Свидетелей». Бывший агент Эпсилона. Холодный, расчётливый. Врёт Аки, используя его для своих целей. Считает, что Эпсилон создал монстров и скрывает правду. Готов избавиться от Аки, когда тот станет не нужен.', tags: ['Лидер', 'Свидетели', 'Предатель'] },
             { id: 'mira', name: 'Мира', emoji: '💉', role: 'Свидетель-медик', age: 'неизвестно', status: 'alive', statusText: '🟢 Жива', color: '#00bfa5', glow: 'rgba(0,191,165,0.4)', group: 'witnesses', short: 'Бывший медик. Добрая, но сломленная.', full: 'Бывший медик Эпсилона. Добрая, но сломленная. Одна из немногих Свидетелей, кто не давит на Аки. Говорит ему: «Правда — внутри тебя. Не снаружи».', tags: ['Свидетели', 'Медик', 'Добрая'] },
@@ -2423,6 +2450,7 @@
                     <li><strong>Сезон 5:</strong> Охота Эпсилона. Тайна Алисы. Омега выходит из тени.</li>
                     <li><strong>Сезон 6:</strong> Финал. Совет, Анастасия, Кронос. Аки уничтожает чип и становится свободным.</li>
                     <li><strong>Сезон 7:</strong> После падения Эпсилона появляется Синдикат. Аки встречает Иерихона.</li>
+                    <li><strong>Сезон 8:</strong> Новый Эпсилон. Маньяк Психотерапевт. Агент Ноль. Голоса в голове.</li>
                 </ul>` },
             { icon: '👥', title: 'Кто такие «Свидетели»?', body: `
                 <p><strong>«Свидетели»</strong> — это бывшие агенты Эпсилона, которые узнали правду о том, что организация создала монстров, и ушли. Они не убивают — они свидетельствуют. Но у них своя правда, и они используют Аки в своих целях.</p>
@@ -2478,6 +2506,15 @@
                     <li><strong>Арка 28 «Иерихон»:</strong> Аки встречает Иерихона — идеального агента, созданного из его ДНК.</li>
                     <li><strong>Арка 29 «Хакер»:</strong> Аки объединяется с Джесс, чтобы взломать систему Синдиката.</li>
                     <li><strong>Арка 30 «Новый Эпсилон»:</strong> Аки создаёт новый Эпсилон — без чипов и лжи. Финал.</li>
+                </ul>` },
+            { icon: '🪞', title: 'Сезон 8: «Тёмное отражение»', body: `
+                <p><strong>Главная идея:</strong> Аки создал новый Эпсилон, но даже без чипов организация может стать монстром. Появляется маньяк, который хочет "вылечить" Аки от героизма.</p>
+                <ul>
+                    <li><strong>Арка 31 «Тёмное отражение»:</strong> Агенты "Нового Эпсилона" начинают погибать. На месте преступления остаются послания кровью.</li>
+                    <li><strong>Арка 32 «Кукловод»:</strong> Аки выясняет, что за убийствами стоит Психотерапевт — бывший учёный Эпсилона.</li>
+                    <li><strong>Арка 33 «Голоса»:</strong> Аки начинает слышать голос аномалии в своей голове. Лира пытается его спасти.</li>
+                    <li><strong>Арка 34 «Близнецы»:</strong> Появляются Агент Ноль и Вера — брат и сестра с разными способностями.</li>
+                    <li><strong>Арка 35 «Финальная жертва»:</strong> Аки приходится выбирать между спасением мира и спасением себя. Кто-то из команды погибает.</li>
                 </ul>` }
         ];
 
