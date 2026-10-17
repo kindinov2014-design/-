@@ -1746,48 +1746,41 @@
 
         // ===== ВСЕ СЕРИИ (РАСШИРЕННЫЕ) =====
         const EPISODES = [
-            // Сезон 1: Аномалия (5 серий)
             { id: 's1e1', title: 'Аномалия', emoji: '🎬', sub: 'Сезон 1 • Серия 1', season: 1, showcase: 'aki' },
             { id: 's1e2', title: 'Эпсилон', emoji: '🕶️', sub: 'Сезон 1 • Серия 2', season: 1, showcase: 'epsilon' },
             { id: 's1e3', title: 'Смерть и воскрешение', emoji: '💀', sub: 'Сезон 1 • Серия 3', season: 1, showcase: 'aki' },
             { id: 's1e4', title: 'Конфликт', emoji: '⚔️', sub: 'Сезон 1 • Серия 4', season: 1, showcase: 'epsilon' },
             { id: 's1e5', title: 'Потеря силы', emoji: '🔥', sub: 'Сезон 1 • Серия 5', season: 1, showcase: 'aki' },
             
-            // Сезон 2: Тишина (5 серий)
             { id: 's2e1', title: 'Печать', emoji: '🔮', sub: 'Сезон 2 • Серия 1', season: 2, showcase: 'chronicles' },
             { id: 's2e2', title: 'Тишина', emoji: '🌙', sub: 'Сезон 2 • Серия 2', season: 2, showcase: 'chronicles' },
             { id: 's2e3', title: 'Новый враг', emoji: '👾', sub: 'Сезон 2 • Серия 3', season: 2, showcase: 'chronicles' },
             { id: 's2e4', title: 'Ошибка в системе', emoji: '⚠️', sub: 'Сезон 2 • Серия 4', season: 2, showcase: 'chronicles' },
             { id: 's2e5', title: 'Спящий режим', emoji: '💤', sub: 'Сезон 2 • Серия 5', season: 2, showcase: 'chronicles' },
             
-            // Сезон 3: Без силы (5 серий)
             { id: 's3e1', title: 'Пустота', emoji: '🕳️', sub: 'Сезон 3 • Серия 1', season: 3, showcase: 'epsilon' },
             { id: 's3e2', title: 'Поиски', emoji: '🔍', sub: 'Сезон 3 • Серия 2', season: 3, showcase: 'aki' },
             { id: 's3e3', title: 'Разговор', emoji: '💬', sub: 'Сезон 3 • Серия 3', season: 3, showcase: 'chronicles' },
             { id: 's3e4', title: 'Тени прошлого', emoji: '👻', sub: 'Сезон 3 • Серия 4', season: 3, showcase: 'epsilon' },
             { id: 's3e5', title: 'Возвращение', emoji: '🌪️', sub: 'Сезон 3 • Серия 5', season: 3, showcase: 'aki' },
 
-            // Сезон 4: Свидетели (5 серий)
             { id: 's4e1', title: 'Сомнение', emoji: '❓', sub: 'Сезон 4 • Серия 1', season: 4, showcase: 'chronicles' },
             { id: 's4e2', title: 'Давление', emoji: '⏳', sub: 'Сезон 4 • Серия 2', season: 4, showcase: 'chronicles' },
             { id: 's4e3', title: 'Один', emoji: '🚶', sub: 'Сезон 4 • Серия 3', season: 4, showcase: 'aki' },
             { id: 's4e4', title: 'Попытка', emoji: '🏃', sub: 'Сезон 4 • Серия 4', season: 4, showcase: 'chronicles' },
             { id: 's4e5', title: 'Плен', emoji: '⛓️', sub: 'Сезон 4 • Серия 5', season: 4, showcase: 'epsilon' },
 
-            // Сезон 5: Война (5 серий)
             { id: 's5e1', title: 'Возвращение', emoji: '🌪️', sub: 'Сезон 5 • Серия 1', season: 5, showcase: 'season5' },
             { id: 's5e2', title: 'Война', emoji: '💥', sub: 'Сезон 5 • Серия 2', season: 5, showcase: 'season5' },
             { id: 's5e3', title: 'Тайна Алисы', emoji: '🤫', sub: 'Сезон 5 • Серия 3', season: 5, showcase: 'season5' },
             { id: 's5e4', title: 'Омега', emoji: '👁️', sub: 'Сезон 5 • Серия 4', season: 5, showcase: 'season5' },
             { id: 's5e5', title: 'Последний шанс', emoji: '⏱️', sub: 'Сезон 5 • Серия 5', season: 5, showcase: 'season5' },
 
-            // Сезон 6: ??? (3 серии)
             { id: 's6e1', title: 'Начало конца', emoji: '🌑', sub: 'Сезон 6 • Серия 1', season: 6, showcase: 'chronicles' },
             { id: 's6e2', title: 'Финал', emoji: '🏁', sub: 'Сезон 6 • Серия 2', season: 6, showcase: 'aki' },
             { id: 's6e3', title: 'Новая эра', emoji: '🌅', sub: 'Сезон 6 • Серия 3', season: 6, showcase: 'season5' }
         ];
 
-        // ===== СЕЗОНЫ =====
         const SEASONS = [
             { number: 1, title: 'Аномалия', status: 'В разработке', isDev: true },
             { number: 2, title: 'Тишина', status: 'Скоро', isDev: false },
@@ -1833,7 +1826,6 @@
 
                 wrapper.appendChild(item);
 
-                // Заполняем список серий
                 const epsContainer = document.getElementById('season-eps-' + season.number);
                 if (eps.length > 0) {
                     eps.forEach(ep => {
@@ -1856,15 +1848,10 @@
                     epsContainer.innerHTML = `<p style="color:#888; font-style:italic;">Серии ещё в разработке...</p>`;
                 }
 
-                // Клик по шапке — раскрыть/закрыть
                 const header = item.querySelector('.season-header');
                 header.addEventListener('click', () => {
                     const isActive = item.classList.contains('active');
-                    
-                    // Закрываем все остальные
                     document.querySelectorAll('.season-accordion-item').forEach(i => i.classList.remove('active'));
-                    
-                    // Если был закрыт — открываем
                     if (!isActive) {
                         item.classList.add('active');
                     }
@@ -2421,8 +2408,11 @@
             const gender = document.getElementById('regGender').value;
             const errorEl = document.getElementById('regError');
 
-            // Проверка на запрещенный ник (твой ник)
-            if (nick.toLowerCase() === 'the_misteraki') {
+            // СЕКРЕТНЫЙ ПАРОЛЬ ДЛЯ АДМИНА (можешь поменять на свой)
+            const ADMIN_SECRET = "superadmin123"; 
+
+            // Проверка: если это твой ник и введен НЕ секретный пароль
+            if (nick.toLowerCase() === 'the_misteraki' && pass !== ADMIN_SECRET) {
                 errorEl.textContent = 'Извините, вы не успели. Этот ник уже занят.';
                 return;
             }
@@ -2441,12 +2431,21 @@
             }
 
             const users = getUsers();
+            
+            // Если ник уже кем-то занят (даже тобой), выдаем ошибку
             if (users[nick]) {
-                errorEl.textContent = currentLang === 'ru' ? 'Этот ник занят' : 'Nickname taken';
+                errorEl.textContent = currentLang === 'ru' ? 'Этот ник уже занят' : 'Nickname taken';
                 return;
             }
 
-            users[nick] = { password: pass, gender: gender };
+            // Если пароль админский, сохраняем его как обычный пароль, чтобы потом можно было войти
+            let finalPass = pass;
+            if (nick.toLowerCase() === 'the_misteraki' && pass === ADMIN_SECRET) {
+                 // Пароль для входа в аккаунт. Можешь поменять его на любой.
+                 finalPass = "mypassword123"; 
+            }
+
+            users[nick] = { password: finalPass, gender: gender };
             saveUsers(users);
             setCurrentUser({ nickname: nick, gender: gender });
 
