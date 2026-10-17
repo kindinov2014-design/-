@@ -33,7 +33,7 @@
         }
         body.theme-light { background: radial-gradient(circle at 50% 0%, #ffe5e5 0%, var(--bg) 60%); }
 
-        /* 1. Сканирующая линия */
+        /* Сканирующая линия */
         .scan-line {
             position: fixed; top: 0; left: 0; width: 100%; height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
@@ -45,18 +45,6 @@
         @keyframes scan {
             0% { top: -2px; }
             100% { top: 100%; }
-        }
-
-        /* 2. Эффект аномалии при скролле */
-        .anomaly-active {
-            animation: anomaly 0.5s ease-in-out;
-        }
-        @keyframes anomaly {
-            0% { filter: hue-rotate(0deg); transform: scale(1); }
-            25% { filter: hue-rotate(90deg); transform: scale(1.01); }
-            50% { filter: invert(0.2); transform: scale(0.99) translateX(5px); }
-            75% { filter: hue-rotate(-90deg); transform: scale(1.01) translateX(-5px); }
-            100% { filter: hue-rotate(0deg); transform: scale(1); }
         }
 
         /* АНИМИРОВАННЫЙ ФОН */
@@ -88,6 +76,7 @@
             font-size: 1.5rem; font-weight: 900; color: var(--text);
             letter-spacing: 1px; display: flex; align-items: center;
             gap: 5px; cursor: pointer; white-space: nowrap;
+            user-select: none;
         }
         .logo span { color: var(--accent); font-size: 1.7rem; }
         .topbar-nav {
@@ -545,6 +534,18 @@
         .bottom-nav-item .bn-icon { font-size: 1.2rem; line-height: 1; }
         .bottom-nav-item.active { color: var(--accent); }
 
+        /* ===== АНИМАЦИИ ДЛЯ ПАСХАЛКИ ===== */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        @keyframes flashFade {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
         @media (max-width: 1100px) { .topbar-nav { display: none; } }
         @media (max-width: 1024px) {
             .hero h1 { font-size: 3rem; }
@@ -636,7 +637,7 @@
 
     <!-- TOPBAR -->
     <div class="topbar">
-        <div class="logo" onclick="showPage('home')">АКИ<span>×</span>ЭПСИЛОН</div>
+        <div class="logo" id="easterEggLogo" onclick="showPage('home')">АКИ<span>×</span>ЭПСИЛОН</div>
         <div class="topbar-nav">
             <button class="nav-btn active" onclick="showPage('home')" data-i18n="nav_home">Главная</button>
             <button class="nav-btn" onclick="showPage('characters')" data-i18n="nav_characters">Персонажи</button>
@@ -1204,17 +1205,6 @@
         document.addEventListener('click', () => {
             clickSound.currentTime = 0;
             clickSound.play().catch(() => {});
-        });
-
-        // ===== ЭФФЕКТ АНОМАЛИИ ПРИ СКРОЛЛЕ =====
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            if (scrollTimeout) return;
-            scrollTimeout = setTimeout(() => {
-                document.body.classList.add('anomaly-active');
-                setTimeout(() => document.body.classList.remove('anomaly-active'), 500);
-                scrollTimeout = null;
-            }, 200);
         });
 
         // ===== МИНИ-ИГРА "РЕВЕРС" =====
@@ -2238,6 +2228,67 @@
                 document.body.classList.add('theme-light');
                 document.getElementById('themeBtn').textContent = '☀️';
             }
+        }
+
+        // ===== ПАСХАЛКА =====
+        let logoClicks = 0;
+        let clickTimer = null;
+        const easterEggMessages = [
+            "Ты что, пытаешься сломать мне чип?",
+            "Алиса уже знает, что ты здесь.",
+            "Аномалия не дремлет...",
+            "Свидетели наблюдают за тобой.",
+            "Ты нашёл секрет. Но правда скрыта глубже."
+        ];
+
+        document.getElementById('easterEggLogo').addEventListener('click', (e) => {
+            logoClicks++;
+            if (clickTimer) clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { logoClicks = 0; }, 1500);
+            if (logoClicks >= 5) {
+                logoClicks = 0;
+                triggerEasterEgg();
+            }
+        });
+
+        function triggerEasterEgg() {
+            // Тряска
+            document.body.style.animation = 'shake 0.5s ease-in-out';
+            setTimeout(() => { document.body.style.animation = ''; }, 500);
+
+            // Случайное сообщение
+            const randomMsg = easterEggMessages[Math.floor(Math.random() * easterEggMessages.length)];
+            showNotification(randomMsg, 'error');
+
+            // Вспышка
+            const flash = document.createElement('div');
+            flash.style.position = 'fixed';
+            flash.style.top = '0';
+            flash.style.left = '0';
+            flash.style.width = '100vw';
+            flash.style.height = '100vh';
+            flash.style.backgroundColor = 'rgba(255, 51, 51, 0.3)';
+            flash.style.zIndex = '9999';
+            flash.style.pointerEvents = 'none';
+            flash.style.animation = 'flashFade 0.6s ease-out forwards';
+            document.body.appendChild(flash);
+            setTimeout(() => flash.remove(), 600);
+
+            // Звук
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.setValueAtTime(150, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.5);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.5);
+            } catch (err) {}
         }
 
         // ===== ХОТКЕИ =====
