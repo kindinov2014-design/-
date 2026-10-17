@@ -1094,12 +1094,13 @@
             <button class="showcase-tab" onclick="showShowcase('aki', event)" data-i18n="showcase_aki">Аки</button>
             <button class="showcase-tab" onclick="showShowcase('epsilon', event)" data-i18n="showcase_epsilon">Эпсилон</button>
             <button class="showcase-tab" onclick="showShowcase('chronicles', event)" data-i18n="showcase_chronicles">Свидетели</button>
+            <button class="showcase-tab" onclick="showShowcase('season6', event)">Сезон 6</button>
         </div>
 
         <div class="section-wrapper showcase-content active" id="showcase-all">
             <div class="showcase-description">
                 <strong>ВСЕ АРКИ</strong><br>
-                Полный список арок «Аки и Эпсилон» — от заражения в лаборатории до 15-й арки. Смотри по порядку или выбирай любимые.
+                Полный список арок «Аки и Эпсилон» — от заражения в лаборатории до 25-й (финальной) арки.
             </div>
             <div class="carousel" id="allGrid"></div>
         </div>
@@ -1124,6 +1125,13 @@
             </div>
             <div class="carousel" id="chroniclesGrid"></div>
         </div>
+        <div class="section-wrapper showcase-content" id="showcase-season6">
+            <div class="showcase-description">
+                <strong>СЕЗОН 6: «НОВАЯ ЭРА»</strong><br>
+                Финал истории. Война закончена. Эпсилон больше не будет прежним. Аки должен решить, каким будет мир после. Арки 21–25.
+            </div>
+            <div class="carousel" id="season6Grid"></div>
+        </div>
 
         <div class="section-wrapper" id="continueSection" style="display: none;">
             <h2 class="section-title" data-i18n="continue_title">⏯ <span>ПРОДОЛЖИТЬ ПРОСМОТР</span></h2>
@@ -1137,10 +1145,11 @@
         <div class="big-banner">
             <div class="big-banner-inner">
                 <h2 data-i18n="banner_title">СЛЕДИ ЗА ПРОЕКТОМ</h2>
-                <p data-i18n="banner_desc">Подписывайся на Telegram и YouTube, чтобы не пропустить выход новых серий</p>
+                <p data-i18n="banner_desc">Подписывайся на Telegram, YouTube и Discord, чтобы не пропустить выход новых серий</p>
                 <div class="hero-buttons" style="justify-content: center;">
                     <a href="https://t.me/The_MisterAki2" target="_blank" class="btn-primary">Telegram</a>
                     <a href="https://youtube.com/@the_misteraki?si=i-DJ63jZH8Hk8waX" target="_blank" class="btn-secondary">YouTube</a>
+                    <a href="https://discord.gg/5vbQ9sMb3" target="_blank" class="btn-discord">Discord</a>
                 </div>
             </div>
         </div>
@@ -1549,7 +1558,19 @@
             { id: 'a12', title: 'Сомнение',              emoji: '❓', sub: 'Сезон 4 • Арка 12', season: 4, showcase: 'chronicles' },
             { id: 'a13', title: 'Давление',              emoji: '⏳', sub: 'Сезон 4 • Арка 13', season: 4, showcase: 'chronicles' },
             { id: 'a14', title: 'Один',                  emoji: '🚶', sub: 'Сезон 4 • Арка 14', season: 4, showcase: 'aki' },
-            { id: 'a15', title: 'Попытка',               emoji: '⛓️', sub: 'Сезон 4 • Арка 15', season: 4, showcase: 'aki' }
+            { id: 'a15', title: 'Попытка',               emoji: '⛓️', sub: 'Сезон 4 • Арка 15', season: 4, showcase: 'aki' },
+
+            { id: 'a16', title: 'Охота',                 emoji: '🎯', sub: 'Сезон 5 • Арка 16', season: 5, showcase: 'epsilon' },
+            { id: 'a17', title: 'Союзники',              emoji: '🤝', sub: 'Сезон 5 • Арка 17', season: 5, showcase: 'aki' },
+            { id: 'a18', title: 'Тайна Алисы',           emoji: '🤫', sub: 'Сезон 5 • Арка 18', season: 5, showcase: 'epsilon' },
+            { id: 'a19', title: 'Война начинается',      emoji: '💥', sub: 'Сезон 5 • Арка 19', season: 5, showcase: 'aki' },
+            { id: 'a20', title: 'Омега выходит',         emoji: '👁️', sub: 'Сезон 5 • Арка 20', season: 5, showcase: 'chronicles' },
+
+            { id: 'a21', title: 'Начало конца',        emoji: '🌑', sub: 'Сезон 6 • Арка 21', season: 6, showcase: 'aki' },
+            { id: 'a22', title: 'Совет',               emoji: '⚖️', sub: 'Сезон 6 • Арка 22', season: 6, showcase: 'epsilon' },
+            { id: 'a23', title: 'Осада Омеги',         emoji: '💥', sub: 'Сезон 6 • Арка 23', season: 6, showcase: 'aki' },
+            { id: 'a24', title: 'Кронос',              emoji: '🩸', sub: 'Сезон 6 • Арка 24', season: 6, showcase: 'aki' },
+            { id: 'a25', title: 'Новая эра',           emoji: '🌅', sub: 'Сезон 6 • Арка 25', season: 6, showcase: 'season6' }
         ];
 
         const SEASONS = [
@@ -1678,15 +1699,18 @@
             const akiGrid = document.getElementById('akiGrid');
             const epsilonGrid = document.getElementById('epsilonGrid');
             const chroniclesGrid = document.getElementById('chroniclesGrid');
+            const season6Grid = document.getElementById('season6Grid');
             allGrid.innerHTML = '';
             akiGrid.innerHTML = '';
             epsilonGrid.innerHTML = '';
             chroniclesGrid.innerHTML = '';
+            season6Grid.innerHTML = '';
             EPISODES.forEach(ep => {
                 renderEpisodeCard(ep, allGrid);
                 if (ep.showcase === 'aki') renderEpisodeCard(ep, akiGrid);
                 if (ep.showcase === 'epsilon') renderEpisodeCard(ep, epsilonGrid);
                 if (ep.showcase === 'chronicles') renderEpisodeCard(ep, chroniclesGrid);
+                if (ep.season === 6) renderEpisodeCard(ep, season6Grid);
             });
         }
 
@@ -2268,6 +2292,10 @@
             { id: 'rok', name: 'Рок', emoji: '🧢', role: 'Друг Аки', age: '20 лет', status: 'alive', statusText: '🟢 Жив', color: '#ff9800', glow: 'rgba(255,152,0,0.4)', group: 'main', short: 'Трусливый, но верный. Друг Аки.', full: 'Друг Аки, который пошёл с ним и Тимом в заброшку. Ему было очень страшно, и он постоянно предлагал уйти. Но когда Аки пострадал, именно Рок помог его вытащить.', tags: ['Друг', 'Арка 1', 'Гражданский'] },
             { id: 'scientist', name: 'Учёный-создатель', emoji: '☣️', role: 'Создатель «Эхо»', age: 'неизвестно', status: 'dead', statusText: '🔴 Погиб', color: '#9c27b0', glow: 'rgba(156,39,176,0.4)', group: 'epsilon', short: 'Безумный гений, создавший вирус «Эхо».', full: 'Учёный, который создал вирус «Эхо» для Эпсилона, чтобы стирать память врагам. Вирус вышел из-под контроля и заразил его самого. Аки и Лира нашли его в старом секторе (арка 6). Перед смертью он передал Аки формулу антивируса.', tags: ['Учёный', 'Вирус «Эхо»', 'Арка 6'] },
 
+            { id: 'holt', name: 'Советник Холт', emoji: '⚖️', role: 'Совет Эпсилона', age: '60 лет', status: 'unknown', statusText: '🟡 Неизвестно', color: '#9e9e9e', glow: 'rgba(158,158,158,0.4)', group: 'epsilon', short: 'Глава Совета. Тот, кто отдаёт приказы Алисе.', full: 'Один из трёх членов Совета Эпсилона. Старый, хитрый и безжалостный. Именно он приказал создать вирус «Эхо» и скрыть правду об аномалиях. Алиса подчиняется ему, но боится. В 6-м сезоне он попытается уничтожить всех свидетелей, чтобы сохранить тайну.', tags: ['Совет', 'Антагонист', 'Сезон 6'] },
+            { id: 'eva', name: 'Ева', emoji: '👁️‍🗨️', role: 'Лидер «Омеги»', age: '30 лет', status: 'alive', statusText: '🟢 Жива', color: '#000000', glow: 'rgba(255,51,51,0.6)', group: 'witnesses', short: 'Фанатичка. Считает, что мир должен быть очищен.', full: 'Истинный лидер группировки «Омега» (Зейн был лишь пешкой). Фанатичка, которая считает, что человечество погрязло в грехах, и аномалии — это кара. Она хочет уничтожить Эпсилон и всех, кто связан с аномалиями, чтобы начать «новую эру» с нуля. Очень опасна.', tags: ['Омега', 'Фанатик', 'Главный злодей'] },
+            { id: 'kronos', name: 'Кронос', emoji: '👹', role: 'Мутант-разумник', age: '35 лет', status: 'alive', statusText: '🟢 Жив', color: '#8b0000', glow: 'rgba(139,0,0,0.5)', group: 'main', short: 'Бывший напарник Кая. Стал монстром, но сохранил разум.', full: 'Бывший агент Эпсилона и напарник Кая. Считался погибшим на задании, но на самом деле был захвачен аномалией. Мутировал в монстра, но, в отличие от остальных, сохранил человеческий разум. Он ненавидит Эпсилон за то, что его бросили, и хочет отомстить. В 6-м сезоне становится союзником Аки.', tags: ['Монстр', 'Напарник Кая', 'Сезон 6'] },
+
             { id: 'zein', name: 'Зейн', emoji: '🕵️', role: 'Лидер Свидетелей', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', color: '#5865F2', glow: 'rgba(88,101,242,0.4)', group: 'witnesses', short: 'Бывший агент Эпсилона. Холодный, расчётливый. Врёт Аки.', full: 'Лидер «Свидетелей». Бывший агент Эпсилона. Холодный, расчётливый. Врёт Аки, используя его для своих целей. Считает, что Эпсилон создал монстров и скрывает правду. Готов избавиться от Аки, когда тот станет не нужен.', tags: ['Лидер', 'Свидетели', 'Предатель'] },
             { id: 'mira', name: 'Мира', emoji: '💉', role: 'Свидетель-медик', age: 'неизвестно', status: 'alive', statusText: '🟢 Жива', color: '#00bfa5', glow: 'rgba(0,191,165,0.4)', group: 'witnesses', short: 'Бывший медик. Добрая, но сломленная.', full: 'Бывший медик Эпсилона. Добрая, но сломленная. Одна из немногих Свидетелей, кто не давит на Аки. Говорит ему: «Правда — внутри тебя. Не снаружи».', tags: ['Свидетели', 'Медик', 'Добрая'] },
             { id: 'korv', name: 'Корв', emoji: '💻', role: 'Свидетель-техник', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', color: '#00e676', glow: 'rgba(0,230,118,0.4)', group: 'witnesses', short: 'Бывший техник. Гений. Параноик.', full: 'Бывший техник Эпсилона. Гений, параноик. Давит на Аки: «Правда не важна. Важно действие». В арке 14 Аки слышит, как Корв и Зейн обсуждают, что избавятся от него.', tags: ['Свидетели', 'Техник', 'Параноик'] },
@@ -2357,6 +2385,8 @@
                     <li><strong>Сезон 2:</strong> Вирус «Эхо». Печать. Мирная арка.</li>
                     <li><strong>Сезон 3:</strong> Аки теряет силу. «Омега». Поиски Алисы.</li>
                     <li><strong>Сезон 4:</strong> «Свидетели». Аки думает. Правда раскрывается. Аки выживает в 15-й арке.</li>
+                    <li><strong>Сезон 5:</strong> Охота Эпсилона. Тайна Алисы. Омега выходит из тени.</li>
+                    <li><strong>Сезон 6:</strong> Финал. Совет, Ева, Кронос. Аки уничтожает чип и становится свободным.</li>
                 </ul>` },
             { icon: '👥', title: 'Кто такие «Свидетели»?', body: `
                 <p><strong>«Свидетели»</strong> — это бывшие агенты Эпсилона, которые узнали правду о том, что организация создала монстров, и ушли. Они не убивают — они свидетельствуют. Но у них своя правда, и они используют Аки в своих целях.</p>
@@ -2394,6 +2424,15 @@
                     <li><strong>Арка 13 «Давление»:</strong> Эпсилон ищет Аки, Корв давит, Мира поддерживает.</li>
                     <li><strong>Арка 14 «Один»:</strong> Аки находит документы «Проект Эхо».</li>
                     <li><strong>Арка 15 «Попытка»:</strong> Бой с Реном, Алиса убегает, Аки выживает.</li>
+                </ul>` },
+            { icon: '🌅', title: 'Сезон 6: «Новая эра»', body: `
+                <p><strong>Главная идея:</strong> Финал истории. Война закончена. Эпсилон больше не будет прежним. Аки должен решить, каким будет мир после.</p>
+                <ul>
+                    <li><strong>Арка 21 «Начало конца»:</strong> Аки и Лира сбегают из штаба. Эпсилон объявляет их предателями. Начинается охота.</li>
+                    <li><strong>Арка 22 «Совет»:</strong> Алиса раскрывает Аки правду о Совете. Советник Холт отдаёт приказ уничтожить всех Свидетелей.</li>
+                    <li><strong>Арка 23 «Осада Омеги»:</strong> База Свидетелей атакована. Ева (лидер Омеги) выходит из тени. Аки приходится выбирать сторону.</li>
+                    <li><strong>Арка 24 «Кронос»:</strong> Аки встречает Кроноса — мутанта с разумом человека. Тот помогает ему проникнуть в самое сердце Эпсилона.</li>
+                    <li><strong>Арка 25 «Новая эра»:</strong> Финальная битва. Совет падает. Аки уничтожает чип в своей шее и становится свободным. Мир меняется навсегда.</li>
                 </ul>` }
         ];
 
