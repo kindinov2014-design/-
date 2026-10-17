@@ -834,7 +834,6 @@
             .about-text h2 { font-size: 1.4rem; }
             .about-text p { font-size: 0.92rem; }
 
-            /* CHARACTERS mobile */
             .char-grid { grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }
             .char-card { padding: 18px 12px; }
             .char-avatar { width: 70px; height: 70px; font-size: 2.2rem; margin-bottom: 12px; }
@@ -847,7 +846,6 @@
             .char-modal-avatar { width: 80px; height: 80px; font-size: 2.4rem; }
             .char-modal-title h2 { text-align: center; font-size: 1.3rem; }
 
-            /* LORE mobile */
             .lore-header { padding: 16px 18px; }
             .lore-icon { font-size: 1.5rem; }
             .lore-header-title { font-size: 1rem; }
@@ -1066,7 +1064,7 @@
         <div class="section-wrapper showcase-content active" id="showcase-all">
             <div class="showcase-description">
                 <strong>ВСЕ АРКИ</strong><br>
-                Полный список арок «Аки и Эпсилон» — от заражения в лаборатории до плена в 15-й арке. Смотри по порядку или выбирай любимые.
+                Полный список арок «Аки и Эпсилон» — от заражения в лаборатории до 15-й арки. Смотри по порядку или выбирай любимые.
             </div>
             <div class="carousel" id="allGrid"></div>
         </div>
@@ -1457,7 +1455,7 @@
             }, 300);
         }
 
-        // ===== АРКИ (все серии) =====
+        // ===== АРКИ =====
         const EPISODES = [
             { id: 'a1',  title: 'Аномалия',              emoji: '🩸', sub: 'Сезон 1 • Арка 1',  season: 1, showcase: 'aki' },
             { id: 'a2',  title: 'Эпсилон',               emoji: '🕶️', sub: 'Сезон 1 • Арка 2',  season: 1, showcase: 'epsilon' },
@@ -1542,7 +1540,7 @@
             });
         }
 
-        // ===== МАГАЗИН (всё без цен) =====
+        // ===== МАГАЗИН =====
         const PRODUCTS = [
             { id: 1, name: 'Футболка с рогами Аки', emoji: '👕' },
             { id: 2, name: 'Реверс-брелок',         emoji: '🔑' },
@@ -1679,7 +1677,6 @@
             event.target.classList.add('active');
         }
 
-        // ===== SHOP RENDER =====
         function renderShop() {
             const grid = document.getElementById('shopGrid');
             grid.innerHTML = '';
@@ -1818,7 +1815,7 @@
             {
                 id: 'aki', name: 'Аки', emoji: '🎭',
                 role: 'Главный герой', age: '19 лет',
-                status: 'captive', statusText: '🟡 В плену',
+                status: 'alive', statusText: '🟢 Жив',
                 color: '#ff3333', glow: 'rgba(255,51,51,0.4)',
                 group: 'main',
                 short: 'Обычный человек. Без силы. С реверсом и опытом.',
@@ -2071,7 +2068,7 @@
                         <li><strong>Арка 12 «Сомнение»</strong> — встреча со Свидетелями (Зейн, Мира, Корв, Тень, Вейн), разговор с Вейном, давление Зейна.</li>
                         <li><strong>Арка 13 «Давление»</strong> — Эпсилон ищет Аки, Корв давит, Мира поддерживает, Аки уходит.</li>
                         <li><strong>Арка 14 «Один»</strong> — Аки находит старую лабораторию, документы «Проект Эхо», слышит, как Зейн и Корв обсуждают, что избавятся от него.</li>
-                        <li><strong>Арка 15 «Попытка»</strong> — Аки возвращается в штаб, находит Алису, бой с Реном, выстрелы, Алиса убегает, Аки ловят.</li>
+                        <li><strong>Арка 15 «Попытка»</strong> — Аки возвращается в штаб, находит Алису, бой с Реном, выстрелы, Алиса убегает, Аки выживает.</li>
                     </ul>
                 `
             },
@@ -2094,7 +2091,7 @@
         function renderLore() {
             const wrapper = document.getElementById('loreAccordion');
             wrapper.innerHTML = '';
-            LORE_SECTIONS.forEach((section, i) => {
+            LORE_SECTIONS.forEach(section => {
                 const item = document.createElement('div');
                 item.className = 'lore-item';
                 item.innerHTML = `
