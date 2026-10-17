@@ -33,12 +33,11 @@
         }
         body.theme-light { background: radial-gradient(circle at 50% 0%, #ffe5e5 0%, var(--bg) 60%); }
 
-        /* ОПТИМИЗИРОВАННЫЙ ФОН (без тяжелого Canvas) */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
         #bg-glow {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -2; pointer-events: none;
-            background: radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--accent-glow), transparent 80%);
-            opacity: 0.5; /* Снижает нагрузку на видеокарту */
+            background: radial-gradient(circle 600px at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--accent-glow), transparent 80%);
             transition: background 0.1s ease;
         }
 
@@ -48,7 +47,7 @@
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--border);
             position: sticky; top: 0; z-index: 100;
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
         }
         body.theme-light .topbar { background-color: rgba(245,245,247,0.85); }
         .logo { font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: 1px; display: flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; user-select: none; }
@@ -56,59 +55,61 @@
         .topbar-nav { display: flex; gap: 5px; background: var(--border); padding: 6px 10px; border-radius: 30px; border: 1px solid var(--border); }
         .nav-btn { background: transparent; border: none; color: var(--text-muted); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; cursor: pointer; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; }
         .nav-btn:hover { color: var(--text); background: var(--border); }
-        .nav-btn.active { background: var(--accent); color: #fff; }
+        .nav-btn.active { background: var(--accent); color: #fff; box-shadow: 0 0 20px var(--accent-glow); }
         .topbar-right { display: flex; align-items: center; gap: 10px; }
 
         .icon-btn { background: var(--border); border: 1px solid var(--border-soft); color: var(--text); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1rem; transition: all 0.3s ease; position: relative; display: inline-flex; align-items: center; justify-content: center; }
         .icon-btn:hover { background: color-mix(in srgb, var(--accent) 20%, transparent); border-color: var(--accent); transform: scale(1.08); }
         .cart-btn { background: var(--accent); border: none; }
-        .cart-btn:hover { background: var(--accent-hover); }
+        .cart-btn:hover { background: var(--accent-hover); box-shadow: 0 0 20px var(--accent-glow); }
         .cart-count { position: absolute; top: -3px; right: -3px; background: #fff; color: var(--accent); font-size: 0.7rem; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .user-btn { display: flex; align-items: center; gap: 8px; background: linear-gradient(145deg, #8b0000, var(--accent)); color: #fff; padding: 8px 16px; border-radius: 30px; border: none; cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: all 0.3s ease; font-family: inherit; }
-        .user-btn:hover { transform: translateY(-2px); }
+        .user-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px var(--accent-glow); }
         .user-btn .avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; overflow: hidden; }
         .user-btn .avatar img { width: 100%; height: 100%; object-fit: cover; }
         .lang-btn { background: var(--border); border: 1px solid var(--border-soft); color: var(--text); padding: 8px 12px; border-radius: 30px; cursor: pointer; font-weight: 700; font-size: 0.8rem; transition: all 0.3s ease; font-family: inherit; min-width: 60px; }
         .lang-btn:hover { border-color: var(--accent); background: rgba(255,51,51,0.1); }
         .theme-btn { font-size: 1.1rem; }
 
-        .page { display: none; animation: pageFade 0.3s ease; }
+        .page { display: none; animation: pageFade 0.5s ease; }
         .page.active { display: block; }
-        @keyframes pageFade { from { opacity: 0; } to { opacity: 1; } } /* Убрали transform для скорости */
+        @keyframes pageFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .hero { position: relative; height: 85vh; min-height: 600px; background: linear-gradient(135deg, rgba(26,0,0,0.8) 0%, rgba(5,5,8,0.8) 100%); overflow: hidden; display: flex; align-items: flex-end; padding: 80px 60px; }
+        .hero { position: relative; height: 85vh; min-height: 600px; background: linear-gradient(135deg, rgba(26,0,0,0.5) 0%, rgba(5,5,8,0.5) 100%); overflow: hidden; display: flex; align-items: flex-end; padding: 80px 60px; backdrop-filter: blur(5px); }
         .hero-content { position: relative; z-index: 2; max-width: 700px; }
-        .hero h1 { font-size: 4.5rem; font-weight: 900; color: #fff; text-shadow: 0 0 20px #8b0000; letter-spacing: 4px; margin-bottom: 20px; line-height: 1; } /* Убрали двойную тень */
+        .hero h1 { font-size: 4.5rem; font-weight: 900; color: #fff; text-shadow: 0 0 40px #8b0000, 0 0 80px #8b0000; letter-spacing: 4px; margin-bottom: 20px; line-height: 1; }
         .hero p { font-size: 1.05rem; color: #ccc; margin-bottom: 30px; line-height: 1.7; max-width: 600px; }
         .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
 
-        .btn-primary, .btn-secondary, .btn-discord { padding: 16px 40px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block; font-family: inherit; text-align: center; }
+        .btn-primary, .btn-secondary, .btn-discord { padding: 16px 40px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; font-family: inherit; text-align: center; }
         .btn-primary { background: var(--accent); color: #fff; }
-        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px); }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 10px 30px var(--accent-glow); }
         .btn-secondary { background: var(--border); color: var(--text); border: 1px solid var(--border-soft); }
         .btn-secondary:hover { border-color: var(--accent); background: rgba(255,51,51,0.1); transform: translateY(-3px); }
         .btn-discord { background: var(--discord); color: #fff; }
-        .btn-discord:hover { background: #4752C4; transform: translateY(-3px); }
+        .btn-discord:hover { background: #4752C4; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(88,101,242,0.6); }
 
         .timer-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
-        .timer-box { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; position: relative; overflow: hidden; }
-        .timer-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 50%, rgba(255,51,51,0.05) 0%, transparent 70%); } /* Убрали анимацию вращения */
+        .timer-box { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 0 50px var(--accent-glow); position: relative; overflow: hidden; }
+        .timer-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 50%, rgba(255,51,51,0.08) 0%, transparent 70%); animation: rotate 20s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .timer-label { color: var(--accent); font-size: 0.85rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; position: relative; z-index: 2; }
         .timer-title { font-size: 1.6rem; color: var(--text); font-weight: 900; margin-bottom: 20px; position: relative; z-index: 2; }
         .timer-title span { color: var(--accent); }
         .timer-grid { display: flex; justify-content: center; gap: 12px; position: relative; z-index: 2; flex-wrap: wrap; }
         .timer-cell { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 12px; padding: 15px 20px; min-width: 80px; }
-        .timer-num { font-size: 2.2rem; font-weight: 900; color: var(--accent); line-height: 1; }
+        .timer-num { font-size: 2.2rem; font-weight: 900; color: var(--accent); line-height: 1; text-shadow: 0 0 20px var(--accent-glow); }
         .timer-cell-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 6px; font-weight: 700; }
 
         .game-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
-        .game-box { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; position: relative; overflow: hidden; }
+        .game-box { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 0 50px var(--accent-glow); position: relative; overflow: hidden; }
         .game-title { font-size: 1.5rem; color: var(--accent); font-weight: 900; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
         .game-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
         .game-area { position: relative; width: 100%; height: 300px; background: var(--panel); border: 1px solid var(--border-soft); border-radius: 16px; overflow: hidden; margin-bottom: 20px; cursor: crosshair; user-select: none; }
-        .game-target { position: absolute; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); cursor: pointer; transition: transform 0.1s; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #fff; border: 2px solid #fff; }
-        .game-target.fast { background: #ffd700; width: 30px; height: 30px; font-size: 1rem; }
-        .game-target.boss { background: #8b0000; width: 60px; height: 60px; font-size: 2rem; border: 3px solid #ffd700; }
+        .game-target { position: absolute; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 20px var(--accent-glow), inset 0 0 10px rgba(0,0,0,0.5); cursor: pointer; transition: transform 0.1s; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #fff; animation: target-pulse 0.5s infinite alternate; border: 2px solid #fff; }
+        .game-target.fast { background: #ffd700; box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), inset 0 0 10px rgba(0,0,0,0.5); width: 30px; height: 30px; font-size: 1rem; }
+        .game-target.boss { background: #8b0000; box-shadow: 0 0 30px #ff3333, inset 0 0 20px #000; width: 60px; height: 60px; font-size: 2rem; border: 3px solid #ffd700; }
+        @keyframes target-pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
         .game-target:active { transform: scale(0.8); }
         .splatter { position: absolute; width: 10px; height: 10px; background: #ff3333; border-radius: 50%; pointer-events: none; z-index: 10; animation: splatter-anim 0.5s ease-out forwards; }
         @keyframes splatter-anim { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
@@ -117,7 +118,8 @@
         .game-stat-val { font-size: 1.8rem; font-weight: 900; color: var(--accent); }
         .game-stat-lbl { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
         .game-combo { font-size: 1.2rem; color: #ffd700; font-weight: 900; height: 30px; opacity: 0; transition: opacity 0.2s; text-shadow: 0 0 10px #ffd700; }
-        .game-combo.active { opacity: 1; }
+        .game-combo.active { opacity: 1; animation: combo-pop 0.3s ease; }
+        @keyframes combo-pop { 0% { transform: scale(1.5); } 100% { transform: scale(1); } }
         .game-start-btn { background: var(--accent); color: #fff; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
         .game-start-btn:hover { background: var(--accent-hover); transform: scale(1.05); }
         .game-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20; color: #fff; text-align: center; padding: 20px; }
@@ -126,29 +128,31 @@
 
         .promo { max-width: 1200px; margin: 40px auto; padding: 0 60px; display: flex; gap: 15px; }
         .promo-input { flex: 1; background: rgba(20,20,30,0.9); border: 1px solid var(--border-soft); border-radius: 15px; padding: 20px 30px; color: var(--text); font-size: 0.95rem; transition: all 0.3s ease; text-align: center; font-family: inherit; }
-        .promo-input:focus { outline: none; border-color: var(--accent); }
+        .promo-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 30px rgba(255,51,51,0.2); }
         .promo-btn { background: var(--accent); color: #fff; padding: 20px 40px; border: none; border-radius: 15px; font-weight: 800; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; }
-        .promo-btn:hover { background: var(--accent-hover); transform: translateY(-3px); }
+        .promo-btn:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 10px 30px var(--accent-glow); }
 
         .prediction-section { max-width: 1200px; margin: 40px auto; padding: 0 60px; text-align: center; }
-        .prediction-box { background: linear-gradient(145deg, var(--panel-2) 0%, var(--bg) 100%); border: 2px solid rgba(255,51,51,0.3); border-radius: 20px; padding: 40px; position: relative; overflow: hidden; }
+        .prediction-box { background: linear-gradient(145deg, var(--panel-2) 0%, var(--bg) 100%); border: 2px solid rgba(255,51,51,0.3); border-radius: 20px; padding: 40px; position: relative; overflow: hidden; box-shadow: 0 0 60px rgba(255,51,51,0.15); }
+        .prediction-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 50%, rgba(255,51,51,0.1) 0%, transparent 70%); animation: rotate 20s linear infinite; }
         .prediction-title { font-size: 1.5rem; color: var(--accent); font-weight: 900; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; position: relative; z-index: 2; }
-        .prediction-text { font-size: 1.2rem; color: var(--text); margin-bottom: 25px; min-height: 60px; display: flex; align-items: center; justify-content: center; font-style: italic; position: relative; z-index: 2; transition: all 0.3s ease; }
+        .prediction-text { font-size: 1.2rem; color: var(--text); margin-bottom: 25px; min-height: 60px; display: flex; align-items: center; justify-content: center; font-style: italic; position: relative; z-index: 2; transition: all 0.4s ease; }
         .prediction-btn { background: var(--accent); color: #fff; padding: 16px 45px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: inherit; position: relative; z-index: 2; }
-        .prediction-btn:hover { background: var(--accent-hover); transform: translateY(-3px); }
+        .prediction-btn:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 10px 30px var(--accent-glow); }
 
         .map-section { max-width: 1200px; margin: 60px auto; padding: 0 60px; }
         .map-title { font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 25px; letter-spacing: 1px; }
         .map-title span { color: var(--accent); }
-        .map-container { background: linear-gradient(145deg, var(--bg) 0%, var(--bg-2) 100%); border: 2px solid rgba(255,51,51,0.3); border-radius: 24px; padding: 30px; position: relative; overflow: hidden; }
+        .map-container { background: linear-gradient(145deg, var(--bg) 0%, var(--bg-2) 100%); border: 2px solid rgba(255,51,51,0.3); border-radius: 24px; padding: 30px; position: relative; overflow: hidden; box-shadow: 0 0 80px rgba(255,51,51,0.15); }
         .map-svg { width: 100%; height: auto; display: block; border-radius: 16px; min-height: 600px; }
-        .map-line { stroke-dasharray: 8 6; animation: dash 3s linear infinite; } /* Замедлили анимацию для экономии */
+        .map-line { stroke-dasharray: 8 6; animation: dash 2s linear infinite; }
         @keyframes dash { to { stroke-dashoffset: -28; } }
         .map-point { cursor: pointer; transition: all 0.3s ease; }
-        .map-point:hover circle:first-child { r: 22; fill: var(--accent); filter: drop-shadow(0 0 10px var(--accent)); }
+        .map-point:hover circle:first-child { r: 22; fill: var(--accent); filter: drop-shadow(0 0 20px var(--accent)); }
         .map-point circle { transition: all 0.3s ease; }
         .map-point text { transition: all 0.3s ease; pointer-events: none; }
-        .map-info { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 1px solid var(--accent); border-radius: 16px; padding: 25px 30px; margin-top: 20px; text-align: center; color: var(--text); min-height: 80px; transition: opacity 0.3s ease; }
+        .map-point:hover text { fill: #fff; font-weight: bold; font-size: 16px; }
+        .map-info { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 1px solid var(--accent); border-radius: 16px; padding: 25px 30px; margin-top: 20px; text-align: center; color: var(--text); min-height: 80px; transition: opacity 0.3s ease, transform 0.3s ease; box-shadow: 0 0 30px rgba(255,51,51,0.2); }
         .map-info strong { color: var(--accent); font-size: 1.3rem; display: block; margin-bottom: 8px; letter-spacing: 2px; text-transform: uppercase; }
 
         .section-wrapper { padding: 0 60px; margin-bottom: 40px; }
@@ -156,49 +160,51 @@
         .section-title span { color: var(--accent); }
 
         .showcase-tabs { display: flex; gap: 10px; margin-bottom: 30px; padding: 0 60px; flex-wrap: wrap; }
-        .showcase-tab { background: var(--border); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 12px 28px; border-radius: 25px; cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: all 0.3s ease; font-family: inherit; }
+        .showcase-tab { background: var(--border); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 12px 28px; border-radius: 25px; cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); font-family: inherit; position: relative; overflow: hidden; }
         .showcase-tab:hover { color: var(--text); border-color: var(--accent); }
-        .showcase-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-        .showcase-content { display: none; }
-        .showcase-content.active { display: block; animation: showcaseFadeIn 0.4s ease; }
-        @keyframes showcaseFadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .showcase-description { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border-left: 4px solid var(--accent); border-radius: 0 16px 16px 0; padding: 25px 30px; margin-bottom: 25px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
+        .showcase-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 0 30px var(--accent-glow); transform: scale(1.05); }
+        .showcase-content { display: none; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .showcase-content.active { display: block; opacity: 1; transform: translateY(0); animation: showcaseFadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+        @keyframes showcaseFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .showcase-description { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border-left: 4px solid var(--accent); border-radius: 0 16px 16px 0; padding: 25px 30px; margin-bottom: 25px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; box-shadow: 0 0 30px rgba(255,51,51,0.1); }
         .showcase-description strong { color: var(--accent); font-size: 1.1rem; letter-spacing: 1px; }
 
         .carousel { display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 20px; }
         .carousel::-webkit-scrollbar { height: 6px; }
         .carousel::-webkit-scrollbar-track { background: transparent; }
         .carousel::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
-        .card { flex: 0 0 300px; background: var(--panel); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 0.3s ease, border-color 0.3s ease; cursor: pointer; position: relative; }
-        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .card { flex: 0 0 300px; background: var(--panel); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); cursor: pointer; position: relative; }
+        .card:hover { transform: translateY(-10px) scale(1.02); border-color: var(--accent); box-shadow: 0 20px 50px var(--accent-glow); }
         .card-image { width: 100%; height: 180px; background: linear-gradient(135deg, var(--panel-2), var(--bg)); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; overflow: hidden; }
         .card-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.9) 100%); }
         .card-content { padding: 18px; }
         .card-title { font-size: 1.1rem; font-weight: 800; color: var(--text); margin-bottom: 5px; }
         .card-subtitle { font-size: 0.8rem; color: var(--accent); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-        .card-add { position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.7); border: 1px solid var(--accent); color: var(--accent); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; z-index: 5; }
+        .card-add { position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.7); border: 1px solid var(--accent); color: var(--accent); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 5; }
         .card-add:hover { background: var(--accent); color: #fff; transform: scale(1.1); }
         .card-add.added { background: var(--accent); color: #fff; }
 
         .big-banner { max-width: 1200px; margin: 60px auto; padding: 0 60px; }
         .big-banner-inner { background: linear-gradient(135deg, var(--panel-2) 0%, var(--bg) 100%); border: 1px solid rgba(255,51,51,0.3); border-radius: 20px; padding: 60px; text-align: center; position: relative; overflow: hidden; }
-        .big-banner h2 { font-size: 2.2rem; color: var(--text); margin-bottom: 15px; position: relative; z-index: 2; }
+        .big-banner-inner::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(255,51,51,0.15) 0%, transparent 70%); pointer-events: none; }
+        .big-banner h2 { font-size: 2.2rem; color: var(--text); margin-bottom: 15px; text-shadow: 0 0 30px #8b0000; position: relative; z-index: 2; }
         .big-banner p { color: var(--text-muted); font-size: 1rem; margin-bottom: 25px; position: relative; z-index: 2; }
 
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 60px; }
-        .shop-item { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 30px; text-align: center; transition: transform 0.2s ease; cursor: pointer; position: relative; }
-        .shop-item:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .shop-item { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 30px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; }
+        .shop-item:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 15px 40px var(--accent-glow); }
         .shop-emoji { font-size: 4rem; margin-bottom: 15px; }
         .shop-name { font-size: 1.2rem; color: var(--text); font-weight: 800; margin-bottom: 10px; }
         .shop-price { font-size: 1.5rem; color: var(--accent); font-weight: 900; margin-bottom: 15px; min-height: 2rem; }
-        .shop-price.free { color: var(--success); font-size: 1.1rem; }
+        .shop-price.free { color: var(--success); font-size: 1.1rem; text-shadow: 0 0 20px rgba(0, 255, 136, 0.6); animation: freeGlow 1.5s infinite; }
+        @keyframes freeGlow { 0%, 100% { text-shadow: 0 0 20px rgba(0, 255, 136, 0.6); } 50% { text-shadow: 0 0 40px rgba(0, 255, 136, 1); } }
         .shop-price.no-price { color: var(--text-dim); font-size: 0.75rem; font-weight: 600; font-style: italic; line-height: 1.5; min-height: 3rem; padding: 0 10px; }
-        .shop-discount { position: absolute; top: 10px; right: 10px; background: var(--accent); color: #fff; font-size: 0.8rem; font-weight: 900; padding: 5px 12px; border-radius: 20px; z-index: 2; }
+        .shop-discount { position: absolute; top: 10px; right: 10px; background: var(--accent); color: #fff; font-size: 0.8rem; font-weight: 900; padding: 5px 12px; border-radius: 20px; z-index: 2; box-shadow: 0 0 20px var(--accent-glow); }
         .shop-buy { background: var(--accent); color: #fff; padding: 12px 30px; border: none; border-radius: 25px; font-weight: 800; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
         .shop-buy:hover { background: var(--accent-hover); transform: scale(1.05); }
 
         .music-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 60px; }
-        .music-item { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 25px; transition: transform 0.2s ease; cursor: pointer; }
+        .music-item { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 25px; transition: all 0.3s ease; cursor: pointer; }
         .music-item:hover { transform: translateY(-5px); border-color: var(--accent); }
         .music-cover { font-size: 3rem; margin-bottom: 15px; }
         .music-name { font-size: 1.1rem; color: var(--text); font-weight: 800; margin-bottom: 5px; }
@@ -208,15 +214,15 @@
         .coop-form { background: var(--panel); border: 1px solid var(--border); border-radius: 20px; padding: 40px; }
         .coop-form h3 { color: var(--text); font-size: 1.5rem; margin-bottom: 25px; }
         .coop-form input, .coop-form textarea { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--border-soft); border-radius: 10px; padding: 14px 18px; color: var(--text); font-size: 1rem; font-family: inherit; margin-bottom: 15px; }
-        .coop-form input:focus, .coop-form textarea:focus { outline: none; border-color: var(--accent); }
+        .coop-form input:focus, .coop-form textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 20px rgba(255,51,51,0.3); }
         .coop-form textarea { min-height: 120px; resize: vertical; }
         .coop-discord { text-align: center; color: var(--text-dim); margin-top: 20px; font-size: 0.9rem; }
         .coop-discord a { color: var(--discord); font-weight: 700; text-decoration: none; }
         .coop-discord a:hover { text-decoration: underline; }
 
         .about-section { max-width: 1200px; margin: 60px auto; padding: 0 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .about-image { background: linear-gradient(135deg, var(--panel-2), var(--bg)); border-radius: 20px; height: 400px; display: flex; align-items: center; justify-content: center; font-size: 6rem; border: 1px solid rgba(255,51,51,0.2); }
-        .about-text h2 { font-size: 2rem; color: var(--text); margin-bottom: 20px; }
+        .about-image { background: linear-gradient(135deg, var(--panel-2), var(--bg)); border-radius: 20px; height: 400px; display: flex; align-items: center; justify-content: center; font-size: 6rem; border: 1px solid rgba(255,51,51,0.2); box-shadow: 0 0 60px rgba(255,51,51,0.15); }
+        .about-text h2 { font-size: 2rem; color: var(--text); margin-bottom: 20px; text-shadow: 0 0 20px #8b0000; }
         .about-text p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 12px; }
         .about-socials { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
         .about-socials a { padding: 10px 20px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; text-decoration: none; color: var(--text); border: 1px solid var(--border-soft); transition: all 0.3s ease; }
@@ -225,12 +231,13 @@
         .about-socials a.ds:hover { background: var(--discord); border-color: var(--discord); color: #fff; }
 
         .char-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 60px; }
-        .char-card { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 25px 20px; text-align: center; cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease; position: relative; overflow: hidden; }
-        .char-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--char-color, var(--accent)); }
-        .char-card:hover { transform: translateY(-5px); border-color: var(--char-color, var(--accent)); }
-        .char-avatar { width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.8rem; background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 3px solid var(--char-color, var(--accent)); overflow: hidden; }
+        .char-card { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 25px 20px; text-align: center; cursor: pointer; transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1); position: relative; overflow: hidden; }
+        .char-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--char-color, var(--accent)); opacity: 0.8; transition: all 0.3s ease; }
+        .char-card:hover { transform: translateY(-8px); border-color: var(--char-color, var(--accent)); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 30px var(--char-glow, var(--accent-glow)); }
+        .char-card:hover::before { height: 6px; }
+        .char-avatar { width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.8rem; background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 3px solid var(--char-color, var(--accent)); box-shadow: 0 0 25px var(--char-glow, var(--accent-glow)); overflow: hidden; }
         .char-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-        .char-name { font-size: 1.15rem; color: var(--text); font-weight: 900; margin-bottom: 4px; }
+        .char-name { font-size: 1.15rem; color: var(--text); font-weight: 900; margin-bottom: 4px; letter-spacing: 0.5px; }
         .char-role { font-size: 0.72rem; color: var(--char-color, var(--accent)); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
         .char-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; min-height: 50px; }
         .char-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
@@ -240,16 +247,16 @@
         .char-badge.captive { background: rgba(150, 100, 255, 0.12); color: #b388ff; border: 1px solid rgba(150, 100, 255, 0.3); }
 
         .lore-accordion-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
-        .lore-item { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 2px solid rgba(255,51,51,0.2); border-radius: 16px; margin-bottom: 15px; overflow: hidden; transition: border-color 0.3s ease; }
-        .lore-item.active { border-color: var(--accent); }
-        .lore-header { display: flex; justify-content: space-between; align-items: center; padding: 22px 28px; cursor: pointer; transition: background 0.2s ease; }
+        .lore-item { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 2px solid rgba(255,51,51,0.2); border-radius: 16px; margin-bottom: 15px; overflow: hidden; transition: all 0.3s ease; }
+        .lore-item.active { border-color: var(--accent); box-shadow: 0 0 40px rgba(255,51,51,0.3); }
+        .lore-header { display: flex; justify-content: space-between; align-items: center; padding: 22px 28px; cursor: pointer; transition: background 0.3s ease; }
         .lore-header:hover { background: rgba(255,51,51,0.05); }
         .lore-header-left { display: flex; align-items: center; gap: 15px; }
         .lore-icon { font-size: 1.8rem; }
         .lore-header-title { font-size: 1.15rem; color: var(--text); font-weight: 800; letter-spacing: 0.5px; }
         .lore-header-icon { font-size: 1.3rem; color: var(--accent); transition: transform 0.3s ease; }
         .lore-item.active .lore-header-icon { transform: rotate(180deg); }
-        .lore-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .lore-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
         .lore-item.active .lore-body { max-height: 3000px; }
         .lore-body-inner { padding: 0 28px 28px 28px; border-top: 1px dashed rgba(255,51,51,0.2); padding-top: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
         .lore-body-inner strong { color: var(--accent); }
@@ -257,56 +264,58 @@
         .lore-body-inner li { margin-bottom: 6px; }
 
         .season-accordion-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
-        .season-accordion-item { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 2px solid rgba(255,51,51,0.2); border-radius: 16px; margin-bottom: 15px; overflow: hidden; transition: border-color 0.3s ease; }
-        .season-accordion-item.active { border-color: var(--accent); }
-        .season-header { display: flex; justify-content: space-between; align-items: center; padding: 25px 30px; cursor: pointer; transition: background 0.2s ease; }
+        .season-accordion-item { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 2px solid rgba(255,51,51,0.2); border-radius: 16px; margin-bottom: 15px; overflow: hidden; transition: all 0.3s ease; }
+        .season-accordion-item.active { border-color: var(--accent); box-shadow: 0 0 40px rgba(255,51,51,0.3); }
+        .season-header { display: flex; justify-content: space-between; align-items: center; padding: 25px 30px; cursor: pointer; transition: background 0.3s ease; }
         .season-header:hover { background: rgba(255,51,51,0.05); }
         .season-header-left { display: flex; align-items: center; gap: 20px; }
         .season-header-number { font-size: 2.5rem; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--accent); line-height: 1; }
-        .season-accordion-item.active .season-header-number { color: var(--accent); -webkit-text-stroke: 0; }
+        .season-accordion-item.active .season-header-number { color: var(--accent); -webkit-text-stroke: 0; text-shadow: 0 0 20px var(--accent-glow); }
         .season-header-title { font-size: 1.3rem; color: var(--text); font-weight: 800; letter-spacing: 1px; }
         .season-header-badge { display: inline-block; padding: 4px 12px; border-radius: 15px; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; margin-left: 10px; vertical-align: middle; }
-        .badge-dev { background: rgba(255, 200, 0, 0.15); color: var(--warn); border: 1px solid rgba(255, 200, 0, 0.4); }
+        .badge-dev { background: rgba(255, 200, 0, 0.15); color: var(--warn); border: 1px solid rgba(255, 200, 0, 0.4); animation: blink 2s infinite; }
         .badge-soon { background: rgba(255, 51, 51, 0.15); color: var(--accent); border: 1px solid rgba(255, 51, 51, 0.4); }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         .season-header-icon { font-size: 1.5rem; color: var(--accent); transition: transform 0.3s ease; }
         .season-accordion-item.active .season-header-icon { transform: rotate(180deg); }
-        .season-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .season-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
         .season-accordion-item.active .season-body { max-height: 2500px; }
         .season-body-inner { padding: 0 30px 30px 30px; border-top: 1px dashed rgba(255,51,51,0.2); padding-top: 25px; }
         .season-stats { color: var(--accent); font-weight: 700; font-size: 0.95rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
-        .season-episode-item { background: rgba(255,255,255,0.02); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 15px 20px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s ease; cursor: pointer; }
+        .season-episode-item { background: rgba(255,255,255,0.02); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 15px 20px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; cursor: pointer; }
         .season-episode-item:hover { background: rgba(255,51,51,0.1); transform: translateX(5px); }
         .season-episode-title { color: var(--text); font-weight: 700; font-size: 1rem; }
         .season-episode-sub { color: var(--accent); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.2s ease; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
         .modal-overlay.active { display: flex; opacity: 1; }
-        .modal { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 1px solid rgba(255,51,51,0.4); border-radius: 20px; padding: 40px; max-width: 450px; width: 100%; position: relative; animation: modalSlide 0.3s ease; max-height: 90vh; overflow-y: auto; }
-        @keyframes modalSlide { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 1px solid rgba(255,51,51,0.4); border-radius: 20px; padding: 40px; max-width: 450px; width: 100%; position: relative; box-shadow: 0 0 100px rgba(255,51,51,0.2); animation: modalSlide 0.4s ease; max-height: 90vh; overflow-y: auto; }
+        @keyframes modalSlide { from { transform: translateY(30px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
         .modal-close { position: absolute; top: 15px; right: 20px; background: transparent; border: none; color: var(--text-dim); font-size: 1.8rem; cursor: pointer; transition: all 0.3s ease; line-height: 1; }
         .modal-close:hover { color: var(--accent); transform: rotate(90deg); }
-        .modal h2 { font-size: 1.6rem; color: var(--text); margin-bottom: 25px; text-align: center; letter-spacing: 2px; text-transform: uppercase; }
+        .modal h2 { font-size: 1.6rem; color: var(--text); margin-bottom: 25px; text-align: center; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 0 20px #8b0000; }
         .form-group { margin-bottom: 18px; }
         .form-group label { display: block; color: var(--text-dim); font-size: 0.8rem; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
         .form-group input, .form-group select { width: 100%; background: rgba(0, 0, 0, 0.5); border: 1px solid var(--border-soft); border-radius: 10px; padding: 14px 18px; color: var(--text); font-size: 1rem; font-family: inherit; }
-        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 20px rgba(255,51,51,0.3); }
         .form-group select option { background: var(--panel); color: var(--text); }
         .modal-btn { width: 100%; background: var(--accent); color: #fff; padding: 16px; border: none; border-radius: 10px; font-weight: 800; font-size: 0.95rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: inherit; margin-top: 10px; }
-        .modal-btn:hover { background: var(--accent-hover); }
+        .modal-btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 10px 30px var(--accent-glow); }
         .modal-switch { text-align: center; margin-top: 20px; color: var(--text-dim); font-size: 0.9rem; }
         .modal-switch a { color: var(--accent); cursor: pointer; text-decoration: none; font-weight: 700; }
         .modal-switch a:hover { text-decoration: underline; }
         .error-msg { color: var(--accent); font-size: 0.85rem; text-align: center; margin-top: 10px; min-height: 20px; }
 
-        .promo-modal { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 2px solid #ffd700; border-radius: 20px; padding: 50px 40px; max-width: 500px; width: 100%; text-align: center; animation: promoPop 0.4s ease; }
-        @keyframes promoPop { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        .promo-emoji { font-size: 5rem; margin-bottom: 20px; }
-        .promo-title { font-size: 1.8rem; color: #ffd700; font-weight: 900; margin-bottom: 15px; text-transform: uppercase; }
+        .promo-modal { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 2px solid #ffd700; border-radius: 20px; padding: 50px 40px; max-width: 500px; width: 100%; text-align: center; box-shadow: 0 0 100px rgba(255, 215, 0, 0.4); animation: promoPop 0.5s ease; }
+        @keyframes promoPop { 0% { transform: scale(0.5) rotate(-5deg); opacity: 0; } 60% { transform: scale(1.05) rotate(2deg); opacity: 1; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+        .promo-emoji { font-size: 5rem; margin-bottom: 20px; animation: emojiBounce 1s infinite; }
+        @keyframes emojiBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .promo-title { font-size: 1.8rem; color: #ffd700; font-weight: 900; margin-bottom: 15px; text-shadow: 0 0 30px rgba(255, 215, 0, 0.6); text-transform: uppercase; }
         .promo-reward { font-size: 1.2rem; color: var(--text); margin-bottom: 30px; }
         .promo-modal-btn { background: linear-gradient(145deg, #ffd700, #ff8c00); color: #000; padding: 16px 50px; border: none; border-radius: 30px; font-weight: 900; font-size: 1rem; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
-        .promo-modal-btn:hover { transform: scale(1.05); }
+        .promo-modal-btn:hover { transform: scale(1.05); box-shadow: 0 10px 40px rgba(255, 215, 0, 0.8); }
 
-        .auth-required { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 2px solid var(--accent); border-radius: 20px; padding: 50px 40px; max-width: 500px; width: 100%; text-align: center; animation: promoPop 0.4s ease; }
+        .auth-required { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 2px solid var(--accent); border-radius: 20px; padding: 50px 40px; max-width: 500px; width: 100%; text-align: center; box-shadow: 0 0 100px rgba(255,51,51,0.4); animation: promoPop 0.5s ease; }
         .auth-required-emoji { font-size: 5rem; margin-bottom: 20px; }
         .auth-required-title { font-size: 1.6rem; color: var(--accent); font-weight: 900; margin-bottom: 15px; text-transform: uppercase; }
         .auth-required-text { color: var(--text-muted); font-size: 1rem; margin-bottom: 30px; }
@@ -317,9 +326,9 @@
         .auth-required-btn.secondary { background: transparent; color: var(--text); border: 1px solid var(--border-soft); }
         .auth-required-btn.secondary:hover { border-color: var(--accent); background: rgba(255,51,51,0.1); }
 
-        .char-modal { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 2px solid var(--char-color, var(--accent)); border-radius: 20px; padding: 40px; max-width: 600px; width: 100%; position: relative; animation: modalSlide 0.3s ease; max-height: 90vh; overflow-y: auto; }
+        .char-modal { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 2px solid var(--char-color, var(--accent)); border-radius: 20px; padding: 40px; max-width: 600px; width: 100%; position: relative; box-shadow: 0 0 100px var(--char-glow, var(--accent-glow)); animation: modalSlide 0.4s ease; max-height: 90vh; overflow-y: auto; }
         .char-modal-header { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
-        .char-modal-avatar { width: 100px; height: 100px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 3rem; background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 3px solid var(--char-color, var(--accent)); overflow: hidden; }
+        .char-modal-avatar { width: 100px; height: 100px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 3rem; background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 3px solid var(--char-color, var(--accent)); box-shadow: 0 0 30px var(--char-glow, var(--accent-glow)); overflow: hidden; }
         .char-modal-avatar img { width: 100%; height: 100%; object-fit: cover; }
         .char-modal-title h2 { font-size: 1.6rem; color: var(--text); margin-bottom: 5px; text-align: left; letter-spacing: 1px; }
         .char-modal-role { font-size: 0.8rem; color: var(--char-color, var(--accent)); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; }
@@ -329,7 +338,7 @@
         .char-modal-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 5px; }
         .char-tag { background: var(--border); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 4px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
 
-        .episode-modal-content { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; max-width: 900px; width: 100%; position: relative; animation: modalSlide 0.3s ease; max-height: 92vh; overflow-y: auto; }
+        .episode-modal-content { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; max-width: 900px; width: 100%; position: relative; box-shadow: 0 0 100px var(--accent-glow); animation: modalSlide 0.4s ease; max-height: 92vh; overflow-y: auto; }
         .video-wrap { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; margin-bottom: 20px; border: 1px solid var(--border); }
         .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
         .video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--panel-2), var(--bg)); color: var(--text-muted); text-align: center; padding: 20px; }
@@ -339,28 +348,28 @@
         .episode-modal-title { font-size: 1.5rem; color: var(--text); margin-bottom: 8px; font-weight: 900; }
         .episode-modal-sub { font-size: 0.85rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; }
 
-        .profile-modal { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 2px solid var(--accent); border-radius: 20px; padding: 35px 30px; max-width: 550px; width: 100%; position: relative; animation: modalSlide 0.3s ease; max-height: 92vh; overflow-y: auto; }
+        .profile-modal { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 2px solid var(--accent); border-radius: 20px; padding: 35px 30px; max-width: 550px; width: 100%; position: relative; box-shadow: 0 0 100px var(--accent-glow); animation: modalSlide 0.4s ease; max-height: 92vh; overflow-y: auto; }
         .profile-preview { text-align: center; margin-bottom: 25px; padding: 25px 20px; background: linear-gradient(145deg, var(--panel-2), var(--bg)); border-radius: 16px; border: 1px solid var(--border); }
-        .profile-preview-name { font-size: 1.4rem; font-weight: 900; margin-bottom: 6px; transition: all 0.2s ease; display: inline-block; padding: 4px 16px; border-radius: 20px; }
+        .profile-preview-name { font-size: 1.4rem; font-weight: 900; margin-bottom: 6px; transition: all 0.3s ease; display: inline-block; padding: 4px 16px; border-radius: 20px; }
         .profile-preview-badge { display: inline-block; padding: 5px 14px; border-radius: 14px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; background: rgba(255,51,51,0.15); color: var(--accent); border: 1px solid var(--accent); }
-        .profile-avatar-large { width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; overflow: hidden; border: 4px solid var(--accent); background: linear-gradient(145deg, var(--panel-2), var(--bg)); }
+        .profile-avatar-large { width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; overflow: hidden; border: 4px solid var(--accent); box-shadow: 0 0 30px var(--accent-glow); background: linear-gradient(145deg, var(--panel-2), var(--bg)); }
         .profile-avatar-large img { width: 100%; height: 100%; object-fit: cover; }
         .profile-section-title { color: var(--accent); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; margin-top: 20px; }
         .color-options { display: flex; gap: 8px; flex-wrap: wrap; }
-        .color-option { width: 38px; height: 38px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: transform 0.2s ease; }
+        .color-option { width: 38px; height: 38px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: all 0.25s ease; }
         .color-option:hover { transform: scale(1.15); }
         .color-option.selected { border-color: #fff; box-shadow: 0 0 15px currentColor; }
         .frame-options { display: flex; gap: 8px; flex-wrap: wrap; }
-        .frame-option { padding: 8px 14px; border-radius: 20px; cursor: pointer; font-size: 0.75rem; font-weight: 700; border: 2px solid var(--border-soft); background: var(--panel); color: var(--text-muted); transition: all 0.2s ease; font-family: inherit; }
+        .frame-option { padding: 8px 14px; border-radius: 20px; cursor: pointer; font-size: 0.75rem; font-weight: 700; border: 2px solid var(--border-soft); background: var(--panel); color: var(--text-muted); transition: all 0.25s ease; font-family: inherit; }
         .frame-option.selected { border-color: var(--accent); background: rgba(255,51,51,0.15); color: var(--accent); }
         .status-options { display: flex; gap: 8px; flex-wrap: wrap; }
-        .status-option { padding: 6px 14px; border-radius: 14px; cursor: pointer; font-size: 0.72rem; font-weight: 800; border: 2px solid var(--border-soft); background: var(--panel); color: var(--text-muted); transition: all 0.2s ease; font-family: inherit; text-transform: uppercase; letter-spacing: 1px; }
+        .status-option { padding: 6px 14px; border-radius: 14px; cursor: pointer; font-size: 0.72rem; font-weight: 800; border: 2px solid var(--border-soft); background: var(--panel); color: var(--text-muted); transition: all 0.25s ease; font-family: inherit; text-transform: uppercase; letter-spacing: 1px; }
         .status-option.selected { border-color: var(--accent); background: rgba(255,51,51,0.15); color: var(--accent); }
 
-        .notification { position: fixed; top: 80px; right: 30px; background: linear-gradient(145deg, var(--panel), var(--bg)); border: 1px solid var(--accent); border-radius: 12px; padding: 18px 25px; color: var(--text); font-weight: 700; font-size: 0.95rem; z-index: 2000; transform: translateX(400px); transition: transform 0.3s ease; max-width: 350px; }
+        .notification { position: fixed; top: 80px; right: 30px; background: linear-gradient(145deg, var(--panel), var(--bg)); border: 1px solid var(--accent); border-radius: 12px; padding: 18px 25px; color: var(--text); font-weight: 700; font-size: 0.95rem; z-index: 2000; box-shadow: 0 10px 40px var(--accent-glow); transform: translateX(400px); transition: transform 0.4s ease; max-width: 350px; }
         .notification.show { transform: translateX(0); }
-        .notification.success { border-color: var(--success); }
-        .notification.discord { border-color: var(--discord); }
+        .notification.success { border-color: var(--success); box-shadow: 0 10px 40px rgba(0, 255, 136, 0.4); }
+        .notification.discord { border-color: var(--discord); box-shadow: 0 10px 40px rgba(88, 101, 242, 0.4); }
 
         footer { text-align: center; padding: 50px 20px; color: var(--text-dim); border-top: 1px solid var(--border); margin-top: 60px; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; position: relative; z-index: 2; }
         .footer-socials { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
@@ -370,7 +379,7 @@
         .footer-social.yt:hover { border-color: var(--yt); background: rgba(255, 0, 0, 0.15); }
         .footer-social.tg:hover { border-color: var(--tg); background: rgba(34, 158, 217, 0.15); }
 
-        .bottom-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,10,15,0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid rgba(255,51,51,0.25); z-index: 200; padding: 6px 0 calc(6px + env(safe-area-inset-bottom)); justify-content: space-around; }
+        .bottom-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,10,15,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(255,51,51,0.25); z-index: 200; padding: 6px 0 calc(6px + env(safe-area-inset-bottom)); justify-content: space-around; }
         body.theme-light .bottom-nav { background: rgba(245,245,247,0.95); }
         .bottom-nav-item { flex: 1; background: transparent; border: none; color: var(--text-dim); font-family: inherit; font-size: 0.6rem; font-weight: 700; padding: 6px 2px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; transition: color 0.2s ease; }
         .bottom-nav-item .bn-icon { font-size: 1.2rem; line-height: 1; }
@@ -464,6 +473,7 @@
 </head>
 <body>
 
+    <canvas id="bg-canvas"></canvas>
     <div id="bg-glow"></div>
 
     <!-- TOPBAR -->
@@ -593,6 +603,7 @@
                         <radialGradient id="ruinsGlow" cx="50%" cy="50%" r="50%">
                             <stop offset="0%" stop-color="rgba(100,100,100,0.4)"/><stop offset="100%" stop-color="transparent"/>
                         </radialGradient>
+                        <!-- Новые градиенты -->
                         <radialGradient id="cryosGlow" cx="50%" cy="50%" r="50%">
                             <stop offset="0%" stop-color="rgba(0,188,212,0.4)"/><stop offset="100%" stop-color="transparent"/>
                         </radialGradient>
@@ -615,6 +626,7 @@
                     
                     <rect width="900" height="700" fill="url(#mapGlow)"/>
                     
+                    <!-- Зоны -->
                     <circle cx="400" cy="350" r="200" fill="url(#baseGlow)"/>
                     <circle cx="180" cy="150" r="100" fill="url(#labGlow)"/>
                     <circle cx="650" cy="150" r="100" fill="url(#sectorGlow)"/>
@@ -624,6 +636,7 @@
                     <circle cx="150" cy="300" r="100" fill="url(#campGlow)"/>
                     <circle cx="550" cy="200" r="100" fill="url(#ruinsGlow)"/>
                     
+                    <!-- Новые зоны -->
                     <circle cx="100" cy="100" r="120" fill="url(#cryosGlow)"/>
                     <circle cx="750" cy="550" r="120" fill="url(#forestGlow)"/>
                     <circle cx="800" cy="100" r="100" fill="url(#cityGlow)"/>
@@ -631,6 +644,7 @@
                     <circle cx="400" cy="650" r="120" fill="url(#abyssGlow)"/>
                     <circle cx="300" cy="100" r="100" fill="url(#hospitalGlow)"/>
 
+                    <!-- Линии -->
                     <line x1="180" y1="150" x2="400" y2="350" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
                     <line x1="400" y1="350" x2="650" y2="150" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
                     <line x1="400" y1="350" x2="250" y2="500" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
@@ -639,6 +653,7 @@
                     <line x1="400" y1="350" x2="150" y2="300" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
                     <line x1="400" y1="350" x2="550" y2="200" class="map-line" stroke="#ff3333" stroke-width="2" opacity="0.6"/>
                     
+                    <!-- Новые линии -->
                     <line x1="400" y1="350" x2="100" y2="100" class="map-line" stroke="#00bcd4" stroke-width="2" opacity="0.6"/>
                     <line x1="400" y1="350" x2="750" y2="550" class="map-line" stroke="#4caf50" stroke-width="2" opacity="0.6"/>
                     <line x1="400" y1="350" x2="800" y2="100" class="map-line" stroke="#9e9e9e" stroke-width="2" opacity="0.6"/>
@@ -646,6 +661,7 @@
                     <line x1="400" y1="350" x2="400" y2="650" class="map-line" stroke="#ff0000" stroke-width="3" opacity="0.8"/>
                     <line x1="400" y1="350" x2="300" y2="100" class="map-line" stroke="#9c27b0" stroke-width="2" opacity="0.6"/>
 
+                    <!-- Иконки фона -->
                     <text x="180" y="90" font-size="40" text-anchor="middle" opacity="0.5">🧪</text>
                     <text x="400" y="300" font-size="50" text-anchor="middle" opacity="0.5">🏢</text>
                     <text x="650" y="90" font-size="40" text-anchor="middle" opacity="0.5">🌲</text>
@@ -662,6 +678,7 @@
                     <text x="400" y="600" font-size="50" text-anchor="middle" opacity="0.6">🌋</text>
                     <text x="300" y="60" font-size="40" text-anchor="middle" opacity="0.5">🏥</text>
 
+                    <!-- Старые точки -->
                     <g class="map-point" onclick="showMapInfo('Заброшенная лаборатория', 'Здесь Аки заразился аномалией (арка 1). Позже нашёл документы «Проект Эхо» (арка 14).')">
                         <circle cx="180" cy="150" r="14" fill="#8b0000" opacity="0.9"/>
                         <circle cx="180" cy="150" r="7" fill="#fff"/>
@@ -703,6 +720,7 @@
                         <text x="550" y="180" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold">Руины</text>
                     </g>
 
+                    <!-- Новые точки -->
                     <g class="map-point" onclick="showMapInfo('Ледяная тюрьма «Криос»', 'Секретная тюрьма Эпсилона. Здесь держат мутантов, которых нельзя убить.')">
                         <circle cx="100" cy="100" r="14" fill="#00bcd4" opacity="0.9"/>
                         <circle cx="100" cy="100" r="7" fill="#fff"/>
@@ -1105,29 +1123,16 @@
     <script>
         const TELEGRAM_CHANNEL = "https://t.me/The_MisterAki2";
 
-        // ===== ОПТИМИЗАЦИЯ КУРСОРА (rAF) =====
-        let lastMouseX = 0, lastMouseY = 0, ticking = false;
-        const bgGlow = document.getElementById('bg-glow');
-        
-        window.addEventListener('mousemove', (e) => {
-            lastMouseX = e.clientX;
-            lastMouseY = e.clientY;
-            
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    bgGlow.style.setProperty('--mouse-x', `${lastMouseX}px`);
-                    bgGlow.style.setProperty('--mouse-y', `${lastMouseY}px`);
-                    ticking = false;
-                });
-                ticking = true;
-            }
+        // ===== ЗВУК ПРИ КЛИКЕ =====
+        const clickSound = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');
+        document.addEventListener('click', () => {
+            clickSound.currentTime = 0;
+            clickSound.play().catch(() => {});
         });
 
         // ===== МИНИ-ИГРА "РЕВЕРС" =====
-        let gameActive = false, gameScore = 0, gameTime = 40;
-        let currentCombo = 1;
-        let spawnTimeout = null, comboTimer = null, gameTimerInterval = null;
-        
+        let gameActive = false, gameScore = 0, gameTime = 40, gameTimer = null;
+        let currentCombo = 1, comboTimer = null;
         const gameArea = document.getElementById('gameArea');
         const gameOverlay = document.getElementById('gameOverlay');
         const gameComboEl = document.getElementById('gameCombo');
@@ -1147,8 +1152,8 @@
             gameArea.innerHTML = '';
             updateGameRecord();
 
-            if (gameTimerInterval) clearInterval(gameTimerInterval);
-            gameTimerInterval = setInterval(() => {
+            if (gameTimer) clearInterval(gameTimer);
+            gameTimer = setInterval(() => {
                 gameTime--;
                 document.getElementById('gameTime').textContent = gameTime;
                 if (gameTime <= 0) endGame();
@@ -1160,7 +1165,6 @@
         function spawnTarget() {
             if (!gameActive) return;
 
-            // Ограничиваем спавн, чтобы не лагало
             if (gameArea.querySelectorAll('.game-target').length < 6) {
                 const target = document.createElement('div');
                 target.className = 'game-target';
@@ -1207,35 +1211,35 @@
                         gameComboEl.classList.remove('active');
                     }, 1000);
 
-                    // Упрощенный эффект брызг (меньше DOM-узлов)
-                    const splat = document.createElement('div');
-                    splat.className = 'splatter';
-                    splat.style.left = (e.clientX - gameArea.getBoundingClientRect().left - 5) + 'px';
-                    splat.style.top = (e.clientY - gameArea.getBoundingClientRect().top - 5) + 'px';
-                    splat.style.backgroundColor = target.classList.contains('fast') ? '#ffd700' : (target.classList.contains('boss') ? '#8b0000' : '#ff3333');
-                    gameArea.appendChild(splat);
-                    setTimeout(() => splat.remove(), 500);
+                    createSplatter(e.clientX - gameArea.getBoundingClientRect().left, e.clientY - gameArea.getBoundingClientRect().top, target.classList.contains('fast') ? '#ffd700' : (target.classList.contains('boss') ? '#8b0000' : '#ff3333'));
 
                     target.remove();
                 };
-                
                 gameArea.appendChild(target);
                 setTimeout(() => { if (target.parentNode) target.remove(); }, timeToLive);
             }
             
-            // Сохраняем ID таймера, чтобы очистить при конце игры
-            spawnTimeout = setTimeout(spawnTarget, Math.random() * 200 + 300);
+            setTimeout(spawnTarget, Math.random() * 200 + 300);
+        }
+
+        function createSplatter(x, y, color) {
+            for(let i=0; i<3; i++) {
+                const splat = document.createElement('div');
+                splat.className = 'splatter';
+                splat.style.left = (x - 5) + 'px';
+                splat.style.top = (y - 5) + 'px';
+                splat.style.backgroundColor = color;
+                splat.style.transform = `translate(${Math.random()*30-15}px, ${Math.random()*30-15}px)`;
+                gameArea.appendChild(splat);
+                setTimeout(() => splat.remove(), 500);
+            }
         }
 
         function endGame() {
             gameActive = false;
-            if (gameTimerInterval) clearInterval(gameTimerInterval);
-            if (spawnTimeout) clearTimeout(spawnTimeout);
+            if (gameTimer) clearInterval(gameTimer);
             if (comboTimer) clearTimeout(comboTimer);
-            
             gameArea.querySelectorAll('.game-target').forEach(t => t.remove());
-            gameArea.querySelectorAll('.splatter').forEach(s => s.remove());
-            
             const record = parseInt(localStorage.getItem('aki_game_record') || 0);
             if (gameScore > record) localStorage.setItem('aki_game_record', gameScore);
             updateGameRecord();
@@ -1250,7 +1254,10 @@
         }
 
         // ===== ТАЙМЕР =====
-        const NEXT_RELEASE = { title: "1 арка 1 сезона", date: "2026-11-01T19:10:00" };
+        const NEXT_RELEASE = {
+            title: "1 арка 1 сезона",
+            date: "2026-11-01T19:10:00"
+        };
         let timerInterval = null;
         function startTimer() {
             document.getElementById('timerTitle').innerHTML = `<span>${NEXT_RELEASE.title}</span>`;
@@ -1269,7 +1276,6 @@
             tick(); if (timerInterval) clearInterval(timerInterval); timerInterval = setInterval(tick, 1000);
         }
 
-        // ===== ПРЕДСКАЗАНИЯ =====
         const PREDICTIONS = [
             "Аномалия — это не энергия. Это форма жизни. Древняя. Она была здесь до нас.",
             "Ты больше не человек. И не монстр. Ты что-то между.",
@@ -1292,20 +1298,24 @@
         function getPrediction() {
             const textEl = document.getElementById('predictionText');
             textEl.style.opacity = '0';
+            textEl.style.transform = 'translateY(15px)';
             setTimeout(() => {
                 const random = PREDICTIONS[Math.floor(Math.random() * PREDICTIONS.length)];
                 textEl.textContent = random;
                 textEl.style.opacity = '1';
-            }, 300);
+                textEl.style.transform = 'translateY(0)';
+            }, 400);
         }
 
         function showMapInfo(title, description) {
             const info = document.getElementById('mapInfo');
             info.style.opacity = '0';
+            info.style.transform = 'translateY(10px)';
             setTimeout(() => {
                 info.innerHTML = `<strong>${title}</strong>${description}`;
                 info.style.opacity = '1';
-            }, 200);
+                info.style.transform = 'translateY(0)';
+            }, 300);
         }
 
         const EPISODES = [
@@ -1314,31 +1324,38 @@
             { id: 'a3',  title: 'Смерть и воскрешение',  emoji: '💀', sub: 'Сезон 1 • Арка 3',  season: 1, showcase: 'aki' },
             { id: 'a4',  title: 'Конфликт',              emoji: '⚔️', sub: 'Сезон 1 • Арка 4',  season: 1, showcase: 'epsilon' },
             { id: 'a5',  title: 'Потеря силы',           emoji: '🔥', sub: 'Сезон 1 • Арка 5',  season: 1, showcase: 'aki' },
+
             { id: 'a6',  title: 'Печать',                emoji: '🦠', sub: 'Сезон 2 • Арка 6',  season: 2, showcase: 'aki' },
             { id: 'a7',  title: 'Тишина перед бурей',    emoji: '🌙', sub: 'Сезон 2 • Арка 7',  season: 2, showcase: 'aki' },
+
             { id: 'a8',  title: 'Пустота',               emoji: '🕳️', sub: 'Сезон 3 • Арка 8',  season: 3, showcase: 'aki' },
             { id: 'a9',  title: 'Поиски',                emoji: '🔍', sub: 'Сезон 3 • Арка 9',  season: 3, showcase: 'aki' },
             { id: 'a10', title: 'Поиски (продолжение)',  emoji: '🏭', sub: 'Сезон 3 • Арка 10', season: 3, showcase: 'epsilon' },
             { id: 'a11', title: 'Разговор',              emoji: '💬', sub: 'Сезон 3 • Арка 11', season: 3, showcase: 'chronicles' },
+
             { id: 'a12', title: 'Сомнение',              emoji: '❓', sub: 'Сезон 4 • Арка 12', season: 4, showcase: 'chronicles' },
             { id: 'a13', title: 'Давление',              emoji: '⏳', sub: 'Сезон 4 • Арка 13', season: 4, showcase: 'chronicles' },
             { id: 'a14', title: 'Один',                  emoji: '🚶', sub: 'Сезон 4 • Арка 14', season: 4, showcase: 'aki' },
             { id: 'a15', title: 'Попытка',               emoji: '⛓️', sub: 'Сезон 4 • Арка 15', season: 4, showcase: 'aki' },
+
             { id: 'a16', title: 'Охота',                 emoji: '🎯', sub: 'Сезон 5 • Арка 16', season: 5, showcase: 'epsilon' },
             { id: 'a17', title: 'Союзники',              emoji: '🤝', sub: 'Сезон 5 • Арка 17', season: 5, showcase: 'aki' },
             { id: 'a18', title: 'Тайна Алисы',           emoji: '🤫', sub: 'Сезон 5 • Арка 18', season: 5, showcase: 'epsilon' },
             { id: 'a19', title: 'Война начинается',      emoji: '💥', sub: 'Сезон 5 • Арка 19', season: 5, showcase: 'aki' },
             { id: 'a20', title: 'Омега выходит',         emoji: '👁️', sub: 'Сезон 5 • Арка 20', season: 5, showcase: 'chronicles' },
+
             { id: 'a21', title: 'Начало конца',        emoji: '🌑', sub: 'Сезон 6 • Арка 21', season: 6, showcase: 'aki' },
             { id: 'a22', title: 'Совет',               emoji: '⚖️', sub: 'Сезон 6 • Арка 22', season: 6, showcase: 'epsilon' },
             { id: 'a23', title: 'Осада Омеги',         emoji: '💥', sub: 'Сезон 6 • Арка 23', season: 6, showcase: 'aki' },
             { id: 'a24', title: 'Кронос',              emoji: '🩸', sub: 'Сезон 6 • Арка 24', season: 6, showcase: 'aki' },
             { id: 'a25', title: 'Новая эра',           emoji: '🌅', sub: 'Сезон 6 • Арка 25', season: 6, showcase: 'season6' },
+
             { id: 'a26', title: 'Руины',                 emoji: '🏚️', sub: 'Сезон 7 • Арка 26', season: 7, showcase: 'aki' },
             { id: 'a27', title: 'Синдикат',              emoji: '🦅', sub: 'Сезон 7 • Арка 27', season: 7, showcase: 'epsilon' },
             { id: 'a28', title: 'Иерихон',               emoji: '🧬', sub: 'Сезон 7 • Арка 28', season: 7, showcase: 'aki' },
             { id: 'a29', title: 'Хакер',                 emoji: '💻', sub: 'Сезон 7 • Арка 29', season: 7, showcase: 'chronicles' },
             { id: 'a30', title: 'Новый Эпсилон',         emoji: '🛡️', sub: 'Сезон 7 • Арка 30', season: 7, showcase: 'season7' },
+
             { id: 'a31', title: 'Тёмное отражение',      emoji: '🪞', sub: 'Сезон 8 • Арка 31', season: 8, showcase: 'aki' },
             { id: 'a32', title: 'Кукловод',              emoji: '🎭', sub: 'Сезон 8 • Арка 32', season: 8, showcase: 'chronicles' },
             { id: 'a33', title: 'Голоса',                emoji: '👂', sub: 'Сезон 8 • Арка 33', season: 8, showcase: 'aki' },
@@ -1478,9 +1495,13 @@
             const season7Grid = document.getElementById('season7Grid');
             const season8Grid = document.getElementById('season8Grid');
             
-            allGrid.innerHTML = ''; akiGrid.innerHTML = ''; epsilonGrid.innerHTML = '';
-            chroniclesGrid.innerHTML = ''; season6Grid.innerHTML = '';
-            season7Grid.innerHTML = ''; season8Grid.innerHTML = '';
+            allGrid.innerHTML = '';
+            akiGrid.innerHTML = '';
+            epsilonGrid.innerHTML = '';
+            chroniclesGrid.innerHTML = '';
+            season6Grid.innerHTML = '';
+            season7Grid.innerHTML = '';
+            season8Grid.innerHTML = '';
 
             EPISODES.forEach(ep => {
                 renderEpisodeCard(ep, allGrid);
@@ -1570,7 +1591,12 @@
                 if (product.free) {
                     priceHTML = `<div class="shop-discount">-100%</div><div class="shop-price free">БЕСПЛАТНО 🎉</div>`;
                 } else {
-                    priceHTML = `<div class="shop-price no-price">Цена ещё нет — в реальной жизни не продаётся.</div>`;
+                    priceHTML = `
+                        <div class="shop-price no-price">
+                            Цена ещё нет — в реальной жизни не продаётся.<br>
+                            <span style="color:var(--text-dim); font-size:0.75rem;">Будет когда-нибудь...</span>
+                        </div>
+                    `;
                 }
                 const item = document.createElement('div');
                 item.className = 'shop-item';
@@ -1862,8 +1888,9 @@
             const elements = document.querySelectorAll('[data-i18n], [data-i18n-placeholder]');
             const langBtn = document.getElementById('langBtn');
             elements.forEach(el => {
-                el.style.transition = 'opacity 0.2s ease';
+                el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                 el.style.opacity = '0';
+                el.style.transform = 'translateY(6px)';
             });
             setTimeout(() => {
                 currentLang = currentLang === 'ru' ? 'en' : 'ru';
@@ -1871,9 +1898,10 @@
                 applyLang();
                 elements.forEach(el => {
                     el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
                 });
-                setTimeout(() => { isSwitching = false; }, 300);
-            }, 200);
+                setTimeout(() => { isSwitching = false; }, 400);
+            }, 320);
         }
         function applyLang() {
             const t = translations[currentLang];
@@ -1911,7 +1939,7 @@
         function closeAuth() {
             const modal = document.getElementById('authModal');
             modal.classList.remove('active');
-            setTimeout(() => modal.style.display = 'none', 200);
+            setTimeout(() => modal.style.display = 'none', 300);
             document.getElementById('regError').textContent = '';
             document.getElementById('logError').textContent = '';
         }
@@ -2242,8 +2270,8 @@
             if (e.key === 'Enter' && document.activeElement.id === 'promoInput') applyPromo();
         });
 
-        // ===== ИНИЦИАЛИЗАЦИЯ (БЕЗ ТЯЖЕЛОГО ФОНОВОГО CANVAS) =====
         loadTheme();
+        initParticles();
         startTimer();
         updateUserArea();
         applyLang();
@@ -2254,6 +2282,92 @@
         renderSeasons();
         updateGameRecord();
 
+        function initParticles() {
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            const glow = document.getElementById('bg-glow');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const particleCount = window.innerWidth < 768 ? 30 : 70;
+
+            let mouse = { x: null, y: null, radius: 150 };
+
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+                glow.style.setProperty('--mouse-x', `${e.clientX}px`);
+                glow.style.setProperty('--mouse-y', `${e.clientY}px`);
+            });
+
+            window.addEventListener('mouseout', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 0.8,
+                    speedY: (Math.random() - 0.5) * 0.8,
+                    opacity: Math.random() * 0.5 + 0.2
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(p => {
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+
+                    if (p.x < 0) p.x = canvas.width;
+                    if (p.x > canvas.width) p.x = 0;
+                    if (p.y < 0) p.y = canvas.height;
+                    if (p.y > canvas.height) p.y = 0;
+
+                    if (mouse.x != null) {
+                        let dx = mouse.x - p.x;
+                        let dy = mouse.y - p.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < mouse.radius) {
+                            let forceDirectionX = dx / distance;
+                            let forceDirectionY = dy / distance;
+                            let maxDistance = mouse.radius;
+                            let force = (maxDistance - distance) / maxDistance;
+                            
+                            p.x -= forceDirectionX * force * 5;
+                            p.y -= forceDirectionY * force * 5;
+                            
+                            p.opacity = Math.min(1, p.opacity + 0.05);
+                        } else {
+                            p.opacity = Math.max(0.2, p.opacity - 0.02);
+                        }
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    const isLight = document.body.classList.contains('theme-light');
+                    ctx.fillStyle = isLight ? `rgba(211, 47, 47, ${p.opacity * 0.6})` : `rgba(255, 51, 51, ${p.opacity})`;
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
         const CHARACTERS = [
             { id: 'aki', name: 'Аки', emoji: '🎭', role: 'Главный герой', age: '19 лет', status: 'alive', statusText: '🟢 Жив', color: '#ff3333', glow: 'rgba(255,51,51,0.4)', group: 'main', short: 'Обычный человек. Без силы. С реверсом и опытом.', full: 'Любопытный, упрямый, но боится показывать слабость. Цель — выжить и узнать правду об аномалиях. Всегда проверяет реверс перед миссией (кроме рокового дня). Обычный человек, как половина Эпсилона. У него нет силы — только опыт и реверс.', tags: ['Главный герой', 'Агент Эпсилона', 'Реверс'] },
             { id: 'alice', name: 'Алиса', emoji: '🕶️', role: 'Глава Эпсилона', age: '35 лет', status: 'alive', statusText: '🟢 Жива', color: '#b388ff', glow: 'rgba(179,136,255,0.4)', group: 'epsilon', short: 'Холодная, расчётливая, но справедливая. Знает больше, чем говорит.', full: 'Глава Эпсилона. Холодная, расчётливая, но справедливая. Знает больше об аномалиях, чем говорит. Цель — использовать Аки для своих планов. Боится потерять своих агентов, как потеряла других.', tags: ['Глава', 'Совет', 'Тайна'] },
@@ -2261,20 +2375,25 @@
             { id: 'ren', name: 'Рен', emoji: '🗡️', role: 'Агент-антагонист', age: '28 лет', status: 'alive', statusText: '🟢 Жив', color: '#ff6b00', glow: 'rgba(255,107,0,0.4)', group: 'epsilon', short: 'Жестокий, амбициозный, завистливый. Считает Аки угрозой.', full: 'Агент Эпсилона, который считает Аки угрозой. Жестокий, амбициозный, завистливый. Цель — убить Аки и занять его место. В арке 15 именно он ловит Аки и не убивает его, чтобы поймать Алису.', tags: ['Антагонист', 'Эпсилон', 'Зависть'] },
             { id: 'lira', name: 'Лира', emoji: '🌸', role: 'Напарница Аки', age: '20 лет', status: 'alive', statusText: '🟢 Жива', color: '#e24a90', glow: 'rgba(226,74,144,0.4)', group: 'main', short: 'Добрая, но сильная. Уважает Аки.', full: 'Новый напарник Аки после исчезновения Эпсилона. Добрая, но сильная. Уважает Аки. Помогает ему в 3-м сезоне. В арке 7 именно с ней Аки проводит последний мирный день.', tags: ['Напарница', 'Сезон 3', 'Друг'] },
             { id: 'wayne', name: 'Доктор Вейн', emoji: '🧪', role: 'Учёный Эпсилона', age: '50 лет', status: 'unknown', statusText: '🟡 Неизвестно', color: '#00bcd4', glow: 'rgba(0,188,212,0.4)', group: 'epsilon', short: 'Одержим наукой. Хочет использовать Аки для экспериментов.', full: 'Учёный Эпсилона. Одержим наукой, эмоционально отстранён. Изучает аномалии и монстров. Тайно хочет использовать Аки для экспериментов. Позже раскаялся, но всё ещё врёт. Входит в состав «Свидетелей».', tags: ['Учёный', 'Эксперименты', 'Свидетели'] },
+            
             { id: 'tim', name: 'Тим', emoji: '👦', role: 'Друг Аки', age: '19 лет', status: 'alive', statusText: '🟢 Жив', color: '#4caf50', glow: 'rgba(76,175,80,0.4)', group: 'main', short: 'Обычный парень. Друг детства Аки.', full: 'Друг детства Аки. Пошёл с ним в заброшенную лабораторию в арке 1. Именно он помог вытащить Аки от разлома и принёс домой. Не знает о существовании Эпсилона, но подозревает, что с Аки что-то не так.', tags: ['Друг', 'Арка 1', 'Гражданский'] },
             { id: 'rok', name: 'Рок', emoji: '🧢', role: 'Друг Аки', age: '20 лет', status: 'alive', statusText: '🟢 Жив', color: '#ff9800', glow: 'rgba(255,152,0,0.4)', group: 'main', short: 'Трусливый, но верный. Друг Аки.', full: 'Друг Аки, который пошёл с ним и Тимом в заброшку. Ему было очень страшно, и он постоянно предлагал уйти. Но когда Аки пострадал, именно Рок помог его вытащить.', tags: ['Друг', 'Арка 1', 'Гражданский'] },
             { id: 'scientist', name: 'Учёный-создатель', emoji: '☣️', role: 'Создатель «Эхо»', age: 'неизвестно', status: 'dead', statusText: '🔴 Погиб', color: '#9c27b0', glow: 'rgba(156,39,176,0.4)', group: 'epsilon', short: 'Безумный гений, создавший вирус «Эхо».', full: 'Учёный, который создал вирус «Эхо» для Эпсилона, чтобы стирать память врагам. Вирус вышел из-под контроля и заразил его самого. Аки и Лира нашли его в старом секторе (арка 6). Перед смертью он передал Аки формулу антивируса.', tags: ['Учёный', 'Вирус «Эхо»', 'Арка 6'] },
+
             { id: 'holt', name: 'Советник Холт', emoji: '⚖️', role: 'Совет Эпсилона', age: '60 лет', status: 'unknown', statusText: '🟡 Неизвестно', color: '#9e9e9e', glow: 'rgba(158,158,158,0.4)', group: 'epsilon', short: 'Глава Совета. Тот, кто отдаёт приказы Алисе.', full: 'Один из трёх членов Совета Эпсилона. Старый, хитрый и безжалостный. Именно он приказал создать вирус «Эхо» и скрыть правду об аномалиях. Алиса подчиняется ему, но боится. В 6-м сезоне он попытается уничтожить всех свидетелей, чтобы сохранить тайну.', tags: ['Совет', 'Антагонист', 'Сезон 6'] },
             { id: 'eva', name: 'Анастасия', emoji: '👁️‍🗨️', role: 'Лидер «Омеги»', age: '30 лет', status: 'alive', statusText: '🟢 Жива', color: '#000000', glow: 'rgba(255,51,51,0.6)', group: 'witnesses', short: 'Фанатичка. Считает, что мир должен быть очищен.', full: 'Истинный лидер группировки «Омега» (Зейн был лишь пешкой). Фанатичка, которая считает, что человечество погрязло в грехах, и аномалии — это кара. Она хочет уничтожить Эпсилон и всех, кто связан с аномалиями, чтобы начать «новую эру» с нуля. Очень опасна.', tags: ['Омега', 'Фанатик', 'Главный злодей'] },
             { id: 'kronos', name: 'Кронос', emoji: '👹', role: 'Мутант-разумник', age: '35 лет', status: 'alive', statusText: '🟢 Жив', color: '#8b0000', glow: 'rgba(139,0,0,0.5)', group: 'main', short: 'Бывший напарник Кая. Стал монстром, но сохранил разум.', full: 'Бывший агент Эпсилона и напарник Кая. Считался погибшим на задании, но на самом деле был захвачен аномалией. Мутировал в монстра, но, в отличие от остальных, сохранил человеческий разум. Он ненавидит Эпсилон за то, что его бросили, и хочет отомстить. В 6-м сезоне становится союзником Аки.', tags: ['Монстр', 'Напарник Кая', 'Сезон 6'] },
+
             { id: 'markus', name: 'Маркус', emoji: '🦅', role: 'Лидер Синдиката', age: '40 лет', status: 'alive', statusText: '🟢 Жив', color: '#ffd700', glow: 'rgba(255,215,0,0.4)', group: 'epsilon', short: 'Бывший агент. Хочет создать новый порядок.', full: 'Бывший агент Эпсилона, который считает, что организация была слишком мягкой. Он основал «Синдикат» — группировку, которая хочет использовать аномалии для контроля над миром. Харизматичный, жестокий и умный.', tags: ['Синдикат', 'Антагонист', 'Сезон 7'] },
             { id: 'jess', name: 'Джесс', emoji: '💻', role: 'Хакер', age: '22 года', status: 'alive', statusText: '🟢 Жива', color: '#00e5ff', glow: 'rgba(0,229,255,0.4)', group: 'main', short: 'Воровка и хакер. Помогает Аки за защиту.', full: 'Молодая хакерша, которая взломала базы Эпсилона. Она знает всё о Синдикате и помогает Аки в обмен на защиту. У неё есть свои секреты, и она не так проста, как кажется.', tags: ['Хакер', 'Союзник', 'Сезон 7'] },
             { id: 'jericho', name: 'Иерихон', emoji: '🧬', role: 'Идеальный агент', age: '1 год', status: 'unknown', statusText: '🟡 Неизвестно', color: '#b388ff', glow: 'rgba(179,136,255,0.4)', group: 'main', short: 'Мутант, созданный из ДНК Аки и Кроноса.', full: 'Искусственно созданный мутант, который считает себя «сыном» Аки и Кроноса. Он невероятно силён, но не понимает, что его создали как оружие. В 7-м сезоне он играет ключевую роль в конфликте.', tags: ['Мутант', 'Создан искусственно', 'Сезон 7'] },
+
             { id: 'therapist', name: 'Психотерапевт', emoji: '🧠', role: 'Маньяк-учёный', age: '45 лет', status: 'alive', statusText: '🟢 Жив', color: '#d32f2f', glow: 'rgba(211,47,47,0.5)', group: 'epsilon', short: 'Бывший учёный. Хочет "вылечить" Аки от героизма.', full: 'Бывший учёный Эпсилона, который сошёл с ума после экспериментов с аномалиями. Он считает, что героизм Аки — это болезнь, и хочет "вылечить" его, заставив страдать. Убивает агентов "Нового Эпсилона" и оставляет послания кровью.', tags: ['Учёный', 'Маньяк', 'Сезон 8'] },
             { id: 'agent_zero', name: 'Агент Ноль', emoji: '🤖', role: 'Идеальный агент', age: '25 лет', status: 'alive', statusText: '🟢 Жив', color: '#607d8b', glow: 'rgba(96,125,139,0.4)', group: 'epsilon', short: 'Без эмоций. Без страха. Полная противоположность Аки.', full: 'Идеальный агент "Нового Эпсилона". Он был создан как машина для убийств, но внешне выглядит как человек. У него нет эмоций, он не чувствует боли и страха. Аки видит в нём своё "тёмное отражение".', tags: ['Агент', 'Без эмоций', 'Сезон 8'] },
             { id: 'vera', name: 'Вера', emoji: '👧', role: 'Скрытый мутант', age: '20 лет', status: 'alive', statusText: '🟢 Жива', color: '#e91e63', glow: 'rgba(233,30,99,0.4)', group: 'main', short: 'Сестра-близнец Агента Ноль. Добрая, но нестабильная.', full: 'Сестра-близнец Агента Ноль. В отличие от брата, она сохранила человеческие эмоции, но её тело мутировало из-за экспериментов. Она добрая и хочет помочь Аки, но боится, что потеряет контроль над своей силой.', tags: ['Мутант', 'Сестра', 'Сезон 8'] },
             { id: 'crow', name: 'Доктор Кроу', emoji: '🐦', role: 'Новый учёный', age: '35 лет', status: 'unknown', statusText: '🟡 Неизвестно', color: '#00bcd4', glow: 'rgba(0,188,212,0.4)', group: 'epsilon', short: 'Изучает аномалию в теле Аки. Может стать другом или врагом.', full: 'Новый учёный "Нового Эпсилона". Он пытается понять, как аномалия повлияла на Аки и почему он всё ещё жив. Он одержим наукой, как и Вейн, но более человечен. Его цель — спасти Аки, но он готов на жертвы.', tags: ['Учёный', 'Исследователь', 'Сезон 8'] },
             { id: 'voice', name: 'Голос', emoji: '🗣️', role: 'Сущность', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', color: '#9c27b0', glow: 'rgba(156,39,176,0.4)', group: 'main', short: 'Остаточная аномалия в голове Аки, обретшая сознание.', full: 'Таинственная сущность, которая появляется в голове Аки в 8-м сезоне. Это остаточная аномалия, которая обрела сознание после его воскрешения. Она говорит с Аки и пытается склонить его на свою сторону, обещая силу и правду.', tags: ['Аномалия', 'Голос в голове', 'Сезон 8'] },
+
             { id: 'zein', name: 'Зейн', emoji: '🕵️', role: 'Лидер Свидетелей', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', color: '#5865F2', glow: 'rgba(88,101,242,0.4)', group: 'witnesses', short: 'Бывший агент Эпсилона. Холодный, расчётливый. Врёт Аки.', full: 'Лидер «Свидетелей». Бывший агент Эпсилона. Холодный, расчётливый. Врёт Аки, используя его для своих целей. Считает, что Эпсилон создал монстров и скрывает правду. Готов избавиться от Аки, когда тот станет не нужен.', tags: ['Лидер', 'Свидетели', 'Предатель'] },
             { id: 'mira', name: 'Мира', emoji: '💉', role: 'Свидетель-медик', age: 'неизвестно', status: 'alive', statusText: '🟢 Жива', color: '#00bfa5', glow: 'rgba(0,191,165,0.4)', group: 'witnesses', short: 'Бывший медик. Добрая, но сломленная.', full: 'Бывший медик Эпсилона. Добрая, но сломленная. Одна из немногих Свидетелей, кто не давит на Аки. Говорит ему: «Правда — внутри тебя. Не снаружи».', tags: ['Свидетели', 'Медик', 'Добрая'] },
             { id: 'korv', name: 'Корв', emoji: '💻', role: 'Свидетель-техник', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', color: '#00e676', glow: 'rgba(0,230,118,0.4)', group: 'witnesses', short: 'Бывший техник. Гений. Параноик.', full: 'Бывший техник Эпсилона. Гений, параноик. Давит на Аки: «Правда не важна. Важно действие». В арке 14 Аки слышит, как Корв и Зейн обсуждают, что избавятся от него.', tags: ['Свидетели', 'Техник', 'Параноик'] },
