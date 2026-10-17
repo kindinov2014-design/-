@@ -39,8 +39,7 @@
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -2; pointer-events: none;
             background: radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--accent-glow), transparent 80%);
-            opacity: 0.4; 
-            transition: background 0.1s ease;
+            opacity: 0.4; transition: background 0.1s ease;
         }
         body.theme-light #bg-glow { opacity: 0.15; }
 
@@ -53,27 +52,27 @@
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
         body.theme-light .topbar { background-color: rgba(255, 255, 255, 0.85); }
-        
+
         .logo { font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: 1px; display: flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; user-select: none; }
         .logo span { color: var(--accent); font-size: 1.7rem; }
-        
+
         .topbar-nav { display: flex; gap: 5px; background: var(--border); padding: 6px 10px; border-radius: 30px; border: 1px solid var(--border); }
         .nav-btn { background: transparent; border: none; color: var(--text-muted); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; cursor: pointer; font-family: inherit; white-space: nowrap; }
         .nav-btn:hover { color: var(--text); background: var(--border-soft); }
         .nav-btn.active { background: var(--accent); color: #fff; }
-        
+
         .topbar-right { display: flex; align-items: center; gap: 10px; }
         .icon-btn { background: var(--border); border: 1px solid var(--border-soft); color: var(--text); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1rem; position: relative; display: inline-flex; align-items: center; justify-content: center; }
         .icon-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: scale(1.05); }
         .cart-btn { background: var(--accent); color: #fff; border: none; }
         .cart-btn:hover { background: var(--accent-hover); }
         .cart-count { position: absolute; top: -3px; right: -3px; background: #fff; color: var(--accent); font-size: 0.7rem; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        
+
         .user-btn { display: flex; align-items: center; gap: 8px; background: linear-gradient(145deg, #8b0000, var(--accent)); color: #fff; padding: 8px 16px; border-radius: 30px; border: none; cursor: pointer; font-weight: 700; font-size: 0.85rem; font-family: inherit; }
         .user-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px var(--accent-glow); }
         .user-btn .avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; overflow: hidden; }
         .user-btn .avatar img { width: 100%; height: 100%; object-fit: cover; }
-        
+
         .lang-btn { background: var(--border); border: 1px solid var(--border-soft); color: var(--text); padding: 8px 12px; border-radius: 30px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; min-width: 60px; }
         .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
 
@@ -96,11 +95,9 @@
         .btn-discord { background: var(--discord); color: #fff; }
         .btn-discord:hover { background: #4752C4; transform: translateY(-3px); }
 
-        /* ===== НОВОЕ: Кинотеатр ===== */
         .cinema-wrap { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; margin-bottom: 20px; border: 1px solid var(--border-soft); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .cinema-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* ===== НОВОЕ: Достижения ===== */
         .xp-container { background: var(--bg); border-radius: 10px; padding: 15px; margin-bottom: 20px; border: 1px solid var(--border-soft); }
         .xp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; }
         .xp-level { color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
@@ -341,7 +338,6 @@
         .char-modal-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 5px; }
         .char-tag { background: var(--bg); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 4px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
 
-        /* ===== НОВОЕ: Модалка Кинотеатра ===== */
         .cinema-modal { background: #000; border: 2px solid var(--accent); border-radius: 20px; padding: 20px; max-width: 1000px; width: 100%; position: relative; box-shadow: 0 0 50px rgba(255,51,51,0.2); }
         .cinema-modal .modal-close { color: #fff; z-index: 10; text-shadow: 0 0 5px #000; }
 
@@ -359,6 +355,15 @@
         .bottom-nav-item { flex: 1; background: transparent; border: none; color: var(--text-dim); font-family: inherit; font-size: 0.6rem; font-weight: 700; padding: 6px 2px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; }
         .bottom-nav-item .bn-icon { font-size: 1.2rem; }
         .bottom-nav-item.active { color: var(--accent); }
+
+        /* ===== КОРЗИНА ===== */
+        .cart-item { display: flex; align-items: center; gap: 12px; background: var(--bg); border: 1px solid var(--border-soft); border-radius: 12px; padding: 10px 14px; margin-bottom: 10px; animation: pageFade 0.2s ease; }
+        .cart-item-emoji { font-size: 1.8rem; flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--panel); border-radius: 10px; }
+        .cart-item-info { flex: 1; min-width: 0; }
+        .cart-item-name { color: var(--text); font-weight: 700; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .cart-item-qty { color: var(--text-dim); font-size: 0.75rem; margin-top: 2px; }
+        .cart-item-remove { background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 1rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: inherit; transition: all 0.2s ease; }
+        .cart-item-remove:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: scale(1.08); }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); } 20%, 40%, 60%, 80% { transform: translateX(5px); } }
         @keyframes flashFade { 0% { opacity: 1; } 100% { opacity: 0; } }
@@ -445,8 +450,7 @@
             .hero h1 { font-size: 1.7rem; } .card { flex: 0 0 84vw; } .logo { font-size: 0.95rem; }
         }
     </style>
-</head>
-<body>
+</head><body>
 
     <div id="bg-glow"></div>
 
@@ -544,7 +548,7 @@
             </div>
         </div>
 
-        <!-- ОБНОВЛЁННАЯ КАРТА -->
+        <!-- КАРТА -->
         <div class="map-section">
             <h2 class="map-title" data-i18n="map_title">🗺️ <span>КАРТА ЭПСИЛОНА</span></h2>
             <div class="map-container">
@@ -596,9 +600,9 @@
                             <stop offset="0%" stop-color="rgba(100,50,100,0.4)"/><stop offset="100%" stop-color="transparent"/>
                         </radialGradient>
                     </defs>
-                    
+
                     <rect width="900" height="700" fill="var(--bg)"/>
-                    
+
                     <circle cx="400" cy="350" r="200" fill="url(#baseGlow)"/>
                     <circle cx="180" cy="150" r="100" fill="url(#labGlow)"/>
                     <circle cx="650" cy="150" r="100" fill="url(#sectorGlow)"/>
@@ -607,7 +611,7 @@
                     <circle cx="750" cy="300" r="100" fill="url(#homeGlow)"/>
                     <circle cx="150" cy="300" r="100" fill="url(#campGlow)"/>
                     <circle cx="550" cy="200" r="100" fill="url(#ruinsGlow)"/>
-                    
+
                     <circle cx="100" cy="100" r="120" fill="url(#cryosGlow)"/>
                     <circle cx="750" cy="550" r="120" fill="url(#forestGlow)"/>
                     <circle cx="800" cy="100" r="100" fill="url(#cityGlow)"/>
@@ -622,7 +626,7 @@
                     <line x1="400" y1="350" x2="750" y2="300" class="map-line" stroke="var(--accent)" stroke-width="2" opacity="0.6"/>
                     <line x1="400" y1="350" x2="150" y2="300" class="map-line" stroke="var(--accent)" stroke-width="2" opacity="0.6"/>
                     <line x1="400" y1="350" x2="550" y2="200" class="map-line" stroke="var(--accent)" stroke-width="2" opacity="0.6"/>
-                    
+
                     <line x1="400" y1="350" x2="100" y2="100" class="map-line" stroke="#00bcd4" stroke-width="2" opacity="0.6"/>
                     <line x1="400" y1="350" x2="750" y2="550" class="map-line" stroke="#4caf50" stroke-width="2" opacity="0.6"/>
                     <line x1="400" y1="350" x2="800" y2="100" class="map-line" stroke="#9e9e9e" stroke-width="2" opacity="0.6"/>
@@ -638,7 +642,7 @@
                     <text x="750" y="240" font-size="40" text-anchor="middle" opacity="0.5">🏠</text>
                     <text x="150" y="240" font-size="40" text-anchor="middle" opacity="0.5">🔥</text>
                     <text x="550" y="140" font-size="40" text-anchor="middle" opacity="0.5">🏗️</text>
-                    
+
                     <text x="100" y="60" font-size="40" text-anchor="middle" opacity="0.5">❄️</text>
                     <text x="750" y="490" font-size="40" text-anchor="middle" opacity="0.5">🌲</text>
                     <text x="800" y="60" font-size="40" text-anchor="middle" opacity="0.5">🏙️</text>
@@ -807,9 +811,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- ============ CHARACTERS ============ -->
+    </div>    <!-- ============ CHARACTERS ============ -->
     <div class="page" id="page-characters">
         <div class="section-wrapper" style="margin-top: 40px;">
             <h2 class="section-title">🎭 <span>ПЕРСОНАЖИ</span></h2>
@@ -958,9 +960,7 @@
         <button class="bottom-nav-item" data-page="shop" onclick="showPage('shop')">
             <span class="bn-icon">🛒</span><span data-i18n="nav_shop">Магазин</span>
         </button>
-    </nav>
-
-    <!-- ===== MODALS ===== -->
+    </nav>    <!-- ===== MODALS ===== -->
     <div class="modal-overlay" id="authModal">
         <div class="modal">
             <button class="modal-close" onclick="closeAuth()">×</button>
@@ -1040,11 +1040,19 @@
         </div>
     </div>
 
+    <!-- НОВАЯ КОРЗИНА -->
     <div class="modal-overlay" id="cartModal">
-        <div class="modal">
+        <div class="modal" style="max-width: 500px;">
             <button class="modal-close" onclick="closeCart()">×</button>
             <h2 data-i18n="cart_title">🛒 Корзина</h2>
-            <p id="cartText" style="color:var(--text-muted); text-align:center; margin-bottom:20px;">Товаров в корзине: 0</p>
+            <div id="cartItemsList" style="max-height: 45vh; overflow-y: auto; margin-bottom: 20px;"></div>
+            <div id="cartEmptyMsg" style="color:var(--text-muted); text-align:center; padding: 30px 0; font-size: 0.95rem;">
+                Корзина пуста
+            </div>
+            <div id="cartTotalRow" style="display:none; justify-content:space-between; align-items:center; padding: 12px 0; border-top: 1px dashed var(--border-soft); margin-bottom: 15px; font-weight: 800;">
+                <span>Всего товаров:</span>
+                <span id="cartTotalCount" style="color: var(--accent);">0</span>
+            </div>
             <button class="modal-btn" onclick="closeCart()" data-i18n="cart_btn">Закрыть</button>
         </div>
     </div>
@@ -1065,19 +1073,19 @@
         </div>
     </div>
 
-    <!-- НОВОЕ: Окно профиля с Достижениями -->
+    <!-- ПРОФИЛЬ -->
     <div class="modal-overlay" id="profileModal">
         <div class="profile-modal">
             <button class="modal-close" onclick="closeProfile()">×</button>
             <h2 style="font-size:1.3rem; color:var(--text); margin-bottom:20px; text-align:center; letter-spacing:2px; text-transform:uppercase;">⚙️ Настройки профиля</h2>
-            
+
             <div class="profile-preview">
                 <div class="profile-avatar-large" id="profilePreviewAvatar">👤</div>
                 <div class="profile-preview-name" id="profilePreviewName">Ник</div>
                 <div class="profile-preview-badge" id="profilePreviewBadge">Агент Эпсилона</div>
             </div>
 
-            <!-- НОВОЕ: Полоска опыта -->
+            <!-- Полоска опыта -->
             <div class="xp-container">
                 <div class="xp-header">
                     <span>Уровень:</span>
@@ -1106,19 +1114,17 @@
         </div>
     </div>
 
-    <audio id="audioPlayer" style="display:none;"></audio>
-
-    <script>
+    <audio id="audioPlayer" style="display:none;"></audio>    <script>
         const TELEGRAM_CHANNEL = "https://t.me/The_MisterAki2";
 
         // ===== ОПТИМИЗАЦИЯ КУРСОРА =====
         let lastMouseX = 0, lastMouseY = 0, ticking = false;
         const bgGlow = document.getElementById('bg-glow');
-        
+
         window.addEventListener('mousemove', (e) => {
             lastMouseX = e.clientX;
             lastMouseY = e.clientY;
-            
+
             if (!ticking) {
                 window.requestAnimationFrame(() => {
                     bgGlow.style.setProperty('--mouse-x', `${lastMouseX}px`);
@@ -1129,7 +1135,7 @@
             }
         });
 
-        // ===== НОВОЕ: СИСТЕМА ДОСТИЖЕНИЙ (XP) =====
+        // ===== СИСТЕМА ДОСТИЖЕНИЙ (XP) =====
         const XP_LEVELS = [
             { xp: 0, name: 'Новобранец', name_en: 'Recruit' },
             { xp: 100, name: 'Агент', name_en: 'Agent' },
@@ -1149,11 +1155,10 @@
             if (!user) return;
             let xp = getUserXP() + amount;
             localStorage.setItem('aki_xp_' + user.nickname, xp);
-            
-            // Проверка на новый уровень
+
             const oldLevel = getLevelIndex(getUserXP() - amount);
             const newLevel = getLevelIndex(xp);
-            
+
             if (newLevel > oldLevel) {
                 showNotification(currentLang === 'ru' ? `🏆 Новый уровень: ${XP_LEVELS[newLevel].name}!` : `🏆 New level: ${XP_LEVELS[newLevel].name_en}!`, 'success');
             }
@@ -1170,34 +1175,38 @@
         function updateXPBar() {
             const user = getCurrentUser();
             const xpContainer = document.querySelector('.xp-container');
-            if (!user) { xpContainer.style.display = 'none'; return; }
-            xpContainer.style.display = 'block';
+            if (!user) { if (xpContainer) xpContainer.style.display = 'none'; return; }
+            if (xpContainer) xpContainer.style.display = 'block';
 
             const xp = getUserXP();
             const levelIndex = getLevelIndex(xp);
             const currentLevel = XP_LEVELS[levelIndex];
             const nextLevel = XP_LEVELS[levelIndex + 1] || { xp: currentLevel.xp + 1000 };
-            
+
             const levelName = currentLang === 'ru' ? currentLevel.name : currentLevel.name_en;
-            document.getElementById('xpLevelText').textContent = `Ур. ${levelIndex + 1} — ${levelName}`;
-            
+            const levelEl = document.getElementById('xpLevelText');
+            if (levelEl) levelEl.textContent = `Ур. ${levelIndex + 1} — ${levelName}`;
+
             const progress = ((xp - currentLevel.xp) / (nextLevel.xp - currentLevel.xp)) * 100;
-            document.getElementById('xpBarFill').style.width = `${Math.min(100, progress)}%`;
-            document.getElementById('xpText').textContent = `${xp} / ${nextLevel.xp} XP`;
+            const fillEl = document.getElementById('xpBarFill');
+            if (fillEl) fillEl.style.width = `${Math.min(100, progress)}%`;
+            const textEl = document.getElementById('xpText');
+            if (textEl) textEl.textContent = `${xp} / ${nextLevel.xp} XP`;
         }
 
         // ===== МИНИ-ИГРА =====
         let gameActive = false, gameScore = 0, gameTime = 40;
         let currentCombo = 1;
         let spawnTimeout = null, comboTimer = null, gameTimerInterval = null;
-        
+
         const gameArea = document.getElementById('gameArea');
         const gameOverlay = document.getElementById('gameOverlay');
         const gameComboEl = document.getElementById('gameCombo');
 
         function updateGameRecord() {
             const record = localStorage.getItem('aki_game_record') || 0;
-            document.getElementById('gameRecord').textContent = record;
+            const el = document.getElementById('gameRecord');
+            if (el) el.textContent = record;
         }
 
         function startGame() {
@@ -1228,7 +1237,7 @@
                 const rand = Math.random();
                 let points = 1;
                 let timeToLive = 1500;
-                
+
                 if (rand > 0.85) {
                     target.classList.add('boss');
                     target.textContent = '👹';
@@ -1247,19 +1256,19 @@
                 const maxY = gameArea.clientHeight - 50;
                 target.style.left = Math.max(0, Math.random() * maxX) + 'px';
                 target.style.top = Math.max(0, Math.random() * maxY) + 'px';
-                
+
                 target.onclick = (e) => {
                     e.stopPropagation();
                     if (!gameActive) return;
                     if (comboTimer) clearTimeout(comboTimer);
                     gameScore += points * currentCombo;
                     document.getElementById('gameScore').textContent = gameScore;
-                    
+
                     if (currentCombo > 1) {
                         gameComboEl.classList.add('active');
                         gameComboEl.textContent = `КОМБО x${currentCombo}`;
                     }
-                    
+
                     currentCombo++;
                     comboTimer = setTimeout(() => {
                         currentCombo = 1;
@@ -1287,15 +1296,14 @@
             if (gameTimerInterval) clearInterval(gameTimerInterval);
             if (spawnTimeout) clearTimeout(spawnTimeout);
             if (comboTimer) clearTimeout(comboTimer);
-            
+
             gameArea.querySelectorAll('.game-target').forEach(t => t.remove());
             gameArea.querySelectorAll('.splatter').forEach(s => s.remove());
-            
+
             const record = parseInt(localStorage.getItem('aki_game_record') || 0);
             if (gameScore > record) localStorage.setItem('aki_game_record', gameScore);
             updateGameRecord();
-            
-            // ДОБАВЛЯЕМ XP ЗА ИГРУ
+
             addXP(Math.floor(gameScore / 2));
 
             gameOverlay.style.display = 'flex';
@@ -1481,6 +1489,7 @@
 
         function renderSeasons() {
             const wrapper = document.getElementById('seasonsAccordion');
+            if (!wrapper) return;
             wrapper.innerHTML = '';
             SEASONS.forEach(season => {
                 const eps = EPISODES.filter(e => e.season === season.number);
@@ -1577,7 +1586,7 @@
             const inWatchlist = user && getWatchlist().includes(ep.id);
             const title = currentLang === 'ru' ? ep.title : ep.title_en;
             const sub = currentLang === 'ru' ? ep.sub : ep.sub_en;
-            
+
             card.innerHTML = `
                 <button class="card-add ${inWatchlist ? 'added' : ''}" data-ep="${ep.id}">${inWatchlist ? '✓' : '+'}</button>
                 <div class="card-image">${ep.emoji}</div>
@@ -1606,19 +1615,23 @@
             const season6Grid = document.getElementById('season6Grid');
             const season7Grid = document.getElementById('season7Grid');
             const season8Grid = document.getElementById('season8Grid');
-            
-            allGrid.innerHTML = ''; akiGrid.innerHTML = ''; epsilonGrid.innerHTML = '';
-            chroniclesGrid.innerHTML = ''; season6Grid.innerHTML = '';
-            season7Grid.innerHTML = ''; season8Grid.innerHTML = '';
+
+            if (allGrid) allGrid.innerHTML = '';
+            if (akiGrid) akiGrid.innerHTML = '';
+            if (epsilonGrid) epsilonGrid.innerHTML = '';
+            if (chroniclesGrid) chroniclesGrid.innerHTML = '';
+            if (season6Grid) season6Grid.innerHTML = '';
+            if (season7Grid) season7Grid.innerHTML = '';
+            if (season8Grid) season8Grid.innerHTML = '';
 
             EPISODES.forEach(ep => {
-                renderEpisodeCard(ep, allGrid);
-                if (ep.showcase === 'aki') renderEpisodeCard(ep, akiGrid);
-                if (ep.showcase === 'epsilon') renderEpisodeCard(ep, epsilonGrid);
-                if (ep.showcase === 'chronicles') renderEpisodeCard(ep, chroniclesGrid);
-                if (ep.season === 6) renderEpisodeCard(ep, season6Grid);
-                if (ep.season === 7) renderEpisodeCard(ep, season7Grid);
-                if (ep.season === 8) renderEpisodeCard(ep, season8Grid);
+                if (allGrid) renderEpisodeCard(ep, allGrid);
+                if (ep.showcase === 'aki' && akiGrid) renderEpisodeCard(ep, akiGrid);
+                if (ep.showcase === 'epsilon' && epsilonGrid) renderEpisodeCard(ep, epsilonGrid);
+                if (ep.showcase === 'chronicles' && chroniclesGrid) renderEpisodeCard(ep, chroniclesGrid);
+                if (ep.season === 6 && season6Grid) renderEpisodeCard(ep, season6Grid);
+                if (ep.season === 7 && season7Grid) renderEpisodeCard(ep, season7Grid);
+                if (ep.season === 8 && season8Grid) renderEpisodeCard(ep, season8Grid);
             });
         }
 
@@ -1626,6 +1639,7 @@
             const user = getCurrentUser();
             const continueSection = document.getElementById('continueSection');
             const grid = document.getElementById('continueGrid');
+            if (!continueSection || !grid) return;
             if (!user) { continueSection.style.display = 'none'; return; }
             const last = localStorage.getItem('aki_last_watched_' + user.nickname);
             if (!last) { continueSection.style.display = 'none'; return; }
@@ -1664,7 +1678,7 @@
                 btn.classList.add('added');
                 btn.textContent = '✓';
                 showNotification(currentLang === 'ru' ? 'Добавлено в список' : 'Added to list', 'success');
-                addXP(10); // XP за добавление в список
+                addXP(10);
             }
             saveWatchlist(list);
             renderWatchlist();
@@ -1674,6 +1688,7 @@
             const user = getCurrentUser();
             const section = document.getElementById('watchlistSection');
             const grid = document.getElementById('watchlistGrid');
+            if (!section || !grid) return;
             if (!user) { section.style.display = 'none'; return; }
             const list = getWatchlist();
             if (list.length === 0) { section.style.display = 'none'; return; }
@@ -1694,6 +1709,7 @@
 
         function renderShop() {
             const grid = document.getElementById('shopGrid');
+            if (!grid) return;
             grid.innerHTML = '';
             PRODUCTS.forEach(product => {
                 let priceHTML = '';
@@ -1714,9 +1730,9 @@
                 const buyBtn = item.querySelector('.shop-buy');
                 buyBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    buyItem(pName, !!product.free);
+                    buyItem(pName, !!product.free, product);
                 });
-                item.addEventListener('click', () => buyItem(pName, !!product.free));
+                item.addEventListener('click', () => buyItem(pName, !!product.free, product));
                 grid.appendChild(item);
             });
         }
@@ -1822,7 +1838,8 @@
 
         function showPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-' + page).classList.add('active');
+            const targetPage = document.getElementById('page-' + page);
+            if (targetPage) targetPage.classList.add('active');
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             const navBtns = document.querySelectorAll('.nav-btn');
             const pageMap = { home: 0, characters: 1, lore: 2, shop: 3, seasons: 4, music: 5, coop: 6, about: 7 };
@@ -1847,7 +1864,7 @@
         function doSearch() {
             const query = document.getElementById('searchInput').value.trim().toLowerCase();
             if (query) {
-                const found = EPISODES.filter(ep => 
+                const found = EPISODES.filter(ep =>
                     (currentLang === 'ru' ? ep.title : ep.title_en).toLowerCase().includes(query)
                 );
                 if (found.length > 0) {
@@ -1859,36 +1876,113 @@
             }
         }
 
-        function openCart() {
-            const count = getCartCount();
+        // ===== КОРЗИНА (НОВАЯ) =====
+        function getCart() {
             const user = getCurrentUser();
-            let text = currentLang === 'ru'
-                ? (user ? `Товаров в корзине: ${count}` : 'Войди, чтобы увидеть корзину')
-                : (user ? `Items in cart: ${count}` : 'Login to see your cart');
-            document.getElementById('cartText').textContent = text;
-            document.getElementById('cartModal').classList.add('active');
+            if (!user) return [];
+            const raw = localStorage.getItem('aki_cart_items_' + user.nickname);
+            return raw ? JSON.parse(raw) : [];
         }
-        function closeCart() { document.getElementById('cartModal').classList.remove('active'); }
-
-        function buyItem(name, isFree) {
+        function saveCart(cart) {
+            const user = getCurrentUser();
+            if (!user) return;
+            localStorage.setItem('aki_cart_items_' + user.nickname, JSON.stringify(cart));
+            updateCartCount();
+        }
+        function getCartCount() {
+            return getCart().reduce((sum, item) => sum + item.qty, 0);
+        }
+        function updateCartCount() {
+            const el = document.getElementById('cartCount');
+            if (el) el.textContent = getCartCount();
+        }
+        function addToCart(product) {
             const user = getCurrentUser();
             if (!user) {
                 document.getElementById('authRequiredModal').classList.add('active');
                 return;
             }
-            if (isFree) {
-                setCartCount(getCartCount() + 1);
-                showNotification(
-                    (currentLang === 'ru' ? 'Бесплатно добавлено: ' : 'Added for free: ') + name,
-                    'success'
-                );
-                addXP(5); // XP за покупку
+            const cart = getCart();
+            const existing = cart.find(i => i.id === product.id);
+            if (existing) existing.qty += 1;
+            else cart.push({
+                id: product.id,
+                name: product.name,
+                name_en: product.name_en,
+                emoji: product.emoji,
+                qty: 1
+            });
+            saveCart(cart);
+        }
+        function removeFromCart(productId) {
+            let cart = getCart();
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+            if (item.qty > 1) item.qty -= 1;
+            else cart = cart.filter(i => i.id !== productId);
+            saveCart(cart);
+            renderCartModal();
+        }
+        function openCart() {
+            const user = getCurrentUser();
+            if (!user) {
+                document.getElementById('authRequiredModal').classList.add('active');
+                return;
+            }
+            renderCartModal();
+            document.getElementById('cartModal').classList.add('active');
+        }
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('active');
+        }
+        function renderCartModal() {
+            const list = document.getElementById('cartItemsList');
+            const empty = document.getElementById('cartEmptyMsg');
+            const totalRow = document.getElementById('cartTotalRow');
+            const totalCount = document.getElementById('cartTotalCount');
+            if (!list || !empty || !totalRow || !totalCount) return;
+            const cart = getCart();
+
+            list.innerHTML = '';
+            if (cart.length === 0) {
+                empty.style.display = 'block';
+                totalRow.style.display = 'none';
+                return;
+            }
+            empty.style.display = 'none';
+            totalRow.style.display = 'flex';
+
+            cart.forEach(item => {
+                const name = currentLang === 'ru' ? item.name : item.name_en;
+                const row = document.createElement('div');
+                row.className = 'cart-item';
+                row.innerHTML = `
+                    <div class="cart-item-emoji">${item.emoji}</div>
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${name}</div>
+                        <div class="cart-item-qty">${currentLang === 'ru' ? 'Количество' : 'Qty'}: ${item.qty}</div>
+                    </div>
+                    <button class="cart-item-remove" title="${currentLang === 'ru' ? 'Удалить' : 'Remove'}">🗑</button>
+                `;
+                row.querySelector('.cart-item-remove').addEventListener('click', () => removeFromCart(item.id));
+                list.appendChild(row);
+            });
+            totalCount.textContent = getCartCount();
+        }
+
+        function buyItem(name, isFree, product = null) {
+            const user = getCurrentUser();
+            if (!user) {
+                document.getElementById('authRequiredModal').classList.add('active');
+                return;
+            }
+            if (isFree && product) {
+                addToCart(product);
+                showNotification((currentLang === 'ru' ? 'Добавлено в корзину: ' : 'Added to cart: ') + name, 'success');
+                addXP(5);
             } else {
                 window.open(TELEGRAM_CHANNEL, '_blank');
-                showNotification(
-                    (currentLang === 'ru' ? 'Открываем Telegram: ' : 'Opening Telegram: ') + name,
-                    'success'
-                );
+                showNotification((currentLang === 'ru' ? 'Открываем Telegram: ' : 'Opening Telegram: ') + name, 'success');
             }
         }
 
@@ -1916,7 +2010,7 @@
 
         function sendCoop() {
             showNotification(currentLang === 'ru' ? 'Сообщение отправлено!' : 'Message sent!', 'success');
-            addXP(15); // XP за обратную связь
+            addXP(15);
         }
 
         function openEpisode(sub, title) {
@@ -1924,7 +2018,7 @@
             if (user) {
                 const ep = EPISODES.find(e => (currentLang === 'ru' ? e.sub : e.sub_en) === sub);
                 if (ep) localStorage.setItem('aki_last_watched_' + user.nickname, ep.id);
-                addXP(20); // XP за просмотр
+                addXP(20);
             }
             document.getElementById('episodeTitle').textContent = title;
             document.getElementById('episodeInfo').textContent = sub + (currentLang === 'ru' ? ' — в разработке' : ' — in development');
@@ -1943,18 +2037,6 @@
             if (!user) return;
             localStorage.setItem('aki_used_promos_' + user.nickname, JSON.stringify(promos));
         }
-        function getCartCount() {
-            const user = getCurrentUser();
-            if (!user) return 0;
-            const count = localStorage.getItem('aki_cart_' + user.nickname);
-            return count ? parseInt(count) : 0;
-        }
-        function setCartCount(count) {
-            const user = getCurrentUser();
-            if (!user) return;
-            localStorage.setItem('aki_cart_' + user.nickname, count);
-            document.getElementById('cartCount').textContent = count;
-        }
         function applyPromo() {
             const input = document.getElementById('promoInput');
             const code = input.value.trim().toUpperCase();
@@ -1968,7 +2050,18 @@
             if (!promo) { showNotification(t.promo_error, 'error'); return; }
             if (promo.reward.startsWith('cart+')) {
                 const amount = parseInt(promo.reward.replace('cart+', ''));
-                setCartCount(getCartCount() + amount);
+                const bonusProduct = PRODUCTS.find(p => p.free) || PRODUCTS[0];
+                const cart = getCart();
+                const existing = cart.find(i => i.id === bonusProduct.id);
+                if (existing) existing.qty += amount;
+                else cart.push({
+                    id: bonusProduct.id,
+                    name: bonusProduct.name,
+                    name_en: bonusProduct.name_en,
+                    emoji: bonusProduct.emoji,
+                    qty: amount
+                });
+                saveCart(cart);
             } else if (promo.reward === 'vip') {
                 localStorage.setItem('aki_vip_' + user.nickname, 'true');
             }
@@ -1977,7 +2070,7 @@
             document.getElementById('promoReward').textContent = promo.message;
             document.getElementById('promoModal').classList.add('active');
             input.value = '';
-            addXP(50); // Много XP за промокод
+            addXP(50);
         }
         function closePromoModal() { document.getElementById('promoModal').classList.remove('active'); }
         function closeAuthRequired() { document.getElementById('authRequiredModal').classList.remove('active'); }
@@ -2171,7 +2264,7 @@
                         <span class="name" id="userNameWrap">${user.nickname}</span>
                     </button>
                 `;
-                document.getElementById('cartCount').textContent = getCartCount();
+                updateCartCount();
                 applyUserCustomization();
                 updateXPBar();
             } else {
@@ -2249,8 +2342,8 @@
                 previewAvatar.textContent = genderIcon;
             }
             document.getElementById('profilePreviewName').textContent = user.nickname;
-            
-            updateXPBar(); // Обновляем полоску при открытии
+
+            updateXPBar();
 
             const colorOpts = document.getElementById('colorOptions');
             colorOpts.innerHTML = '';
@@ -2392,20 +2485,7 @@
                 closeSearch(); closeCart(); closeEpisode(); closeCharModal(); closeProfile();
             }
             if (e.key === 'Enter' && document.activeElement.id === 'promoInput') applyPromo();
-        });
-
-        // ===== ИНИЦИАЛИЗАЦИЯ =====
-        loadTheme();
-        startTimer();
-        updateUserArea();
-        applyLang();
-        renderAllEpisodes();
-        renderContinue();
-        renderWatchlist();
-        renderShop();
-        renderSeasons();
-        updateGameRecord();
-
+        });        // ===== ПЕРСОНАЖИ =====
         const CHARACTERS = [
             { id: 'aki', name: 'Аки', name_en: 'Aki', emoji: '🎭', role: 'Главный герой', role_en: 'Main Character', age: '19 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#ff3333', group: 'main', short: 'Обычный человек. Без силы. С реверсом и опытом.', short_en: 'A regular human. No powers. With a reverse and experience.', full: 'Любопытный, упрямый, но боится показывать слабость. Цель — выжить и узнать правду об аномалиях. Всегда проверяет реверс перед миссией (кроме рокового дня). Обычный человек, как половина Эпсилона. У него нет силы — только опыт и реверс.', full_en: 'Curious, stubborn, but afraid to show weakness. Goal — to survive and learn the truth about anomalies. Always checks the reverse before a mission (except for the fateful day). An ordinary human, like half of Epsilon. He has no power — only experience and the reverse.', tags: ['Главный герой', 'Агент Эпсилона', 'Реверс'], tags_en: ['Main Character', 'Epsilon Agent', 'Reverse'] },
             { id: 'alice', name: 'Алиса', name_en: 'Alice', emoji: '🕶️', role: 'Глава Эпсилона', role_en: 'Epsilon Head', age: '35 лет', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#b388ff', group: 'epsilon', short: 'Холодная, расчётливая, но справедливая. Знает больше, чем говорит.', short_en: 'Cold, calculating, but fair. Knows more than she says.', full: 'Глава Эпсилона. Холодная, расчётливая, но справедливая. Знает больше об аномалиях, чем говорит. Цель — использовать Аки для своих планов. Боится потерять своих агентов, как потеряла других.', full_en: 'Head of Epsilon. Cold, calculating, but fair. Knows more about anomalies than she says. Goal — to use Aki for her plans. Afraid of losing her agents, like she lost others.', tags: ['Глава', 'Совет', 'Тайна'], tags_en: ['Head', 'Council', 'Secret'] },
@@ -2437,6 +2517,7 @@
 
         function renderCharacters() {
             const grid = document.getElementById('charGrid');
+            if (!grid) return;
             grid.innerHTML = '';
             const filtered = CHARACTERS.filter(c => currentCharFilter === 'all' || c.group === currentCharFilter);
             filtered.forEach(char => {
@@ -2447,7 +2528,7 @@
                 const role = currentLang === 'ru' ? char.role : char.role_en;
                 const desc = currentLang === 'ru' ? char.short : char.short_en;
                 const status = currentLang === 'ru' ? char.statusText : char.statusText_en;
-                
+
                 card.innerHTML = `
                     <div class="char-avatar">${char.emoji}</div>
                     <div class="char-name">${name}</div>
@@ -2469,14 +2550,15 @@
             const modal = document.getElementById('charModal');
             const content = document.getElementById('charModalContent');
             const body = document.getElementById('charModalBody');
+            if (!modal || !content || !body) return;
             content.style.setProperty('--char-color', char.color);
-            
+
             const name = currentLang === 'ru' ? char.name : char.name_en;
             const role = currentLang === 'ru' ? char.role : char.role_en;
             const status = currentLang === 'ru' ? char.statusText : char.statusText_en;
             const full = currentLang === 'ru' ? char.full : char.full_en;
             const tags = currentLang === 'ru' ? char.tags : char.tags_en;
-            
+
             body.innerHTML = `
                 <div class="char-modal-header">
                     <div class="char-modal-avatar">${char.emoji}</div>
@@ -2493,15 +2575,16 @@
         }
         function closeCharModal() { document.getElementById('charModal').classList.remove('active'); }
 
+        // ===== ЛОР =====
         const LORE_SECTIONS = [
             { icon: '🌍', title: 'Мир', title_en: 'World', body: `
                 <p><strong>Аномалии</strong> — зоны, где реальность искажена. В этих зонах появляются <strong>монстры</strong> — мутировавшие существа. Причина аномалий неизвестна. Но Эпсилон знает больше, чем говорит.</p>
                 <p><strong>Монстры</strong> — существа из аномальных зон. Разные: быстрые, сильные, умные. Их нельзя вылечить. Их можно только убить.</p>
-                <p><strong>Реверс</strong> — оружие, созданное Эпсилоном. Работает от себя и может работать вечно. Эффективен против монстров. Может использовать любой, кто умеет.</p>`, 
+                <p><strong>Реверс</strong> — оружие, созданное Эпсилоном. Работает от себя и может работать вечно. Эффективен против монстров. Может использовать любой, кто умеет.</p>`,
               body_en: `
                 <p><strong>Anomalies</strong> — zones where reality is distorted. In these zones, <strong>monsters</strong> appear — mutated creatures. The cause of anomalies is unknown. But Epsilon knows more than it says.</p>
                 <p><strong>Monsters</strong> — creatures from anomalous zones. Different: fast, strong, smart. They cannot be cured. They can only be killed.</p>
-                <p><strong>Reverse</strong> — a weapon created by Epsilon. It works on its own and can work forever. Effective against monsters. Anyone who knows how can use it.</p>` 
+                <p><strong>Reverse</strong> — a weapon created by Epsilon. It works on its own and can work forever. Effective against monsters. Anyone who knows how can use it.</p>`
             },
             { icon: '🕶️', title: 'Организация Эпсилон', title_en: 'Epsilon Organization', body: `
                 <p><strong>Эпсилон</strong> — тайная организация, основанная <strong>30 лет назад</strong>. Её цель — спасать мир от монстров и аномалий. Тайно. Жёстко. Без благодарности. О ней никто не знает, кроме агентов.</p>
@@ -2517,7 +2600,7 @@
                     <li><strong>Учёные</strong> — 10–15 человек. Вейн и его команда.</li>
                     <li><strong>«Тени»</strong> — 5–10 человек. Стирают память.</li>
                     <li><strong>Техники</strong> — 10–15 человек. Чипы, реверсы, системы.</li>
-                </ul>`, 
+                </ul>`,
               body_en: `
                 <p><strong>Epsilon</strong> — a secret organization founded <strong>30 years ago</strong>. Its goal is to save the world from monsters and anomalies. Secretly. Harshly. Without gratitude. No one knows about it except the agents.</p>
                 <p><strong>Uniform:</strong> black jacket (optional to take off on a mission), white shirt, black tie, black pants, white shoes.</p>
@@ -2532,16 +2615,16 @@
                     <li><strong>Scientists</strong> — 10–15 people. Wayne and his team.</li>
                     <li><strong>"Shadows"</strong> — 5–10 people. Erase memory.</li>
                     <li><strong>Technicians</strong> — 10–15 people. Chips, reverses, systems.</li>
-                </ul>` 
+                </ul>`
             },
             { icon: '👁️', title: 'Что такое «Омега»?', title_en: 'What is "Omega"?', body: `
                 <p><strong>«Омега»</strong> — это тайная группировка, которая знает правду об Эпсилоне. Они не просто враги, они — другая сторона конфликта. Они люди в чёрной броне с красным символом.</p>
                 <p>В 3-м сезоне они похищают Алису, чтобы «поговорить». Именно они раскрывают Аки правду о том, что <strong>Эпсилон сам создал аномалии и монстров</strong> в результате экспериментов.</p>
-                <p>Их лидер — <strong>Зейн</strong>, бывший агент Эпсилона.</p>`, 
+                <p>Их лидер — <strong>Зейн</strong>, бывший агент Эпсилона.</p>`,
               body_en: `
                 <p><strong>"Omega"</strong> — a secret group that knows the truth about Epsilon. They are not just enemies; they are the other side of the conflict. They are people in black armor with a red symbol.</p>
                 <p>In season 3, they kidnap Alice to "talk". It is they who reveal to Aki the truth that <strong>Epsilon itself created the anomalies and monsters</strong> as a result of experiments.</p>
-                <p>Their leader is <strong>Zane</strong>, a former Epsilon agent.</p>` 
+                <p>Their leader is <strong>Zane</strong>, a former Epsilon agent.</p>`
             },
             { icon: '🕰️', title: 'Хронология событий', title_en: 'Timeline of Events', body: `
                 <ul>
@@ -2555,7 +2638,7 @@
                     <li><strong>Сезон 6:</strong> Финал. Совет, Анастасия, Кронос. Аки уничтожает чип и становится свободным.</li>
                     <li><strong>Сезон 7:</strong> После падения Эпсилона появляется Синдикат. Аки встречает Иерихона.</li>
                     <li><strong>Сезон 8:</strong> Новый Эпсилон. Маньяк Психотерапевт. Агент Ноль. Голоса в голове.</li>
-                </ul>`, 
+                </ul>`,
               body_en: `
                 <ul>
                     <li><strong>5 years before start:</strong> Epsilon founded. Anomaly research begins.</li>
@@ -2568,7 +2651,7 @@
                     <li><strong>Season 6:</strong> Finale. Council, Anastasia, Kronos. Aki destroys the chip and becomes free.</li>
                     <li><strong>Season 7:</strong> After the fall of Epsilon, the Syndicate appears. Aki meets Jericho.</li>
                     <li><strong>Season 8:</strong> New Epsilon. Maniac Therapist. Agent Zero. Voices in the head.</li>
-                </ul>` 
+                </ul>`
             },
             { icon: '👥', title: 'Кто такие «Свидетели»?', title_en: 'Who are the "Witnesses"?', body: `
                 <p><strong>«Свидетели»</strong> — это бывшие агенты Эпсилона, которые узнали правду о том, что организация создала монстров, и ушли. Они не убивают — они свидетельствуют. Но у них своя правда, и они используют Аки в своих целях.</p>
@@ -2579,7 +2662,7 @@
                     <li><strong>Корв</strong> — бывший техник. Гений-параноик.</li>
                     <li><strong>Тень</strong> — бывший «стиратель» памяти.</li>
                     <li><strong>Вейн</strong> — бывший учёный. Раскаялся, но всё ещё врёт.</li>
-                </ul>`, 
+                </ul>`,
               body_en: `
                 <p><strong>"Witnesses"</strong> — former Epsilon agents who learned the truth that the organization created monsters and left. They don't kill — they witness. But they have their own truth, and they use Aki for their purposes.</p>
                 <p><strong>Composition:</strong></p>
@@ -2589,7 +2672,7 @@
                     <li><strong>Korv</strong> — former technician. Genius-paranoid.</li>
                     <li><strong>Shadow</strong> — former memory "eraser".</li>
                     <li><strong>Wayne</strong> — former scientist. Repented, but still lies.</li>
-                </ul>` 
+                </ul>`
             },
             { icon: '🩸', title: 'Сезон 1: «Аномалия»', title_en: 'Season 1: "Anomaly"', body: `
                 <ul>
@@ -2598,7 +2681,7 @@
                     <li><strong>Арка 3 «Смерть и воскрешение»:</strong> Забытый реверс, смерть, рога, лаборатория Вейна.</li>
                     <li><strong>Арка 4 «Конфликт»:</strong> Рен, правда об аномалии.</li>
                     <li><strong>Арка 5 «Потеря силы»:</strong> Повторная смерть, аномалия ушла, новая сила.</li>
-                </ul>`, 
+                </ul>`,
               body_en: `
                 <ul>
                     <li><strong>Arc 1 "Anomaly":</strong> Abandoned place, rift, infection.</li>
@@ -2606,18 +2689,18 @@
                     <li><strong>Arc 3 "Death and Resurrection":</strong> Forgotten reverse, death, horns, Wayne's lab.</li>
                     <li><strong>Arc 4 "Conflict":</strong> Ren, the truth about the anomaly.</li>
                     <li><strong>Arc 5 "Loss of Power":</strong> Second death, anomaly leaves, new power.</li>
-                </ul>` 
+                </ul>`
             },
             { icon: '🌙', title: 'Сезон 2: «Тишина»', title_en: 'Season 2: "Silence"', body: `
                 <ul>
                     <li><strong>Арка 6 «Печать»:</strong> Вирус «Эхо» стирает личности. Аки создаёт печати.</li>
                     <li><strong>Арка 7 «Тишина перед бурей»:</strong> Приказ Алисы об отдыхе, дом Аки, вечер у костра, красная луна, записка кровью.</li>
-                </ul>`, 
+                </ul>`,
               body_en: `
                 <ul>
                     <li><strong>Arc 6 "Seal":</strong> The "Echo" virus erases personalities. Aki creates seals.</li>
                     <li><strong>Arc 7 "Calm Before the Storm":</strong> Alice's order to rest, Aki's house, evening by the campfire, red moon, note in blood.</li>
-                </ul>` 
+                </ul>`
             },
             { icon: '🕳️', title: 'Сезон 3: «Без силы»', title_en: 'Season 3: "Without Power"', body: `
                 <ul>
@@ -2625,14 +2708,14 @@
                     <li><strong>Арка 9 «Поиски»:</strong> Разрушенный штаб, встреча с Лирой.</li>
                     <li><strong>Арка 10 «Поиски (продолжение)»:</strong> Координаты «Сектор 7», встреча с Зейном.</li>
                     <li><strong>Арка 11 «Разговор»:</strong> Зейн раскрывает правду: Эпсилон создал монстров.</li>
-                </ul>`, 
+                </ul>`,
               body_en: `
                 <ul>
                     <li><strong>Arc 8 "Void":</strong> Awakening in "Omega" captivity, escape without power.</li>
                     <li><strong>Arc 9 "Search":</strong> Destroyed HQ, meeting Lira.</li>
                     <li><strong>Arc 10 "Search (Cont.)":</strong> Coordinates "Sector 7", meeting Zane.</li>
                     <li><strong>Arc 11 "Conversation":</strong> Zane reveals the truth: Epsilon created monsters.</li>
-                </ul>` 
+                </ul>`
             },
             { icon: '❓', title: 'Сезон 4: «Свидетели»', title_en: 'Season 4: "Witnesses"', body: `
                 <ul>
@@ -2640,14 +2723,14 @@
                     <li><strong>Арка 13 «Давление»:</strong> Эпсилон ищет Аки, Корв давит, Мира поддерживает.</li>
                     <li><strong>Арка 14 «Один»:</strong> Аки находит документы «Проект Эхо».</li>
                     <li><strong>Арка 15 «Попытка»:</strong> Бой с Реном, Алиса убегает, Аки выживает.</li>
-                </ul>`, 
+                </ul>`,
               body_en: `
                 <ul>
                     <li><strong>Arc 12 "Doubt":</strong> Meeting the Witnesses, conversation with Wayne.</li>
                     <li><strong>Arc 13 "Pressure":</strong> Epsilon searches for Aki, Korv pressures, Mira supports.</li>
                     <li><strong>Arc 14 "Alone":</strong> Aki finds "Project Echo" documents.</li>
                     <li><strong>Arc 15 "Attempt":</strong> Fight with Ren, Alice escapes, Aki survives.</li>
-                </ul>` 
+                </ul>`
             },
             { icon: '🌅', title: 'Сезон 6: «Новая эра»', title_en: 'Season 6: "New Era"', body: `
                 <p><strong>Главная идея:</strong> Финал истории. Война закончена. Эпсилон больше не будет прежним. Аки должен решить, каким будет мир после.</p>
@@ -2657,7 +2740,7 @@
                     <li><strong>Арка 23 «Осада Омеги»:</strong> База Свидетелей атакована. Анастасия (лидер Омеги) выходит из тени. Аки приходится выбирать сторону.</li>
                     <li><strong>Арка 24 «Кронос»:</strong> Аки встречает Кроноса — мутанта с разумом человека. Тот помогает ему проникнуть в самое сердце Эпсилона.</li>
                     <li><strong>Арка 25 «Новая эра»:</strong> Финальная битва. Совет падает. Аки уничтожает чип в своей шее и становится свободным. Мир меняется навсегда.</li>
-                </ul>`, 
+                </ul>`,
               body_en: `
                 <p><strong>Main idea:</strong> The finale of the story. The war is over. Epsilon will never be the same. Aki must decide what the world will be like after.</p>
                 <ul>
@@ -2666,7 +2749,7 @@
                     <li><strong>Arc 23 "Siege of Omega":</strong> The Witnesses' base is attacked. Anastasia (Omega leader) emerges from the shadows. Aki has to choose a side.</li>
                     <li><strong>Arc 24 "Kronos":</strong> Aki meets Kronos — a mutant with a human mind. He helps him penetrate the very heart of Epsilon.</li>
                     <li><strong>Arc 25 "New Era":</strong> Final battle. The Council falls. Aki destroys the chip in his neck and becomes free. The world changes forever.</li>
-                </ul>` 
+                </ul>`
             },
             { icon: '🏚️', title: 'Сезон 7: «Эхо прошлого»', title_en: 'Season 7: "Echo of the Past"', body: `
                 <p><strong>Главная идея:</strong> После падения Эпсилона Аки пытается жить обычной жизнью, но прошлое не отпускает. Появляется новая угроза — «Синдикат».</p>
@@ -2676,7 +2759,7 @@
                     <li><strong>Арка 28 «Иерихон»:</strong> Аки встречает Иерихона — идеального агента, созданного из его ДНК.</li>
                     <li><strong>Арка 29 «Хакер»:</strong> Аки объединяется с Джесс, чтобы взломать систему Синдиката.</li>
                     <li><strong>Арка 30 «Новый Эпсилон»:</strong> Аки создаёт новый Эпсилон — без чипов и лжи. Финал.</li>
-                </ul>`, 
+                </ul>`,
               body_en: `
                 <p><strong>Main idea:</strong> After the fall of Epsilon, Aki tries to live a normal life, but the past doesn't let go. A new threat appears — the "Syndicate".</p>
                 <ul>
@@ -2685,7 +2768,7 @@
                     <li><strong>Arc 28 "Jericho":</strong> Aki meets Jericho — a perfect agent created from his DNA.</li>
                     <li><strong>Arc 29 "Hacker":</strong> Aki teams up with Jess to hack the Syndicate's system.</li>
                     <li><strong>Arc 30 "New Epsilon":</strong> Aki creates a new Epsilon — without chips and lies. Finale.</li>
-                </ul>` 
+                </ul>`
             },
             { icon: '🪞', title: 'Сезон 8: «Тёмное отражение»', title_en: 'Season 8: "Dark Reflection"', body: `
                 <p><strong>Главная идея:</strong> Аки создал новый Эпсилон, но даже без чипов организация может стать монстром. Появляется маньяк, который хочет "вылечить" Аки от героизма.</p>
@@ -2695,7 +2778,7 @@
                     <li><strong>Арка 33 «Голоса»:</strong> Аки начинает слышать голос аномалии в своей голове. Лира пытается его спасти.</li>
                     <li><strong>Арка 34 «Близнецы»:</strong> Появляются Агент Ноль и Вера — брат и сестра с разными способностями.</li>
                     <li><strong>Арка 35 «Финальная жертва»:</strong> Аки приходится выбирать между спасением мира и спасением себя. Кто-то из команды погибает.</li>
-                </ul>`, 
+                </ul>`,
               body_en: `
                 <p><strong>Main idea:</strong> Aki created a new Epsilon, but even without chips, the organization can become a monster. A maniac appears who wants to "cure" Aki of heroism.</p>
                 <ul>
@@ -2704,19 +2787,20 @@
                     <li><strong>Arc 33 "Voices":</strong> Aki begins to hear the voice of the anomaly in his head. Lira tries to save him.</li>
                     <li><strong>Arc 34 "Twins":</strong> Agent Zero and Vera appear — brother and sister with different abilities.</li>
                     <li><strong>Arc 35 "Final Sacrifice":</strong> Aki has to choose between saving the world and saving himself. Someone from the team dies.</li>
-                </ul>` 
+                </ul>`
             }
         ];
 
         function renderLore() {
             const wrapper = document.getElementById('loreAccordion');
+            if (!wrapper) return;
             wrapper.innerHTML = '';
             LORE_SECTIONS.forEach(section => {
                 const item = document.createElement('div');
                 item.className = 'lore-item';
                 const title = currentLang === 'ru' ? section.title : section.title_en;
                 const body = currentLang === 'ru' ? section.body : section.body_en;
-                
+
                 item.innerHTML = `
                     <div class="lore-header">
                         <div class="lore-header-left">
@@ -2736,6 +2820,19 @@
                 });
             });
         }
+
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        loadTheme();
+        startTimer();
+        updateUserArea();
+        applyLang();
+        renderAllEpisodes();
+        renderContinue();
+        renderWatchlist();
+        renderShop();
+        renderSeasons();
+        updateGameRecord();
+        updateCartCount();
     </script>
 </body>
 </html>
