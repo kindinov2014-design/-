@@ -9,7 +9,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
-        /* ===== ЦВЕТОВЫЕ ПЕРЕМЕННЫЕ ===== */
         :root {
             --bg: #0a0a0f; --bg-2: #050508; --panel: #0f0f15; --panel-2: #1a0505;
             --text: #e0e0e0; --text-muted: #aaa; --text-dim: #888;
@@ -18,7 +17,6 @@
             --discord: #5865F2; --tg: #229ED9; --yt: #FF0000;
             --success: #00ff88; --warn: #ffc800;
         }
-        
         body.theme-light {
             --bg: #f0f2f5; --bg-2: #e4e6eb; --panel: #ffffff; --panel-2: #fdf2f2;
             --text: #1c1e21; --text-muted: #4b4f56; --text-dim: #65676b;
@@ -26,7 +24,6 @@
             --border: rgba(0,0,0,0.08); --border-soft: rgba(0,0,0,0.15);
         }
 
-        /* Плавный переход для всех элементов */
         body, .topbar, .nav-btn, .icon-btn, .lang-btn, .hero, .game-box, .promo-input, .card, .shop-item, .char-card, .lore-item, .season-accordion-item, .modal, .notification {
             transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
@@ -38,7 +35,6 @@
             background: radial-gradient(circle at 50% 0%, var(--bg-2) 0%, var(--bg) 60%);
         }
 
-        /* ОПТИМИЗИРОВАННЫЙ ФОН */
         #bg-glow {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -2; pointer-events: none;
@@ -99,6 +95,18 @@
         .btn-secondary:hover { border-color: var(--accent); background: var(--panel-2); transform: translateY(-3px); }
         .btn-discord { background: var(--discord); color: #fff; }
         .btn-discord:hover { background: #4752C4; transform: translateY(-3px); }
+
+        /* ===== НОВОЕ: Кинотеатр ===== */
+        .cinema-wrap { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; margin-bottom: 20px; border: 1px solid var(--border-soft); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .cinema-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        /* ===== НОВОЕ: Достижения ===== */
+        .xp-container { background: var(--bg); border-radius: 10px; padding: 15px; margin-bottom: 20px; border: 1px solid var(--border-soft); }
+        .xp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; }
+        .xp-level { color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+        .xp-bar-bg { width: 100%; height: 12px; background: var(--panel); border-radius: 6px; overflow: hidden; position: relative; }
+        .xp-bar-fill { height: 100%; background: linear-gradient(90deg, #ff3333, #ff8c00); width: 0%; transition: width 0.4s ease; border-radius: 6px; }
+        .xp-text { text-align: right; font-size: 0.75rem; color: var(--text-muted); margin-top: 5px; }
 
         .timer-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
         .timer-box { background: var(--panel); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
@@ -332,6 +340,10 @@
         .char-modal-section p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
         .char-modal-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 5px; }
         .char-tag { background: var(--bg); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 4px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
+
+        /* ===== НОВОЕ: Модалка Кинотеатра ===== */
+        .cinema-modal { background: #000; border: 2px solid var(--accent); border-radius: 20px; padding: 20px; max-width: 1000px; width: 100%; position: relative; box-shadow: 0 0 50px rgba(255,51,51,0.2); }
+        .cinema-modal .modal-close { color: #fff; z-index: 10; text-shadow: 0 0 5px #000; }
 
         .notification { position: fixed; top: 80px; right: 30px; background: var(--panel); border: 1px solid var(--accent); border-radius: 12px; padding: 18px 25px; color: var(--text); font-weight: 700; font-size: 0.95rem; z-index: 2000; transform: translateX(400px); transition: transform 0.3s ease; max-width: 350px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         .notification.show { transform: translateX(0); }
@@ -634,73 +646,73 @@
                     <text x="400" y="600" font-size="50" text-anchor="middle" opacity="0.6">🌋</text>
                     <text x="300" y="60" font-size="40" text-anchor="middle" opacity="0.5">🏥</text>
 
-                    <g class="map-point" onclick="showMapInfo('Заброшенная лаборатория', 'Здесь Аки заразился аномалией (арка 1). Позже нашёл документы «Проект Эхо» (арка 14).')">
+                    <g class="map-point" onclick="showMapInfo('lab')">
                         <circle cx="180" cy="150" r="14" fill="#8b0000" opacity="0.9"/>
                         <circle cx="180" cy="150" r="7" fill="#fff"/>
                         <text x="180" y="130" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">Лаборатория</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Штаб Эпсилона', 'Секретная база. Здесь Аки получил чип и стал агентом. Совет, Алиса, учёные.')">
+                    <g class="map-point" onclick="showMapInfo('base')">
                         <circle cx="400" cy="350" r="24" fill="var(--accent)"/>
                         <circle cx="400" cy="350" r="12" fill="#fff"/>
                         <text x="400" y="320" fill="var(--text)" font-size="18" text-anchor="middle" font-weight="bold">Штаб Эпсилона</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Старый сектор', 'Заброшенные лаборатории, где создали вирус «Эхо» (арка 6).')">
+                    <g class="map-point" onclick="showMapInfo('sector')">
                         <circle cx="650" cy="150" r="14" fill="#006400" opacity="0.9"/>
                         <circle cx="650" cy="150" r="7" fill="#fff"/>
                         <text x="650" y="130" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">Старый сектор</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Старый завод (Сектор 7)', 'Место, где Аки встретил Зейна и узнал правду об «Омеге».')">
+                    <g class="map-point" onclick="showMapInfo('factory')">
                         <circle cx="250" cy="500" r="14" fill="#666" opacity="0.9"/>
                         <circle cx="250" cy="500" r="7" fill="#fff"/>
                         <text x="250" y="480" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">Завод</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Бункер «Свидетелей»', 'Убежище Зейна, Миры, Корва, Тени и Вейна.')">
+                    <g class="map-point" onclick="showMapInfo('bunker')">
                         <circle cx="580" cy="500" r="14" fill="#004a7c" opacity="0.9"/>
                         <circle cx="580" cy="500" r="7" fill="#fff"/>
                         <text x="580" y="480" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">Бункер</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Дом Аки', 'Здесь Аки отдыхал после заданий и скрывался от Эпсилона.')">
+                    <g class="map-point" onclick="showMapInfo('home')">
                         <circle cx="750" cy="300" r="14" fill="#c89600" opacity="0.9"/>
                         <circle cx="750" cy="300" r="7" fill="#fff"/>
                         <text x="750" y="280" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">Дом Аки</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Лес у костра', 'Аки, Лира и другие отдыхали здесь в 7-й арке. Последний мирный день.')">
+                    <g class="map-point" onclick="showMapInfo('camp')">
                         <circle cx="150" cy="300" r="14" fill="#009688" opacity="0.9"/>
                         <circle cx="150" cy="300" r="7" fill="#fff"/>
                         <text x="150" y="280" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">Костёр</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Руины Эпсилона', 'Остатки старого штаба. Здесь Аки находит файлы Синдиката.')">
+                    <g class="map-point" onclick="showMapInfo('ruins')">
                         <circle cx="550" cy="200" r="14" fill="#555" opacity="0.9"/>
                         <circle cx="550" cy="200" r="7" fill="#fff"/>
                         <text x="550" y="180" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">Руины</text>
                     </g>
 
-                    <g class="map-point" onclick="showMapInfo('Ледяная тюрьма «Криос»', 'Секретная тюрьма Эпсилона. Здесь держат мутантов, которых нельзя убить.')">
+                    <g class="map-point" onclick="showMapInfo('cryos')">
                         <circle cx="100" cy="100" r="14" fill="#00bcd4" opacity="0.9"/>
                         <circle cx="100" cy="100" r="7" fill="#fff"/>
                         <text x="100" y="80" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">Криос</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Гнилой Лес', 'Зона аномалии. Деревья-мутанты, споры, агрессивные монстры.')">
+                    <g class="map-point" onclick="showMapInfo('forest')">
                         <circle cx="750" cy="550" r="14" fill="#4caf50" opacity="0.9"/>
                         <circle cx="750" cy="550" r="7" fill="#fff"/>
                         <text x="750" y="530" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">Гнилой лес</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Город-призрак «Сектор 0»', 'Мегаполис, уничтоженный аномалией. Убежище Психотерапевта.')">
+                    <g class="map-point" onclick="showMapInfo('city')">
                         <circle cx="800" cy="100" r="14" fill="#9e9e9e" opacity="0.9"/>
                         <circle cx="800" cy="100" r="7" fill="#fff"/>
                         <text x="800" y="80" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">Сектор 0</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Корабль-ковчег «Ноев»', 'Затонувший лайнер с артефактами и монстрами. Локация 5-го сезона.')">
+                    <g class="map-point" onclick="showMapInfo('ship')">
                         <circle cx="100" cy="600" r="14" fill="#0050a0" opacity="0.9"/>
                         <circle cx="100" cy="600" r="7" fill="#fff"/>
                         <text x="100" y="580" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">Корабль</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Разлом «Бездна»', 'Гигантская трещина, ведущая к источнику аномалии. Арена финальной битвы.')">
+                    <g class="map-point" onclick="showMapInfo('abyss')">
                         <circle cx="400" cy="650" r="18" fill="#ff0000" opacity="0.9"/>
                         <circle cx="400" cy="650" r="9" fill="#fff"/>
                         <text x="400" y="625" fill="var(--text)" font-size="16" text-anchor="middle" font-weight="bold">Бездна</text>
                     </g>
-                    <g class="map-point" onclick="showMapInfo('Госпиталь «Мира»', 'Заброшенная больница. Место экспериментов Вейна и создания вируса «Эхо».')">
+                    <g class="map-point" onclick="showMapInfo('hospital')">
                         <circle cx="300" cy="100" r="14" fill="#9c27b0" opacity="0.9"/>
                         <circle cx="300" cy="100" r="7" fill="#fff"/>
                         <text x="300" y="80" fill="var(--text)" font-size="14" text-anchor="middle" font-weight="bold">Госпиталь</text>
@@ -1038,23 +1050,45 @@
     </div>
 
     <div class="modal-overlay" id="episodeModal">
-        <div class="modal">
+        <div class="cinema-modal">
             <button class="modal-close" onclick="closeEpisode()">×</button>
-            <h2 id="episodeTitle">Серия</h2>
-            <p id="episodeInfo" style="color:var(--text-muted); text-align:center; margin-bottom:20px;">Информация о серии</p>
-            <button class="modal-btn" onclick="closeEpisode()" data-i18n="episode_btn">Закрыть</button>
+            <div class="cinema-wrap">
+                <div id="videoPlayerPlaceholder" style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#111;color:#666;font-size:1.2rem;font-weight:700;">
+                    🎬 Видео появится здесь (вставь iframe YouTube в код)
+                </div>
+                <!-- Сюда ты сможешь вставить iframe с YouTube: 
+                <iframe src="https://www.youtube.com/embed/ТВОЙ_КОД" allowfullscreen></iframe> 
+                -->
+            </div>
+            <h2 id="episodeTitle" style="color:#fff; text-align:center; margin-top:10px;">Название серии</h2>
+            <p id="episodeInfo" style="color:var(--text-muted); text-align:center; font-size:0.9rem;">Информация</p>
         </div>
     </div>
 
+    <!-- НОВОЕ: Окно профиля с Достижениями -->
     <div class="modal-overlay" id="profileModal">
         <div class="profile-modal">
             <button class="modal-close" onclick="closeProfile()">×</button>
             <h2 style="font-size:1.3rem; color:var(--text); margin-bottom:20px; text-align:center; letter-spacing:2px; text-transform:uppercase;">⚙️ Настройки профиля</h2>
+            
             <div class="profile-preview">
                 <div class="profile-avatar-large" id="profilePreviewAvatar">👤</div>
                 <div class="profile-preview-name" id="profilePreviewName">Ник</div>
                 <div class="profile-preview-badge" id="profilePreviewBadge">Агент Эпсилона</div>
             </div>
+
+            <!-- НОВОЕ: Полоска опыта -->
+            <div class="xp-container">
+                <div class="xp-header">
+                    <span>Уровень:</span>
+                    <span class="xp-level" id="xpLevelText">1 - Новобранец</span>
+                </div>
+                <div class="xp-bar-bg">
+                    <div class="xp-bar-fill" id="xpBarFill"></div>
+                </div>
+                <div class="xp-text" id="xpText">0 / 100 XP</div>
+            </div>
+
             <div class="profile-section-title">🎨 Цвет ника</div>
             <div class="color-options" id="colorOptions"></div>
             <div class="profile-section-title">🖼️ Рамка аватарки</div>
@@ -1094,6 +1128,63 @@
                 ticking = true;
             }
         });
+
+        // ===== НОВОЕ: СИСТЕМА ДОСТИЖЕНИЙ (XP) =====
+        const XP_LEVELS = [
+            { xp: 0, name: 'Новобранец', name_en: 'Recruit' },
+            { xp: 100, name: 'Агент', name_en: 'Agent' },
+            { xp: 300, name: 'Старший агент', name_en: 'Senior Agent' },
+            { xp: 600, name: 'Ветеран', name_en: 'Veteran' },
+            { xp: 1000, name: 'Легенда Эпсилона', name_en: 'Epsilon Legend' }
+        ];
+
+        function getUserXP() {
+            const user = getCurrentUser();
+            if (!user) return 0;
+            return parseInt(localStorage.getItem('aki_xp_' + user.nickname) || 0);
+        }
+
+        function addXP(amount) {
+            const user = getCurrentUser();
+            if (!user) return;
+            let xp = getUserXP() + amount;
+            localStorage.setItem('aki_xp_' + user.nickname, xp);
+            
+            // Проверка на новый уровень
+            const oldLevel = getLevelIndex(getUserXP() - amount);
+            const newLevel = getLevelIndex(xp);
+            
+            if (newLevel > oldLevel) {
+                showNotification(currentLang === 'ru' ? `🏆 Новый уровень: ${XP_LEVELS[newLevel].name}!` : `🏆 New level: ${XP_LEVELS[newLevel].name_en}!`, 'success');
+            }
+            updateXPBar();
+        }
+
+        function getLevelIndex(xp) {
+            for (let i = XP_LEVELS.length - 1; i >= 0; i--) {
+                if (xp >= XP_LEVELS[i].xp) return i;
+            }
+            return 0;
+        }
+
+        function updateXPBar() {
+            const user = getCurrentUser();
+            const xpContainer = document.querySelector('.xp-container');
+            if (!user) { xpContainer.style.display = 'none'; return; }
+            xpContainer.style.display = 'block';
+
+            const xp = getUserXP();
+            const levelIndex = getLevelIndex(xp);
+            const currentLevel = XP_LEVELS[levelIndex];
+            const nextLevel = XP_LEVELS[levelIndex + 1] || { xp: currentLevel.xp + 1000 };
+            
+            const levelName = currentLang === 'ru' ? currentLevel.name : currentLevel.name_en;
+            document.getElementById('xpLevelText').textContent = `Ур. ${levelIndex + 1} — ${levelName}`;
+            
+            const progress = ((xp - currentLevel.xp) / (nextLevel.xp - currentLevel.xp)) * 100;
+            document.getElementById('xpBarFill').style.width = `${Math.min(100, progress)}%`;
+            document.getElementById('xpText').textContent = `${xp} / ${nextLevel.xp} XP`;
+        }
 
         // ===== МИНИ-ИГРА =====
         let gameActive = false, gameScore = 0, gameTime = 40;
@@ -1204,11 +1295,15 @@
             if (gameScore > record) localStorage.setItem('aki_game_record', gameScore);
             updateGameRecord();
             
+            // ДОБАВЛЯЕМ XP ЗА ИГРУ
+            addXP(Math.floor(gameScore / 2));
+
             gameOverlay.style.display = 'flex';
             gameOverlay.innerHTML = `
                 <h3>ВРЕМЯ ВЫШЛО</h3>
                 <p>Твои очки: <strong>${gameScore}</strong></p>
                 <p>Рекорд: <strong>${Math.max(gameScore, record)}</strong></p>
+                <p style="color:#00ff88; font-size:0.9rem;">Получено ${Math.floor(gameScore / 2)} XP!</p>
                 <button class="game-start-btn" onclick="startGame()">Играть ещё раз</button>
             `;
         }
@@ -1569,6 +1664,7 @@
                 btn.classList.add('added');
                 btn.textContent = '✓';
                 showNotification(currentLang === 'ru' ? 'Добавлено в список' : 'Added to list', 'success');
+                addXP(10); // XP за добавление в список
             }
             saveWatchlist(list);
             renderWatchlist();
@@ -1786,6 +1882,7 @@
                     (currentLang === 'ru' ? 'Бесплатно добавлено: ' : 'Added for free: ') + name,
                     'success'
                 );
+                addXP(5); // XP за покупку
             } else {
                 window.open(TELEGRAM_CHANNEL, '_blank');
                 showNotification(
@@ -1819,6 +1916,7 @@
 
         function sendCoop() {
             showNotification(currentLang === 'ru' ? 'Сообщение отправлено!' : 'Message sent!', 'success');
+            addXP(15); // XP за обратную связь
         }
 
         function openEpisode(sub, title) {
@@ -1826,6 +1924,7 @@
             if (user) {
                 const ep = EPISODES.find(e => (currentLang === 'ru' ? e.sub : e.sub_en) === sub);
                 if (ep) localStorage.setItem('aki_last_watched_' + user.nickname, ep.id);
+                addXP(20); // XP за просмотр
             }
             document.getElementById('episodeTitle').textContent = title;
             document.getElementById('episodeInfo').textContent = sub + (currentLang === 'ru' ? ' — в разработке' : ' — in development');
@@ -1878,6 +1977,7 @@
             document.getElementById('promoReward').textContent = promo.message;
             document.getElementById('promoModal').classList.add('active');
             input.value = '';
+            addXP(50); // Много XP за промокод
         }
         function closePromoModal() { document.getElementById('promoModal').classList.remove('active'); }
         function closeAuthRequired() { document.getElementById('authRequiredModal').classList.remove('active'); }
@@ -1907,16 +2007,14 @@
                 currentLang = currentLang === 'ru' ? 'en' : 'ru';
                 langBtn.textContent = currentLang.toUpperCase() + ' ▾';
                 applyLang();
-                // Перерисовываем динамический контент
                 renderAllEpisodes();
                 renderContinue();
                 renderWatchlist();
                 renderShop();
+                updateXPBar();
                 if (document.getElementById('page-seasons').classList.contains('active')) renderSeasons();
                 if (document.getElementById('page-characters').classList.contains('active')) renderCharacters();
                 if (document.getElementById('page-lore').classList.contains('active')) renderLore();
-                
-                // Восстанавливаем текст карты
                 document.getElementById('mapInfo').innerHTML = MAP_DATA[currentLang].default;
 
                 elements.forEach(el => {
@@ -2075,6 +2173,7 @@
                 `;
                 document.getElementById('cartCount').textContent = getCartCount();
                 applyUserCustomization();
+                updateXPBar();
             } else {
                 userArea.innerHTML = `
                     <button class="user-btn" onclick="openAuth('login')">
@@ -2150,6 +2249,9 @@
                 previewAvatar.textContent = genderIcon;
             }
             document.getElementById('profilePreviewName').textContent = user.nickname;
+            
+            updateXPBar(); // Обновляем полоску при открытии
+
             const colorOpts = document.getElementById('colorOptions');
             colorOpts.innerHTML = '';
             NAME_COLORS.forEach(cOpt => {
