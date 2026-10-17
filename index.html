@@ -47,36 +47,7 @@
             100% { top: 100%; }
         }
 
-        /* 2. Глитч-эффект (только для заголовка) */
-        .glitch {
-            position: relative; display: inline-block;
-        }
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%; overflow: hidden;
-            opacity: 0.8;
-        }
-        .glitch::before { color: #0ff; left: 2px; text-shadow: -2px 0 #0ff; animation: glitch-anim-1 2s infinite linear alternate-reverse; }
-        .glitch::after { color: #f0f; left: -2px; text-shadow: -2px 0 #f0f; animation: glitch-anim-2 3s infinite linear alternate-reverse; }
-        @keyframes glitch-anim-1 {
-            0% { clip-path: inset(20% 0 30% 0); }
-            20% { clip-path: inset(60% 0 10% 0); }
-            40% { clip-path: inset(10% 0 80% 0); }
-            60% { clip-path: inset(40% 0 50% 0); }
-            80% { clip-path: inset(80% 0 5% 0); }
-            100% { clip-path: inset(30% 0 50% 0); }
-        }
-        @keyframes glitch-anim-2 {
-            0% { clip-path: inset(50% 0 20% 0); }
-            20% { clip-path: inset(10% 0 60% 0); }
-            40% { clip-path: inset(80% 0 10% 0); }
-            60% { clip-path: inset(20% 0 40% 0); }
-            80% { clip-path: inset(5% 0 80% 0); }
-            100% { clip-path: inset(50% 0 30% 0); }
-        }
-
-        /* 3. Эффект аномалии при скролле */
+        /* 2. Эффект аномалии при скролле */
         .anomaly-active {
             animation: anomaly 0.5s ease-in-out;
         }
@@ -697,7 +668,7 @@
     <div class="page active" id="page-home">
         <section class="hero">
             <div class="hero-content">
-                <h1 class="glitch" data-text="АКИ И ЭПСИЛОН" data-i18n="hero_title">АКИ И ЭПСИЛОН</h1>
+                <h1 data-i18n="hero_title">АКИ И ЭПСИЛОН</h1>
                 <p data-i18n="hero_desc">
                     Тайная организация, которая спасает мир от аномалий и монстров.
                     Тайно. Жёстко. Без благодарности. История, которую скрывает мир.
@@ -1228,15 +1199,14 @@
     <script>
         const TELEGRAM_CHANNEL = "https://t.me/The_MisterAki2";
 
-        // ===== ИМБОВЫЕ ЭФФЕКТЫ =====
-        // 1. Звук при клике
+        // ===== ЗВУК ПРИ КЛИКЕ =====
         const clickSound = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');
         document.addEventListener('click', () => {
             clickSound.currentTime = 0;
             clickSound.play().catch(() => {});
         });
 
-        // 2. Эффект аномалии при скролле
+        // ===== ЭФФЕКТ АНОМАЛИИ ПРИ СКРОЛЛЕ =====
         let scrollTimeout;
         window.addEventListener('scroll', () => {
             if (scrollTimeout) return;
@@ -1247,7 +1217,7 @@
             }, 200);
         });
 
-        // 3. Мини-игра "Реверс"
+        // ===== МИНИ-ИГРА "РЕВЕРС" =====
         let gameActive = false, gameScore = 0, gameTime = 20, gameTimer = null;
         const gameArea = document.getElementById('gameArea');
         const gameOverlay = document.getElementById('gameOverlay');
