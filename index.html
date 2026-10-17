@@ -1218,7 +1218,7 @@
         }
 
         function startGame() {
-            gameActive = true; gameScore = 0; gameTime = 20;
+            gameActive = true; gameScore = 0; gameTime = 30;
             document.getElementById('gameScore').textContent = 0;
             document.getElementById('gameTime').textContent = 20;
             gameOverlay.style.display = 'none';
@@ -1242,8 +1242,8 @@
             const target = document.createElement('div');
             target.className = 'game-target';
             target.textContent = '💥';
-            const maxX = gameArea.clientWidth - 40;
-            const maxY = gameArea.clientHeight - 40;
+            const maxX = gameArea.clientWidth - 100;
+            const maxY = gameArea.clientHeight - 100;
             target.style.left = Math.random() * maxX + 'px';
             target.style.top = Math.random() * maxY + 'px';
             target.onclick = (e) => {
