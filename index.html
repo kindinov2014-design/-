@@ -192,27 +192,63 @@
         }
         .game-title { font-size: 1.5rem; color: var(--accent); font-weight: 900; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
         .game-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
+        
         .game-area {
             position: relative; width: 100%; height: 300px;
             background: var(--panel); border: 1px solid var(--border-soft);
             border-radius: 16px; overflow: hidden; margin-bottom: 20px;
-            cursor: crosshair;
+            cursor: crosshair; user-select: none;
         }
+
+        /* === УЛУЧШЕННЫЕ МОНСТРЫ === */
         .game-target {
             position: absolute; width: 40px; height: 40px;
             border-radius: 50%; background: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow);
+            box-shadow: 0 0 20px var(--accent-glow), inset 0 0 10px rgba(0,0,0,0.5);
             cursor: pointer; transition: transform 0.1s;
             display: flex; align-items: center; justify-content: center;
             font-size: 1.2rem; color: #fff;
             animation: target-pulse 0.5s infinite alternate;
+            border: 2px solid #fff;
+        }
+        .game-target.fast {
+            background: #ffd700;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), inset 0 0 10px rgba(0,0,0,0.5);
+            width: 30px; height: 30px; font-size: 1rem;
+        }
+        .game-target.boss {
+            background: #8b0000;
+            box-shadow: 0 0 30px #ff3333, inset 0 0 20px #000;
+            width: 60px; height: 60px; font-size: 2rem;
+            border: 3px solid #ffd700;
         }
         @keyframes target-pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
         .game-target:active { transform: scale(0.8); }
+
+        /* === ЭФФЕКТ БРЫЗГ === */
+        .splatter {
+            position: absolute; width: 10px; height: 10px;
+            background: #ff3333; border-radius: 50%;
+            pointer-events: none; z-index: 10;
+            animation: splatter-anim 0.5s ease-out forwards;
+        }
+        @keyframes splatter-anim {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
         .game-stats { display: flex; justify-content: center; gap: 30px; margin-bottom: 15px; flex-wrap: wrap; }
         .game-stat { text-align: center; }
         .game-stat-val { font-size: 1.8rem; font-weight: 900; color: var(--accent); }
         .game-stat-lbl { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .game-combo {
+            font-size: 1.2rem; color: #ffd700; font-weight: 900;
+            height: 30px; opacity: 0; transition: opacity 0.2s;
+            text-shadow: 0 0 10px #ffd700;
+        }
+        .game-combo.active { opacity: 1; animation: combo-pop 0.3s ease; }
+        @keyframes combo-pop { 0% { transform: scale(1.5); } 100% { transform: scale(1); } }
+        
         .game-start-btn {
             background: var(--accent); color: #fff; padding: 14px 40px;
             border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem;
@@ -223,47 +259,27 @@
         .game-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.8); display: flex; flex-direction: column;
-            align-items: center; justify-content: center; z-index: 10;
+            align-items: center; justify-content: center; z-index: 20;
             color: #fff; text-align: center; padding: 20px;
         }
         .game-overlay h3 { font-size: 2rem; margin-bottom: 10px; color: var(--accent); }
         .game-overlay p { font-size: 1rem; margin-bottom: 20px; }
 
-        /* ===== PROMO ===== */
+        /* ===== ОСТАЛЬНОЕ (НЕ ТРОГАЕМ) ===== */
         .promo { max-width: 1200px; margin: 40px auto; padding: 0 60px; display: flex; gap: 15px; }
-        .promo-input {
-            flex: 1; background: rgba(20,20,30,0.9); border: 1px solid var(--border-soft);
-            border-radius: 15px; padding: 20px 30px; color: var(--text);
-            font-size: 0.95rem; transition: all 0.3s ease; text-align: center; font-family: inherit;
-        }
+        .promo-input { flex: 1; background: rgba(20,20,30,0.9); border: 1px solid var(--border-soft); border-radius: 15px; padding: 20px 30px; color: var(--text); font-size: 0.95rem; transition: all 0.3s ease; text-align: center; font-family: inherit; }
         .promo-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 30px rgba(255,51,51,0.2); }
-        .promo-btn {
-            background: var(--accent); color: #fff; padding: 20px 40px;
-            border: none; border-radius: 15px; font-weight: 800; font-size: 0.9rem;
-            letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
-            transition: all 0.3s ease; font-family: inherit; white-space: nowrap;
-        }
+        .promo-btn { background: var(--accent); color: #fff; padding: 20px 40px; border: none; border-radius: 15px; font-weight: 800; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; }
         .promo-btn:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 10px 30px var(--accent-glow); }
 
-        /* ===== PREDICTION ===== */
         .prediction-section { max-width: 1200px; margin: 40px auto; padding: 0 60px; text-align: center; }
-        .prediction-box {
-            background: linear-gradient(145deg, var(--panel-2) 0%, var(--bg) 100%);
-            border: 2px solid rgba(255,51,51,0.3); border-radius: 20px; padding: 40px;
-            position: relative; overflow: hidden; box-shadow: 0 0 60px rgba(255,51,51,0.15);
-        }
-        .prediction-box::before {
-            content: ''; position: absolute; top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle at 50% 50%, rgba(255,51,51,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
+        .prediction-box { background: linear-gradient(145deg, var(--panel-2) 0%, var(--bg) 100%); border: 2px solid rgba(255,51,51,0.3); border-radius: 20px; padding: 40px; position: relative; overflow: hidden; box-shadow: 0 0 60px rgba(255,51,51,0.15); }
+        .prediction-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 50%, rgba(255,51,51,0.1) 0%, transparent 70%); animation: rotate 20s linear infinite; }
         .prediction-title { font-size: 1.5rem; color: var(--accent); font-weight: 900; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; position: relative; z-index: 2; }
         .prediction-text { font-size: 1.2rem; color: var(--text); margin-bottom: 25px; min-height: 60px; display: flex; align-items: center; justify-content: center; font-style: italic; position: relative; z-index: 2; transition: all 0.4s ease; }
         .prediction-btn { background: var(--accent); color: #fff; padding: 16px 45px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: inherit; position: relative; z-index: 2; }
         .prediction-btn:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 10px 30px var(--accent-glow); }
 
-        /* ===== MAP ===== */
         .map-section { max-width: 1200px; margin: 60px auto; padding: 0 60px; }
         .map-title { font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 25px; letter-spacing: 1px; }
         .map-title span { color: var(--accent); }
@@ -279,12 +295,10 @@
         .map-info { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 1px solid var(--accent); border-radius: 16px; padding: 25px 30px; margin-top: 20px; text-align: center; color: var(--text); min-height: 80px; transition: opacity 0.3s ease, transform 0.3s ease; box-shadow: 0 0 30px rgba(255,51,51,0.2); }
         .map-info strong { color: var(--accent); font-size: 1.3rem; display: block; margin-bottom: 8px; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* ===== SECTIONS ===== */
         .section-wrapper { padding: 0 60px; margin-bottom: 40px; }
         .section-title { font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 25px; letter-spacing: 1px; line-height: 1.2; }
         .section-title span { color: var(--accent); }
 
-        /* ===== SHOWCASE TABS ===== */
         .showcase-tabs { display: flex; gap: 10px; margin-bottom: 30px; padding: 0 60px; flex-wrap: wrap; }
         .showcase-tab { background: var(--border); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 12px 28px; border-radius: 25px; cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); font-family: inherit; position: relative; overflow: hidden; }
         .showcase-tab:hover { color: var(--text); border-color: var(--accent); }
@@ -295,7 +309,6 @@
         .showcase-description { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border-left: 4px solid var(--accent); border-radius: 0 16px 16px 0; padding: 25px 30px; margin-bottom: 25px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; box-shadow: 0 0 30px rgba(255,51,51,0.1); }
         .showcase-description strong { color: var(--accent); font-size: 1.1rem; letter-spacing: 1px; }
 
-        /* ===== CAROUSEL ===== */
         .carousel { display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 20px; }
         .carousel::-webkit-scrollbar { height: 6px; }
         .carousel::-webkit-scrollbar-track { background: transparent; }
@@ -311,14 +324,12 @@
         .card-add:hover { background: var(--accent); color: #fff; transform: scale(1.1); }
         .card-add.added { background: var(--accent); color: #fff; }
 
-        /* ===== BIG BANNER ===== */
         .big-banner { max-width: 1200px; margin: 60px auto; padding: 0 60px; }
         .big-banner-inner { background: linear-gradient(135deg, var(--panel-2) 0%, var(--bg) 100%); border: 1px solid rgba(255,51,51,0.3); border-radius: 20px; padding: 60px; text-align: center; position: relative; overflow: hidden; }
         .big-banner-inner::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(255,51,51,0.15) 0%, transparent 70%); pointer-events: none; }
         .big-banner h2 { font-size: 2.2rem; color: var(--text); margin-bottom: 15px; text-shadow: 0 0 30px #8b0000; position: relative; z-index: 2; }
         .big-banner p { color: var(--text-muted); font-size: 1rem; margin-bottom: 25px; position: relative; z-index: 2; }
 
-        /* ===== SHOP / MUSIC ===== */
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 60px; }
         .shop-item { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 30px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; }
         .shop-item:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 15px 40px var(--accent-glow); }
@@ -339,7 +350,6 @@
         .music-name { font-size: 1.1rem; color: var(--text); font-weight: 800; margin-bottom: 5px; }
         .music-artist { font-size: 0.85rem; color: var(--accent); font-weight: 700; }
 
-        /* ===== COOP ===== */
         .coop-section { max-width: 800px; margin: 0 auto; padding: 0 60px; }
         .coop-form { background: var(--panel); border: 1px solid var(--border); border-radius: 20px; padding: 40px; }
         .coop-form h3 { color: var(--text); font-size: 1.5rem; margin-bottom: 25px; }
@@ -350,7 +360,6 @@
         .coop-discord a { color: var(--discord); font-weight: 700; text-decoration: none; }
         .coop-discord a:hover { text-decoration: underline; }
 
-        /* ===== ABOUT ===== */
         .about-section { max-width: 1200px; margin: 60px auto; padding: 0 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
         .about-image { background: linear-gradient(135deg, var(--panel-2), var(--bg)); border-radius: 20px; height: 400px; display: flex; align-items: center; justify-content: center; font-size: 6rem; border: 1px solid rgba(255,51,51,0.2); box-shadow: 0 0 60px rgba(255,51,51,0.15); }
         .about-text h2 { font-size: 2rem; color: var(--text); margin-bottom: 20px; text-shadow: 0 0 20px #8b0000; }
@@ -361,7 +370,6 @@
         .about-socials a.yt:hover { background: var(--yt); border-color: var(--yt); color: #fff; }
         .about-socials a.ds:hover { background: var(--discord); border-color: var(--discord); color: #fff; }
 
-        /* ===== CHARACTERS ===== */
         .char-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 60px; }
         .char-card { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 25px 20px; text-align: center; cursor: pointer; transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1); position: relative; overflow: hidden; }
         .char-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--char-color, var(--accent)); opacity: 0.8; transition: all 0.3s ease; }
@@ -378,7 +386,6 @@
         .char-badge.unknown { background: rgba(255, 200, 0, 0.12); color: var(--warn); border: 1px solid rgba(255, 200, 0, 0.3); }
         .char-badge.captive { background: rgba(150, 100, 255, 0.12); color: #b388ff; border: 1px solid rgba(150, 100, 255, 0.3); }
 
-        /* ===== LORE ===== */
         .lore-accordion-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
         .lore-item { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 2px solid rgba(255,51,51,0.2); border-radius: 16px; margin-bottom: 15px; overflow: hidden; transition: all 0.3s ease; }
         .lore-item.active { border-color: var(--accent); box-shadow: 0 0 40px rgba(255,51,51,0.3); }
@@ -396,7 +403,6 @@
         .lore-body-inner ul { margin: 10px 0 10px 20px; }
         .lore-body-inner li { margin-bottom: 6px; }
 
-        /* ===== SEASONS ACCORDION ===== */
         .season-accordion-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
         .season-accordion-item { background: linear-gradient(145deg, var(--panel-2), var(--bg)); border: 2px solid rgba(255,51,51,0.2); border-radius: 16px; margin-bottom: 15px; overflow: hidden; transition: all 0.3s ease; }
         .season-accordion-item.active { border-color: var(--accent); box-shadow: 0 0 40px rgba(255,51,51,0.3); }
@@ -421,7 +427,6 @@
         .season-episode-title { color: var(--text); font-weight: 700; font-size: 1rem; }
         .season-episode-sub { color: var(--accent); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* ===== MODALS ===== */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal { background: linear-gradient(145deg, var(--panel) 0%, var(--bg-2) 100%); border: 1px solid rgba(255,51,51,0.4); border-radius: 20px; padding: 40px; max-width: 450px; width: 100%; position: relative; box-shadow: 0 0 100px rgba(255,51,51,0.2); animation: modalSlide 0.4s ease; max-height: 90vh; overflow-y: auto; }
@@ -520,7 +525,6 @@
         .bottom-nav-item .bn-icon { font-size: 1.2rem; line-height: 1; }
         .bottom-nav-item.active { color: var(--accent); }
 
-        /* ===== АНИМАЦИИ ДЛЯ ПАСХАЛКИ ===== */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
@@ -684,12 +688,13 @@
         <div class="game-section">
             <div class="game-box">
                 <div class="game-title">🎮 РЕВЕРС</div>
-                <div class="game-desc">Кликай по аномалиям, чтобы нейтрализовать их. Успей за 40 секунд!</div>
+                <div class="game-desc">Кликай по аномалиям. Успей за 40 секунд! Жёлтые — быстрые, Красные — боссы.</div>
                 <div class="game-stats">
                     <div class="game-stat"><div class="game-stat-val" id="gameScore">0</div><div class="game-stat-lbl">Очки</div></div>
                     <div class="game-stat"><div class="game-stat-val" id="gameTime">40</div><div class="game-stat-lbl">Секунды</div></div>
                     <div class="game-stat"><div class="game-stat-val" id="gameRecord">0</div><div class="game-stat-lbl">Рекорд</div></div>
                 </div>
+                <div class="game-combo" id="gameCombo"></div>
                 <div class="game-area" id="gameArea">
                     <div class="game-overlay" id="gameOverlay">
                         <h3>РЕВЕРС</h3>
@@ -1194,8 +1199,10 @@
 
         // ===== МИНИ-ИГРА "РЕВЕРС" =====
         let gameActive = false, gameScore = 0, gameTime = 40, gameTimer = null;
+        let currentCombo = 1, comboTimer = null;
         const gameArea = document.getElementById('gameArea');
         const gameOverlay = document.getElementById('gameOverlay');
+        const gameComboEl = document.getElementById('gameCombo');
 
         function updateGameRecord() {
             const record = localStorage.getItem('aki_game_record') || 0;
@@ -1204,6 +1211,8 @@
 
         function startGame() {
             gameActive = true; gameScore = 0; gameTime = 40;
+            currentCombo = 1;
+            gameComboEl.classList.remove('active');
             document.getElementById('gameScore').textContent = 0;
             document.getElementById('gameTime').textContent = 40;
             gameOverlay.style.display = 'none';
@@ -1217,36 +1226,93 @@
                 if (gameTime <= 0) endGame();
             }, 1000);
 
+            // Запускаем бесконечный спавн
             spawnTarget();
         }
 
         function spawnTarget() {
             if (!gameActive) return;
-            if (gameArea.querySelectorAll('.game-target').length >= 3) return;
 
-            const target = document.createElement('div');
-            target.className = 'game-target';
-            target.textContent = '💥';
-            const maxX = gameArea.clientWidth - 40;
-            const maxY = gameArea.clientHeight - 40;
-            target.style.left = Math.random() * maxX + 'px';
-            target.style.top = Math.random() * maxY + 'px';
-            target.onclick = (e) => {
-                e.stopPropagation();
-                if (!gameActive) return;
-                gameScore++;
-                document.getElementById('gameScore').textContent = gameScore;
-                target.remove();
-                spawnTarget();
-            };
-            gameArea.appendChild(target);
-            setTimeout(() => { if (target.parentNode) target.remove(); }, 1500);
-            setTimeout(spawnTarget, 600);
+            // Разрешаем до 6 монстров одновременно
+            if (gameArea.querySelectorAll('.game-target').length < 6) {
+                const target = document.createElement('div');
+                target.className = 'game-target';
+                
+                // Рандомный тип монстра
+                const rand = Math.random();
+                let points = 1;
+                let timeToLive = 1500;
+                
+                if (rand > 0.85) {
+                    target.classList.add('boss');
+                    target.textContent = '👹';
+                    points = 3;
+                    timeToLive = 2000;
+                } else if (rand > 0.6) {
+                    target.classList.add('fast');
+                    target.textContent = '⚡';
+                    points = 1;
+                    timeToLive = 800;
+                } else {
+                    target.textContent = '💥';
+                }
+
+                const maxX = gameArea.clientWidth - 50;
+                const maxY = gameArea.clientHeight - 50;
+                target.style.left = Math.max(0, Math.random() * maxX) + 'px';
+                target.style.top = Math.max(0, Math.random() * maxY) + 'px';
+                
+                target.onclick = (e) => {
+                    e.stopPropagation();
+                    if (!gameActive) return;
+                    
+                    // Логика комбо
+                    if (comboTimer) clearTimeout(comboTimer);
+                    gameScore += points * currentCombo;
+                    document.getElementById('gameScore').textContent = gameScore;
+                    
+                    if (currentCombo > 1) {
+                        gameComboEl.classList.add('active');
+                        gameComboEl.textContent = `КОМБО x${currentCombo}`;
+                    }
+                    
+                    currentCombo++;
+                    comboTimer = setTimeout(() => {
+                        currentCombo = 1;
+                        gameComboEl.classList.remove('active');
+                    }, 1000);
+
+                    // Эффект брызг
+                    createSplatter(e.clientX - gameArea.getBoundingClientRect().left, e.clientY - gameArea.getBoundingClientRect().top, target.classList.contains('fast') ? '#ffd700' : (target.classList.contains('boss') ? '#8b0000' : '#ff3333'));
+
+                    target.remove();
+                };
+                gameArea.appendChild(target);
+                setTimeout(() => { if (target.parentNode) target.remove(); }, timeToLive);
+            }
+            
+            // Спавним нового монстра каждые 300-500 мс
+            setTimeout(spawnTarget, Math.random() * 200 + 300);
+        }
+
+        function createSplatter(x, y, color) {
+            for(let i=0; i<3; i++) {
+                const splat = document.createElement('div');
+                splat.className = 'splatter';
+                splat.style.left = (x - 5) + 'px';
+                splat.style.top = (y - 5) + 'px';
+                splat.style.backgroundColor = color;
+                // Разбрасываем в разные стороны
+                splat.style.transform = `translate(${Math.random()*30-15}px, ${Math.random()*30-15}px)`;
+                gameArea.appendChild(splat);
+                setTimeout(() => splat.remove(), 500);
+            }
         }
 
         function endGame() {
             gameActive = false;
             if (gameTimer) clearInterval(gameTimer);
+            if (comboTimer) clearTimeout(comboTimer);
             gameArea.querySelectorAll('.game-target').forEach(t => t.remove());
             const record = parseInt(localStorage.getItem('aki_game_record') || 0);
             if (gameScore > record) localStorage.setItem('aki_game_record', gameScore);
@@ -2071,7 +2137,6 @@
             }
         }
 
-        // ===== КАСТОМИЗАЦИЯ =====
         const NAME_COLORS = [
             { id: 'default', color: '#ffffff', label: 'Стандарт' },
             { id: 'red',     color: '#ff3333', label: 'Алый' },
@@ -2202,7 +2267,6 @@
         }
         function closeProfile() { document.getElementById('profileModal').classList.remove('active'); }
 
-        // ===== ТЕМА =====
         function toggleTheme() {
             const isLight = document.body.classList.toggle('theme-light');
             document.getElementById('themeBtn').textContent = isLight ? '☀️' : '🌙';
@@ -2216,7 +2280,6 @@
             }
         }
 
-        // ===== ПАСХАЛКА =====
         let logoClicks = 0;
         let clickTimer = null;
         const easterEggMessages = [
@@ -2238,15 +2301,12 @@
         });
 
         function triggerEasterEgg() {
-            // Тряска
             document.body.style.animation = 'shake 0.5s ease-in-out';
             setTimeout(() => { document.body.style.animation = ''; }, 500);
 
-            // Случайное сообщение
             const randomMsg = easterEggMessages[Math.floor(Math.random() * easterEggMessages.length)];
             showNotification(randomMsg, 'error');
 
-            // Вспышка
             const flash = document.createElement('div');
             flash.style.position = 'fixed';
             flash.style.top = '0';
@@ -2260,7 +2320,6 @@
             document.body.appendChild(flash);
             setTimeout(() => flash.remove(), 600);
 
-            // Звук
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 const oscillator = audioCtx.createOscillator();
@@ -2277,7 +2336,6 @@
             } catch (err) {}
         }
 
-        // ===== ХОТКЕИ =====
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeAuth(); closePromoModal(); closeAuthRequired();
@@ -2286,7 +2344,6 @@
             if (e.key === 'Enter' && document.activeElement.id === 'promoInput') applyPromo();
         });
 
-        // ===== INIT =====
         loadTheme();
         initParticles();
         startTimer();
@@ -2299,7 +2356,6 @@
         renderSeasons();
         updateGameRecord();
 
-        // ===== ЧАСТИЦЫ =====
         function initParticles() {
             const canvas = document.getElementById('bg-canvas');
             const ctx = canvas.getContext('2d');
@@ -2386,7 +2442,6 @@
             });
         }
 
-        // ===== CHARACTERS DATA =====
         const CHARACTERS = [
             { id: 'aki', name: 'Аки', emoji: '🎭', role: 'Главный герой', age: '19 лет', status: 'alive', statusText: '🟢 Жив', color: '#ff3333', glow: 'rgba(255,51,51,0.4)', group: 'main', short: 'Обычный человек. Без силы. С реверсом и опытом.', full: 'Любопытный, упрямый, но боится показывать слабость. Цель — выжить и узнать правду об аномалиях. Всегда проверяет реверс перед миссией (кроме рокового дня). Обычный человек, как половина Эпсилона. У него нет силы — только опыт и реверс.', tags: ['Главный герой', 'Агент Эпсилона', 'Реверс'] },
             { id: 'alice', name: 'Алиса', emoji: '🕶️', role: 'Глава Эпсилона', age: '35 лет', status: 'alive', statusText: '🟢 Жива', color: '#b388ff', glow: 'rgba(179,136,255,0.4)', group: 'epsilon', short: 'Холодная, расчётливая, но справедливая. Знает больше, чем говорит.', full: 'Глава Эпсилона. Холодная, расчётливая, но справедливая. Знает больше об аномалиях, чем говорит. Цель — использовать Аки для своих планов. Боится потерять своих агентов, как потеряла других.', tags: ['Глава', 'Совет', 'Тайна'] },
@@ -2469,7 +2524,6 @@
         }
         function closeCharModal() { document.getElementById('charModal').classList.remove('active'); }
 
-        // ===== LORE DATA =====
         const LORE_SECTIONS = [
             { icon: '🌍', title: 'Мир', body: `
                 <p><strong>Аномалии</strong> — зоны, где реальность искажена. В этих зонах появляются <strong>монстры</strong> — мутировавшие существа. Причина аномалий неизвестна. Но Эпсилон знает больше, чем говорит.</p>
