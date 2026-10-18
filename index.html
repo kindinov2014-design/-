@@ -373,12 +373,13 @@
         .wheel-spin-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px var(--accent-glow); }
         .wheel-spin-btn:disabled { background: var(--border-soft); color: var(--text-dim); cursor: not-allowed; }
         .wheel-timer { color: var(--text-muted); font-size: 0.8rem; margin-top: 10px; }
-        body.season-halloween { --accent: #ff8c00; --accent-hover: #ffa533; --accent-glow: rgba(255,140,0,0.5); --bg: #0d0500; --bg-2: #1a0a00; }
+        body.season-halloween { --accent: #00e5ff; --accent-hover: #33ebff; --accent-glow: rgba(0,229,255,0.5); --bg: #001018; --bg-2: #001a26; }
+        body { --accent: #00cfff; --accent-hover: #55ddff; --accent-glow: rgba(0,207,255,0.42); }
         body.season-newyear { --accent: #00e5ff; --accent-hover: #33ebff; --accent-glow: rgba(0,229,255,0.5); --bg: #001018; --bg-2: #001a26; }
-        body.season-halloween .logo::after { content: ' 🎃'; font-size: 1.2rem; }
+        body.season-halloween .logo::after { content: ' ❄️'; font-size: 1.2rem; }
         body.season-newyear .logo::after { content: ' ❄️'; font-size: 1.2rem; }
         .season-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-        .season-badge.halloween { background: rgba(255,140,0,0.2); color: #ff8c00; border: 1px solid #ff8c00; }
+        .season-badge.halloween { background: rgba(0,229,255,0.2); color: #00e5ff; border: 1px solid #00e5ff; }
         .season-badge.newyear { background: rgba(0,229,255,0.2); color: #00e5ff; border: 1px solid #00e5ff; }
         .duel-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
         .duel-box { padding: 30px; text-align: center; }
@@ -563,9 +564,9 @@
         .checkout-success-title { font-size: 1.4rem; color: var(--success); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
         .checkout-success-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
         #animated-bg { position: fixed; inset: 0; z-index: -3; pointer-events: none; overflow: hidden; opacity: 0.5; }
-        #animated-bg .falling { position: absolute; color: rgba(255,51,51,0.35); font-family: monospace; font-weight: 900; animation: fallDown linear infinite; text-shadow: 0 0 10px rgba(255,51,51,0.5); }
+        #animated-bg .falling { position: absolute; color: rgba(220,245,255,0.72); font-family: sans-serif; font-weight: 400; animation: fallDown linear infinite; text-shadow: 0 0 10px rgba(150,220,255,0.55); user-select: none; will-change: transform; }
         @keyframes fallDown { 0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
-        #loadingScreen { position: fixed; inset: 0; z-index: 99999; background: radial-gradient(circle at center, #1a0505 0%, #0a0a0f 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+        #loadingScreen { position: fixed; inset: 0; z-index: 99999; background: radial-gradient(circle at center, #08283b 0%, #06111c 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
         #loadingScreen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
         .loading-logo { font-size: 3rem; font-weight: 900; color: var(--text); letter-spacing: 6px; margin-bottom: 20px; text-shadow: 0 0 30px var(--accent-glow); animation: loadingPulse 1.5s ease-in-out infinite; }
         .loading-logo span { color: var(--accent); }
@@ -667,6 +668,24 @@
             .shop-grid, .music-grid, .char-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 1.7rem; } .card { flex: 0 0 84vw; } .logo { font-size: 0.95rem; }
         }
+
+        /* ===== ЗИМНЕЕ СОБЫТИЕ ===== */
+        .winter-event { max-width: 900px; margin: 28px auto 38px; padding: 0 24px; }
+        .winter-card { position: relative; overflow: hidden; padding: 28px; border: 1px solid rgba(145,220,255,.42); border-radius: 22px; background: radial-gradient(circle at 90% 10%, rgba(100,190,255,.24), transparent 35%), linear-gradient(135deg, rgba(10,35,65,.97), rgba(25,58,91,.92)); box-shadow: 0 12px 40px rgba(40,150,230,.12); }
+        .winter-card::after { content: '❄  ❅  ❄'; position: absolute; right: 18px; top: 10px; font-size: 2rem; letter-spacing: 12px; color: rgba(210,244,255,.22); pointer-events:none; }
+        .winter-kicker { color:#a8e6ff; font-size:.78rem; font-weight:900; letter-spacing:2px; text-transform:uppercase; }
+        .winter-heading { color:#f0fbff; font-size:clamp(1.5rem,4vw,2.2rem); font-weight:950; margin:8px 0; }
+        .winter-copy { color:#c9e6f7; line-height:1.6; max-width:680px; }
+        .winter-stats { display:flex; flex-wrap:wrap; gap:12px; margin:18px 0; }
+        .winter-stat { background:rgba(230,248,255,.09); border:1px solid rgba(200,235,255,.15); padding:10px 14px; border-radius:12px; color:#effaff; }
+        .winter-stat strong { color:#a8e6ff; }
+        .winter-rewards { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin:18px 0; }
+        .winter-reward { padding:13px; border-radius:13px; background:rgba(0,10,25,.24); border:1px solid rgba(190,230,255,.15); color:#e7f7ff; }
+        .winter-reward span { display:block; font-size:1.5rem; margin-bottom:5px; }
+        .winter-action { border:0; border-radius:999px; padding:13px 22px; color:#06233b; background:linear-gradient(110deg,#c4f0ff,#69caff); font-weight:900; cursor:pointer; box-shadow:0 5px 20px rgba(90,190,255,.2); }
+        .winter-action:disabled { opacity:.55; cursor:not-allowed; }
+        .winter-note { color:#a9d5ed; font-size:.82rem; margin-top:10px; }
+
     </style>
 </head><body>
 
@@ -773,6 +792,28 @@
                 <button class="leaderboard-btn" onclick="openLeaderboard()">🏆 Топ рекордов</button>
             </div>
         </div>
+
+
+        <!-- ЗИМНЕЕ СОБЫТИЕ -->
+        <section class="winter-event" aria-labelledby="winterTitle">
+            <div class="winter-card acrylic">
+                <div class="winter-kicker">❄ Сезонное событие · Аки и Эпсилон</div>
+                <h2 class="winter-heading" id="winterTitle">Зимний протокол: Морозная аномалия</h2>
+                <p class="winter-copy">В штаб-квартире обнаружена ледяная аномалия. Выполняй ежедневную зимнюю операцию, собирай снежинки и забирай награды. Авторизуйся, чтобы сохранять личный прогресс в этом браузере.</p>
+                <div class="winter-stats">
+                    <div class="winter-stat">❄ Снежинки: <strong id="winterSnowflakes">0</strong></div>
+                    <div class="winter-stat">🎯 Операций выполнено: <strong id="winterOps">0</strong></div>
+                    <div class="winter-stat">🎁 Награда дня: <strong id="winterRewardStatus">не получена</strong></div>
+                </div>
+                <div class="winter-rewards">
+                    <div class="winter-reward"><span>🧊</span><strong>Ледяной агент</strong><br><small>100 снежинок</small></div>
+                    <div class="winter-reward"><span>🎁</span><strong>Подарок штаба</strong><br><small>250 снежинок</small></div>
+                    <div class="winter-reward"><span>👑</span><strong>Хранитель зимы</strong><br><small>500 снежинок</small></div>
+                </div>
+                <button class="winter-action" id="winterClaimBtn" onclick="claimWinterOperation()">Выполнить зимнюю операцию (+25 ❄, +50 XP)</button>
+                <div class="winter-note" id="winterEventNote">Одна операция в день. Награды события — виртуальные и сохраняются только в этом браузере.</div>
+            </div>
+        </section>
 
         <!-- ЕЖЕДНЕВНЫЕ ЗАДАНИЯ + БОНУС -->
         <div class="daily-section">
@@ -1370,6 +1411,12 @@
     </div>
 
     <audio id="audioPlayer" style="display:none;"></audio>    <script>
+        // Безопасное чтение JSON: повреждённые данные в localStorage не должны ломать весь сайт.
+        function safeJSONParse(value, fallback = null) {
+            if (typeof value !== 'string' || value.length === 0) return fallback;
+            try { return JSON.parse(value); }
+            catch (error) { console.warn('Повреждённые локальные данные JSON:', error); return fallback; }
+        }
         const TELEGRAM_CHANNEL = "https://t.me/The_MisterAki2";
 
         // ===== КУРСОР =====
@@ -1416,16 +1463,18 @@
         function initAnimatedBg() {
             const bg = document.getElementById('animated-bg');
             if (!bg) return;
-            const symbols = ['🩸', '⚡', '💥', '👁️', '🧬', '☢️', '🔑', '🎭', '💀', '🕳️'];
-            const count = 20;
+            const symbols = ['❄', '❅', '❆', '✧', '❄'];
+            bg.replaceChildren();
+            const count = 42;
             for (let i = 0; i < count; i++) {
                 const el = document.createElement('div');
                 el.className = 'falling';
                 el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
                 el.style.left = Math.random() * 100 + 'vw';
-                el.style.fontSize = (Math.random() * 20 + 12) + 'px';
-                el.style.animationDuration = (Math.random() * 15 + 10) + 's';
-                el.style.animationDelay = (Math.random() * 15) + 's';
+                el.style.fontSize = (Math.random() * 18 + 10) + 'px';
+                el.style.opacity = (Math.random() * 0.55 + 0.25).toFixed(2);
+                el.style.animationDuration = (Math.random() * 12 + 10) + 's';
+                el.style.animationDelay = (-Math.random() * 22) + 's';
                 bg.appendChild(el);
             }
         }
@@ -1642,10 +1691,8 @@
         const LEADERBOARD_KEY = 'aki_reverse_leaderboard';
         const LEADERBOARD_BOSS_KEY = 'aki_bossrush_leaderboard';
         const LEADERBOARD_MAX = 10;
-        const LEADERBOARD_BIN_ID = 'YOUR_BIN_ID';
-        const LEADERBOARD_MASTER_KEY = 'YOUR_MASTER_KEY';
-        const LEADERBOARD_API = 'https://api.jsonbin.io/v3/b/' + LEADERBOARD_BIN_ID;
-        const LEADERBOARD_REMOTE = LEADERBOARD_BIN_ID && LEADERBOARD_BIN_ID !== 'YOUR_BIN_ID';
+        // Общая таблица рекордов требует серверного API. Не помещайте master key в HTML/JavaScript.
+        const LEADERBOARD_REMOTE = false;
         let currentLeaderboardMode = 'normal';
 
         function switchLeaderboardMode(mode) {
@@ -1658,7 +1705,7 @@
         function getLocalLeaderboard(mode) {
             const key = mode === 'boss' ? LEADERBOARD_BOSS_KEY : LEADERBOARD_KEY;
             const raw = localStorage.getItem(key);
-            return raw ? JSON.parse(raw) : [];
+            return raw ? safeJSONParse(raw) : [];
         }
         function saveLocalLeaderboard(mode, list) {
             const key = mode === 'boss' ? LEADERBOARD_BOSS_KEY : LEADERBOARD_KEY;
@@ -1736,7 +1783,7 @@
             const user = getCurrentUser();
             if (!user) return { date: getTodayKey(), progress: {} };
             const raw = localStorage.getItem('aki_daily_' + user.nickname);
-            const data = raw ? JSON.parse(raw) : { date: getTodayKey(), progress: {} };
+            const data = raw ? safeJSONParse(raw) : { date: getTodayKey(), progress: {} };
             if (data.date !== getTodayKey()) { data.date = getTodayKey(); data.progress = {}; localStorage.setItem('aki_daily_' + user.nickname, JSON.stringify(data)); }
             return data;
         }
@@ -1832,7 +1879,7 @@
             const user = getCurrentUser();
             if (!user) return [];
             const raw = localStorage.getItem('aki_achievements_' + user.nickname);
-            return raw ? JSON.parse(raw) : [];
+            return raw ? safeJSONParse(raw) : [];
         }
         function unlockAchievement(id) {
             const user = getCurrentUser();
@@ -1947,14 +1994,14 @@
         function getCurrentSeason() {
             const now = new Date();
             const month = now.getMonth() + 1, day = now.getDate();
-            if (month === 10) return 'halloween';
-            if (month === 12 || (month === 1 && day <= 10)) return 'newyear';
-            return null;
+            // На сайте постоянно используется зимняя тема; сезонный бонус также зимний.
+            return 'newyear';
         }
         function applySeason() {
             const season = getCurrentSeason();
             const badgeWrap = document.getElementById('seasonBadgeWrap');
             document.body.classList.remove('season-halloween', 'season-newyear');
+            document.body.classList.add('season-newyear');
             if (!badgeWrap) return;
             if (season === 'halloween') {
                 document.body.classList.add('season-halloween');
@@ -2057,7 +2104,7 @@
             const user = getCurrentUser();
             if (!user) return [];
             const raw = localStorage.getItem('aki_friends_' + user.nickname);
-            return raw ? JSON.parse(raw) : [];
+            return raw ? safeJSONParse(raw) : [];
         }
         function saveFriends(list) {
             const user = getCurrentUser();
@@ -2123,7 +2170,7 @@
             const user = getCurrentUser();
             if (!user) return { id: 'default', customUrl: '' };
             const raw = localStorage.getItem('aki_cursor_' + user.nickname);
-            return raw ? JSON.parse(raw) : { id: 'default', customUrl: '' };
+            return raw ? safeJSONParse(raw) : { id: 'default', customUrl: '' };
         }
         function saveCursorSettings(s) {
             const user = getCurrentUser();
@@ -2191,7 +2238,7 @@
             const user = getCurrentUser();
             if (!user) return [];
             const raw = localStorage.getItem('aki_favorites_' + user.nickname);
-            return raw ? JSON.parse(raw) : [];
+            return raw ? safeJSONParse(raw) : [];
         }
         function saveFavorites(list) {
             const user = getCurrentUser();
@@ -2459,12 +2506,72 @@
             renderDealBanner();
         }
 
+
+        // ===== ЗИМНЕЕ СОБЫТИЕ =====
+        function winterStorageKey(suffix) {
+            const user = getCurrentUser();
+            return user && typeof user.nickname === 'string' && user.nickname.trim() ? 'aki_winter_' + suffix + '_' + user.nickname.trim().toLocaleLowerCase() : null;
+        }
+        function winterRead(suffix, fallback) {
+            const key = winterStorageKey(suffix);
+            if (!key) return fallback;
+            const raw = localStorage.getItem(key);
+            if (raw === null) return fallback;
+            try { return JSON.parse(raw); } catch (_) { return fallback; }
+        }
+        function winterWrite(suffix, value) {
+            const key = winterStorageKey(suffix);
+            if (key) localStorage.setItem(key, JSON.stringify(value));
+        }
+        function winterDateKey() {
+            const d = new Date();
+            return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+        }
+        function renderWinterEvent() {
+            const snowEl = document.getElementById('winterSnowflakes');
+            if (!snowEl) return;
+            const user = getCurrentUser();
+            const snow = user ? Number(winterRead('snow', 0)) : 0;
+            const ops = user ? Number(winterRead('ops', 0)) : 0;
+            const claimedToday = user && winterRead('last_day', '') === winterDateKey();
+            snowEl.textContent = snow;
+            document.getElementById('winterOps').textContent = ops;
+            document.getElementById('winterRewardStatus').textContent = claimedToday ? 'получена ✓' : 'не получена';
+            const btn = document.getElementById('winterClaimBtn');
+            btn.disabled = !user || claimedToday;
+            btn.textContent = !user ? 'Войди, чтобы участвовать' : claimedToday ? 'Операция на сегодня выполнена ✓' : 'Выполнить зимнюю операцию (+25 ❄, +50 XP)';
+            const note = document.getElementById('winterEventNote');
+            if (user) {
+                const next = snow >= 500 ? 'Все три награды открыты!' : snow >= 250 ? 'Осталось ' + (500-snow) + ' ❄ до награды «Хранитель зимы».' : snow >= 100 ? 'Осталось ' + (250-snow) + ' ❄ до подарка штаба.' : 'Осталось ' + (100-snow) + ' ❄ до награды «Ледяной агент».';
+                note.textContent = next + ' Прогресс сохраняется в этом браузере.';
+            } else note.textContent = 'Войди в аккаунт, чтобы собирать снежинки. Прогресс хранится локально в этом браузере.';
+        }
+        function claimWinterOperation() {
+            const user = getCurrentUser();
+            if (!user) {
+                if (typeof openAuth === 'function') openAuth('login');
+                showNotification('Сначала войди в аккаунт', 'error');
+                return;
+            }
+            if (winterRead('last_day', '') === winterDateKey()) {
+                showNotification('Зимняя операция на сегодня уже выполнена!', 'info');
+                renderWinterEvent();
+                return;
+            }
+            winterWrite('snow', Number(winterRead('snow', 0)) + 25);
+            winterWrite('ops', Number(winterRead('ops', 0)) + 1);
+            winterWrite('last_day', winterDateKey());
+            addXP(50);
+            renderWinterEvent();
+            showNotification('❄ Зимняя операция выполнена! +25 снежинок и +50 XP', 'success');
+        }
+
         // ===== КОРЗИНА =====
         function getCart() {
             const user = getCurrentUser();
             if (!user) return [];
             const raw = localStorage.getItem('aki_cart_items_' + user.nickname);
-            return raw ? JSON.parse(raw) : [];
+            return raw ? safeJSONParse(raw) : [];
         }
         function saveCart(cart) {
             const user = getCurrentUser();
@@ -2602,7 +2709,7 @@
             const user = getCurrentUser();
             if (!user) return [];
             const raw = localStorage.getItem('aki_watchlist_' + user.nickname);
-            return raw ? JSON.parse(raw) : [];
+            return raw ? safeJSONParse(raw) : [];
         }
         function saveWatchlist(list) {
             const user = getCurrentUser();
@@ -2673,7 +2780,7 @@
             const user = getCurrentUser();
             if (!user) return [];
             const raw = localStorage.getItem('aki_used_promos_' + user.nickname);
-            return raw ? JSON.parse(raw) : [];
+            return raw ? safeJSONParse(raw) : [];
         }
         function saveUsedPromos(promos) {
             const user = getCurrentUser();
@@ -2757,10 +2864,27 @@
         }
 
         // ===== АВТОРИЗАЦИЯ =====
-        function getUsers() { const u = localStorage.getItem('aki_users'); return u ? JSON.parse(u) : {}; }
+        // Данные и пароли хранятся локально только для прототипа. Для публичного сайта нужна серверная авторизация.
+        function getUsers() {
+            const raw = localStorage.getItem('aki_users');
+            const users = raw ? safeJSONParse(raw, {}) : {};
+            return users && typeof users === 'object' && !Array.isArray(users) ? users : {};
+        }
         function saveUsers(users) { localStorage.setItem('aki_users', JSON.stringify(users)); }
-        function getCurrentUser() { const u = localStorage.getItem('aki_current_user'); return u ? JSON.parse(u) : null; }
+        function getCurrentUser() {
+            const u = localStorage.getItem('aki_current_user');
+            const current = u ? safeJSONParse(u, null) : null;
+            if (!current || !current.nickname) return null;
+            // Не считаем пользователя вошедшим, если его аккаунта больше нет в списке.
+            const users = getUsers();
+            const key = Object.keys(users).find(k => k.toLowerCase() === String(current.nickname).toLowerCase());
+            if (!key) return null;
+            const account = users[key];
+            return { nickname: key, gender: account.gender || current.gender || '', avatar: account.avatar || current.avatar || null };
+        }
         function setCurrentUser(user) { if (user) localStorage.setItem('aki_current_user', JSON.stringify(user)); else localStorage.removeItem('aki_current_user'); }
+
+        // Аккаунты сохраняются между входами и выходами. Выход удаляет только текущую сессию.
         function openAuth(mode) {
             const modal = document.getElementById('authModal');
             modal.style.display = 'flex';
@@ -2792,21 +2916,21 @@
             const avatarUrl = document.getElementById('regAvatar').value.trim();
             const gender = document.getElementById('regGender').value;
             const errorEl = document.getElementById('regError');
-            const ADMIN_SECRET = "superadmin123";
-            if (nick.toLowerCase() === 'the_misteraki' && pass !== ADMIN_SECRET) { errorEl.textContent = currentLang === 'ru' ? 'Ник занят.' : 'Taken.'; return; }
-            if (!nick || nick.length < 2) { errorEl.textContent = currentLang === 'ru' ? 'Ник мин 2' : 'Nick min 2'; return; }
-            if (!pass || pass.length < 4) { errorEl.textContent = currentLang === 'ru' ? 'Пароль мин 4' : 'Pass min 4'; return; }
+            if (!nick || nick.length < 2 || nick.length > 24) { errorEl.textContent = currentLang === 'ru' ? 'Ник должен содержать от 2 до 24 символов.' : 'Nickname must be 2–24 characters.'; return; }
+            if (!/^[\p{L}\p{N}_-]+$/u.test(nick)) { errorEl.textContent = currentLang === 'ru' ? 'Используй только буквы, цифры, _ и -.' : 'Use only letters, numbers, _ and -.'; return; }
+            if (!pass || pass.length < 8) { errorEl.textContent = currentLang === 'ru' ? 'Пароль должен содержать минимум 8 символов.' : 'Password must be at least 8 characters.'; return; }
             if (!gender) { errorEl.textContent = currentLang === 'ru' ? 'Выбери пол' : 'Choose gender'; return; }
             const users = getUsers();
-            if (users[nick]) { errorEl.textContent = currentLang === 'ru' ? 'Ник занят' : 'Taken'; return; }
-            let finalPass = pass;
-            if (nick.toLowerCase() === 'the_misteraki' && pass === ADMIN_SECRET) finalPass = "mypassword123";
-            users[nick] = { password: finalPass, gender, avatar: avatarUrl || null };
+            const existingNick = Object.keys(users).some(key => key.toLowerCase() === nick.toLowerCase());
+            if (existingNick) { errorEl.textContent = currentLang === 'ru' ? 'Этот ник уже занят.' : 'This nickname is already taken.'; return; }
+            // Внимание: это локальная демо-авторизация. Пароли в браузере нельзя считать защищёнными.
+            users[nick] = { password: pass, gender, avatar: avatarUrl || null };
             saveUsers(users);
             setCurrentUser({ nickname: nick, gender, avatar: avatarUrl || null });
             errorEl.textContent = '';
             closeAuth();
             updateUserArea();
+            if (typeof renderWinterEvent === 'function') renderWinterEvent();
             renderContinue(); renderWatchlist(); renderAllEpisodes();
             renderDailyTasks(); updateDailyBonusButton(); renderAchievements(); renderFriends();
             applyCursorClass();
@@ -2818,12 +2942,21 @@
             const errorEl = document.getElementById('logError');
             if (!nick || !pass) { errorEl.textContent = currentLang === 'ru' ? 'Заполни поля' : 'Fill'; return; }
             const users = getUsers();
-            if (!users[nick]) { errorEl.textContent = currentLang === 'ru' ? 'Не найден' : 'Not found'; return; }
-            if (users[nick].password !== pass) { errorEl.textContent = currentLang === 'ru' ? 'Неверный пароль' : 'Wrong'; return; }
-            setCurrentUser({ nickname: nick, gender: users[nick].gender, avatar: users[nick].avatar || null });
+            const matchedNick = Object.keys(users).find(key => key.trim().toLocaleLowerCase() === nick.trim().toLocaleLowerCase());
+            const account = matchedNick ? users[matchedNick] : null;
+            if (!account) {
+                errorEl.textContent = currentLang === 'ru'
+                    ? 'Аккаунт не найден в этом браузере. Проверь раскладку и регистр ника или зарегистрируйся заново. Аккаунты из другого браузера/старой копии HTML автоматически не переносятся.'
+                    : 'Account not found in this browser. Check the nickname or register again. Accounts from another browser/older HTML copy are not transferred automatically.';
+                return;
+            }
+            if (typeof account.password !== 'string') { errorEl.textContent = currentLang === 'ru' ? 'У этого аккаунта повреждены данные. Зарегистрируй его заново.' : 'This account data is incomplete. Please register again.'; return; }
+            if (account.password !== pass) { errorEl.textContent = currentLang === 'ru' ? 'Неверный пароль' : 'Wrong'; return; }
+            setCurrentUser({ nickname: matchedNick, gender: account.gender, avatar: account.avatar || null });
             errorEl.textContent = '';
             closeAuth();
             updateUserArea();
+            if (typeof renderWinterEvent === 'function') renderWinterEvent();
             renderContinue(); renderWatchlist(); renderAllEpisodes();
             renderDailyTasks(); updateDailyBonusButton(); renderAchievements(); renderFriends();
             applySeason(); applyCursorClass();
@@ -2832,6 +2965,7 @@
         function logout() {
             setCurrentUser(null);
             updateUserArea();
+            if (typeof renderWinterEvent === 'function') renderWinterEvent();
             document.getElementById('cartCount').textContent = '0';
             renderContinue(); renderWatchlist(); renderAllEpisodes(); renderDailyTasks(); renderAchievements(); renderFriends();
             document.body.classList.remove('cursor-crosshair', 'cursor-reverse', 'cursor-chip', 'cursor-anomaly', 'cursor-redstone', 'cursor-star', 'cursor-skull', 'cursor-nuke');
@@ -2882,7 +3016,7 @@
             const user = getCurrentUser();
             if (!user) return { color: 'default', frame: 'basic', status: 'agent' };
             const c = localStorage.getItem('aki_custom_' + user.nickname);
-            return c ? JSON.parse(c) : { color: 'default', frame: 'basic', status: 'agent' };
+            return c ? safeJSONParse(c) : { color: 'default', frame: 'basic', status: 'agent' };
         }
         function saveCustomization(c) {
             const user = getCurrentUser();
@@ -3055,7 +3189,7 @@
             const name = nameEl ? nameEl.value.trim() : '';
             if (!text || text.length < 5) { showNotification(currentLang === 'ru' ? 'Напиши идею (мин 5)' : 'Write an idea (min 5)', 'error'); return; }
             const user = getCurrentUser();
-            const all = JSON.parse(localStorage.getItem('aki_suggestions') || '[]');
+            const all = safeJSONParse(localStorage.getItem('aki_suggestions') || '[]');
             all.push({ name: name || (user ? user.nickname : 'Аноним'), text, date: new Date().toISOString() });
             localStorage.setItem('aki_suggestions', JSON.stringify(all));
             if (textEl) textEl.value = '';
@@ -3065,8 +3199,9 @@
             showNotification(currentLang === 'ru' ? '💡 Спасибо! Идея отправлена.' : '💡 Thanks!', 'success');
         }
         function sendCoop() {
-            showNotification(currentLang === 'ru' ? 'Сообщение отправлено!' : 'Message sent!', 'success');
-            addXP(15);
+            showNotification(currentLang === 'ru'
+                ? 'Отправка пока не подключена: для этого нужен сервер или адрес получателя.'
+                : 'Sending is not configured yet: a server or recipient address is required.', 'error');
         }
         const NEXT_RELEASE = { title: "1 арка 1 сезона", date: "2026-11-01T19:10:00" };
         let timerInterval = null;
@@ -3263,11 +3398,16 @@
             if (page === 'characters') renderCharacters();
             if (page === 'lore') renderLore();
             if (page === 'quotes') renderQuotes();
-            if (page === 'home') { renderAllEpisodes(); renderContinue(); renderWatchlist(); renderTimeline(); }
+            if (page === 'home') { renderWinterEvent(); renderAllEpisodes(); renderContinue(); renderWatchlist(); renderTimeline(); }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // ===== ESC / ИНИЦИАЛИЗАЦИЯ =====
+        window.addEventListener('focus', () => {
+            if (typeof renderWinterEvent === 'function') renderWinterEvent();
+            if (typeof updateUserArea === 'function') updateUserArea();
+        });
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeAuth(); closePromoModal(); closeAuthRequired(); closeSearch(); closeCart();
@@ -3281,6 +3421,7 @@
         initAnimatedBg();
         startTimer();
         updateUserArea();
+        renderWinterEvent();
         applyLang();
         renderAllEpisodes();
         renderContinue();
