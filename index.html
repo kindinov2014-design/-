@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0f">
+    <title>Аки и Эпсилон | Официальная платформа</title>
+    <style>
+        /* ================= БАЗА ================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        :root {
+            --bg: #09090c; --bg-2: #120609; --panel: #171014; --panel-2: #241116;
+            --text: #e0e0e0; --text-muted: #aaa; --text-dim: #888;
+            --accent: #e21b2d; --accent-hover: #ff3547; --accent-glow: rgba(226,27,45,0.42);
+            --border: rgba(255,255,255,0.05); --border-soft: rgba(255,255,255,0.1);
+            --discord: #a31225; --tg: #c0182b; --yt: #FF0000;
+            --success: #ff4a5b; --warn: #ff858e;
+            --faction-color: #e21b2d;
+        }
+        body.theme-light {
+            --bg: #16090b; --bg-2: #260b10; --panel: #1c1114; --panel-2: #2a151a;
+            --text: #1c1e21; --text-muted: #4b4f56; --text-dim: #65676b;
+            --accent: #e21b2d; --accent-hover: #ff3547; --accent-glow: rgba(226,27,45,0.3);
+            --border: rgba(0,0,0,0.08); --border-soft: rgba(0,0,0,0.15);
+        }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; overflow-x: hidden; position: relative; background: radial-gradient(circle at 50% 0%, var(--bg-2) 0%, var(--bg) 60%); transition: background 0.6s ease, color 0.4s ease; }
+        
+        #bg-glow { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; background: radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--accent-glow), transparent 80%); opacity: 0.4; transition: background 0.1s ease; }
+        body.theme-light #bg-glow { opacity: 0.15; }
+
+        /* ================= TOPBAR ================= */
+        .topbar { background-color: rgba(10,10,15,0.85); padding: 10px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        body.theme-light .topbar { background-color: rgba(255,255,255,0.85); }
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: 1px; display: flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; user-select: none; }
+        .logo span { color: var(--accent); font-size: 1.7rem; }
+        .topbar-nav { display: flex; gap: 5px; background: var(--border); padding: 6px 10px; border-radius: 30px; border: 1px solid var(--border); flex-wrap: wrap; }
+        .nav-btn { background: transparent; border: none; color: var(--text-muted); padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; cursor: pointer; font-family: inherit; white-space: nowrap; transition: all 0.2s; }
+        .nav-btn:hover { color: var(--text); background: var(--border-soft); }
+        .nav-btn.active { background: var(--accent); color: #fff; }
+        .topbar-right { display: flex; align-items: center; gap: 10px; }
+        .icon-btn { background: var(--border); border: 1px solid var(--border-soft); color: var(--text); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1rem; position: relative; display: inline-flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .icon-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: scale(1.05); }
+        .cart-btn { background: var(--accent); color: #fff; border: none; }
+        .cart-btn:hover { background: var(--accent-hover); }
+        .cart-count { position: absolute; top: -3px; right: -3px; background: #fff; color: var(--accent); font-size: 0.7rem; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .user-btn { display: flex; align-items: center; gap: 8px; background: linear-gradient(145deg, #8b0000, var(--accent)); color: #fff; padding: 8px 16px; border-radius: 30px; border: none; cursor: pointer; font-weight: 700; font-size: 0.85rem; font-family: inherit; transition: all 0.2s; }
+        .user-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px var(--accent-glow); }
+        .user-btn .avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; overflow: hidden; }
+        .lang-btn { background: var(--border); border: 1px solid var(--border-soft); color: var(--text); padding: 8px 12px; border-radius: 30px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; min-width: 60px; transition: all 0.2s; }
+        .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ================= PAGES ================= */
+        .page { display: none; animation: pageFade 0.3s ease; }
+        .page.active { display: block; }
+        @keyframes pageFade { from { opacity: 0; } to { opacity: 1; } }
+
+        /* ================= HERO ================= */
+        .hero { position: relative; height: min(82vh, 900px); min-height: 620px; background: radial-gradient(ellipse at 50% 45%, rgba(28,100,45,.20) 0%, rgba(4,20,9,.18) 55%, rgba(4,20,9,.62) 100%); overflow: hidden; display: flex; align-items: center; padding: 70px clamp(24px, 8vw, 120px); }
+        .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(5,7,12,.88) 0%, rgba(5,7,12,.62) 32%, rgba(5,7,12,.08) 72%, rgba(5,7,12,.18) 100%); }
+        .hero-content { position: relative; z-index: 2; max-width: 700px; text-align: left; padding: clamp(20px, 3vw, 38px); border: 1px solid rgba(100,210,120,.22); border-radius: 24px; background: linear-gradient(135deg, rgba(5,12,22,.72), rgba(5,12,22,.25)); box-shadow: 0 20px 70px rgba(0,0,0,.2); backdrop-filter: blur(3px); }
+        .hero h1 { font-size: 4.5rem; font-weight: 900; color: var(--text); letter-spacing: 4px; margin-bottom: 20px; line-height: 1; text-shadow: 0 0 20px var(--accent-glow); }
+        .hero p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.7; max-width: 600px; }
+        .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn-primary, .btn-secondary, .btn-discord { padding: 16px 40px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; font-family: inherit; text-align: center; transition: all 0.25s ease; }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 5px 15px var(--accent-glow); }
+        .btn-secondary { background: var(--panel); color: var(--text); border: 1px solid var(--border-soft); }
+        .btn-secondary:hover { border-color: var(--accent); background: var(--panel-2); transform: translateY(-3px); }
+        .btn-discord { background: var(--discord); color: #fff; }
+        .btn-discord:hover { background: #246b3b; transform: translateY(-3px); }
+
+        /* ================= GAME ================= */
+        .game-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
+        .game-box { background: var(--panel); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; }
+        .game-mode-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+        .game-mode-tab { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 10px 22px; border-radius: 25px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; transition: all 0.2s; }
+        .game-mode-tab:hover { color: var(--text); border-color: var(--accent); }
+        .game-mode-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .game-title { font-size: 1.5rem; color: var(--accent); font-weight: 900; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
+        .game-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
+        .game-area { position: relative; width: 100%; height: 300px; background: var(--bg); border: 1px solid var(--border-soft); border-radius: 16px; overflow: hidden; margin-bottom: 20px; cursor: crosshair; user-select: none; }
+        .game-target { position: absolute; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #fff; border: 2px solid #fff; animation: targetIn 0.25s ease; }
+        .game-target.fast { background: #ffd700; width: 30px; height: 30px; font-size: 1rem; }
+        .game-target.boss { background: #8b0000; width: 60px; height: 60px; font-size: 2rem; border: 3px solid #ffd700; }
+        @keyframes targetIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .boss-target { position: absolute; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle, #ff0000, #8b0000); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; border: 3px solid #ffd700; box-shadow: 0 0 25px rgba(255,0,0,0.7); animation: bossPulse 1s ease-in-out infinite; }
+        @keyframes bossPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        .splatter { position: absolute; width: 10px; height: 10px; background: #ff3333; border-radius: 50%; pointer-events: none; z-index: 10; animation: splatter-anim 0.5s ease-out forwards; }
+        @keyframes splatter-anim { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
+        .game-stats { display: flex; justify-content: center; gap: 30px; margin-bottom: 15px; flex-wrap: wrap; }
+        .game-stat { text-align: center; }
+        .game-stat-val { font-size: 1.8rem; font-weight: 900; color: var(--accent); }
+        .game-stat-lbl { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .game-combo { font-size: 1.2rem; color: #ffd700; font-weight: 900; height: 30px; opacity: 0; transition: opacity 0.2s; }
+        .game-combo.active { opacity: 1; }
+        .game-start-btn { background: var(--accent); color: #fff; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+        .game-start-btn:hover { background: var(--accent-hover); transform: scale(1.05); }
+        .game-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20; color: #fff; text-align: center; padding: 20px; }
+        .game-overlay h3 { font-size: 2rem; margin-bottom: 10px; color: var(--accent); }
+        .game-overlay p { font-size: 1rem; margin-bottom: 20px; }
+        .leaderboard-btn { background: linear-gradient(120deg, #ffd700, #ff8c00); color: #000; padding: 12px 28px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; margin-top: 15px; transition: all 0.2s; }
+        .leaderboard-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,200,0,0.5); }
+        
+        /* Отчёт игры (пункт 3) */
+        .game-report { display: none; margin-top: 18px; padding: 18px 22px; background: linear-gradient(135deg, rgba(226,27,45,.14), rgba(0,0,0,.25)); border: 1px solid var(--accent); border-radius: 14px; text-align: left; animation: reportIn 0.5s cubic-bezier(0.22,1,0.36,1); }
+        .game-report.show { display: block; }
+        @keyframes reportIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .game-report-title { color: var(--accent); font-weight: 900; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 8px; }
+        .game-report-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+        .game-report-text strong { color: var(--accent); }
+
+        /* ================= ТАЙМЛАЙН ================= */
+        .timeline-section { max-width: 900px; margin: 60px auto; padding: 0 60px; }
+        .timeline-title { font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 25px; }
+        .timeline-title span { color: var(--accent); }
+        .timeline-wrap { position: relative; padding-left: 40px; }
+        .timeline-wrap::before { content: ''; position: absolute; left: 15px; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--accent), #b388ff, #00e5ff); border-radius: 2px; }
+        .timeline-item { position: relative; margin-bottom: 30px; }
+        .timeline-dot { position: absolute; left: -32px; top: 8px; width: 20px; height: 20px; border-radius: 50%; background: var(--panel); border: 3px solid var(--accent); box-shadow: 0 0 15px var(--accent-glow); z-index: 2; }
+        .timeline-card { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 14px; padding: 18px 22px; transition: transform 0.2s, border-color 0.2s; cursor: pointer; }
+        .timeline-card:hover { transform: translateX(5px); border-color: var(--accent); }
+        .timeline-date { font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+        .timeline-event-title { font-size: 1.05rem; color: var(--text); font-weight: 800; margin-bottom: 6px; }
+        .timeline-event-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        .timeline-emoji { font-size: 1.5rem; margin-right: 8px; }
+        .timeline-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .timeline-filter { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; transition: all 0.2s; }
+        .timeline-filter.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        /* ================= КАРТА ================= */
+        .map-section { max-width: 1200px; margin: 60px auto; padding: 0 60px; }
+        .map-title { font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 25px; }
+        .map-title span { color: var(--accent); }
+        .map-container { background: var(--panel); border: 2px solid var(--border-soft); border-radius: 24px; padding: 30px; }
+        .map-svg { width: 100%; height: auto; display: block; border-radius: 16px; min-height: 600px; }
+        .map-line { stroke-dasharray: 8 6; animation: dash 3s linear infinite; }
+        @keyframes dash { to { stroke-dashoffset: -28; } }
+        .map-point { cursor: pointer; }
+        .map-point:hover circle:first-child { r: 22; fill: var(--accent); filter: drop-shadow(0 0 10px var(--accent)); }
+        .map-point circle { transition: all 0.3s ease; }
+        .map-point text { transition: all 0.3s ease; pointer-events: none; }
+        .map-info { background: var(--bg); border: 1px solid var(--accent); border-radius: 16px; padding: 25px 30px; margin-top: 20px; text-align: center; color: var(--text); min-height: 80px; }
+        .map-info strong { color: var(--accent); font-size: 1.3rem; display: block; margin-bottom: 8px; letter-spacing: 2px; text-transform: uppercase; }
+        .map-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
+        .map-filter { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; transition: all 0.2s; }
+        .map-filter.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        /* ================= ВИТРИНЫ ================= */
+        .section-wrapper { padding: 0 60px; margin-bottom: 40px; }
+        .section-title { font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 25px; }
+        .section-title span { color: var(--accent); }
+        .showcase-tabs { display: flex; gap: 10px; margin-bottom: 30px; padding: 0 60px; flex-wrap: wrap; }
+        .showcase-tab { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 12px 28px; border-radius: 25px; cursor: pointer; font-weight: 700; font-size: 0.85rem; font-family: inherit; transition: all 0.2s; }
+        .showcase-tab:hover { color: var(--text); border-color: var(--accent); }
+        .showcase-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .showcase-content { display: none; }
+        .showcase-content.active { display: block; }
+        .showcase-description { background: var(--panel); border-left: 4px solid var(--accent); border-radius: 0 16px 16px 0; padding: 25px 30px; margin-bottom: 25px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
+        .showcase-description strong { color: var(--accent); font-size: 1.1rem; }
+        .carousel { display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 20px; }
+        .carousel::-webkit-scrollbar { height: 6px; }
+        .carousel::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+        .card { flex: 0 0 300px; background: var(--panel); border: 1px solid var(--border-soft); border-radius: 16px; overflow: hidden; cursor: pointer; position: relative; transition: transform 0.25s, border-color 0.25s; }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card-image { width: 100%; height: 180px; background: linear-gradient(135deg, var(--bg-2), var(--bg)); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; }
+        .card-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8) 100%); }
+        .card-content { padding: 18px; }
+        .card-title { font-size: 1.1rem; font-weight: 800; color: var(--text); margin-bottom: 5px; }
+        .card-subtitle { font-size: 0.8rem; color: var(--accent); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .card-add { position: absolute; top: 10px; right: 10px; background: var(--panel); border: 1px solid var(--accent); color: var(--accent); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; z-index: 5; transition: all 0.2s; }
+        .card-add:hover { background: var(--accent); color: #fff; }
+        .card-add.added { background: var(--accent); color: #fff; }
+
+        /* ================= МАГАЗИН ================= */
+        .big-banner { max-width: 1200px; margin: 60px auto; padding: 0 60px; }
+        .big-banner-inner { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 20px; padding: 60px; text-align: center; }
+        .big-banner h2 { font-size: 2.2rem; color: var(--text); margin-bottom: 15px; }
+        .big-banner p { color: var(--text-muted); font-size: 1rem; margin-bottom: 25px; }
+        .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+        .shop-item { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 16px; padding: 30px; text-align: center; cursor: pointer; position: relative; transition: transform 0.25s, border-color 0.25s; }
+        .shop-item:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .shop-emoji { font-size: 4rem; margin-bottom: 15px; }
+        .shop-name { font-size: 1.2rem; color: var(--text); font-weight: 800; margin-bottom: 10px; }
+        .shop-price { font-size: 1.5rem; color: var(--accent); font-weight: 900; margin-bottom: 15px; min-height: 2rem; }
+        .shop-price.free { color: var(--success); font-size: 1.1rem; }
+        .shop-price.no-price { color: var(--text-dim); font-size: 0.75rem; font-weight: 600; font-style: italic; line-height: 1.5; min-height: 3rem; padding: 0 10px; }
+        .shop-discount { position: absolute; top: 10px; right: 10px; background: var(--accent); color: #fff; font-size: 0.8rem; font-weight: 900; padding: 5px 12px; border-radius: 20px; z-index: 2; }
+        .shop-buy { background: var(--accent); color: #fff; padding: 12px 30px; border: none; border-radius: 25px; font-weight: 800; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+        .shop-buy:hover { background: var(--accent-hover); transform: scale(1.05); }
+
+        /* ================= МУЗЫКА / РАДИО ================= */
+        .music-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+        .music-item { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 16px; padding: 25px; cursor: pointer; transition: transform 0.25s, border-color 0.25s; }
+        .music-item:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .music-cover { font-size: 3rem; margin-bottom: 15px; }
+        .music-name { font-size: 1.1rem; color: var(--text); font-weight: 800; margin-bottom: 5px; }
+        .music-artist { font-size: 0.85rem; color: var(--accent); font-weight: 700; }
+        
+        .radio-box { max-width: 1200px; margin: 0 auto 30px; padding: 0 60px; }
+        .radio-inner { background: linear-gradient(135deg, rgba(226,27,45,.08), rgba(0,0,0,.3)); border: 1px solid var(--accent); border-radius: 18px; padding: 24px 28px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .radio-freq { font-size: 1.6rem; font-weight: 900; color: var(--accent); letter-spacing: 2px; }
+        .radio-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+        .radio-visualizer { display: flex; gap: 4px; align-items: flex-end; height: 40px; flex: 1; min-width: 120px; }
+        .radio-bar { flex: 1; background: var(--accent); border-radius: 2px; height: 20%; opacity: 0.35; transition: height 0.12s ease, opacity 0.12s ease; }
+        .radio-inner.playing .radio-bar { opacity: 1; }
+        .radio-status { font-size: 0.8rem; color: var(--text-muted); }
+        .radio-btn { background: var(--accent); color: #fff; border: none; border-radius: 50%; width: 52px; height: 52px; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+
+        /* ================= ПЕРСОНАЖИ ================= */
+        .char-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+        .char-card { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 18px; padding: 25px 20px; text-align: center; cursor: pointer; position: relative; overflow: hidden; transition: transform 0.25s, border-color 0.25s; }
+        .char-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--char-color, var(--accent)); }
+        .char-card:hover { transform: translateY(-5px); border-color: var(--char-color, var(--accent)); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .char-avatar { width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.8rem; background: var(--bg); border: 3px solid var(--char-color, var(--accent)); overflow: hidden; }
+        .char-name { font-size: 1.15rem; color: var(--text); font-weight: 900; margin-bottom: 4px; }
+        .char-role { font-size: 0.72rem; color: var(--char-color, var(--accent)); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+        .char-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; min-height: 50px; }
+        .char-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+        .char-badge.alive { background: rgba(255,53,71,0.12); color: var(--success); border: 1px solid rgba(255,53,71,0.3); }
+        .char-badge.dead { background: rgba(255,51,51,0.12); color: var(--accent); border: 1px solid rgba(255,51,51,0.3); }
+        .char-badge.unknown { background: rgba(255,200,0,0.12); color: var(--warn); border: 1px solid rgba(255,200,0,0.3); }
+
+        /* ================= ЛОР ================= */
+        .lore-accordion-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+        .lore-item { background: var(--panel); border: 2px solid var(--border-soft); border-radius: 16px; margin-bottom: 15px; overflow: hidden; }
+        .lore-item.active { border-color: var(--accent); }
+        .lore-header { display: flex; justify-content: space-between; align-items: center; padding: 22px 28px; cursor: pointer; }
+        .lore-header:hover { background: var(--bg); }
+        .lore-header-left { display: flex; align-items: center; gap: 15px; }
+        .lore-icon { font-size: 1.8rem; }
+        .lore-header-title { font-size: 1.15rem; color: var(--text); font-weight: 800; }
+        .lore-header-icon { font-size: 1.3rem; color: var(--accent); transition: transform 0.3s ease; }
+        .lore-item.active .lore-header-icon { transform: rotate(180deg); }
+        .lore-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .lore-item.active .lore-body { max-height: 3000px; }
+        .lore-body-inner { padding: 0 28px 28px 28px; border-top: 1px dashed var(--border-soft); padding-top: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
+        .lore-body-inner strong { color: var(--accent); }
+
+        /* ================= СЕЗОНЫ ================= */
+        .season-accordion-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+        .season-accordion-item { background: var(--panel); border: 2px solid var(--border-soft); border-radius: 16px; margin-bottom: 15px; overflow: hidden; }
+        .season-accordion-item.active { border-color: var(--accent); }
+        .season-header { display: flex; justify-content: space-between; align-items: center; padding: 25px 30px; cursor: pointer; }
+        .season-header:hover { background: var(--bg); }
+        .season-header-left { display: flex; align-items: center; gap: 20px; }
+        .season-header-number { font-size: 2.5rem; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--accent); line-height: 1; }
+        .season-accordion-item.active .season-header-number { color: var(--accent); -webkit-text-stroke: 0; }
+        .season-header-title { font-size: 1.3rem; color: var(--text); font-weight: 800; }
+        .season-header-badge { display: inline-block; padding: 4px 12px; border-radius: 15px; font-size: 0.65rem; font-weight: 800; margin-left: 10px; vertical-align: middle; }
+        .season-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .season-accordion-item.active .season-body { max-height: 2500px; }
+        .season-body-inner { padding: 0 30px 30px 30px; border-top: 1px dashed var(--border-soft); padding-top: 25px; }
+
+        /* ================= ФРАКЦИИ ================= */
+        .faction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+        .faction-card { border: 1px solid rgba(226,27,45,.35); border-radius: 18px; background: linear-gradient(145deg, rgba(42,12,18,.96), rgba(13,9,12,.98)); box-shadow: 0 12px 35px rgba(0,0,0,.25); padding: 24px; color: #eee; transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; position: relative; cursor: pointer; }
+        .faction-card:hover { transform: translateY(-5px); border-color: var(--faction-color, var(--accent)); }
+        .faction-card.selected { border-color: var(--faction-color, var(--accent)); box-shadow: 0 0 25px var(--faction-color, var(--accent)); }
+        .faction-card h3 { margin: 0 0 10px; color: #fff; font-size: 1.2rem; }
+        .faction-card p { color: #d0b8bc; line-height: 1.6; font-size: 0.85rem; margin-bottom: 14px; }
+        .faction-card button { border: 1px solid var(--faction-color, var(--accent)); background: rgba(255,255,255,0.05); color: #fff; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-family: inherit; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; }
+        .faction-card.selected button { background: var(--faction-color, var(--accent)); }
+        .faction-status { text-align: center; margin: 25px auto 40px; color: #ffb6be; font-weight: 700; font-size: 0.9rem; padding: 12px 20px; border: 1px dashed var(--accent); border-radius: 12px; max-width: 700px; }
+        .faction-epsilon { --faction-color: #39c96b; border-top: 3px solid #39c96b; }
+        .faction-omega { --faction-color: #a88be7; border-top: 3px solid #a88be7; }
+        .faction-witness { --faction-color: #69b8cf; border-top: 3px solid #69b8cf; }
+
+        /* ================= ГАЛЕРЕЯ ================= */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+        .gallery-card { border: 1px solid rgba(226,27,45,.35); border-radius: 18px; background: var(--panel); overflow: hidden; cursor: pointer; transition: transform 0.25s; }
+        .gallery-card:hover { transform: translateY(-5px); }
+        .gallery-art { height: 190px; background: #10080b; display: grid; place-items: center; font-size: 4rem; }
+        .gallery-card h3 { padding: 15px 18px 5px; margin: 0; }
+        .gallery-card p { padding: 0 18px 18px; color: var(--text-muted); font-size: 0.85rem; }
+        .gallery-filters { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; padding: 0 24px 20px; }
+        .gallery-tag { background: var(--panel); border: 1px solid var(--border-soft); padding: 6px 14px; border-radius: 15px; cursor: pointer; color: var(--text-muted); }
+        .gallery-tag.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        /* ================= ТЕРМИНАЛ ================= */
+        .terminal-panel { max-width: 850px; margin: 0 auto 50px; padding: 0 60px; }
+        .terminal-inner { background: #10080b; border: 1px solid #8e1b2a; border-radius: 14px; padding: 20px; font-family: monospace; color: #ffbfc7; box-shadow: 0 0 30px rgba(226,27,45,.18); }
+        .terminal-top { border-bottom: 1px solid #61202b; padding-bottom: 10px; color: #f0b6bd; font-size: 0.85rem; display: flex; justify-content: space-between; }
+        .terminal-log { max-height: 320px; overflow-y: auto; padding: 14px 0; font-size: 0.85rem; line-height: 1.7; }
+        .terminal-line { margin-bottom: 4px; white-space: pre-wrap; }
+        .terminal-line.cmd::before { content: '> '; color: #ff5966; }
+        .terminal-line.err { color: #ff7780; }
+        .terminal-line.ok { color: #7bea91; }
+        .terminal-input-row { display: flex; gap: 8px; padding-top: 12px; border-top: 1px solid #61202b; }
+        .terminal-input-row input { flex: 1; min-width: 0; background: #170b0e; color: #fff; border: 1px solid #8e1b2a; border-radius: 8px; padding: 10px 12px; font: inherit; font-size: 0.85rem; }
+        .terminal-input-row button { border: 1px solid #b51d30; background: #45101a; color: #fff; padding: 10px 18px; border-radius: 8px; cursor: pointer; font: inherit; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; }
+        .terminal-input-row button:hover { background: #8d1426; }
+
+        /* ================= ПРОФИЛЬ ================= */
+        #profileModal.modal-overlay { backdrop-filter: blur(0px); transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1), visibility 0s linear 0.5s, backdrop-filter 0.5s; opacity: 0; visibility: hidden; pointer-events: none; }
+        #profileModal.modal-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; backdrop-filter: blur(10px); transition: opacity 0.5s, visibility 0s linear 0s, backdrop-filter 0.5s; }
+        .profile-modal { background: var(--panel); border-radius: 18px; padding: 22px 20px; width: min(92vw, 390px); max-height: 76vh; overflow-y: auto; opacity: 0; transform: translateY(24px) scale(0.94); filter: blur(6px); transition: opacity 0.55s, transform 0.55s, filter 0.55s; }
+        #profileModal.active .profile-modal { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); box-shadow: 0 20px 60px rgba(0,0,0,0.55), 0 0 40px var(--accent-glow); }
+        .profile-modal > * { opacity: 0; transform: translateY(10px); transition: opacity 0.4s, transform 0.4s; }
+        #profileModal.active .profile-modal > * { opacity: 1; transform: translateY(0); }
+        #profileModal.active .profile-modal > *:nth-child(1) { transition-delay: 0.12s; }
+        #profileModal.active .profile-modal > *:nth-child(2) { transition-delay: 0.16s; }
+        #profileModal.active .profile-modal > *:nth-child(3) { transition-delay: 0.20s; }
+        #profileModal.active .profile-modal > *:nth-child(4) { transition-delay: 0.24s; }
+        #profileModal.active .profile-modal > *:nth-child(5) { transition-delay: 0.28s; }
+        #profileModal.active .profile-modal > *:nth-child(6) { transition-delay: 0.32s; }
+
+        .agent-dossier { background: var(--bg); border: 1px dashed var(--accent); border-radius: 12px; padding: 14px; margin: 12px 0; font-family: monospace; font-size: 0.8rem; color: var(--text-muted); }
+        .agent-dossier-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dotted var(--border-soft); }
+        .agent-dossier-row span:last-child { color: var(--accent); font-weight: 800; }
+        .agent-journal { max-height: 120px; overflow-y: auto; background: var(--bg); border-radius: 10px; padding: 8px 12px; font-size: 0.75rem; color: var(--text-dim); }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 20px; padding: 40px; max-width: 450px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; }
+        .modal-close { position: absolute; top: 15px; right: 20px; background: transparent; border: none; color: var(--text-dim); font-size: 1.8rem; cursor: pointer; }
+        .modal h2 { font-size: 1.6rem; color: var(--text); margin-bottom: 25px; text-align: center; letter-spacing: 2px; text-transform: uppercase; }
+
+        .lightbox { position: fixed; inset: 0; z-index: 5000; background: rgba(0,0,0,.94); display: none; align-items: center; justify-content: center; flex-direction: column; padding: 40px 20px; opacity: 0; transition: opacity 0.35s ease; }
+        .lightbox.active { display: flex; opacity: 1; }
+        .lightbox img { max-width: 90vw; max-height: 78vh; border-radius: 12px; transform: scale(0.95); transition: transform 0.4s; }
+        .lightbox.active img { transform: scale(1); }
+        .lightbox-close { position: absolute; top: 20px; right: 24px; background: transparent; border: 1px solid var(--accent); color: #fff; font-size: 1.8rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; }
+
+        .notification { position: fixed; top: 80px; right: -400px; background: var(--panel); border: 1px solid var(--accent); border-radius: 12px; padding: 18px 25px; color: var(--text); z-index: 2000; transition: right 0.3s ease; max-width: 350px; }
+        .notification.show { right: 30px; }
+        .notification.success { border-color: var(--success); }
+
+        #loadingScreen { position: fixed; inset: 0; z-index: 99999; background: #09090c; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+        #loadingScreen.hidden { opacity: 0; visibility: hidden; }
+        .loading-logo { font-size: 3rem; font-weight: 900; color: #fff; letter-spacing: 6px; margin-bottom: 20px; animation: loadingPulse 1.5s infinite; }
+        .loading-logo span { color: var(--accent); }
+        .loading-bar { width: 280px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+        .loading-bar-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s ease; }
+
+        /* Адаптив */
+        @media (max-width: 1100px) { .topbar-nav { display: none; } }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .section-wrapper, .promo, .big-banner, .about-section, .showcase-tabs, .prediction-section, .map-section, .season-accordion-wrapper, .char-grid, .lore-accordion-wrapper, .coop-section, .shop-grid, .music-grid, .timer-section, .game-section, .daily-section, .wheel-section, .duel-section, .friends-section, .quotes-section, .timeline-section, .faction-grid, .radio-box, .terminal-panel { padding-left: 20px; padding-right: 20px; }
+            .radio-inner { flex-direction: column; text-align: center; }
+            .terminal-input-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ЗАГРУЗОЧНЫЙ ЭКРАН -->
+    <div id="loadingScreen">
+        <div class="loading-logo">АКИ<span>×</span>ЭПСИЛОН</div>
+        <div class="loading-bar"><div class="loading-bar-fill" id="loadingBarFill"></div></div>
+    </div>
+
+    <!-- ФОН -->
+    <div id="animated-bg" style="position:fixed;inset:0;z-index:-1;pointer-events:none;background: radial-gradient(circle at 50% 0%, #120609 0%, #09090c 60%)"></div>
+    <div id="bg-glow"></div>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="logo" onclick="showPage('home')">АКИ<span>×</span>ЭПСИЛОН</div>
+        <div class="topbar-nav">
+            <button class="nav-btn active" onclick="showPage('home')">Главная</button>
+            <button class="nav-btn" onclick="showPage('characters')">Персонажи</button>
+            <button class="nav-btn" onclick="showPage('lore')">Лор</button>
+            <button class="nav-btn" onclick="showPage('shop')">Магазин</button>
+            <button class="nav-btn" onclick="showPage('seasons')">Сезоны</button>
+            <button class="nav-btn" onclick="showPage('music')">Музыка</button>
+            <button class="nav-btn" onclick="showPage('faction')">Сторона</button>
+            <button class="nav-btn" onclick="showPage('gallery')">Галерея</button>
+            <button class="nav-btn" onclick="showPage('terminal')">Терминал</button>
+        </div>
+        <div class="topbar-right">
+            <button class="icon-btn theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+            <div id="userArea">
+                <button class="user-btn" onclick="openProfile()">
+                    <span class="avatar" id="topbarAvatar">👤</span>
+                    <span class="name" id="topbarName">Профиль</span>
+                </button>
+            </div>
+            <button class="icon-btn cart-btn" onclick="showNotification('Корзина в разработке', 'error')">🛒</button>
+            <button class="lang-btn" onclick="showNotification('Языки в разработке', 'error')">RU ▾</button>
+        </div>
+    </div>
+
+    <!-- ============ HOME ============ -->
+    <div class="page active" id="page-home">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>АКИ И ЭПСИЛОН</h1>
+                <p>Тайная организация, которая спасает мир от аномалий и монстров. Тайно. Жёстко. Без благодарности. История, которую скрывает мир.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="showPage('characters')">ПОПРОБОВАТЬ</button>
+                    <button class="btn-secondary" onclick="showPage('lore')">О проекте</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ИГРА -->
+        <div class="game-section">
+            <div class="game-box">
+                <div class="game-mode-tabs">
+                    <button class="game-mode-tab active" id="modeNormal" onclick="switchGameMode('normal')">🎮 Обычный</button>
+                    <button class="game-mode-tab" id="modeBoss" onclick="switchGameMode('boss')">👹 Босс-раш</button>
+                </div>
+                <div class="game-title">🎮 РЕВЕРС</div>
+                <div class="game-desc">Кликай по аномалиям. Успей за 40 секунд! Жёлтые — быстрые, Красные — боссы.</div>
+                <div class="game-stats">
+                    <div class="game-stat"><div class="game-stat-val" id="gameScore">0</div><div class="game-stat-lbl">Очки</div></div>
+                    <div class="game-stat"><div class="game-stat-val" id="gameTime">40</div><div class="game-stat-lbl">Секунды</div></div>
+                    <div class="game-stat"><div class="game-stat-val" id="gameRecord">0</div><div class="game-stat-lbl">Рекорд</div></div>
+                </div>
+                <div class="game-combo" id="gameCombo"></div>
+                <div class="game-area" id="gameArea">
+                    <div class="game-overlay" id="gameOverlay">
+                        <h3>РЕВЕРС</h3>
+                        <p>Нажми "Старт", чтобы начать</p>
+                        <button class="game-start-btn" onclick="startGame()">Старт</button>
+                    </div>
+                </div>
+                <!-- Отчёт (пункт 3) -->
+                <div class="game-report" id="gameReport"></div>
+                <button class="leaderboard-btn" onclick="showNotification('Лидерборд в разработке', 'error')">🏆 Топ рекордов</button>
+            </div>
+        </div>
+
+        <!-- ТЕРМИНАЛ (пункт 2) -->
+        <div class="terminal-panel">
+            <div class="terminal-inner">
+                <div class="terminal-top"><span>● ● ●</span><span>EPSILON_SECURE_NODE // LOCAL</span></div>
+                <div class="terminal-log" id="terminalLog">
+                    <div class="terminal-line">> Соединение установлено. Введите команду.</div>
+                    <div class="terminal-line">Подсказка: введите <code style="color:#ff5966;">help</code> для списка команд.</div>
+                </div>
+                <div class="terminal-input-row">
+                    <input id="terminalInput" placeholder="ВВЕДИТЕ КОМАНДУ..." autocomplete="off" onkeydown="if(event.key==='Enter')runTerminal()">
+                    <button onclick="runTerminal()">ВВОД</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ТАЙМЛАЙН (пункт 4) -->
+        <div class="timeline-section">
+            <h2 class="timeline-title">📅 <span>ТАЙМЛАЙН</span></h2>
+            <div class="timeline-filters">
+                <button class="timeline-filter active" data-season="all" onclick="filterTimeline('all')">Все</button>
+                <button class="timeline-filter" data-season="6" onclick="filterTimeline(6)">Сезон 6</button>
+                <button class="timeline-filter" data-season="7" onclick="filterTimeline(7)">Сезон 7</button>
+                <button class="timeline-filter" data-season="8" onclick="filterTimeline(8)">Сезон 8</button>
+            </div>
+            <div class="timeline-wrap" id="timelineWrap"></div>
+        </div>
+
+        <!-- КАРТА (пункт 6) -->
+        <div class="map-section">
+            <h2 class="map-title">🗺️ <span>КАРТА</span></h2>
+            <div class="map-filters">
+                <button class="map-filter active" data-season="all" onclick="filterMap('all')">Все локации</button>
+                <button class="map-filter" data-season="6" onclick="filterMap(6)">Сезон 6</button>
+            </div>
+            <div class="map-container">
+                <svg class="map-svg" viewBox="0 0 900 700">
+                    <rect width="900" height="700" fill="var(--bg)"/>
+                    <line x1="400" y1="350" x2="180" y2="150" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="400" y1="350" x2="650" y2="150" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="400" y1="350" x2="400" y2="650" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5,5"/>
+                    <g class="map-point" onclick="showMapInfo('lab')"><circle cx="180" cy="150" r="14" fill="#8b0000"/><circle cx="180" cy="150" r="7" fill="#fff"/><text x="180" y="130" fill="#fff" text-anchor="middle" font-weight="bold">Лаборатория</text></g>
+                    <g class="map-point" onclick="showMapInfo('base')"><circle cx="400" cy="350" r="24" fill="var(--accent)"/><circle cx="400" cy="350" r="12" fill="#fff"/><text x="400" y="320" fill="#fff" text-anchor="middle" font-weight="bold">Штаб Эпсилона</text></g>
+                    <g class="map-point" onclick="showMapInfo('sector')"><circle cx="650" cy="150" r="14" fill="#006400"/><circle cx="650" cy="150" r="7" fill="#fff"/><text x="650" y="130" fill="#fff" text-anchor="middle" font-weight="bold">Старый сектор</text></g>
+                    <g class="map-point" onclick="showMapInfo('abyss')"><circle cx="400" cy="650" r="18" fill="#ff0000"/><circle cx="400" cy="650" r="9" fill="#fff"/><text x="400" y="625" fill="#fff" text-anchor="middle" font-weight="bold">Бездна</text></g>
+                </svg>
+                <div class="map-info" id="mapInfo">Нажми на любую точку на карте, чтобы узнать больше о локации</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ CHARACTERS ============ -->
+    <div class="page" id="page-characters">
+        <div class="section-wrapper" style="margin-top: 40px;"><h2 class="section-title">🎭 <span>ПЕРСОНАЖИ</span></h2></div>
+        <div class="char-grid">
+            <div class="char-card" style="--char-color:#e21b2d">
+                <div class="char-avatar">👤</div><div class="char-name">Аки</div><div class="char-role">Агент</div>
+                <div class="char-desc">19-летний парень. Нашёл странный камень, заразился аномалией.</div>
+                <div class="char-badge alive">Жив</div>
+            </div>
+            <div class="char-card" style="--char-color:#39c96b">
+                <div class="char-avatar">👁️</div><div class="char-name">Эпсилон</div><div class="char-role">Организация</div>
+                <div class="char-desc">Тайная организация, спасающая мир от аномалий.</div>
+                <div class="char-badge unknown">Неизвестно</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ LORE ============ -->
+    <div class="page" id="page-lore">
+        <div class="section-wrapper" style="margin-top: 40px;"><h2 class="section-title">📖 <span>ЛОР</span></h2></div>
+        <div class="lore-accordion-wrapper">
+            <div class="lore-item active">
+                <div class="lore-header"><div class="lore-header-left"><div class="lore-icon">👤</div><div class="lore-header-title">Кто такой Аки?</div></div><div class="lore-header-icon">▼</div></div>
+                <div class="lore-body"><div class="lore-body-inner"><strong>Аки</strong> — 19-летний парень. Нашёл странный камень, заразился аномалией, вступил в Эпсилон, умер, воскрес — но потерял силу.</div></div>
+            </div>
+            <div class="lore-item">
+                <div class="lore-header"><div class="lore-header-left"><div class="lore-icon">🏛️</div><div class="lore-header-title">Что такое Эпсилон?</div></div><div class="lore-header-icon">▼</div></div>
+                <div class="lore-body"><div class="lore-body-inner">Тайная организация, основанная 30 лет назад. Спасает мир от аномалий. Тайно. Жёстко. Без благодарности.</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ SHOP ============ -->
+    <div class="page" id="page-shop">
+        <div class="section-wrapper" style="margin-top: 40px;"><h2 class="section-title">🛒 <span>МАГАЗИН</span></h2></div>
+        <div class="shop-grid">
+            <div class="shop-item"><div class="shop-emoji">👕</div><div class="shop-name">Футболка Эпсилона</div><div class="shop-price">500 🪙</div><button class="shop-buy" onclick="showNotification('Магазин в разработке', 'error')">Купить</button></div>
+            <div class="shop-item"><div class="shop-emoji">🧢</div><div class="shop-name">Кепка Аки</div><div class="shop-price">300 🪙</div><button class="shop-buy" onclick="showNotification('Магазин в разработке', 'error')">Купить</button></div>
+        </div>
+    </div>
+
+    <!-- ============ SEASONS ============ -->
+    <div class="page" id="page-seasons">
+        <div class="section-wrapper" style="margin-top: 40px;"><h2 class="section-title">📺 <span>СЕЗОНЫ</span></h2></div>
+        <div class="season-accordion-wrapper">
+            <div class="season-accordion-item active">
+                <div class="season-header"><div class="season-header-left"><div class="season-header-number">6</div><div class="season-header-title">Новая эра</div></div><div class="season-header-icon">▼</div></div>
+                <div class="season-body"><div class="season-body-inner">Финал истории. Война закончена. Арки 21–25.</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ MUSIC ============ -->
+    <div class="page" id="page-music">
+        <div class="section-wrapper" style="margin-top: 40px;"><h2 class="section-title">🎵 <span>МУЗЫКА</span></h2></div>
+        
+        <!-- РАДИО (пункт 10) -->
+        <div class="radio-box">
+            <div class="radio-inner" id="radioInner">
+                <div><div class="radio-label">Радио Эпсилона</div><div class="radio-freq">87.6 FM</div></div>
+                <div class="radio-visualizer"><div class="radio-bar"></div><div class="radio-bar"></div><div class="radio-bar"></div><div class="radio-bar"></div></div>
+                <div class="radio-status" id="radioStatus">ЭФИР: ПАУЗА</div>
+                <button class="radio-btn" id="radioBtn" onclick="toggleRadio()">▶</button>
+            </div>
+        </div>
+
+        <div class="music-grid">
+            <div class="music-item" onclick="showNotification('🎵 Трек в разработке', 'error')"><div class="music-cover">🎵</div><div class="music-name">Aki Theme</div><div class="music-artist">Эпсилон Soundtrack</div></div>
+            <div class="music-item" onclick="showNotification('🎵 Трек в разработке', 'error')"><div class="music-cover">🎶</div><div class="music-name">Epsilon March</div><div class="music-artist">Эпсилон Soundtrack</div></div>
+        </div>
+    </div>
+
+    <!-- ============ FACTION (пункт 7) ============ -->
+    <div class="page" id="page-faction">
+        <div class="section-wrapper" style="margin-top: 40px;"><h2 class="section-title">⚔ <span>ВЫБЕРИ СТОРОНУ</span></h2></div>
+        <div class="faction-grid">
+            <div class="faction-card faction-epsilon" data-faction="epsilon" onclick="chooseFaction('epsilon')">
+                <div style="font-size:2.5rem;">🛡️</div><h3>Эпсилон</h3><p>Порядок, протоколы и контроль аномалий.</p><button>Вступить</button>
+            </div>
+            <div class="faction-card faction-omega" data-faction="omega" onclick="chooseFaction('omega')">
+                <div style="font-size:2.5rem;">👁️</div><h3>Омега</h3><p>Сомневайся в официальной версии.</p><button>Присоединиться</button>
+            </div>
+            <div class="faction-card faction-witness" data-faction="witnesses" onclick="chooseFaction('witnesses')">
+                <div style="font-size:2.5rem;">📡</div><h3>Свидетели</h3><p>Сохраняй свидетельства и помогай другим.</p><button>Стать Свидетелем</button>
+            </div>
+        </div>
+        <p id="factionStatus" class="faction-status">Сторона пока не выбрана.</p>
+    </div>
+
+    <!-- ============ GALLERY (пункт 6) ============ -->
+    <div class="page" id="page-gallery">
+        <div class="section-wrapper" style="margin-top: 40px;"><h2 class="section-title">🖼 <span>ГАЛЕРЕЯ</span></h2></div>
+        <div class="gallery-filters">
+            <button class="gallery-tag active" data-tag="all" onclick="filterGallery('all')">Все</button>
+            <button class="gallery-tag" data-tag="abyss" onclick="filterGallery('abyss')">#Бездна</button>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-card" data-tags="abyss" onclick="openLightbox('https://via.placeholder.com/800x600?text=Abyss', 'Бездна')">
+                <div class="gallery-art">🌋</div><h3>Бездна</h3><p>Нестабильная аномалия.</p>
+            </div>
+            <div class="gallery-card" onclick="openLightbox('https://via.placeholder.com/800x600?text=Lab', 'Лаборатория')">
+                <div class="gallery-art">🧪</div><h3>Лаборатория</h3><p>Место заражения Аки.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ TERMINAL (пункт 2) ============ -->
+    <div class="page" id="page-terminal">
+        <div class="section-wrapper" style="margin-top: 40px;"><h2 class="section-title">⌨ <span>ТЕРМИНАЛ</span></h2></div>
+        <div class="terminal-panel">
+            <div class="terminal-inner">
+                <div class="terminal-top"><span>● ● ●</span><span>EPSILON_SECURE_NODE // LOCAL</span></div>
+                <div class="terminal-log" id="terminalLog">
+                    <div class="terminal-line">> Соединение установлено.</div>
+                    <div class="terminal-line">Подсказка: введите <code style="color:#ff5966;">help</code></div>
+                </div>
+                <div class="terminal-input-row">
+                    <input id="terminalInput" placeholder="ВВЕДИТЕ КОМАНДУ..." autocomplete="off" onkeydown="if(event.key==='Enter')runTerminal()">
+                    <button onclick="runTerminal()">ВВОД</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ ПРОФИЛЬ (пункт 9) ============ -->
+    <div class="modal-overlay" id="profileModal" onclick="if(event.target===this) closeProfile()">
+        <div class="profile-modal">
+            <button class="modal-close" onclick="closeProfile()">×</button>
+            <h2 style="text-align:center; margin-bottom:15px; font-size:1.2rem;">Личное дело</h2>
+            
+            <div style="text-align:center; margin-bottom: 15px;">
+                <div style="width:70px; height:70px; border-radius:50%; background:var(--bg); border:2px solid var(--accent); display:flex; align-items:center; justify-content:center; font-size:2rem; margin:0 auto 10px;">👤</div>
+                <div style="font-weight:900; font-size:1.1rem;" id="profileName">Агент</div>
+            </div>
+
+            <div class="agent-dossier">
+                <div class="agent-dossier-row"><span>КОД АГЕНТА</span><span id="agentCode">—</span></div>
+                <div class="agent-dossier-row"><span>РАНГ</span><span id="agentRank">Новичок</span></div>
+                <div class="agent-dossier-row"><span>СТОРОНА</span><span id="agentFaction">—</span></div>
+            </div>
+
+            <div style="font-size:0.8rem; font-weight:800; margin:12px 0 6px; color:var(--accent);">ЖУРНАЛ</div>
+            <div class="agent-journal" id="agentJournal"></div>
+
+            <button class="btn-primary" style="width:100%; margin-top:20px; padding:12px;" onclick="closeProfile()">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- ЛАЙТБОКС -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">×</button>
+        <img id="lightboxImg" src="" alt="">
+        <div id="lightboxCaption" style="margin-top:16px; color:#fff; font-size:1rem;"></div>
+    </div>
+
+    <script>
+        /* ===================== СОСТОЯНИЕ ===================== */
+        let coins = parseInt(localStorage.getItem('aki_coins') || '0');
+        let records = JSON.parse(localStorage.getItem('aki_records') || '{"normal":0,"boss":0}');
+        let gameMode = 'normal';
+        let faction = localStorage.getItem('aki_faction') || null;
+        let journal = JSON.parse(localStorage.getItem('aki_journal') || '[]');
+
+        function saveAll() {
+            localStorage.setItem('aki_coins', String(coins));
+            localStorage.setItem('aki_records', JSON.stringify(records));
+            localStorage.setItem('aki_journal', JSON.stringify(journal));
+        }
+
+        /* ===================== УВЕДОМЛЕНИЯ ===================== */
+        function showNotification(text, type) {
+            let n = document.getElementById('notificationBox');
+            if (!n) {
+                n = document.createElement('div');
+                n.id = 'notificationBox';
+                n.className = 'notification';
+                document.body.appendChild(n);
+            }
+            n.textContent = text;
+            n.className = 'notification' + (type ? ' ' + type : '');
+            n.classList.add('show');
+            clearTimeout(window._notifTimer);
+            window._notifTimer = setTimeout(() => n.classList.remove('show'), 3000);
+        }
+
+        /* ===================== ПРОФИЛЬ ===================== */
+        function openProfile() {
+            const modal = document.getElementById('profileModal');
+            if (!modal) return;
+            modal.classList.remove('active');
+            void modal.offsetWidth;
+            updateProfileUI();
+            requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('active')));
+        }
+        function closeProfile() { document.getElementById('profileModal')?.classList.remove('active'); }
+        function updateProfileUI() {
+            document.getElementById('agentCode').textContent = 'EPS-' + Math.random().toString(36).slice(2,6).toUpperCase();
+            const rank = (records.normal + records.boss*2) >= 25 ? 'Оперативник' : 'Новичок';
+            document.getElementById('agentRank').textContent = rank;
+            document.getElementById('agentFaction').textContent = faction ? faction : '—';
+            renderJournal();
+        }
+        function addJournal(text) {
+            journal.unshift({ t: Date.now(), text }); journal = journal.slice(0,20); saveAll(); renderJournal();
+        }
+        function renderJournal() {
+            const box = document.getElementById('agentJournal');
+            if (!box) return;
+            if (!journal.length) { box.innerHTML = '<div style="font-style:italic;">Журнал пуст.</div>'; return; }
+            box.innerHTML = journal.map(e => {
+                const time = new Date(e.t).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+                return `<div style="padding:4px 0; border-bottom:1px dotted var(--border-soft)"><span style="color:var(--accent)">[${time}]</span> ${e.text}</div>`;
+            }).join('');
+        }
+
+        /* ===================== ИГРА ===================== */
+        let gameTimer = null, gameLeft = 40, gameScore = 0, gameCombo = 0;
+        function switchGameMode(mode) {
+            gameMode = mode;
+            document.getElementById('modeNormal').classList.toggle('active', mode === 'normal');
+            document.getElementById('modeBoss').classList.toggle('active', mode === 'boss');
+        }
+        function spawnTarget() {
+            const area = document.getElementById('gameArea');
+            if (!area) return;
+            document.getElementById('gameOverlay').style.display = 'none';
+            const type = gameMode === 'boss' && Math.random() < 0.2 ? 'boss' : (Math.random() < 0.3 ? 'fast' : 'normal');
+            const el = document.createElement('div');
+            el.className = 'game-target ' + type;
+            el.textContent = type === 'boss' ? '👹' : (type === 'fast' ? '⚡' : '👾');
+            const maxX = area.clientWidth - (type === 'boss' ? 70 : 40), maxY = area.clientHeight - (type === 'boss' ? 70 : 40);
+            el.style.left = Math.random() * maxX + 'px'; el.style.top = Math.random() * maxY + 'px';
+            el.onclick = (e) => {
+                e.stopPropagation();
+                gameScore += type === 'boss' ? 10 : (type === 'fast' ? 3 : 1); gameCombo++;
+                document.getElementById('gameScore').textContent = gameScore;
+                if (gameCombo >= 3) {
+                    const c = document.getElementById('gameCombo');
+                    c.textContent = `🔥 x${gameCombo}`; c.classList.add('active');
+                }
+                el.remove(); spawnTarget();
+            };
+            area.appendChild(el);
+            setTimeout(() => { if(el.parentNode) el.remove(); }, 1500);
+        }
+        function startGame() {
+            if (gameTimer) clearInterval(gameTimer);
+            gameLeft = 40; gameScore = 0; gameCombo = 0;
+            document.querySelectorAll('.game-target').forEach(e => e.remove());
+            document.getElementById('gameOverlay').style.display = 'none';
+            document.getElementById('gameReport').classList.remove('show');
+            document.getElementById('gameScore').textContent = 0;
+            document.getElementById('gameTime').textContent = 40;
+            spawnTarget();
+            gameTimer = setInterval(() => {
+                gameLeft--; document.getElementById('gameTime').textContent = gameLeft;
+                if (gameLeft <= 0) endGame();
+            }, 1000);
+        }
+        function endGame() {
+            clearInterval(gameTimer); gameTimer = null;
+            document.querySelectorAll('.game-target').forEach(e => e.remove());
+            const prev = records[gameMode] || 0;
+            const isRecord = gameScore > prev;
+            if (isRecord) records[gameMode] = gameScore; saveAll();
+            
+            document.getElementById('gameOverlay').style.display = 'flex';
+            document.getElementById('gameOverlay').innerHTML = `<h3>Конец!</h3><p>Очки: ${gameScore}</p><button class="game-start-btn" onclick="startGame()">Ещё раз</button>`;
+            
+            document.getElementById('gameReport').innerHTML = `
+                <div class="game-report-title">// ОТЧЁТ ЭПСИЛОНА</div>
+                <div class="game-report-text">Аномалия нейтрализована. Очков: <strong>${gameScore}</strong>.</div>
+            `;
+            document.getElementById('gameReport').classList.add('show');
+            addJournal(`Реверс: ${gameScore} очков.`);
+        }
+
+        /* ===================== ТЕРМИНАЛ ===================== */
+        function terminalPrint(text, cls) {
+            const log = document.getElementById('terminalLog');
+            if (!log) return;
+            const div = document.createElement('div');
+            div.className = 'terminal-line' + (cls ? ' ' + cls : '');
+            div.textContent = text; log.appendChild(div); log.scrollTop = log.scrollHeight;
+        }
+        function runTerminal() {
+            const input = document.getElementById('terminalInput');
+            const cmd = input.value.trim().toLowerCase();
+            if (!cmd) return;
+            terminalPrint(input.value, 'cmd'); input.value = '';
+            
+            if (cmd === 'help') terminalPrint('Команды: help, whoami, faction, record, clear, epsilon', 'ok');
+            else if (cmd === 'whoami') terminalPrint(`Агент: Гость | Ранг: ${document.getElementById('agentRank').textContent}`, 'ok');
+            else if (cmd === 'faction') terminalPrint(`Сторона: ${faction || 'не выбрана'}`, 'ok');
+            else if (cmd === 'record') terminalPrint(`Реверс: ${records.normal} | Босс: ${records.boss}`, 'ok');
+            else if (cmd === 'clear') document.getElementById('terminalLog').innerHTML = '';
+            else if (cmd === 'epsilon' || cmd === 'aki') { terminalPrint('Ключ принят. Добро пожаловать.', 'ok'); addJournal('Взлом терминала.'); }
+            else terminalPrint(`Команда "${cmd}" не найдена.`, 'err');
+        }
+
+        /* ===================== РАДИО ===================== */
+        let radioPlaying = false;
+        function toggleRadio() {
+            const box = document.getElementById('radioInner');
+            const btn = document.getElementById('radioBtn');
+            const status = document.getElementById('radioStatus');
+            if (radioPlaying) {
+                radioPlaying = false; box.classList.remove('playing'); btn.textContent = '▶'; status.textContent = 'ЭФИР: ПАУЗА';
+            } else {
+                radioPlaying = true; box.classList.add('playing'); btn.textContent = '⏸'; status.textContent = 'ЭФИР: 87.6 FM';
+                addJournal('Включено радио Эпсилона.');
+            }
+        }
+
+        /* ===================== ФРАКЦИИ ===================== */
+        function chooseFaction(id) {
+            faction = id; localStorage.setItem('aki_faction', id);
+            const m = { epsilon: 'Эпсилон', omega: 'Омега', witnesses: 'Свидетели' };
+            document.getElementById('factionStatus').innerHTML = `Текущая сторона: <strong style="color:var(--accent)">${m[id]}</strong>`;
+            document.querySelectorAll('.faction-card').forEach(c => c.classList.toggle('selected', c.dataset.faction === id));
+            showNotification(`Ты выбрал сторону: ${m[id]}`, 'success');
+            addJournal(`Выбрана сторона: ${m[id]}.`);
+        }
+
+        /* ===================== ГАЛЕРЕЯ ===================== */
+        function filterGallery(tag) {
+            document.querySelectorAll('.gallery-tag').forEach(t => t.classList.toggle('active', t.dataset.tag === tag));
+            document.querySelectorAll('.gallery-card').forEach(card => {
+                const tags = (card.dataset.tags || '').split(',');
+                card.style.display = (tag === 'all' || tags.includes(tag)) ? 'block' : 'none';
+            });
+        }
+        function openLightbox(src, caption) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightboxCaption').textContent = caption;
+            document.getElementById('lightbox').classList.add('active');
+            addJournal(`Просмотр арта: ${caption}.`);
+        }
+        function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+
+        /* ===================== КАРТА ===================== */
+        function showMapInfo(key) {
+            const info = {
+                lab: 'Лаборатория. Уровень опасности: ВЫСОКИЙ.',
+                base: 'Штаб Эпсилона. Центр карты.',
+                sector: 'Старый сектор. Заброшенные здания.',
+                abyss: 'Бездна. Уровень опасности: ВЫСОКИЙ.'
+            }[key];
+            if (info) document.getElementById('mapInfo').innerHTML = `<strong style="color:var(--accent)">${info}</strong>`;
+        }
+        function filterMap(season) {
+            document.querySelectorAll('.map-filter').forEach(f => f.classList.toggle('active', f.dataset.season === season));
+        }
+
+        /* ===================== ТАЙМЛАЙН ===================== */
+        const EVENTS = [
+            { date: '30 лет назад', title: 'Основание Эпсилона', season: 6 },
+            { date: 'Недавно', title: 'Найден камень', season: 6 },
+            { date: 'Сезон 7', title: 'Падение Эпсилона', season: 7 },
+            { date: 'Сезон 8', title: 'Тёмное отражение', season: 8 },
+        ];
+        function filterTimeline(s) {
+            document.querySelectorAll('.timeline-filter').forEach(f => f.classList.toggle('active', f.dataset.season === String(s)));
+            const list = s === 'all' ? EVENTS : EVENTS.filter(e => e.season === +s);
+            document.getElementById('timelineWrap').innerHTML = list.map(e => `
+                <div class="timeline-item"><div class="timeline-dot"></div>
+                <div class="timeline-card"><div class="timeline-date">${e.date}</div><div class="timeline-event-title">${e.title}</div></div></div>
+            `).join('');
+        }
+
+        /* ===================== ТЕМА / СТРАНИЦЫ ===================== */
+        function toggleTheme() {
+            const isLight = document.body.classList.toggle('theme-light');
+            document.getElementById('themeBtn').textContent = isLight ? '☀️' : '🌙';
+        }
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + id)?.classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* ===================== ЗАГРУЗКА ===================== */
+        document.addEventListener('DOMContentLoaded', () => {
+            const screen = document.getElementById('loadingScreen');
+            const fill = document.getElementById('loadingBarFill');
+            let p = 0;
+            const iv = setInterval(() => {
+                p += 20; fill.style.width = p + '%';
+                if (p >= 100) { clearInterval(iv); setTimeout(() => screen.classList.add('hidden'), 300); }
+            }, 100);
+            
+            filterTimeline('all');
+            if (faction) chooseFaction(faction);
+            renderJournal();
+            
+            document.addEventListener('mousemove', (e) => {
+                document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
+                document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
+            });
+        });
+
+        /* ⚙️ ВАШ КОД (Магазин, Авторизация) */
+    </script>
+</body>
+</html>
