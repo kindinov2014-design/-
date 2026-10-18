@@ -48,10 +48,7 @@
         .page { display: none; animation: pageFade 0.3s ease; }
         .page.active { display: block; }
         @keyframes pageFade { from { opacity: 0; } to { opacity: 1; } }
-        .hero { position: relative; height: min(82vh, 900px); min-height: 620px; background: radial-gradient(ellipse at 50% 45%, rgba(4,35,55,.14) 0%, rgba(5,5,8,.18) 55%, rgba(5,5,8,.62) 100%); overflow: hidden; display: flex; align-items: center; padding: 70px clamp(24px, 8vw, 120px); }
-        .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(5,7,12,.88) 0%, rgba(5,7,12,.62) 32%, rgba(5,7,12,.08) 72%, rgba(5,7,12,.18) 100%); }
-        .hero-content { max-width: 620px; text-align: left; padding: clamp(20px, 3vw, 38px); border: 1px solid rgba(130,205,255,.15); border-radius: 24px; background: linear-gradient(135deg, rgba(5,12,22,.72), rgba(5,12,22,.25)); box-shadow: 0 20px 70px rgba(0,0,0,.2); backdrop-filter: blur(3px); }
-        .hero-content h1 { max-width: 100%; }
+        .hero { position: relative; height: 85vh; min-height: 600px; background: linear-gradient(135deg, rgba(26,0,0,0.7) 0%, rgba(5,5,8,0.7) 100%); overflow: hidden; display: flex; align-items: flex-end; padding: 80px 60px; }
         body.theme-light .hero { background: linear-gradient(135deg, rgba(255,230,230,0.8) 0%, rgba(240,242,245,0.8) 100%); }
         .hero-content { position: relative; z-index: 2; max-width: 700px; }
         .hero h1 { font-size: 4.5rem; font-weight: 900; color: var(--text); letter-spacing: 4px; margin-bottom: 20px; line-height: 1; text-shadow: 0 0 20px var(--accent-glow); }
@@ -379,8 +376,11 @@
         body.season-halloween { --accent: #00e5ff; --accent-hover: #33ebff; --accent-glow: rgba(0,229,255,0.5); --bg: #001018; --bg-2: #001a26; }
         body { --accent: #00cfff; --accent-hover: #55ddff; --accent-glow: rgba(0,207,255,0.42); }
         body.season-newyear { --accent: #00e5ff; --accent-hover: #33ebff; --accent-glow: rgba(0,229,255,0.5); --bg: #001018; --bg-2: #001a26; }
+        body.season-halloween .logo::after { content: ' ❄️'; font-size: 1.2rem; }
+        body.season-newyear .logo::after { content: ' ❄️'; font-size: 1.2rem; }
         .season-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
         .season-badge.halloween { background: rgba(0,229,255,0.2); color: #00e5ff; border: 1px solid #00e5ff; }
+        .season-badge.newyear { background: rgba(0,229,255,0.2); color: #00e5ff; border: 1px solid #00e5ff; }
         .duel-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
         .duel-box { padding: 30px; text-align: center; }
         .duel-title { font-size: 1.4rem; font-weight: 900; color: var(--text); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
@@ -563,15 +563,9 @@
         .checkout-success-icon { font-size: 5rem; margin-bottom: 15px; animation: redisoneyBounce 1s ease-in-out infinite; }
         .checkout-success-title { font-size: 1.4rem; color: var(--success); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
         .checkout-success-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
-        #animated-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; opacity: 1; background: radial-gradient(ellipse at 50% 48%, rgba(5,20,34,.35), transparent 55%); }
-        #animated-bg canvas { display:block; width:100%; height:100%; }
-        /* Keep the site's interface above the animated cosmic background. */
-        body > :not(#animated-bg) { position: relative; }
-        #animated-bg { z-index: 0; }
-        body > #bg-glow, body > .topbar, body > main, body > section, body > footer, body > #loadingScreen, body > .modal, body > .page, body > div:not(#animated-bg) { z-index: 1; }
-        body { background: #03070d !important; }
-        body.theme-light { background: #f0f2f5 !important; }
-        body.theme-light #animated-bg { opacity: .18; }
+        #animated-bg { position: fixed; inset: 0; z-index: -3; pointer-events: none; overflow: hidden; opacity: 0.5; }
+        #animated-bg .falling { position: absolute; color: rgba(220,245,255,0.72); font-family: sans-serif; font-weight: 400; animation: fallDown linear infinite; text-shadow: 0 0 10px rgba(150,220,255,0.55); user-select: none; will-change: transform; }
+        @keyframes fallDown { 0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
         #loadingScreen { position: fixed; inset: 0; z-index: 99999; background: radial-gradient(circle at center, #08283b 0%, #06111c 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
         #loadingScreen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
         .loading-logo { font-size: 3rem; font-weight: 900; color: var(--text); letter-spacing: 6px; margin-bottom: 20px; text-shadow: 0 0 30px var(--accent-glow); animation: loadingPulse 1.5s ease-in-out infinite; }
@@ -599,7 +593,7 @@
             .bottom-nav { display: flex; }
             body { padding-bottom: 68px; }
             footer { padding-bottom: 90px; }
-            .hero { height: auto; min-height: 72vh; padding: 48px 18px; align-items: center; } .hero::before { background: linear-gradient(180deg, rgba(5,7,12,.28), rgba(5,7,12,.72)); } .hero-content { width: 100%; padding: 22px; }
+            .hero { height: auto; min-height: 0; padding: 60px 22px 50px; align-items: center; }
             .hero h1 { font-size: 2rem; letter-spacing: 1.5px; margin-bottom: 14px; }
             .hero p { font-size: 0.92rem; margin-bottom: 22px; }
             .hero-buttons { flex-direction: column; gap: 10px; }
@@ -676,6 +670,21 @@
         }
 
         /* ===== ЗИМНЕЕ СОБЫТИЕ ===== */
+        .winter-event { max-width: 900px; margin: 28px auto 38px; padding: 0 24px; }
+        .winter-card { position: relative; overflow: hidden; padding: 28px; border: 1px solid rgba(145,220,255,.42); border-radius: 22px; background: radial-gradient(circle at 90% 10%, rgba(100,190,255,.24), transparent 35%), linear-gradient(135deg, rgba(10,35,65,.97), rgba(25,58,91,.92)); box-shadow: 0 12px 40px rgba(40,150,230,.12); }
+        .winter-card::after { content: '❄  ❅  ❄'; position: absolute; right: 18px; top: 10px; font-size: 2rem; letter-spacing: 12px; color: rgba(210,244,255,.22); pointer-events:none; }
+        .winter-kicker { color:#a8e6ff; font-size:.78rem; font-weight:900; letter-spacing:2px; text-transform:uppercase; }
+        .winter-heading { color:#f0fbff; font-size:clamp(1.5rem,4vw,2.2rem); font-weight:950; margin:8px 0; }
+        .winter-copy { color:#c9e6f7; line-height:1.6; max-width:680px; }
+        .winter-stats { display:flex; flex-wrap:wrap; gap:12px; margin:18px 0; }
+        .winter-stat { background:rgba(230,248,255,.09); border:1px solid rgba(200,235,255,.15); padding:10px 14px; border-radius:12px; color:#effaff; }
+        .winter-stat strong { color:#a8e6ff; }
+        .winter-rewards { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin:18px 0; }
+        .winter-reward { padding:13px; border-radius:13px; background:rgba(0,10,25,.24); border:1px solid rgba(190,230,255,.15); color:#e7f7ff; }
+        .winter-reward span { display:block; font-size:1.5rem; margin-bottom:5px; }
+        .winter-action { border:0; border-radius:999px; padding:13px 22px; color:#06233b; background:linear-gradient(110deg,#c4f0ff,#69caff); font-weight:900; cursor:pointer; box-shadow:0 5px 20px rgba(90,190,255,.2); }
+        .winter-action:disabled { opacity:.55; cursor:not-allowed; }
+        .winter-note { color:#a9d5ed; font-size:.82rem; margin-top:10px; }
 
     </style>
 </head><body>
@@ -731,6 +740,7 @@
     <div class="page active" id="page-home">
         <section class="hero">
             <div class="hero-content">
+                <div id="seasonBadgeWrap"></div>
                 <h1 data-i18n="hero_title">АКИ И ЭПСИЛОН</h1>
                 <p data-i18n="hero_desc">
                     Тайная организация, которая спасает мир от аномалий и монстров.
@@ -782,6 +792,28 @@
                 <button class="leaderboard-btn" onclick="openLeaderboard()">🏆 Топ рекордов</button>
             </div>
         </div>
+
+
+        <!-- ЗИМНЕЕ СОБЫТИЕ -->
+        <section class="winter-event" aria-labelledby="winterTitle">
+            <div class="winter-card acrylic">
+                <div class="winter-kicker">❄ Сезонное событие · Аки и Эпсилон</div>
+                <h2 class="winter-heading" id="winterTitle">Зимний протокол: Морозная аномалия</h2>
+                <p class="winter-copy">В штаб-квартире обнаружена ледяная аномалия. Выполняй ежедневную зимнюю операцию, собирай снежинки и забирай награды. Авторизуйся, чтобы сохранять личный прогресс в этом браузере.</p>
+                <div class="winter-stats">
+                    <div class="winter-stat">❄ Снежинки: <strong id="winterSnowflakes">0</strong></div>
+                    <div class="winter-stat">🎯 Операций выполнено: <strong id="winterOps">0</strong></div>
+                    <div class="winter-stat">🎁 Награда дня: <strong id="winterRewardStatus">не получена</strong></div>
+                </div>
+                <div class="winter-rewards">
+                    <div class="winter-reward"><span>🧊</span><strong>Ледяной агент</strong><br><small>100 снежинок</small></div>
+                    <div class="winter-reward"><span>🎁</span><strong>Подарок штаба</strong><br><small>250 снежинок</small></div>
+                    <div class="winter-reward"><span>👑</span><strong>Хранитель зимы</strong><br><small>500 снежинок</small></div>
+                </div>
+                <button class="winter-action" id="winterClaimBtn" onclick="claimWinterOperation()">Выполнить зимнюю операцию (+25 ❄, +50 XP)</button>
+                <div class="winter-note" id="winterEventNote">Одна операция в день. Награды события — виртуальные и сохраняются только в этом браузере.</div>
+            </div>
+        </section>
 
         <!-- ЕЖЕДНЕВНЫЕ ЗАДАНИЯ + БОНУС -->
         <div class="daily-section">
@@ -929,7 +961,7 @@
                     <text x="750" y="240" font-size="40" text-anchor="middle" opacity="0.5">🏠</text>
                     <text x="150" y="240" font-size="40" text-anchor="middle" opacity="0.5">🔥</text>
                     <text x="550" y="140" font-size="40" text-anchor="middle" opacity="0.5">🏗️</text>
-                    <text x="100" y="60" font-size="40" text-anchor="middle" opacity="0.5">✦</text>
+                    <text x="100" y="60" font-size="40" text-anchor="middle" opacity="0.5">❄️</text>
                     <text x="750" y="490" font-size="40" text-anchor="middle" opacity="0.5">🌲</text>
                     <text x="800" y="60" font-size="40" text-anchor="middle" opacity="0.5">🏙️</text>
                     <text x="100" y="540" font-size="40" text-anchor="middle" opacity="0.5">🚢</text>
@@ -1430,84 +1462,21 @@
         }
         function initAnimatedBg() {
             const bg = document.getElementById('animated-bg');
-            if (!bg || bg.dataset.cosmicReady === '1') return;
-            bg.dataset.cosmicReady = '1';
-            const canvas = document.createElement('canvas');
-            canvas.setAttribute('aria-hidden', 'true');
-            bg.appendChild(canvas);
-            const ctx = canvas.getContext('2d');
-            if (!ctx) return;
-            let w = 0, h = 0, dpr = 1, frame = 0;
-            const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            let particles = [];
-            function resize() {
-                dpr = Math.min(window.devicePixelRatio || 1, 2);
-                w = window.innerWidth; h = window.innerHeight;
-                canvas.width = Math.floor(w * dpr); canvas.height = Math.floor(h * dpr);
-                canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-                const count = Math.min(620, Math.max(220, Math.floor(w * h / 2300)));
-                particles = Array.from({length: count}, (_, i) => ({
-                    a: Math.random() * Math.PI * 2,
-                    r: Math.random() * Math.min(w * .34, h * .43) + 8,
-                    speed: (Math.random() * .0017 + .00025) * (Math.random() < .5 ? -1 : 1),
-                    size: Math.random() < .08 ? Math.random() * 1.8 + 1.1 : Math.random() * 1.05 + .25,
-                    alpha: Math.random() * .7 + .2,
-                    tint: Math.random() < .13 ? '255,177,91' : (Math.random() < .5 ? '120,195,255' : '235,247,255'),
-                    band: Math.random() * .23 + .84,
-                    phase: Math.random() * Math.PI * 2
-                }));
+            if (!bg) return;
+            const symbols = ['❄', '❅', '❆', '✧', '❄'];
+            bg.replaceChildren();
+            const count = 42;
+            for (let i = 0; i < count; i++) {
+                const el = document.createElement('div');
+                el.className = 'falling';
+                el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.fontSize = (Math.random() * 18 + 10) + 'px';
+                el.style.opacity = (Math.random() * 0.55 + 0.25).toFixed(2);
+                el.style.animationDuration = (Math.random() * 12 + 10) + 's';
+                el.style.animationDelay = (-Math.random() * 22) + 's';
+                bg.appendChild(el);
             }
-            function draw() {
-                ctx.clearRect(0, 0, w, h);
-                const cx = w * .5, cy = h * .51;
-                const scale = Math.min(w, h) / 850;
-                const radius = Math.min(w * .32, h * .42);
-                const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 1.35);
-                glow.addColorStop(0, 'rgba(7,35,57,.25)'); glow.addColorStop(.5, 'rgba(4,20,34,.12)'); glow.addColorStop(1, 'rgba(0,0,0,0)');
-                ctx.fillStyle = glow; ctx.fillRect(0, 0, w, h);
-                // Several softly glowing spiral rings, inspired by the reference.
-                for (let ring = 0; ring < 4; ring++) {
-                    ctx.beginPath();
-                    for (let j = 0; j <= 240; j++) {
-                        const t = j / 240 * Math.PI * 2;
-                        const rr = radius * (.28 + ring * .19) * (1 + .12 * Math.sin(t * 3 + ring));
-                        const x = cx + Math.cos(t + ring * .6 + frame * .00012) * rr * 1.05;
-                        const y = cy + Math.sin(t * 1.35 + ring * .7 + frame * .00015) * rr * .72;
-                        if (j === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-                    }
-                    ctx.strokeStyle = `rgba(82,164,220,${.035 + ring * .009})`; ctx.lineWidth = 1; ctx.stroke();
-                }
-                for (const p of particles) {
-                    if (!reduceMotion) p.a += p.speed;
-                    const spiral = p.a + .28 * Math.sin(p.a * 2 + p.phase);
-                    const rr = p.r * p.band;
-                    const x = cx + Math.cos(spiral) * rr * 1.02 + Math.sin(p.a * 2.1 + p.phase) * radius * .055;
-                    const y = cy + Math.sin(spiral * 1.35) * rr * .73;
-                    const twinkle = .55 + .45 * Math.sin(frame * .035 + p.phase);
-                    const alpha = Math.max(.08, p.alpha * twinkle);
-                    if (p.size > 1.7) {
-                        const halo = ctx.createRadialGradient(x, y, 0, x, y, p.size * 5);
-                        halo.addColorStop(0, `rgba(${p.tint},${alpha * .9})`); halo.addColorStop(1, `rgba(${p.tint},0)`);
-                        ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(x, y, p.size * 5, 0, Math.PI * 2); ctx.fill();
-                    }
-                    ctx.fillStyle = `rgba(${p.tint},${alpha})`;
-                    ctx.beginPath(); ctx.arc(x, y, p.size * scale + .25, 0, Math.PI * 2); ctx.fill();
-                }
-                // A few brighter star glints.
-                for (let i = 0; i < 5; i++) {
-                    const a = frame * .00035 + i * 2.4;
-                    const x = cx + Math.cos(a) * radius * (.42 + (i % 3) * .18);
-                    const y = cy + Math.sin(a * 1.24) * radius * .62;
-                    const pulse = .35 + .65 * (Math.sin(frame * .025 + i * 1.7) * .5 + .5);
-                    ctx.strokeStyle = `rgba(155,215,255,${pulse * .7})`; ctx.lineWidth = .7;
-                    ctx.beginPath(); ctx.moveTo(x - 5 * pulse, y); ctx.lineTo(x + 5 * pulse, y); ctx.moveTo(x, y - 5 * pulse); ctx.lineTo(x, y + 5 * pulse); ctx.stroke();
-                }
-                frame++;
-                if (!reduceMotion) requestAnimationFrame(draw);
-            }
-            resize(); draw();
-            window.addEventListener('resize', resize, {passive:true});
         }
 
         // ===== 30 УРОВНЕЙ XP =====
@@ -2022,9 +1991,43 @@
         }
 
         // ===== СЕЗОНЫ =====
-        function getCurrentSeason() { return ''; }
+        function getCurrentSeason() {
+            const now = new Date();
+            const month = now.getMonth() + 1, day = now.getDate();
+            // На сайте постоянно используется зимняя тема; сезонный бонус также зимний.
+            return 'newyear';
+        }
         function applySeason() {
+            const season = getCurrentSeason();
+            const badgeWrap = document.getElementById('seasonBadgeWrap');
             document.body.classList.remove('season-halloween', 'season-newyear');
+            document.body.classList.add('season-newyear');
+            if (!badgeWrap) return;
+            if (season === 'halloween') {
+                document.body.classList.add('season-halloween');
+                badgeWrap.innerHTML = `<div class="season-badge halloween">🎃 Хэллоуин-событие активно! +50% XP за игры</div>`;
+                const user = getCurrentUser();
+                if (user) {
+                    const key = 'aki_season_halloween_' + user.nickname;
+                    if (!localStorage.getItem(key)) {
+                        localStorage.setItem(key, 'true');
+                        setTimeout(() => showAchievementToast({ icon: '🎃', name: 'Хэллоуин 2026', name_en: 'Halloween 2026', xp: 100 }), 1000);
+                        addXP(100);
+                    }
+                }
+            } else if (season === 'newyear') {
+                document.body.classList.add('season-newyear');
+                badgeWrap.innerHTML = `<div class="season-badge newyear">❄️ Новогоднее событие! +50% XP за игры</div>`;
+                const user = getCurrentUser();
+                if (user) {
+                    const key = 'aki_season_newyear_' + user.nickname;
+                    if (!localStorage.getItem(key)) {
+                        localStorage.setItem(key, 'true');
+                        setTimeout(() => showAchievementToast({ icon: '❄️', name: 'Новый год 2027', name_en: 'New Year 2027', xp: 100 }), 1000);
+                        addXP(100);
+                    }
+                }
+            } else { badgeWrap.innerHTML = ''; }
         }
 
         // ===== ДУЭЛЬ С БОТОМ =====
@@ -2503,6 +2506,66 @@
             renderDealBanner();
         }
 
+
+        // ===== ЗИМНЕЕ СОБЫТИЕ =====
+        function winterStorageKey(suffix) {
+            const user = getCurrentUser();
+            return user && typeof user.nickname === 'string' && user.nickname.trim() ? 'aki_winter_' + suffix + '_' + user.nickname.trim().toLocaleLowerCase() : null;
+        }
+        function winterRead(suffix, fallback) {
+            const key = winterStorageKey(suffix);
+            if (!key) return fallback;
+            const raw = localStorage.getItem(key);
+            if (raw === null) return fallback;
+            try { return JSON.parse(raw); } catch (_) { return fallback; }
+        }
+        function winterWrite(suffix, value) {
+            const key = winterStorageKey(suffix);
+            if (key) localStorage.setItem(key, JSON.stringify(value));
+        }
+        function winterDateKey() {
+            const d = new Date();
+            return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+        }
+        function renderWinterEvent() {
+            const snowEl = document.getElementById('winterSnowflakes');
+            if (!snowEl) return;
+            const user = getCurrentUser();
+            const snow = user ? Number(winterRead('snow', 0)) : 0;
+            const ops = user ? Number(winterRead('ops', 0)) : 0;
+            const claimedToday = user && winterRead('last_day', '') === winterDateKey();
+            snowEl.textContent = snow;
+            document.getElementById('winterOps').textContent = ops;
+            document.getElementById('winterRewardStatus').textContent = claimedToday ? 'получена ✓' : 'не получена';
+            const btn = document.getElementById('winterClaimBtn');
+            btn.disabled = !user || claimedToday;
+            btn.textContent = !user ? 'Войди, чтобы участвовать' : claimedToday ? 'Операция на сегодня выполнена ✓' : 'Выполнить зимнюю операцию (+25 ❄, +50 XP)';
+            const note = document.getElementById('winterEventNote');
+            if (user) {
+                const next = snow >= 500 ? 'Все три награды открыты!' : snow >= 250 ? 'Осталось ' + (500-snow) + ' ❄ до награды «Хранитель зимы».' : snow >= 100 ? 'Осталось ' + (250-snow) + ' ❄ до подарка штаба.' : 'Осталось ' + (100-snow) + ' ❄ до награды «Ледяной агент».';
+                note.textContent = next + ' Прогресс сохраняется в этом браузере.';
+            } else note.textContent = 'Войди в аккаунт, чтобы собирать снежинки. Прогресс хранится локально в этом браузере.';
+        }
+        function claimWinterOperation() {
+            const user = getCurrentUser();
+            if (!user) {
+                if (typeof openAuth === 'function') openAuth('login');
+                showNotification('Сначала войди в аккаунт', 'error');
+                return;
+            }
+            if (winterRead('last_day', '') === winterDateKey()) {
+                showNotification('Зимняя операция на сегодня уже выполнена!', 'info');
+                renderWinterEvent();
+                return;
+            }
+            winterWrite('snow', Number(winterRead('snow', 0)) + 25);
+            winterWrite('ops', Number(winterRead('ops', 0)) + 1);
+            winterWrite('last_day', winterDateKey());
+            addXP(50);
+            renderWinterEvent();
+            showNotification('❄ Зимняя операция выполнена! +25 снежинок и +50 XP', 'success');
+        }
+
         // ===== КОРЗИНА =====
         function getCart() {
             const user = getCurrentUser();
@@ -2867,6 +2930,7 @@
             errorEl.textContent = '';
             closeAuth();
             updateUserArea();
+            if (typeof renderWinterEvent === 'function') renderWinterEvent();
             renderContinue(); renderWatchlist(); renderAllEpisodes();
             renderDailyTasks(); updateDailyBonusButton(); renderAchievements(); renderFriends();
             applyCursorClass();
@@ -2892,6 +2956,7 @@
             errorEl.textContent = '';
             closeAuth();
             updateUserArea();
+            if (typeof renderWinterEvent === 'function') renderWinterEvent();
             renderContinue(); renderWatchlist(); renderAllEpisodes();
             renderDailyTasks(); updateDailyBonusButton(); renderAchievements(); renderFriends();
             applySeason(); applyCursorClass();
@@ -2900,6 +2965,7 @@
         function logout() {
             setCurrentUser(null);
             updateUserArea();
+            if (typeof renderWinterEvent === 'function') renderWinterEvent();
             document.getElementById('cartCount').textContent = '0';
             renderContinue(); renderWatchlist(); renderAllEpisodes(); renderDailyTasks(); renderAchievements(); renderFriends();
             document.body.classList.remove('cursor-crosshair', 'cursor-reverse', 'cursor-chip', 'cursor-anomaly', 'cursor-redstone', 'cursor-star', 'cursor-skull', 'cursor-nuke');
@@ -3332,12 +3398,13 @@
             if (page === 'characters') renderCharacters();
             if (page === 'lore') renderLore();
             if (page === 'quotes') renderQuotes();
-            if (page === 'home') { renderAllEpisodes(); renderContinue(); renderWatchlist(); renderTimeline(); }
+            if (page === 'home') { renderWinterEvent(); renderAllEpisodes(); renderContinue(); renderWatchlist(); renderTimeline(); }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // ===== ESC / ИНИЦИАЛИЗАЦИЯ =====
         window.addEventListener('focus', () => {
+            if (typeof renderWinterEvent === 'function') renderWinterEvent();
             if (typeof updateUserArea === 'function') updateUserArea();
         });
 
@@ -3354,6 +3421,7 @@
         initAnimatedBg();
         startTimer();
         updateUserArea();
+        renderWinterEvent();
         applyLang();
         renderAllEpisodes();
         renderContinue();
