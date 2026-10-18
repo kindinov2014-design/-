@@ -698,7 +698,15 @@
       .summer-mote { position: absolute; bottom: -24px; color: rgba(255,215,112,.62); text-shadow: 0 0 12px rgba(255,190,70,.4); animation: summerRise linear infinite; user-select: none; }
       @keyframes summerRise { from { transform: translate3d(0,0,0) rotate(0deg); opacity: 0; } 12% { opacity: .7; } 85% { opacity: .35; } to { transform: translate3d(28px,-110vh,0) rotate(160deg); opacity: 0; } }
       @media (prefers-reduced-motion: reduce) { .summer-mote { animation: none; display: none; } }
-    </style>
+    
+/* Новые разделы: архив, терминал, миссии, фракции и галерея */
+.feature-intro{max-width:1000px;margin:0 auto 24px;padding:0 24px;color:var(--text-muted,#9db7a6);text-align:center;letter-spacing:.08em}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:18px;max-width:1200px;margin:0 auto;padding:0 24px 45px}
+.feature-card,.mission-panel,.terminal-panel,.gallery-card{border:1px solid rgba(116,190,133,.28);border-radius:18px;background:linear-gradient(145deg,rgba(17,49,34,.94),rgba(9,24,20,.96));box-shadow:0 12px 35px rgba(0,0,0,.18);padding:24px;color:#e7f6e9}
+.feature-card>span,.mission-badge{font-size:.75rem;letter-spacing:.15em;color:#a6d7a9}.feature-card h3,.gallery-card h3{margin:12px 0 8px;color:#d9f8d9}.feature-card p,.gallery-card p{color:#b5cbbb;line-height:1.6}.feature-card button,.terminal-line button,.mission-actions button,.secondary-action{border:1px solid #7cbf86;background:#234b32;color:#f0fff1;padding:10px 14px;border-radius:9px;cursor:pointer;margin:5px 4px 0 0}.feature-card button:hover,.mission-actions button:hover{background:#316b42}.file-secret{padding:12px;border-left:2px solid #a6d7a9;background:rgba(0,0,0,.2)}
+.terminal-panel{max-width:850px;margin:0 auto 50px;background:#06110c;border-color:#37734a;font-family:ui-monospace,SFMono-Regular,monospace;color:#a9f5b4}.terminal-top{border-bottom:1px solid #244b30;padding-bottom:14px;color:#80d48d}.terminal-top span{float:right;font-size:.8rem}.terminal-line{display:flex;gap:10px;margin:20px 0}.terminal-line input{flex:1;min-width:0;background:#0b1b11;color:#c8ffd0;border:1px solid #376846;border-radius:8px;padding:12px;font:inherit}.terminal-hint{color:#63896b;font-size:.85rem}.mission-panel{max-width:850px;margin:0 auto 50px}.mission-result{padding:18px;margin:18px 0;background:rgba(0,0,0,.2);border-radius:10px;line-height:1.6;color:#d5f4d8}.mission-actions{display:flex;flex-wrap:wrap;gap:8px}.secondary-action{background:transparent}.faction-status{text-align:center;margin:0 auto 40px;color:#bde6c3;font-weight:600}.faction-epsilon{border-top:3px solid #7bbd85}.faction-omega{border-top:3px solid #a88be7}.faction-witness{border-top:3px solid #69b8cf}.gallery-card{padding:0 0 18px;overflow:hidden}.gallery-card h3,.gallery-card p{margin-left:18px;margin-right:18px}.gallery-art{height:155px;display:grid;place-items:center;font-size:4.2rem;background:radial-gradient(circle at 50% 40%,rgba(137,210,137,.28),transparent 55%),linear-gradient(135deg,#193e2a,#09130f);border-bottom:1px solid rgba(116,190,133,.2)}.gallery-anomaly .gallery-art{background:radial-gradient(circle,#702b36,#1a1115 70%)}.gallery-epsilon .gallery-art{background:linear-gradient(135deg,#304a3a,#101c16)}.gallery-rift .gallery-art{background:radial-gradient(circle,#564078,#11101a 70%)}.gallery-witness .gallery-art{background:linear-gradient(135deg,#194454,#101b24)}.gallery-omega .gallery-art{background:radial-gradient(circle,#5b4930,#17140f 70%)}
+@media(max-width:700px){.terminal-top span{float:none;display:block;margin-top:8px}.terminal-line{flex-direction:column}.feature-grid{padding-left:16px;padding-right:16px}.feature-card,.mission-panel,.terminal-panel{padding:18px}}
+</style>
 
 </head><body>
 
@@ -725,6 +733,11 @@
             <button class="nav-btn" onclick="showPage('seasons')" data-i18n="nav_seasons">Сезоны</button>
             <button class="nav-btn" onclick="showPage('music')" data-i18n="nav_music">Музыка</button>
             <button class="nav-btn" onclick="showPage('quotes')">Цитаты</button>
+            <button class="nav-btn" onclick="showPage('archive')">🗂 Архив</button>
+            <button class="nav-btn" onclick="showPage('terminal')">⌨ Терминал</button>
+            <button class="nav-btn" onclick="showPage('missions')">🎮 Миссии</button>
+            <button class="nav-btn" onclick="showPage('faction')">⚔ Сторона</button>
+            <button class="nav-btn" onclick="showPage('gallery')">🖼 Галерея</button>
             <button class="nav-btn" onclick="showPage('coop')" data-i18n="nav_coop">Сотрудничество</button>
             <button class="nav-btn" onclick="showPage('about')" data-i18n="nav_about">О проекте</button>
         </div>
@@ -1159,6 +1172,37 @@
     </div>
 
     <!-- ============ ABOUT ============ -->
+    <!-- ДОПОЛНИТЕЛЬНЫЕ СЕКРЕТНЫЕ РАЗДЕЛЫ -->
+    <div class="page" id="page-archive">
+      <div class="section-wrapper" style="margin-top:40px"><h2 class="section-title">🗂 <span>СЕКРЕТНЫЙ АРХИВ ЭПСИЛОНА</span></h2></div>
+      <p class="feature-intro">ДОСТУП ОГРАНИЧЕН. Некоторые файлы повреждены или засекречены.</p>
+      <div class="feature-grid" id="archiveGrid">
+        <article class="feature-card"><span>📁 ДОСЬЕ 001</span><h3>Аки</h3><p>Статус: активен. Обычный человек, полагающийся на опыт и Реверс.</p><button onclick="revealFile(this,'В деле отмечены повторяющиеся несоответствия в отчётах о смерти и возвращении Аки.')">Открыть файл</button><p class="file-secret" hidden></p></article>
+        <article class="feature-card"><span>📁 ДОСЬЕ 002</span><h3>Эпсилон</h3><p>Статус: организация под наблюдением.</p><button onclick="revealFile(this,'Внутренние документы указывают, что организация знает об источнике части аномалий больше, чем признаёт публично.')">Снять гриф</button><p class="file-secret" hidden></p></article>
+        <article class="feature-card"><span>📁 ДОСЬЕ 003</span><h3>Эхо</h3><p>Категория: биологическая угроза.</p><button onclick="revealFile(this,'Не подключайте заражённые носители к сети. Запись обрывается на словах: «оно учится отвечать…»')">Расшифровать</button><p class="file-secret" hidden></p></article>
+        <article class="feature-card"><span>📁 ДОСЬЕ 004</span><h3>Омега</h3><p>Категория: неизвестная фракция.</p><button onclick="revealFile(this,'Наблюдатели сообщают, что Омега может действовать через посредников. Источник данных не подтверждён.')">Открыть файл</button><p class="file-secret" hidden></p></article>
+      </div>
+    </div>
+    <div class="page" id="page-terminal">
+      <div class="section-wrapper" style="margin-top:40px"><h2 class="section-title">⌨ <span>ЗАКРЫТЫЙ ТЕРМИНАЛ</span></h2></div>
+      <div class="terminal-panel"><div class="terminal-top">● ● ● <span>EPSILON_SECURE_NODE // LOCAL</span></div><p>> Соединение установлено. Введите ключ доступа.</p><div class="terminal-line"><input id="terminalInput" placeholder="КОД ДОСТУПА" autocomplete="off" onkeydown="if(event.key==='Enter')runTerminal()"><button onclick="runTerminal()">ВВЕСТИ</button></div><div id="terminalOutput" aria-live="polite">Подсказка: ключ связан с именем организации.</div><p class="terminal-hint">Попробуй: EPSILON, AKI, ECHO, OMEGA</p></div>
+    </div>
+    <div class="page" id="page-missions">
+      <div class="section-wrapper" style="margin-top:40px"><h2 class="section-title">🎮 <span>СИМУЛЯТОР МИССИЙ</span></h2></div>
+      <p class="feature-intro">Выбери решение. У каждой операции есть риск и последствия.</p>
+      <div class="mission-panel"><div class="mission-badge">ОПЕРАЦИЯ // 07-B</div><h3 id="missionTitle">Сигнал из заброшенного сектора</h3><p id="missionText">Группа связи исчезла возле нестабильной аномалии. В эфире слышен знакомый голос.</p><div class="mission-actions"><button onclick="chooseMission(0)">Войти и проверить сигнал</button><button onclick="chooseMission(1)">Отключить питание сектора</button><button onclick="chooseMission(2)">Запросить подкрепление</button></div><div id="missionResult" class="mission-result">Ожидание решения оперативника…</div><button class="secondary-action" onclick="resetMission()">Начать заново</button></div>
+    </div>
+    <div class="page" id="page-faction">
+      <div class="section-wrapper" style="margin-top:40px"><h2 class="section-title">⚔ <span>ВЫБЕРИ СТОРОНУ</span></h2></div>
+      <p class="feature-intro">Твой выбор сохранится в этом браузере. Его можно изменить в любой момент.</p>
+      <div class="feature-grid faction-grid"><article class="feature-card faction-epsilon"><span>🛡️ ФРАКЦИЯ 01</span><h3>Эпсилон</h3><p>Порядок, протоколы и контроль аномалий — даже если правда опасна.</p><button onclick="chooseFaction('epsilon')">Вступить в Эпсилон</button></article><article class="feature-card faction-omega"><span>👁️ ФРАКЦИЯ 02</span><h3>Омега</h3><p>Сомневайся в официальной версии. Ищи скрытые причины происходящего.</p><button onclick="chooseFaction('omega')">Присоединиться к Омеге</button></article><article class="feature-card faction-witness"><span>📡 ФРАКЦИЯ 03</span><h3>Свидетели</h3><p>Сохраняй свидетельства и помогай тем, кого система предпочла забыть.</p><button onclick="chooseFaction('witnesses')">Стать Свидетелем</button></article></div><p id="factionStatus" class="faction-status">Сторона пока не выбрана.</p>
+    </div>
+    <div class="page" id="page-gallery">
+      <div class="section-wrapper" style="margin-top:40px"><h2 class="section-title">🖼 <span>ГАЛЕРЕЯ МИРА</span></h2></div>
+      <p class="feature-intro">Визуальные заметки из мира Аки и Эпсилона.</p>
+      <div class="feature-grid gallery-grid"><article class="gallery-card gallery-forest"><div class="gallery-art">🌿</div><h3>Гнилой лес</h3><p>Зона, где привычные законы природы дают сбой.</p></article><article class="gallery-card gallery-anomaly"><div class="gallery-art">🩸</div><h3>След аномалии</h3><p>Не приближаться без защитного снаряжения.</p></article><article class="gallery-card gallery-epsilon"><div class="gallery-art">🛡️</div><h3>Штаб Эпсилона</h3><p>У каждого коридора есть своя закрытая дверь.</p></article><article class="gallery-card gallery-rift"><div class="gallery-art">🌀</div><h3>Разлом</h3><p>Сигнал приходит раньше, чем его отправляют.</p></article><article class="gallery-card gallery-witness"><div class="gallery-art">📡</div><h3>Архив Свидетелей</h3><p>Фрагменты правды, собранные очевидцами.</p></article><article class="gallery-card gallery-omega"><div class="gallery-art">👁️</div><h3>Знак Омеги</h3><p>Его появление редко бывает случайным.</p></article></div>
+    </div>
+
     <div class="page" id="page-about">
         <div class="section-wrapper" style="margin-top: 40px;">
             <h2 class="section-title" data-i18n="about_title">📖 <span>О ПРОЕКТЕ</span></h2>
@@ -3276,13 +3320,61 @@
             });
         }
 
+        // ===== ДОПОЛНИТЕЛЬНЫЕ ИНТЕРАКТИВНЫЕ РАЗДЕЛЫ =====
+        function revealFile(button, text) {
+            const out = button.parentElement.querySelector('.file-secret');
+            if (!out) return;
+            out.hidden = !out.hidden;
+            out.textContent = out.hidden ? '' : text;
+            button.textContent = out.hidden ? 'Открыть файл' : 'Скрыть файл';
+        }
+        function runTerminal() {
+            const input = document.getElementById('terminalInput');
+            const output = document.getElementById('terminalOutput');
+            if (!input || !output) return;
+            const code = input.value.trim().toUpperCase();
+            const records = {
+                EPSILON: 'ДОСТУП ЧАСТИЧНЫЙ: протоколы организации не объясняют происхождение всех аномалий.',
+                AKI: 'ФАЙЛ АKИ: субъект пережил события, которые должны были стать финальными. Причина не подтверждена.',
+                ECHO: 'ПРЕДУПРЕЖДЕНИЕ: не отвечайте на сигнал, если он повторяет ваш голос.',
+                OMEGA: 'ЗАПИСЬ ОМЕГИ: «История, которую вам рассказали, — только одна из версий».',
+                WITNESS: 'АРХИВ СВИДЕТЕЛЕЙ: показания расходятся, но все упоминают один и тот же знак.'
+            };
+            output.textContent = records[code] || 'ОТКАЗАНО. Код не распознан. Подсказка: попробуйте EPSILON, AKI, ECHO, OMEGA или WITNESS.';
+        }
+        const missionOutcomes = [
+          'Ты входишь в сектор. Сигнал оказывается ловушкой, но ты находишь журнал пропавшей группы. Итог: данные получены, риск высокий.',
+          'Питание отключено, аномалия затихает. Вместе с сигналом исчезает и шанс найти группу. Итог: угроза временно нейтрализована.',
+          'Подкрепление прибывает и фиксирует следы эвакуации. Операция затягивается, зато команда возвращается целой. Итог: безопаснее, но часть улик потеряна.'
+        ];
+        function chooseMission(choice) {
+          const result = document.getElementById('missionResult');
+          if (result) result.textContent = missionOutcomes[choice] || 'Решение не распознано.';
+        }
+        function resetMission() {
+          const result = document.getElementById('missionResult');
+          if (result) result.textContent = 'Ожидание решения оперативника…';
+        }
+        function chooseFaction(faction) {
+          const names = {epsilon:'Эпсилон 🛡️', omega:'Омега 👁️', witnesses:'Свидетели 📡'};
+          try { localStorage.setItem('aki_faction', faction); } catch(e) {}
+          const status = document.getElementById('factionStatus');
+          if (status) status.textContent = 'Твоя сторона: ' + (names[faction] || faction) + '. Выбор сохранён в этом браузере.';
+        }
+        function loadFaction() {
+          let faction = ''; try { faction = localStorage.getItem('aki_faction') || ''; } catch(e) {}
+          const names = {epsilon:'Эпсилон 🛡️', omega:'Омега 👁️', witnesses:'Свидетели 📡'};
+          const status = document.getElementById('factionStatus');
+          if (status && faction) status.textContent = 'Твоя сторона: ' + (names[faction] || faction) + '. Выбор сохранён в этом браузере.';
+        }
+
         // ===== НАВИГАЦИЯ =====
         function showPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const targetPage = document.getElementById('page-' + page);
             if (targetPage) targetPage.classList.add('active');
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            const pageMap = { home: 0, characters: 1, lore: 2, shop: 3, seasons: 4, music: 5, quotes: 6, coop: 7, about: 8 };
+            const pageMap = { home: 0, characters: 1, lore: 2, shop: 3, seasons: 4, music: 5, quotes: 6, archive: 7, terminal: 8, missions: 9, faction: 10, gallery: 11, coop: 12, about: 13 };
             const navBtns = document.querySelectorAll('.nav-btn');
             if (navBtns[pageMap[page]]) navBtns[pageMap[page]].classList.add('active');
             document.querySelectorAll('.bottom-nav-item').forEach(btn => btn.classList.toggle('active', btn.dataset.page === page));
@@ -3291,6 +3383,7 @@
             if (page === 'characters') renderCharacters();
             if (page === 'lore') renderLore();
             if (page === 'quotes') renderQuotes();
+            if (page === 'faction') loadFaction();
             if (page === 'home') { renderAllEpisodes(); renderContinue(); renderWatchlist(); renderTimeline(); }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
