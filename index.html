@@ -2081,8 +2081,7 @@ body.season-halloween .season-badge.halloween {
             }
             if (season === 'halloween') {
                 document.body.classList.add('season-halloween');
-                badgeWrap.innerHTML = `<div class="season-badge halloween">🎃 Хэллоуин-событие активно! +50% XP за игры</div>`;
-                clearSnowflakes();
+                badgeWrap.innerHTML = `<div class="season-badge halloween">
                 const user = getCurrentUser();
                 if (user) {
                     const key = 'aki_season_halloween_' + user.nickname;
