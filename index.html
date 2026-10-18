@@ -9,17 +9,17 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         :root {
-            --bg: #0a0a0f; --bg-2: #050508; --panel: #0f0f15; --panel-2: #1a0505;
+            --bg: #07130f; --bg-2: #03100d; --panel: #0c1d16; --panel-2: #14271a;
             --text: #e0e0e0; --text-muted: #aaa; --text-dim: #888;
-            --accent: #ff3333; --accent-hover: #ff5555; --accent-glow: rgba(255,51,51,0.5);
+            --accent: #ffb52e; --accent-hover: #ffd166; --accent-glow: rgba(255,181,46,0.42);
             --border: rgba(255,255,255,0.05); --border-soft: rgba(255,255,255,0.1);
-            --discord: #5865F2; --tg: #229ED9; --yt: #FF0000;
-            --success: #00ff88; --warn: #ffc800;
+            --discord: #2e8b57; --tg: #27834a; --yt: #FF0000;
+            --success: #70e38b; --warn: #ffd166;
         }
         body.theme-light {
-            --bg: #f0f2f5; --bg-2: #e4e6eb; --panel: #ffffff; --panel-2: #fdf2f2;
+            --bg: #f3fff3; --bg-2: #e0f7df; --panel: #ffffff; --panel-2: #fff4d8;
             --text: #1c1e21; --text-muted: #4b4f56; --text-dim: #65676b;
-            --accent: #e63946; --accent-hover: #d62828; --accent-glow: rgba(230,57,70,0.3);
+            --accent: #e9a11b; --accent-hover: #c98208; --accent-glow: rgba(233,161,27,0.3);
             --border: rgba(0,0,0,0.08); --border-soft: rgba(0,0,0,0.15);
         }
         body { background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; overflow-x: hidden; position: relative; background: radial-gradient(circle at 50% 0%, var(--bg-2) 0%, var(--bg) 60%); }
@@ -48,7 +48,10 @@
         .page { display: none; animation: pageFade 0.3s ease; }
         .page.active { display: block; }
         @keyframes pageFade { from { opacity: 0; } to { opacity: 1; } }
-        .hero { position: relative; height: 85vh; min-height: 600px; background: linear-gradient(135deg, rgba(26,0,0,0.7) 0%, rgba(5,5,8,0.7) 100%); overflow: hidden; display: flex; align-items: flex-end; padding: 80px 60px; }
+        .hero { position: relative; height: min(82vh, 900px); min-height: 620px; background: radial-gradient(ellipse at 50% 45%, rgba(28,100,45,.20) 0%, rgba(4,20,9,.18) 55%, rgba(4,20,9,.62) 100%); overflow: hidden; display: flex; align-items: center; padding: 70px clamp(24px, 8vw, 120px); }
+        .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(5,7,12,.88) 0%, rgba(5,7,12,.62) 32%, rgba(5,7,12,.08) 72%, rgba(5,7,12,.18) 100%); }
+        .hero-content { max-width: 620px; text-align: left; padding: clamp(20px, 3vw, 38px); border: 1px solid rgba(100,210,120,.22); border-radius: 24px; background: linear-gradient(135deg, rgba(5,12,22,.72), rgba(5,12,22,.25)); box-shadow: 0 20px 70px rgba(0,0,0,.2); backdrop-filter: blur(3px); }
+        .hero-content h1 { max-width: 100%; }
         body.theme-light .hero { background: linear-gradient(135deg, rgba(255,230,230,0.8) 0%, rgba(240,242,245,0.8) 100%); }
         .hero-content { position: relative; z-index: 2; max-width: 700px; }
         .hero h1 { font-size: 4.5rem; font-weight: 900; color: var(--text); letter-spacing: 4px; margin-bottom: 20px; line-height: 1; text-shadow: 0 0 20px var(--accent-glow); }
@@ -60,7 +63,7 @@
         .btn-secondary { background: var(--panel); color: var(--text); border: 1px solid var(--border-soft); }
         .btn-secondary:hover { border-color: var(--accent); background: var(--panel-2); transform: translateY(-3px); }
         .btn-discord { background: var(--discord); color: #fff; }
-        .btn-discord:hover { background: #4752C4; transform: translateY(-3px); }
+        .btn-discord:hover { background: #246b3b; transform: translateY(-3px); }
         .xp-container { background: var(--bg); border-radius: 10px; padding: 15px; margin-bottom: 20px; border: 1px solid var(--border-soft); }
         .xp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; }
         .xp-level { color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
@@ -365,7 +368,7 @@
         .wheel-sub { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px; }
         .wheel-wrap { position: relative; width: 280px; height: 280px; margin: 0 auto 20px; }
         .wheel-pointer { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); font-size: 2rem; z-index: 5; filter: drop-shadow(0 0 8px var(--accent)); }
-        .wheel-disc { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(#ff3333 0deg 45deg, #ffd700 45deg 90deg, #b388ff 90deg 135deg, #00e5ff 135deg 180deg, #00ff88 180deg 225deg, #ff8c00 225deg 270deg, #e24a90 270deg 315deg, #5865F2 315deg 360deg); border: 6px solid var(--panel); box-shadow: 0 0 30px var(--accent-glow), inset 0 0 30px rgba(0,0,0,0.3); transition: transform 4s cubic-bezier(.17,.67,.12,.99); position: relative; }
+        .wheel-disc { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(#ff3333 0deg 45deg, #ffd700 45deg 90deg, #b388ff 90deg 135deg, #00e5ff 135deg 180deg, #00ff88 180deg 225deg, #ff8c00 225deg 270deg, #e24a90 270deg 315deg, #2e8b57 315deg 360deg); border: 6px solid var(--panel); box-shadow: 0 0 30px var(--accent-glow), inset 0 0 30px rgba(0,0,0,0.3); transition: transform 4s cubic-bezier(.17,.67,.12,.99); position: relative; }
         .wheel-disc::after { content: '🎁'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2.5rem; width: 70px; height: 70px; background: var(--panel); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 3px solid var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
         .wheel-labels { position: absolute; inset: 0; pointer-events: none; }
         .wheel-label { position: absolute; font-size: 0.75rem; font-weight: 900; color: #fff; text-shadow: 0 0 4px #000, 0 0 8px #000; white-space: nowrap; }
@@ -373,13 +376,11 @@
         .wheel-spin-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px var(--accent-glow); }
         .wheel-spin-btn:disabled { background: var(--border-soft); color: var(--text-dim); cursor: not-allowed; }
         .wheel-timer { color: var(--text-muted); font-size: 0.8rem; margin-top: 10px; }
-        body.season-halloween { --accent: #ff8c00; --accent-hover: #ffa533; --accent-glow: rgba(255,140,0,0.5); --bg: #0d0500; --bg-2: #1a0a00; }
+        body.season-halloween { --accent: #00e5ff; --accent-hover: #33ebff; --accent-glow: rgba(0,229,255,0.5); --bg: #001018; --bg-2: #001a26; }
+        body { --accent: #39c96b; --accent-hover: #72e58e; --accent-glow: rgba(57,201,107,0.38); }
         body.season-newyear { --accent: #00e5ff; --accent-hover: #33ebff; --accent-glow: rgba(0,229,255,0.5); --bg: #001018; --bg-2: #001a26; }
-        body.season-halloween .logo::after { content: ' 🎃'; font-size: 1.2rem; }
-        body.season-newyear .logo::after { content: ' ❄️'; font-size: 1.2rem; }
         .season-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-        .season-badge.halloween { background: rgba(255,140,0,0.2); color: #ff8c00; border: 1px solid #ff8c00; }
-        .season-badge.newyear { background: rgba(0,229,255,0.2); color: #00e5ff; border: 1px solid #00e5ff; }
+        .season-badge.halloween { background: rgba(0,229,255,0.2); color: #00e5ff; border: 1px solid #00e5ff; }
         .duel-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
         .duel-box { padding: 30px; text-align: center; }
         .duel-title { font-size: 1.4rem; font-weight: 900; color: var(--text); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
@@ -392,15 +393,15 @@
         .duel-arena { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
         .duel-side { background: rgba(0,0,0,0.25); border: 1px solid var(--border-soft); border-radius: 16px; padding: 20px; }
         .duel-side.player { border-color: var(--accent); }
-        .duel-side.bot { border-color: #5865F2; }
+        .duel-side.bot { border-color: #2e8b57; }
         .duel-side-name { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
         .duel-side.player .duel-side-name { color: var(--accent); }
-        .duel-side.bot .duel-side-name { color: #5865F2; }
+        .duel-side.bot .duel-side-name { color: #2e8b57; }
         .duel-side-score { font-size: 2.5rem; font-weight: 900; color: var(--text); }
         .duel-side-bar { width: 100%; height: 8px; background: var(--bg); border-radius: 4px; margin-top: 8px; overflow: hidden; }
         .duel-side-bar-fill { height: 100%; border-radius: 4px; transition: width 0.1s; }
         .duel-side.player .duel-side-bar-fill { background: linear-gradient(90deg, #ff3333, #ff8c00); }
-        .duel-side.bot .duel-side-bar-fill { background: linear-gradient(90deg, #5865F2, #00e5ff); }
+        .duel-side.bot .duel-side-bar-fill { background: linear-gradient(90deg, #2e8b57, #00e5ff); }
         .duel-timer { font-size: 1.2rem; font-weight: 900; color: var(--accent); margin-bottom: 15px; }
         .duel-click-btn { background: linear-gradient(120deg, var(--accent), #b388ff); color: #fff; padding: 30px 60px; border: none; border-radius: 20px; font-weight: 900; font-size: 1.3rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 2px; width: 100%; user-select: none; }
         .duel-click-btn:active { transform: scale(0.95); }
@@ -562,10 +563,15 @@
         .checkout-success-icon { font-size: 5rem; margin-bottom: 15px; animation: redisoneyBounce 1s ease-in-out infinite; }
         .checkout-success-title { font-size: 1.4rem; color: var(--success); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
         .checkout-success-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
-        #animated-bg { position: fixed; inset: 0; z-index: -3; pointer-events: none; overflow: hidden; opacity: 0.5; }
-        #animated-bg .falling { position: absolute; color: rgba(255,51,51,0.35); font-family: monospace; font-weight: 900; animation: fallDown linear infinite; text-shadow: 0 0 10px rgba(255,51,51,0.5); }
-        @keyframes fallDown { 0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
-        #loadingScreen { position: fixed; inset: 0; z-index: 99999; background: radial-gradient(circle at center, #1a0505 0%, #0a0a0f 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+        /* Summer atmosphere: no cosmic canvas or spiral. */
+        #animated-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; opacity: .32; background: radial-gradient(ellipse at 82% 4%, rgba(255,205,90,.24), transparent 28%), radial-gradient(ellipse at 12% 30%, rgba(54,180,105,.12), transparent 34%); }
+        #animated-bg canvas { display: none !important; }
+        #animated-bg .summer-leaf { position:absolute; top:-8vh; display:block; opacity:.68; filter:drop-shadow(0 0 5px rgba(94,190,90,.24)); user-select:none; pointer-events:none; will-change:transform; animation:summerLeafFall linear infinite; }
+        @keyframes summerLeafFall { 0% { transform:translate3d(0,-8vh,0) rotate(0deg); opacity:0; } 12% { opacity:.68; } 88% { opacity:.55; } 100% { transform:translate3d(var(--drift),112vh,0) rotate(300deg); opacity:0; } }
+        @media (prefers-reduced-motion: reduce) { #animated-bg .summer-leaf { animation-duration:40s !important; } }
+        body { background: linear-gradient(180deg, #10291c 0%, #071710 42%, #06100d 100%) !important; }
+        body.theme-light { background: linear-gradient(180deg, #e7ffd9 0%, #f6ffe9 48%, #fff6d9 100%) !important; }
+        #loadingScreen { position: fixed; inset: 0; z-index: 99999; background: radial-gradient(circle at center, #08283b 0%, #06111c 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
         #loadingScreen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
         .loading-logo { font-size: 3rem; font-weight: 900; color: var(--text); letter-spacing: 6px; margin-bottom: 20px; text-shadow: 0 0 30px var(--accent-glow); animation: loadingPulse 1.5s ease-in-out infinite; }
         .loading-logo span { color: var(--accent); }
@@ -592,7 +598,7 @@
             .bottom-nav { display: flex; }
             body { padding-bottom: 68px; }
             footer { padding-bottom: 90px; }
-            .hero { height: auto; min-height: 0; padding: 60px 22px 50px; align-items: center; }
+            .hero { height: auto; min-height: 72vh; padding: 48px 18px; align-items: center; } .hero::before { background: linear-gradient(180deg, rgba(5,7,12,.28), rgba(5,7,12,.72)); } .hero-content { width: 100%; padding: 22px; }
             .hero h1 { font-size: 2rem; letter-spacing: 1.5px; margin-bottom: 14px; }
             .hero p { font-size: 0.92rem; margin-bottom: 22px; }
             .hero-buttons { flex-direction: column; gap: 10px; }
@@ -667,7 +673,33 @@
             .shop-grid, .music-grid, .char-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 1.7rem; } .card { flex: 0 0 84vw; } .logo { font-size: 0.95rem; }
         }
+
+        /* ===== ЛЕТНЯЯ ТЕМА ===== */
+
     </style>
+
+    <style id="summer-theme-overrides">
+      body { background-image: radial-gradient(ellipse at 82% 0%, rgba(255,194,72,.2), transparent 30%), radial-gradient(ellipse at 15% 22%, rgba(47,165,89,.22), transparent 42%), linear-gradient(180deg, rgba(7,34,21,.18), transparent 70%); }
+      body.theme-light { background-image: radial-gradient(ellipse at 82% 0%, rgba(255,193,64,.32), transparent 30%), radial-gradient(ellipse at 12% 22%, rgba(74,190,103,.16), transparent 42%); }
+      .hero { background: radial-gradient(ellipse at 82% 24%, rgba(255,194,72,.18), transparent 36%), radial-gradient(ellipse at 20% 70%, rgba(45,150,83,.2), transparent 48%), linear-gradient(120deg, rgba(7,30,18,.52), rgba(20,35,18,.2)); }
+      .hero-content { border-color: rgba(255,190,75,.3); background: linear-gradient(135deg, rgba(11,38,22,.82), rgba(30,42,18,.48)); }
+      /* Летняя палитра для кнопок, активных вкладок и карточек */
+      body { --accent: #42d66f; --accent-hover: #7bea91; --accent-glow: rgba(66,214,111,.38); }
+      .btn-primary, .game-mode-tab.active, .leaderboard-mode-tab.active, .tab-btn.active { background: linear-gradient(135deg,#35c96a,#8bdf63) !important; color: #062414 !important; border-color: rgba(155,235,119,.8) !important; }
+      .btn-primary:hover { box-shadow: 0 8px 24px rgba(75,220,105,.3) !important; }
+      .loading-logo span, .countdown-number, .release-title, .section-title span, .hero h1 span { color: #70e887; }
+      .countdown-card, .release-card, .game-card, .acrylic { border-color: rgba(135,207,112,.22); }
+      .countdown-card, .release-card { background: linear-gradient(135deg,rgba(17,56,33,.82),rgba(20,77,63,.7)) !important; }
+      .hero-content { box-shadow: 0 12px 45px rgba(40,150,70,.08); }
+      a:hover, .text-accent { color: #9be86c; }
+      .topbar, .bottom-nav { backdrop-filter: blur(12px); }
+      .topbar-nav { box-shadow: 0 0 24px rgba(255,181,46,.08); }
+      #summer-motes { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+      .summer-mote { position: absolute; bottom: -24px; color: rgba(255,215,112,.62); text-shadow: 0 0 12px rgba(255,190,70,.4); animation: summerRise linear infinite; user-select: none; }
+      @keyframes summerRise { from { transform: translate3d(0,0,0) rotate(0deg); opacity: 0; } 12% { opacity: .7; } 85% { opacity: .35; } to { transform: translate3d(28px,-110vh,0) rotate(160deg); opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { .summer-mote { animation: none; display: none; } }
+    </style>
+
 </head><body>
 
     <!-- ЗАГРУЗОЧНЫЙ ЭКРАН -->
@@ -721,7 +753,6 @@
     <div class="page active" id="page-home">
         <section class="hero">
             <div class="hero-content">
-                <div id="seasonBadgeWrap"></div>
                 <h1 data-i18n="hero_title">АКИ И ЭПСИЛОН</h1>
                 <p data-i18n="hero_desc">
                     Тайная организация, которая спасает мир от аномалий и монстров.
@@ -920,7 +951,7 @@
                     <text x="750" y="240" font-size="40" text-anchor="middle" opacity="0.5">🏠</text>
                     <text x="150" y="240" font-size="40" text-anchor="middle" opacity="0.5">🔥</text>
                     <text x="550" y="140" font-size="40" text-anchor="middle" opacity="0.5">🏗️</text>
-                    <text x="100" y="60" font-size="40" text-anchor="middle" opacity="0.5">❄️</text>
+                    <text x="100" y="60" font-size="40" text-anchor="middle" opacity="0.5">✦</text>
                     <text x="750" y="490" font-size="40" text-anchor="middle" opacity="0.5">🌲</text>
                     <text x="800" y="60" font-size="40" text-anchor="middle" opacity="0.5">🏙️</text>
                     <text x="100" y="540" font-size="40" text-anchor="middle" opacity="0.5">🚢</text>
@@ -1420,19 +1451,21 @@
             }, 350);
         }
         function initAnimatedBg() {
+            // Летняя листва вместо снежинок.
             const bg = document.getElementById('animated-bg');
             if (!bg) return;
-            const symbols = ['🩸', '⚡', '💥', '👁️', '🧬', '☢️', '🔑', '🎭', '💀', '🕳️'];
-            const count = 20;
-            for (let i = 0; i < count; i++) {
-                const el = document.createElement('div');
-                el.className = 'falling';
-                el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-                el.style.left = Math.random() * 100 + 'vw';
-                el.style.fontSize = (Math.random() * 20 + 12) + 'px';
-                el.style.animationDuration = (Math.random() * 15 + 10) + 's';
-                el.style.animationDelay = (Math.random() * 15) + 's';
-                bg.appendChild(el);
+            bg.replaceChildren();
+            const leaves = ['🍃', '🍀', '🌿', '🍃', '🌱'];
+            for (let i = 0; i < 30; i++) {
+                const leaf = document.createElement('span');
+                leaf.className = 'summer-leaf';
+                leaf.textContent = leaves[Math.floor(Math.random() * leaves.length)];
+                leaf.style.left = (Math.random() * 100) + 'vw';
+                leaf.style.fontSize = (Math.random() * 15 + 12) + 'px';
+                leaf.style.animationDuration = (Math.random() * 12 + 12) + 's';
+                leaf.style.animationDelay = (-Math.random() * 24) + 's';
+                leaf.style.setProperty('--drift', ((Math.random() - 0.5) * 180) + 'px');
+                bg.appendChild(leaf);
             }
         }
 
@@ -1948,43 +1981,9 @@
         }
 
         // ===== СЕЗОНЫ =====
-        function getCurrentSeason() {
-            const now = new Date();
-            const month = now.getMonth() + 1, day = now.getDate();
-            if (month === 10) return 'halloween';
-            if (month === 12 || (month === 1 && day <= 10)) return 'newyear';
-            return null;
-        }
+        function getCurrentSeason() { return ''; }
         function applySeason() {
-            const season = getCurrentSeason();
-            const badgeWrap = document.getElementById('seasonBadgeWrap');
             document.body.classList.remove('season-halloween', 'season-newyear');
-            if (!badgeWrap) return;
-            if (season === 'halloween') {
-                document.body.classList.add('season-halloween');
-                badgeWrap.innerHTML = `<div class="season-badge halloween">🎃 Хэллоуин-событие активно! +50% XP за игры</div>`;
-                const user = getCurrentUser();
-                if (user) {
-                    const key = 'aki_season_halloween_' + user.nickname;
-                    if (!localStorage.getItem(key)) {
-                        localStorage.setItem(key, 'true');
-                        setTimeout(() => showAchievementToast({ icon: '🎃', name: 'Хэллоуин 2026', name_en: 'Halloween 2026', xp: 100 }), 1000);
-                        addXP(100);
-                    }
-                }
-            } else if (season === 'newyear') {
-                document.body.classList.add('season-newyear');
-                badgeWrap.innerHTML = `<div class="season-badge newyear">❄️ Новогоднее событие! +50% XP за игры</div>`;
-                const user = getCurrentUser();
-                if (user) {
-                    const key = 'aki_season_newyear_' + user.nickname;
-                    if (!localStorage.getItem(key)) {
-                        localStorage.setItem(key, 'true');
-                        setTimeout(() => showAchievementToast({ icon: '❄️', name: 'Новый год 2027', name_en: 'New Year 2027', xp: 100 }), 1000);
-                        addXP(100);
-                    }
-                }
-            } else { badgeWrap.innerHTML = ''; }
         }
 
         // ===== ДУЭЛЬ С БОТОМ =====
@@ -2762,28 +2761,26 @@
 
         // ===== АВТОРИЗАЦИЯ =====
         // Данные и пароли хранятся локально только для прототипа. Для публичного сайта нужна серверная авторизация.
-        function getUsers() { const u = localStorage.getItem('aki_users'); return u ? safeJSONParse(u, {}) : {}; }
+        function getUsers() {
+            const raw = localStorage.getItem('aki_users');
+            const users = raw ? safeJSONParse(raw, {}) : {};
+            return users && typeof users === 'object' && !Array.isArray(users) ? users : {};
+        }
         function saveUsers(users) { localStorage.setItem('aki_users', JSON.stringify(users)); }
-        function getCurrentUser() { const u = localStorage.getItem('aki_current_user'); return u ? safeJSONParse(u, null) : null; }
+        function getCurrentUser() {
+            const u = localStorage.getItem('aki_current_user');
+            const current = u ? safeJSONParse(u, null) : null;
+            if (!current || !current.nickname) return null;
+            // Не считаем пользователя вошедшим, если его аккаунта больше нет в списке.
+            const users = getUsers();
+            const key = Object.keys(users).find(k => k.toLowerCase() === String(current.nickname).toLowerCase());
+            if (!key) return null;
+            const account = users[key];
+            return { nickname: key, gender: account.gender || current.gender || '', avatar: account.avatar || current.avatar || null };
+        }
         function setCurrentUser(user) { if (user) localStorage.setItem('aki_current_user', JSON.stringify(user)); else localStorage.removeItem('aki_current_user'); }
 
-        // Освобождаем ник The_MisterAki: удаляем только аккаунт с этим ником (без учёта регистра).
-        // Это выполняется в браузере при открытии сайта и не затрагивает остальные аккаунты.
-        (function releaseTheMisterAkiNickname() {
-            const users = getUsers();
-            let changed = false;
-            for (const key of Object.keys(users)) {
-                if (key.toLowerCase() === 'the_misteraki') {
-                    delete users[key];
-                    changed = true;
-                }
-            }
-            if (changed) saveUsers(users);
-            const current = getCurrentUser();
-            if (current && typeof current.nickname === 'string' && current.nickname.toLowerCase() === 'the_misteraki') {
-                setCurrentUser(null);
-            }
-        })();
+        // Аккаунты сохраняются между входами и выходами. Выход удаляет только текущую сессию.
         function openAuth(mode) {
             const modal = document.getElementById('authModal');
             modal.style.display = 'flex';
@@ -2840,9 +2837,15 @@
             const errorEl = document.getElementById('logError');
             if (!nick || !pass) { errorEl.textContent = currentLang === 'ru' ? 'Заполни поля' : 'Fill'; return; }
             const users = getUsers();
-            const matchedNick = Object.keys(users).find(key => key.toLowerCase() === nick.toLowerCase());
+            const matchedNick = Object.keys(users).find(key => key.trim().toLocaleLowerCase() === nick.trim().toLocaleLowerCase());
             const account = matchedNick ? users[matchedNick] : null;
-            if (!account || typeof account.password !== 'string') { errorEl.textContent = currentLang === 'ru' ? 'Не найден' : 'Not found'; return; }
+            if (!account) {
+                errorEl.textContent = currentLang === 'ru'
+                    ? 'Аккаунт не найден в этом браузере. Проверь раскладку и регистр ника или зарегистрируйся заново. Аккаунты из другого браузера/старой копии HTML автоматически не переносятся.'
+                    : 'Account not found in this browser. Check the nickname or register again. Accounts from another browser/older HTML copy are not transferred automatically.';
+                return;
+            }
+            if (typeof account.password !== 'string') { errorEl.textContent = currentLang === 'ru' ? 'У этого аккаунта повреждены данные. Зарегистрируй его заново.' : 'This account data is incomplete. Please register again.'; return; }
             if (account.password !== pass) { errorEl.textContent = currentLang === 'ru' ? 'Неверный пароль' : 'Wrong'; return; }
             setCurrentUser({ nickname: matchedNick, gender: account.gender, avatar: account.avatar || null });
             errorEl.textContent = '';
@@ -2887,7 +2890,7 @@
             { id: 'default', color: '#ffffff', label: 'Стандарт' }, { id: 'red', color: '#ff3333', label: 'Алый' },
             { id: 'orange', color: '#ff8c00', label: 'Огненный' }, { id: 'yellow', color: '#ffd700', label: 'Золотой' },
             { id: 'green', color: '#00ff88', label: 'Изумруд' }, { id: 'cyan', color: '#00e5ff', label: 'Ледяной' },
-            { id: 'blue', color: '#5865F2', label: 'Стальной' }, { id: 'purple', color: '#b388ff', label: 'Мистический' },
+            { id: 'blue', color: '#2e8b57', label: 'Стальной' }, { id: 'purple', color: '#b388ff', label: 'Мистический' },
             { id: 'pink', color: '#e24a90', label: 'Розовый' }
         ];
         const AVATAR_FRAMES = [
@@ -3194,7 +3197,7 @@
             { id: 'vera', name: 'Вера', name_en: 'Vera', emoji: '👧', role: 'Скрытый мутант', role_en: 'Hidden Mutant', age: '20 лет', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#e91e63', group: 'main', short: 'Сестра-близнец Агента Ноль.', short_en: 'Agent Zero\'s twin.', full: 'Сохранила эмоции, но тело мутировало.', full_en: 'Retained emotions but mutated.', tags: ['Мутант', 'Сезон 8'], tags_en: ['Mutant', 'Season 8'] },
             { id: 'crow', name: 'Доктор Кроу', name_en: 'Dr. Crow', emoji: '🐦', role: 'Новый учёный', role_en: 'New Scientist', age: '35 лет', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#00bcd4', group: 'epsilon', short: 'Изучает аномалию в теле Аки.', short_en: 'Studies Aki\'s anomaly.', full: 'Пытается спасти Аки, но готов на жертвы.', full_en: 'Tries to save Aki.', tags: ['Учёный', 'Сезон 8'], tags_en: ['Scientist', 'Season 8'] },
             { id: 'voice', name: 'Голос', name_en: 'Voice', emoji: '🗣️', role: 'Сущность', role_en: 'Entity', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#9c27b0', group: 'main', short: 'Аномалия в голове Аки.', short_en: 'Anomaly in Aki\'s head.', full: 'Пытается склонить Аки на свою сторону.', full_en: 'Tries to win Aki over.', tags: ['Аномалия', 'Сезон 8'], tags_en: ['Anomaly', 'Season 8'] },
-            { id: 'zein', name: 'Зейн', name_en: 'Zane', emoji: '🕵️', role: 'Лидер Свидетелей', role_en: 'Witnesses Leader', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#5865F2', group: 'witnesses', short: 'Холодный, расчётливый. Врёт Аки.', short_en: 'Cold, calculating.', full: 'Бывший агент Эпсилона. Использует Аки для своих целей.', full_en: 'Former Epsilon agent.', tags: ['Лидер', 'Свидетели', 'Предатель'], tags_en: ['Leader', 'Witnesses', 'Traitor'] },
+            { id: 'zein', name: 'Зейн', name_en: 'Zane', emoji: '🕵️', role: 'Лидер Свидетелей', role_en: 'Witnesses Leader', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#2e8b57', group: 'witnesses', short: 'Холодный, расчётливый. Врёт Аки.', short_en: 'Cold, calculating.', full: 'Бывший агент Эпсилона. Использует Аки для своих целей.', full_en: 'Former Epsilon agent.', tags: ['Лидер', 'Свидетели', 'Предатель'], tags_en: ['Leader', 'Witnesses', 'Traitor'] },
             { id: 'mira', name: 'Мира', name_en: 'Mira', emoji: '💉', role: 'Свидетель-медик', role_en: 'Medic', age: 'неизвестно', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#00bfa5', group: 'witnesses', short: 'Добрая, но сломленная.', short_en: 'Kind but broken.', full: 'Одна из немногих Свидетелей, кто не давит на Аки.', full_en: 'Doesn\'t pressure Aki.', tags: ['Свидетели', 'Медик'], tags_en: ['Witnesses', 'Medic'] },
             { id: 'korv', name: 'Корв', name_en: 'Korv', emoji: '💻', role: 'Свидетель-техник', role_en: 'Technician', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#00e676', group: 'witnesses', short: 'Гений-параноик.', short_en: 'Genius-paranoid.', full: 'Давит на Аки: «Правда не важна. Важно действие».', full_en: 'Pressures Aki.', tags: ['Свидетели', 'Техник'], tags_en: ['Witnesses', 'Technician'] },
             { id: 'ten', name: 'Тень', name_en: 'Shadow', emoji: '🌑', role: 'Свидетель-стиратель', role_en: 'Eraser', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#424242', group: 'witnesses', short: 'Молчаливый, опасный.', short_en: 'Silent, dangerous.', full: 'Бывший «стиратель» памяти Эпсилона.', full_en: 'Former memory eraser.', tags: ['Свидетели', 'Стиратель'], tags_en: ['Witnesses', 'Eraser'] }
@@ -3293,6 +3296,10 @@
         }
 
         // ===== ESC / ИНИЦИАЛИЗАЦИЯ =====
+        window.addEventListener('focus', () => {
+            if (typeof updateUserArea === 'function') updateUserArea();
+        });
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeAuth(); closePromoModal(); closeAuthRequired(); closeSearch(); closeCart();
@@ -3332,5 +3339,19 @@
         setInterval(updateWheelButton, 60000);
         setInterval(renderDealBanner, 60000);
     </script>
+
+<script id="summer-effects">
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('summer-motes')) return;
+  const layer = document.createElement('div'); layer.id = 'summer-motes'; layer.setAttribute('aria-hidden','true'); document.body.appendChild(layer);
+  const symbols = ['✿','❋','☀','❀','🍃'];
+  for (let i=0; i<24; i++) {
+    const mote = document.createElement('span'); mote.className = 'summer-mote'; mote.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+    mote.style.left = (Math.random()*100)+'vw'; mote.style.fontSize = (8+Math.random()*13)+'px';
+    mote.style.animationDuration = (15+Math.random()*20)+'s'; mote.style.animationDelay = (-Math.random()*30)+'s'; layer.appendChild(mote);
+  }
+});
+</script>
+
 </body>
 </html>
