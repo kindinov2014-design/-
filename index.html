@@ -8,6 +8,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
         :root {
             --bg: #0a0a0f; --bg-2: #050508; --panel: #0f0f15; --panel-2: #1a0505;
             --text: #e0e0e0; --text-muted: #aaa; --text-dim: #888;
@@ -22,38 +23,70 @@
             --accent: #e63946; --accent-hover: #d62828; --accent-glow: rgba(230,57,70,0.3);
             --border: rgba(0,0,0,0.08); --border-soft: rgba(0,0,0,0.15);
         }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; overflow-x: hidden; position: relative; background: radial-gradient(circle at 50% 0%, var(--bg-2) 0%, var(--bg) 60%); }
-        #bg-glow { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; background: radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--accent-glow), transparent 80%); opacity: 0.4; transition: background 0.1s ease; }
+
+        body, .topbar, .nav-btn, .icon-btn, .lang-btn, .hero, .game-box, .promo-input, .card, .shop-item, .char-card, .lore-item, .season-accordion-item, .modal, .notification {
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        body {
+            background-color: var(--bg); color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6; overflow-x: hidden; position: relative;
+            background: radial-gradient(circle at 50% 0%, var(--bg-2) 0%, var(--bg) 60%);
+        }
+
+        #bg-glow {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -2; pointer-events: none;
+            background: radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--accent-glow), transparent 80%);
+            opacity: 0.4; transition: background 0.1s ease;
+        }
         body.theme-light #bg-glow { opacity: 0.15; }
-        .topbar { background-color: rgba(10,10,15,0.85); padding: 10px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-        body.theme-light .topbar { background-color: rgba(255,255,255,0.85); }
+
+        .topbar {
+            background-color: rgba(10, 10, 15, 0.85);
+            padding: 10px 30px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 100;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        body.theme-light .topbar { background-color: rgba(255, 255, 255, 0.85); }
+
         .logo { font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: 1px; display: flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; user-select: none; }
         .logo span { color: var(--accent); font-size: 1.7rem; }
+
         .topbar-nav { display: flex; gap: 5px; background: var(--border); padding: 6px 10px; border-radius: 30px; border: 1px solid var(--border); }
         .nav-btn { background: transparent; border: none; color: var(--text-muted); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; cursor: pointer; font-family: inherit; white-space: nowrap; }
         .nav-btn:hover { color: var(--text); background: var(--border-soft); }
         .nav-btn.active { background: var(--accent); color: #fff; }
+
         .topbar-right { display: flex; align-items: center; gap: 10px; }
         .icon-btn { background: var(--border); border: 1px solid var(--border-soft); color: var(--text); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1rem; position: relative; display: inline-flex; align-items: center; justify-content: center; }
         .icon-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: scale(1.05); }
         .cart-btn { background: var(--accent); color: #fff; border: none; }
         .cart-btn:hover { background: var(--accent-hover); }
         .cart-count { position: absolute; top: -3px; right: -3px; background: #fff; color: var(--accent); font-size: 0.7rem; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
         .user-btn { display: flex; align-items: center; gap: 8px; background: linear-gradient(145deg, #8b0000, var(--accent)); color: #fff; padding: 8px 16px; border-radius: 30px; border: none; cursor: pointer; font-weight: 700; font-size: 0.85rem; font-family: inherit; }
         .user-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px var(--accent-glow); }
-        .user-btn .avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; overflow: hidden; }
+        .user-btn .avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; overflow: hidden; }
         .user-btn .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
         .lang-btn { background: var(--border); border: 1px solid var(--border-soft); color: var(--text); padding: 8px 12px; border-radius: 30px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; min-width: 60px; }
         .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+
         .page { display: none; animation: pageFade 0.3s ease; }
         .page.active { display: block; }
         @keyframes pageFade { from { opacity: 0; } to { opacity: 1; } }
+
         .hero { position: relative; height: 85vh; min-height: 600px; background: linear-gradient(135deg, rgba(26,0,0,0.7) 0%, rgba(5,5,8,0.7) 100%); overflow: hidden; display: flex; align-items: flex-end; padding: 80px 60px; }
         body.theme-light .hero { background: linear-gradient(135deg, rgba(255,230,230,0.8) 0%, rgba(240,242,245,0.8) 100%); }
         .hero-content { position: relative; z-index: 2; max-width: 700px; }
         .hero h1 { font-size: 4.5rem; font-weight: 900; color: var(--text); letter-spacing: 4px; margin-bottom: 20px; line-height: 1; text-shadow: 0 0 20px var(--accent-glow); }
         .hero p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.7; max-width: 600px; }
         .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+
         .btn-primary, .btn-secondary, .btn-discord { padding: 16px 40px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; font-family: inherit; text-align: center; }
         .btn-primary { background: var(--accent); color: #fff; }
         .btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 5px 15px var(--accent-glow); }
@@ -61,14 +94,19 @@
         .btn-secondary:hover { border-color: var(--accent); background: var(--panel-2); transform: translateY(-3px); }
         .btn-discord { background: var(--discord); color: #fff; }
         .btn-discord:hover { background: #4752C4; transform: translateY(-3px); }
+
+        .cinema-wrap { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; margin-bottom: 20px; border: 1px solid var(--border-soft); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .cinema-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
         .xp-container { background: var(--bg); border-radius: 10px; padding: 15px; margin-bottom: 20px; border: 1px solid var(--border-soft); }
         .xp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; }
         .xp-level { color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
         .xp-bar-bg { width: 100%; height: 12px; background: var(--panel); border-radius: 6px; overflow: hidden; position: relative; }
         .xp-bar-fill { height: 100%; background: linear-gradient(90deg, #ff3333, #ff8c00); width: 0%; transition: width 0.4s ease; border-radius: 6px; }
         .xp-text { text-align: right; font-size: 0.75rem; color: var(--text-muted); margin-top: 5px; }
+
         .timer-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
-        .timer-box { background: var(--panel); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .timer-box { background: var(--panel); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         .timer-label { color: var(--accent); font-size: 0.85rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
         .timer-title { font-size: 1.6rem; color: var(--text); font-weight: 900; margin-bottom: 20px; }
         .timer-title span { color: var(--accent); }
@@ -76,12 +114,13 @@
         .timer-cell { background: var(--bg); border: 1px solid var(--border-soft); border-radius: 12px; padding: 15px 20px; min-width: 80px; }
         .timer-num { font-size: 2.2rem; font-weight: 900; color: var(--accent); line-height: 1; }
         .timer-cell-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 6px; font-weight: 700; }
+
         .game-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
-        .game-box { background: var(--panel); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; }
+        .game-box { background: var(--panel); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         .game-title { font-size: 1.5rem; color: var(--accent); font-weight: 900; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
         .game-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
         .game-mode-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
-        .game-mode-tab { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 10px 22px; border-radius: 25px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; }
+        .game-mode-tab { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 10px 22px; border-radius: 25px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; transition: all 0.2s; }
         .game-mode-tab:hover { color: var(--text); border-color: var(--accent); }
         .game-mode-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
         .game-mode-tab.ice { background: linear-gradient(120deg, #00e5ff, #b388ff); color: #001018; border: none; }
@@ -108,8 +147,8 @@
         .game-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20; color: #fff; text-align: center; padding: 20px; }
         .game-overlay h3 { font-size: 2rem; margin-bottom: 10px; color: var(--accent); }
         .game-overlay p { font-size: 1rem; margin-bottom: 20px; }
-        .leaderboard-btn { background: linear-gradient(120deg, #ffd700, #ff8c00); color: #000; padding: 12px 28px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; margin-top: 15px; }
-        .leaderboard-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,200,0,0.5); }
+        .leaderboard-btn { background: linear-gradient(120deg, #ffd700, #ff8c00); color: #000; padding: 12px 28px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; margin-top: 15px; transition: transform 0.2s, box-shadow 0.3s; }
+        .leaderboard-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 200, 0, 0.5); }
         .promo { max-width: 1200px; margin: 40px auto; padding: 0 60px; display: flex; gap: 15px; }
         .promo-input { flex: 1; background: var(--panel); border: 1px solid var(--border-soft); border-radius: 15px; padding: 20px 30px; color: var(--text); font-size: 0.95rem; text-align: center; font-family: inherit; }
         .promo-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
@@ -207,10 +246,10 @@
         .char-role { font-size: 0.72rem; color: var(--char-color, var(--accent)); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
         .char-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; min-height: 50px; }
         .char-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
-        .char-badge.alive { background: rgba(0,255,136,0.12); color: var(--success); border: 1px solid rgba(0,255,136,0.3); }
-        .char-badge.dead { background: rgba(255,51,51,0.12); color: var(--accent); border: 1px solid rgba(255,51,51,0.3); }
-        .char-badge.unknown { background: rgba(255,200,0,0.12); color: var(--warn); border: 1px solid rgba(255,200,0,0.3); }
-        .char-badge.captive { background: rgba(150,100,255,0.12); color: #b388ff; border: 1px solid rgba(150,100,255,0.3); }
+        .char-badge.alive { background: rgba(0, 255, 136, 0.12); color: var(--success); border: 1px solid rgba(0, 255, 136, 0.3); }
+        .char-badge.dead { background: rgba(255, 51, 51, 0.12); color: var(--accent); border: 1px solid rgba(255, 51, 51, 0.3); }
+        .char-badge.unknown { background: rgba(255, 200, 0, 0.12); color: var(--warn); border: 1px solid rgba(255, 200, 0, 0.3); }
+        .char-badge.captive { background: rgba(150, 100, 255, 0.12); color: #b388ff; border: 1px solid rgba(150, 100, 255, 0.3); }
         .lore-accordion-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
         .lore-item { background: var(--panel); border: 2px solid var(--border-soft); border-radius: 16px; margin-bottom: 15px; overflow: hidden; }
         .lore-item.active { border-color: var(--accent); }
@@ -237,8 +276,8 @@
         .season-accordion-item.active .season-header-number { color: var(--accent); -webkit-text-stroke: 0; }
         .season-header-title { font-size: 1.3rem; color: var(--text); font-weight: 800; }
         .season-header-badge { display: inline-block; padding: 4px 12px; border-radius: 15px; font-size: 0.65rem; font-weight: 800; margin-left: 10px; vertical-align: middle; }
-        .badge-dev { background: rgba(255,200,0,0.15); color: var(--warn); border: 1px solid rgba(255,200,0,0.4); }
-        .badge-soon { background: rgba(255,51,51,0.15); color: var(--accent); border: 1px solid rgba(255,51,51,0.4); }
+        .badge-dev { background: rgba(255, 200, 0, 0.15); color: var(--warn); border: 1px solid rgba(255, 200, 0, 0.4); }
+        .badge-soon { background: rgba(255, 51, 51, 0.15); color: var(--accent); border: 1px solid rgba(255, 51, 51, 0.4); }
         .season-header-icon { font-size: 1.5rem; color: var(--accent); transition: transform 0.3s ease; }
         .season-accordion-item.active .season-header-icon { transform: rotate(180deg); }
         .season-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
@@ -249,7 +288,7 @@
         .season-episode-item:hover { background: var(--panel-2); transform: translateX(5px); }
         .season-episode-title { color: var(--text); font-weight: 700; font-size: 1rem; }
         .season-episode-sub { color: var(--accent); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; }
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 20px; padding: 40px; max-width: 450px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .modal-close { position: absolute; top: 15px; right: 20px; background: transparent; border: none; color: var(--text-dim); font-size: 1.8rem; cursor: pointer; }
@@ -309,12 +348,12 @@
         .cart-item-info { flex: 1; min-width: 0; }
         .cart-item-name { color: var(--text); font-weight: 700; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .cart-item-qty { color: var(--text-dim); font-size: 0.75rem; margin-top: 2px; }
-        .cart-item-remove { background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 1rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: inherit; }
+        .cart-item-remove { background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 1rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: inherit; transition: all 0.2s ease; }
         .cart-item-remove:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: scale(1.08); }
-        .acrylic { position: relative; background: rgba(255,255,255,0.06); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); border: 1px solid rgba(255,255,255,0.18); box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15); border-radius: 20px; overflow: hidden; }
-        body.theme-light .acrylic { background: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.7); }
-        .acrylic::before { content: ''; position: absolute; inset: -2px; border-radius: inherit; padding: 2px; background: linear-gradient(120deg, rgba(0,229,255,0.55), rgba(179,136,255,0.55), rgba(255,51,51,0.55), rgba(0,229,255,0.55)); background-size: 300% 300%; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: waterFlow 6s linear infinite; pointer-events: none; filter: blur(0.4px); opacity: 0.9; }
-        .acrylic::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(120% 80% at 10% 0%, rgba(0,229,255,0.12), transparent 60%), radial-gradient(120% 80% at 90% 100%, rgba(179,136,255,0.12), transparent 60%); pointer-events: none; mix-blend-mode: screen; }
+        .acrylic { position: relative; background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); border: 1px solid rgba(255, 255, 255, 0.18); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15); border-radius: 20px; overflow: hidden; }
+        body.theme-light .acrylic { background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.7); }
+        .acrylic::before { content: ''; position: absolute; inset: -2px; border-radius: inherit; padding: 2px; background: linear-gradient(120deg, rgba(0, 229, 255, 0.55), rgba(179, 136, 255, 0.55), rgba(255, 51, 51, 0.55), rgba(0, 229, 255, 0.55)); background-size: 300% 300%; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: waterFlow 6s linear infinite; pointer-events: none; filter: blur(0.4px); opacity: 0.9; }
+        .acrylic::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(120% 80% at 10% 0%, rgba(0, 229, 255, 0.12), transparent 60%), radial-gradient(120% 80% at 90% 100%, rgba(179, 136, 255, 0.12), transparent 60%); pointer-events: none; mix-blend-mode: screen; }
         @keyframes waterFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .suggest-section { max-width: 900px; margin: 60px auto; padding: 0 60px; }
         .suggest-box { padding: 40px; text-align: center; }
@@ -322,11 +361,11 @@
         .suggest-title span { color: var(--accent); }
         .suggest-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; }
         .suggest-form { display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto; }
-        .suggest-input, .suggest-textarea { width: 100%; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.18); border-radius: 12px; padding: 14px 18px; color: var(--text); font-size: 1rem; font-family: inherit; }
-        body.theme-light .suggest-input, body.theme-light .suggest-textarea { background: rgba(255,255,255,0.6); border-color: rgba(0,0,0,0.15); }
+        .suggest-input, .suggest-textarea { width: 100%; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 12px; padding: 14px 18px; color: var(--text); font-size: 1rem; font-family: inherit; transition: border-color 0.3s, box-shadow 0.3s; }
+        body.theme-light .suggest-input, body.theme-light .suggest-textarea { background: rgba(255, 255, 255, 0.6); border-color: rgba(0, 0, 0, 0.15); }
         .suggest-input:focus, .suggest-textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
         .suggest-textarea { min-height: 120px; resize: vertical; }
-        .suggest-btn { background: linear-gradient(120deg, var(--accent), #b388ff); color: #fff; padding: 16px 40px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; }
+        .suggest-btn { background: linear-gradient(120deg, var(--accent), #b388ff); color: #fff; padding: 16px 40px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: transform 0.2s, box-shadow 0.3s; }
         .suggest-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--accent-glow); }
         .daily-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
         .daily-box { padding: 30px; }
@@ -346,7 +385,7 @@
         .daily-progress-fill { height: 100%; background: linear-gradient(90deg, #ff3333, #ff8c00); border-radius: 3px; transition: width 0.3s; }
         .daily-bonus-box { margin-top: 15px; padding: 20px; text-align: center; background: linear-gradient(120deg, rgba(255,215,0,0.15), rgba(255,140,0,0.1)); border: 2px solid #ffd700; border-radius: 16px; }
         .daily-bonus-title { font-size: 1.1rem; font-weight: 900; color: #ffd700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-        .daily-bonus-btn { background: linear-gradient(120deg, #ffd700, #ff8c00); color: #000; padding: 14px 35px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.95rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 1px; }
+        .daily-bonus-btn { background: linear-gradient(120deg, #ffd700, #ff8c00); color: #000; padding: 14px 35px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.95rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 1px; transition: transform 0.2s, box-shadow 0.3s; }
         .daily-bonus-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,200,0,0.5); }
         .daily-bonus-btn:disabled { background: var(--border-soft); color: var(--text-dim); cursor: not-allowed; }
         .daily-bonus-timer { color: var(--text-muted); font-size: 0.8rem; margin-top: 10px; }
@@ -374,83 +413,10 @@
         .wheel-disc::after { content: '🎁'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2.5rem; width: 70px; height: 70px; background: var(--panel); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 3px solid var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
         .wheel-labels { position: absolute; inset: 0; pointer-events: none; }
         .wheel-label { position: absolute; font-size: 0.75rem; font-weight: 900; color: #fff; text-shadow: 0 0 4px #000, 0 0 8px #000; white-space: nowrap; }
-        .wheel-spin-btn { background: linear-gradient(120deg, #ff3333, #b388ff); color: #fff; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.95rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 1px; }
+        .wheel-spin-btn { background: linear-gradient(120deg, #ff3333, #b388ff); color: #fff; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.95rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 1px; transition: transform 0.2s, box-shadow 0.3s; }
         .wheel-spin-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px var(--accent-glow); }
         .wheel-spin-btn:disabled { background: var(--border-soft); color: var(--text-dim); cursor: not-allowed; }
-        .wheel-timer { color: var(--text-muted); font-size: 0.8rem; margin-top: 10px; }/* ===== КРАСНО-ТЁМНАЯ ТЕМА ===== */
-body.season-halloween {
-    --accent: #ff2222;
-    --accent-hover: #ff4444;
-    --accent-glow: rgba(255,34,34,0.6);
-    --bg: #0a0000;
-    --bg-2: #1a0000;
-    --panel: #140000;
-    --panel-2: #2a0000;
-    --text: #f0e0e0;
-    --text-muted: #b08080;
-    --text-dim: #805050;
-    --border: rgba(255,34,34,0.08);
-    --border-soft: rgba(255,34,34,0.18);
-}
-body.season-halloween .logo::after { content: ' 🔴'; font-size: 1.2rem; }
-body.season-halloween .hero {
-    background: linear-gradient(135deg, rgba(40,0,0,0.85) 0%, rgba(10,0,0,0.95) 100%);
-}
-body.season-halloween .hero::before {
-    content: '🩸'; position: absolute; right: 8%; bottom: 10%;
-    font-size: 8rem; opacity: 0.18;
-    animation: treeSway 5s ease-in-out infinite;
-    pointer-events: none;
-    filter: drop-shadow(0 0 30px #ff0000);
-}
-body.season-halloween .hero::after {
-    content: ''; position: absolute; inset: 0;
-    background:
-        radial-gradient(circle at 20% 30%, rgba(255,0,0,0.18), transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(139,0,0,0.15), transparent 50%);
-    pointer-events: none;
-}
-body.season-halloween .topbar { background-color: rgba(20,0,0,0.9); border-bottom-color: rgba(255,34,34,0.2); }
-body.season-halloween .timer-box,
-body.season-halloween .game-box,
-body.season-halloween .prediction-box { border-color: #ff2222; box-shadow: 0 0 30px rgba(255,34,34,0.25); }
-body.season-halloween .nav-btn.active,
-body.season-halloween .btn-primary,
-body.season-halloween .promo-btn,
-body.season-halloween .prediction-btn,
-body.season-halloween .game-start-btn { background: #ff2222; }
-body.season-halloween .nav-btn.active:hover,
-body.season-halloween .btn-primary:hover,
-body.season-halloween .promo-btn:hover,
-body.season-halloween .prediction-btn:hover,
-body.season-halloween .game-start-btn:hover { background: #ff4444; }
-body.season-halloween .section-title span,
-body.season-halloween .map-title span,
-body.season-halloween .timeline-title span,
-body.season-halloween .daily-title span,
-body.season-halloween .wheel-title span,
-body.season-halloween .duel-title span,
-body.season-halloween .friends-title span { color: #ff2222; }
-body.season-halloween .xp-bar-fill { background: linear-gradient(90deg, #ff0000, #8b0000); }
-body.season-halloween .cart-btn { background: #ff2222; }
-body.season-halloween .cart-btn:hover { background: #ff4444; }
-body.season-halloween .user-btn { background: linear-gradient(145deg, #8b0000, #ff2222); }
-body.season-halloween .game-area { background: #050000; }
-body.season-halloween .acrylic::before {
-    background: linear-gradient(120deg, rgba(255,0,0,0.6), rgba(139,0,0,0.6), rgba(255,34,34,0.6), rgba(255,0,0,0.6));
-    background-size: 300% 300%;
-}
-body.season-halloween .acrylic::after {
-    background:
-        radial-gradient(120% 80% at 10% 0%, rgba(255,0,0,0.15), transparent 60%),
-        radial-gradient(120% 80% at 90% 100%, rgba(139,0,0,0.15), transparent 60%);
-}
-body.season-halloween .season-badge.halloween {
-    background: rgba(255,34,34,0.2);
-    color: #ff4444;
-    border: 1px solid #ff2222;
-    box-shadow: 0 0 20px rgba(255,34,34,0.4);
-}
+        .wheel-timer { color: var(--text-muted); font-size: 0.8rem; margin-top: 10px; }
         body.season-newyear { --accent: #00e5ff; --accent-hover: #33ebff; --accent-glow: rgba(0,229,255,0.5); --bg: #001018; --bg-2: #001a26; }
         body.season-newyear .logo::after { content: ' ❄️'; font-size: 1.2rem; }
         body.season-newyear .hero { background: linear-gradient(135deg, rgba(0,30,50,0.8) 0%, rgba(0,15,30,0.9) 100%); }
@@ -458,7 +424,6 @@ body.season-halloween .season-badge.halloween {
         @keyframes treeSway { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
         body.season-newyear .hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 30%, rgba(0,229,255,0.15), transparent 50%), radial-gradient(circle at 80% 70%, rgba(179,136,255,0.12), transparent 50%); pointer-events: none; }
         .season-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-        .season-badge.halloween { background: rgba(255,140,0,0.2); color: #ff8c00; border: 1px solid #ff8c00; }
         .season-badge.newyear { background: rgba(0,229,255,0.2); color: #00e5ff; border: 1px solid #00e5ff; }
         #snowflakes { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; opacity: 0; transition: opacity 0.5s ease; }
         body.season-newyear #snowflakes { opacity: 1; }
@@ -473,7 +438,7 @@ body.season-halloween .season-badge.halloween {
         .duel-title span { color: var(--accent); }
         .duel-sub { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px; }
         .duel-difficulty { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
-        .duel-diff-btn { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; }
+        .duel-diff-btn { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; transition: all 0.2s; }
         .duel-diff-btn:hover { color: var(--text); border-color: var(--accent); }
         .duel-diff-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
         .duel-arena { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
@@ -489,8 +454,8 @@ body.season-halloween .season-badge.halloween {
         .duel-side.player .duel-side-bar-fill { background: linear-gradient(90deg, #ff3333, #ff8c00); }
         .duel-side.bot .duel-side-bar-fill { background: linear-gradient(90deg, #5865F2, #00e5ff); }
         .duel-timer { font-size: 1.2rem; font-weight: 900; color: var(--accent); margin-bottom: 15px; }
-        .duel-click-btn { background: linear-gradient(120deg, var(--accent), #b388ff); color: #fff; padding: 30px 60px; border: none; border-radius: 20px; font-weight: 900; font-size: 1.3rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 2px; width: 100%; user-select: none; }
-        .duel-click-btn:active { transform: scale(0.95); }
+        .duel-click-btn { background: linear-gradient(120deg, var(--accent), #b388ff); color: #fff; padding: 30px 60px; border: none; border-radius: 20px; font-weight: 900; font-size: 1.3rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 2px; transition: transform 0.1s, box-shadow 0.2s; width: 100%; user-select: none; }
+        .duel-click-btn:active { transform: scale(0.95); box-shadow: 0 0 30px var(--accent-glow); }
         .duel-click-btn:disabled { background: var(--border-soft); color: var(--text-dim); cursor: not-allowed; }
         .duel-result { font-size: 1.2rem; font-weight: 900; margin-top: 15px; min-height: 30px; }
         .duel-result.win { color: var(--success); }
@@ -504,7 +469,7 @@ body.season-halloween .season-badge.halloween {
         .friends-add-row { display: flex; gap: 8px; margin-bottom: 20px; }
         .friends-input { flex: 1; background: rgba(0,0,0,0.25); border: 1px solid var(--border-soft); border-radius: 12px; padding: 12px 16px; color: var(--text); font-size: 0.95rem; font-family: inherit; }
         .friends-input:focus { outline: none; border-color: var(--accent); }
-        .friends-add-btn { background: var(--accent); color: #fff; padding: 12px 24px; border: none; border-radius: 12px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; cursor: pointer; font-family: inherit; }
+        .friends-add-btn { background: var(--accent); color: #fff; padding: 12px 24px; border: none; border-radius: 12px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
         .friends-add-btn:hover { background: var(--accent-hover); }
         .friends-list { display: flex; flex-direction: column; gap: 10px; }
         .friend-card { display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-soft); border-radius: 12px; padding: 12px 16px; }
@@ -514,19 +479,19 @@ body.season-halloween .season-badge.halloween {
         .friend-name { color: var(--text); font-weight: 800; font-size: 0.95rem; }
         .friend-status { color: var(--text-dim); font-size: 0.75rem; margin-top: 2px; }
         .friend-record { color: #ffd700; font-weight: 900; font-size: 0.85rem; white-space: nowrap; }
-        .friend-remove { background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: inherit; }
+        .friend-remove { background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: inherit; transition: all 0.2s; }
         .friend-remove:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
         .friends-empty { text-align: center; color: var(--text-dim); padding: 30px 0; font-style: italic; }
-        .leaderboard-modal { background: linear-gradient(160deg, #1a0f00, #0f0f15 70%, #1a0505); border: 2px solid #ffd700; border-radius: 20px; padding: 35px 25px; max-width: 520px; width: 100%; position: relative; box-shadow: 0 0 50px rgba(255,200,0,0.3); max-height: 85vh; overflow-y: auto; }
+        .leaderboard-modal { background: linear-gradient(160deg, #1a0f00, #0f0f15 70%, #1a0505); border: 2px solid #ffd700; border-radius: 20px; padding: 35px 25px; max-width: 520px; width: 100%; position: relative; box-shadow: 0 0 50px rgba(255, 200, 0, 0.3); max-height: 85vh; overflow-y: auto; }
         .leaderboard-title { font-size: 1.6rem; font-weight: 900; text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; background: linear-gradient(90deg, #ffd700, #ff8c00, #ffd700); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: waterFlow 3s linear infinite; }
         .leaderboard-mode-tabs { display: flex; gap: 6px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap; }
         .leaderboard-mode-tab { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.72rem; font-family: inherit; }
         .leaderboard-mode-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
         .leaderboard-list { display: flex; flex-direction: column; gap: 8px; }
-        .leaderboard-row { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px 16px; }
-        .leaderboard-row.top-1 { background: linear-gradient(120deg, rgba(255,215,0,0.25), rgba(255,140,0,0.15)); border-color: #ffd700; box-shadow: 0 0 20px rgba(255,215,0,0.3); }
-        .leaderboard-row.top-2 { background: linear-gradient(120deg, rgba(192,192,192,0.2), rgba(160,160,160,0.1)); border-color: #c0c0c0; }
-        .leaderboard-row.top-3 { background: linear-gradient(120deg, rgba(205,127,50,0.2), rgba(139,69,19,0.1)); border-color: #cd7f32; }
+        .leaderboard-row { display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px 16px; animation: pageFade 0.2s ease; }
+        .leaderboard-row.top-1 { background: linear-gradient(120deg, rgba(255, 215, 0, 0.25), rgba(255, 140, 0, 0.15)); border-color: #ffd700; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+        .leaderboard-row.top-2 { background: linear-gradient(120deg, rgba(192, 192, 192, 0.2), rgba(160, 160, 160, 0.1)); border-color: #c0c0c0; }
+        .leaderboard-row.top-3 { background: linear-gradient(120deg, rgba(205, 127, 50, 0.2), rgba(139, 69, 19, 0.1)); border-color: #cd7f32; }
         .leaderboard-rank { font-size: 1.3rem; font-weight: 900; min-width: 38px; text-align: center; color: var(--accent); }
         .leaderboard-row.top-1 .leaderboard-rank { color: #ffd700; text-shadow: 0 0 10px #ffd700; }
         .leaderboard-row.top-2 .leaderboard-rank { color: #c0c0c0; }
@@ -537,40 +502,42 @@ body.season-halloween .season-badge.halloween {
         .leaderboard-loading { text-align: center; color: var(--text-dim); padding: 20px; font-size: 0.85rem; }
         .leaderboard-loading::after { content: ''; display: inline-block; width: 16px; height: 16px; border: 2px solid var(--border-soft); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px; vertical-align: middle; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .leaderboard-clear-btn { width: 100%; margin-top: 20px; background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); padding: 12px; border-radius: 10px; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+        .leaderboard-clear-btn { width: 100%; margin-top: 20px; background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); padding: 12px; border-radius: 10px; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; }
         .leaderboard-clear-btn:hover { border-color: var(--accent); color: var(--accent); }
-        .redisoney-modal { background: linear-gradient(160deg, #1a0000, #0a0a0f 60%, #1a0a2e); border: 2px solid #ff3333; border-radius: 20px; padding: 40px 30px; max-width: 520px; width: 100%; text-align: center; position: relative; box-shadow: 0 0 60px rgba(255,51,51,0.5), 0 0 120px rgba(179,136,255,0.2); animation: redisoneyPulse 2s ease-in-out infinite alternate; }
-        @keyframes redisoneyPulse { from { box-shadow: 0 0 40px rgba(255,51,51,0.4); } to { box-shadow: 0 0 80px rgba(255,51,51,0.7); } }
+        .redisoney-modal { background: linear-gradient(160deg, #1a0000, #0a0a0f 60%, #1a0a2e); border: 2px solid #ff3333; border-radius: 20px; padding: 40px 30px; max-width: 520px; width: 100%; text-align: center; position: relative; box-shadow: 0 0 60px rgba(255, 51, 51, 0.5), 0 0 120px rgba(179, 136, 255, 0.2); animation: redisoneyPulse 2s ease-in-out infinite alternate; }
+        @keyframes redisoneyPulse { from { box-shadow: 0 0 40px rgba(255, 51, 51, 0.4); } to { box-shadow: 0 0 80px rgba(255, 51, 51, 0.7); } }
         .redisoney-emoji { font-size: 5rem; margin-bottom: 15px; animation: redisoneyBounce 1.2s ease-in-out infinite; }
         @keyframes redisoneyBounce { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-12px) rotate(5deg); } }
         .redisoney-title { font-size: 1.7rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(90deg, #ff3333, #ffd700, #b388ff, #00e5ff, #ff3333); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: waterFlow 4s linear infinite; margin-bottom: 15px; }
         .redisoney-text { color: #e0e0e0; font-size: 1rem; line-height: 1.7; margin-bottom: 25px; font-style: italic; }
-        .redisoney-quote { color: #ffd700; font-size: 1.05rem; font-weight: 700; margin-bottom: 25px; padding: 15px; border-left: 3px solid #ff3333; border-right: 3px solid #b388ff; border-radius: 8px; background: rgba(255,51,51,0.08); }
-        .redisoney-btn { display: inline-block; background: linear-gradient(120deg, #ff3333, #b388ff); color: #fff; padding: 14px 35px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; text-decoration: none; }
-        .redisoney-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,51,51,0.5); }
+        .redisoney-quote { color: #ffd700; font-size: 1.05rem; font-weight: 700; margin-bottom: 25px; padding: 15px; border-left: 3px solid #ff3333; border-right: 3px solid #b388ff; border-radius: 8px; background: rgba(255, 51, 51, 0.08); }
+        .redisoney-btn { display: inline-block; background: linear-gradient(120deg, #ff3333, #b388ff); color: #fff; padding: 14px 35px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; text-decoration: none; transition: transform 0.2s, box-shadow 0.3s; }
+        .redisoney-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 51, 51, 0.5); }
         .redisoney-sub { margin-top: 18px; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
-        .footer-easter { display: inline-block; margin-top: 12px; color: var(--text-dim); font-size: 0.9rem; letter-spacing: 4px; cursor: pointer; opacity: 0.6; transition: opacity 0.3s, color 0.3s; user-select: none; }
+        .footer-easter { display: inline-block; margin-top: 12px; color: var(--text-dim); font-size: 0.9rem; letter-spacing: 4px; cursor: pointer; opacity: 0.6; transition: opacity 0.3s, color 0.3s, text-shadow 0.3s; user-select: none; }
         .footer-easter:hover { opacity: 1; color: #ff3333; text-shadow: 0 0 10px #ff3333; }
         .redisoney-nuke-badge { display: inline-block; font-size: 2rem; margin-bottom: 10px; animation: redisoneyBounce 1.5s ease-in-out infinite; filter: drop-shadow(0 0 12px #ffcc00); }
         .nuke-flash { position: fixed; inset: 0; background: radial-gradient(circle at center, #fff 0%, #ffdd00 15%, #ff6600 35%, #ff0000 60%, #330000 100%); z-index: 99999; pointer-events: none; opacity: 0; animation: nukeFlash 1.5s ease-out forwards; }
         @keyframes nukeFlash { 0% { opacity: 0; transform: scale(0.2); } 10% { opacity: 1; transform: scale(1); } 40% { opacity: 0.9; transform: scale(1.05); } 100% { opacity: 0; transform: scale(2); } }
-        .nuke-shockwave { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; border: 4px solid rgba(255,220,0,0.9); box-shadow: 0 0 60px 20px rgba(255,100,0,0.6); transform: translate(-50%,-50%) scale(0); z-index: 99998; pointer-events: none; animation: nukeWave 1.4s ease-out forwards; }
-        @keyframes nukeWave { 0% { transform: translate(-50%,-50%) scale(0); opacity: 1; border-width: 8px; } 100% { transform: translate(-50%,-50%) scale(120); opacity: 0; border-width: 1px; } }
-        .nuke-mushroom { position: fixed; top: 50%; left: 50%; width: 120px; height: 120px; transform: translate(-50%,-50%) scale(0); z-index: 99997; pointer-events: none; font-size: 100px; line-height: 1; text-align: center; animation: nukeMushroom 1.4s ease-out forwards; filter: drop-shadow(0 0 40px #ff6600); }
-        @keyframes nukeMushroom { 0% { transform: translate(-50%,-50%) scale(0) rotate(0deg); opacity: 0; } 20% { opacity: 1; } 100% { transform: translate(-50%,-50%) scale(6) rotate(90deg); opacity: 0; } }
+        .nuke-shockwave { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; border: 4px solid rgba(255, 220, 0, 0.9); box-shadow: 0 0 60px 20px rgba(255, 100, 0, 0.6); transform: translate(-50%, -50%) scale(0); z-index: 99998; pointer-events: none; animation: nukeWave 1.4s ease-out forwards; }
+        @keyframes nukeWave { 0% { transform: translate(-50%, -50%) scale(0); opacity: 1; border-width: 8px; } 100% { transform: translate(-50%, -50%) scale(120); opacity: 0; border-width: 1px; } }
+        .nuke-mushroom { position: fixed; top: 50%; left: 50%; width: 120px; height: 120px; transform: translate(-50%, -50%) scale(0); z-index: 99997; pointer-events: none; font-size: 100px; line-height: 1; text-align: center; animation: nukeMushroom 1.4s ease-out forwards; filter: drop-shadow(0 0 40px #ff6600); }
+        @keyframes nukeMushroom { 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; } 20% { opacity: 1; } 100% { transform: translate(-50%, -50%) scale(6) rotate(90deg); opacity: 0; } }
         body.nuke-shake { animation: nukeShake 1.2s cubic-bezier(.36,.07,.19,.97) both; }
         @keyframes nukeShake { 0%,100% { transform: translate(0,0) rotate(0); } 10% { transform: translate(-10px,-8px) rotate(-1deg); } 20% { transform: translate(12px,6px) rotate(1deg); } 30% { transform: translate(-8px,10px) rotate(-1deg); } 40% { transform: translate(10px,-6px) rotate(1deg); } 50% { transform: translate(-12px,8px) rotate(-1deg); } 60% { transform: translate(8px,-10px) rotate(1deg); } 70% { transform: translate(-6px,6px) rotate(-0.5deg); } 80% { transform: translate(6px,-6px) rotate(0.5deg); } 90% { transform: translate(-4px,4px) rotate(0); } }
-        .nuke-radiation { position: fixed; inset: 0; pointer-events: none; z-index: 99996; background-image: repeating-linear-gradient(45deg, rgba(255,200,0,0.05) 0, rgba(255,200,0,0.05) 2px, transparent 2px, transparent 8px); opacity: 0; animation: nukeRadiation 1.5s ease-out forwards; }
+        .nuke-radiation { position: fixed; inset: 0; pointer-events: none; z-index: 99996; background-image: repeating-linear-gradient(45deg, rgba(255, 200, 0, 0.05) 0, rgba(255, 200, 0, 0.05) 2px, transparent 2px, transparent 8px); opacity: 0; animation: nukeRadiation 1.5s ease-out forwards; }
         @keyframes nukeRadiation { 0% { opacity: 0; } 20% { opacity: 1; } 100% { opacity: 0; } }
         .cursor-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin-top: 10px; }
         .cursor-option { background: rgba(0,0,0,0.2); border: 2px solid var(--border-soft); border-radius: 10px; padding: 10px 8px; text-align: center; cursor: pointer; transition: all 0.2s; }
         .cursor-option:hover { border-color: var(--accent); }
         .cursor-option.selected { border-color: var(--accent); background: rgba(255,51,51,0.1); box-shadow: 0 0 15px var(--accent-glow); }
         .cursor-option-icon { font-size: 1.5rem; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; height: 30px; }
-        .cursor-option-label { font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
+        .cursor-option-label { font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
         .cursor-custom-input { display: flex; gap: 6px; margin-top: 10px; }
         .cursor-custom-input input { flex: 1; background: rgba(0,0,0,0.25); border: 1px solid var(--border-soft); border-radius: 10px; padding: 10px 12px; color: var(--text); font-size: 0.85rem; font-family: inherit; }
+        .cursor-custom-input input:focus { outline: none; border-color: var(--accent); }
         .cursor-custom-input button { background: var(--accent); color: #fff; border: none; border-radius: 10px; padding: 10px 16px; font-weight: 800; font-size: 0.8rem; cursor: pointer; font-family: inherit; text-transform: uppercase; }
+        .cursor-custom-input button:hover { background: var(--accent-hover); }
         body.cursor-crosshair, body.cursor-crosshair * { cursor: crosshair !important; }
         body.cursor-reverse, body.cursor-reverse * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="%23ff3333" stroke="white" stroke-width="2"/><text x="16" y="21" font-size="14" text-anchor="middle" fill="white" font-weight="bold">R</text></svg>') 16 16, auto !important; }
         body.cursor-chip, body.cursor-chip * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><rect x="8" y="8" width="16" height="16" rx="3" fill="%2300e5ff" stroke="white" stroke-width="2"/><circle cx="16" cy="16" r="3" fill="white"/></svg>') 16 16, auto !important; }
@@ -759,7 +726,7 @@ body.season-halloween .season-badge.halloween {
     <!-- АНИМИРОВАННЫЙ ФОН -->
     <div id="animated-bg"></div>
 
-    <!-- СНЕЖИНКИ -->
+    <!-- СНЕЖИНКИ (зимнее событие) -->
     <div id="snowflakes"></div>
 
     <div id="bg-glow"></div>
@@ -857,7 +824,7 @@ body.season-halloween .season-badge.halloween {
             </div>
         </div>
 
-        <!-- ЕЖЕДНЕВНЫЕ ЗАДАНИЯ -->
+        <!-- ЕЖЕДНЕВНЫЕ ЗАДАНИЯ + БОНУС -->
         <div class="daily-section">
             <div class="daily-box acrylic">
                 <div class="daily-title">📅 <span>ЕЖЕДНЕВНЫЕ ЗАДАНИЯ</span></div>
@@ -886,7 +853,7 @@ body.season-halloween .season-badge.halloween {
             </div>
         </div>
 
-        <!-- ДУЭЛЬ -->
+        <!-- ДУЭЛЬ С БОТОМ -->
         <div class="duel-section">
             <div class="duel-box acrylic">
                 <div class="duel-title">🤖 <span>ДУЭЛЬ С БОТОМ</span></div>
@@ -1525,9 +1492,7 @@ body.season-halloween .season-badge.halloween {
                 addToCart(bonus);
                 const snowman = document.getElementById('snowmanEaster');
                 if (snowman) { snowman.style.opacity = '0'; snowman.style.pointerEvents = 'none'; }
-                setTimeout(() => {
-                    if (snowman) { snowman.style.opacity = ''; snowman.style.pointerEvents = ''; }
-                }, 60000);
+                setTimeout(() => { if (snowman) { snowman.style.opacity = ''; snowman.style.pointerEvents = ''; } }, 60000);
             } else {
                 showNotification(`⛄ ${snowmanClicks}/5...`, '');
             }
@@ -1729,7 +1694,6 @@ body.season-halloween .season-badge.halloween {
             incrementDailyTask('play3', 1);
             checkAchievementsAfterGame(gameScore);
             if (getCurrentSeason() === 'newyear') addXP(50);
-            else if (getCurrentSeason() === 'halloween') addXP(25);
             gameOverlay.style.display = 'flex';
             gameOverlay.innerHTML = `<h3>${currentGameMode === 'boss' ? 'БОСС-РАШ ОКОНЧЕН' : (currentGameMode === 'ice' ? '❄️ ЛЕДЯНОЙ ОКОНЧЕН' : 'ВРЕМЯ ВЫШЛО')}</h3><p>Твои очки: <strong>${gameScore}</strong></p><p>Рекорд режима: <strong>${Math.max(gameScore, record)}</strong></p><button class="game-start-btn" onclick="startGame()">Играть ещё раз</button>`;
         }
@@ -2050,11 +2014,10 @@ body.season-halloween .season-badge.halloween {
             else { btn.disabled = true; btn.textContent = currentLang === 'ru' ? 'Уже крутил' : 'Already spun'; timer.textContent = currentLang === 'ru' ? 'Возвращайся завтра!' : 'Come back tomorrow!'; }
         }
 
-        // ===== СЕЗОНЫ =====
+        // ===== СЕЗОНЫ (ЗИМА) =====
         function getCurrentSeason() {
             const now = new Date();
             const month = now.getMonth() + 1, day = now.getDate();
-            if (month === 10) return 'halloween';
             if (month === 11 && day >= 25) return 'newyear';
             if (month === 12 || (month === 1 && day <= 10)) return 'newyear';
             return null;
@@ -2062,7 +2025,7 @@ body.season-halloween .season-badge.halloween {
         function applySeason() {
             const season = getCurrentSeason();
             const badgeWrap = document.getElementById('seasonBadgeWrap');
-            document.body.classList.remove('season-halloween', 'season-newyear');
+            document.body.classList.remove('season-newyear');
             if (!badgeWrap) return;
             if (season === 'newyear') {
                 document.body.classList.add('season-newyear');
@@ -2079,25 +2042,10 @@ body.season-halloween .season-badge.halloween {
                 }
                 return;
             }
-            if (season === 'halloween') {
-                document.body.classList.add('season-halloween');
-                badgeWrap.innerHTML = `<div class="season-badge halloween">
-                const user = getCurrentUser();
-                if (user) {
-                    const key = 'aki_season_halloween_' + user.nickname;
-                    if (!localStorage.getItem(key)) {
-                        localStorage.setItem(key, 'true');
-                        setTimeout(() => showAchievementToast({ icon: '🎃', name: 'Хэллоуин 2026', name_en: 'Halloween 2026', xp: 100 }), 1000);
-                        addXP(100);
-                    }
-                }
-                return;
-            }
             badgeWrap.innerHTML = '';
             clearSnowflakes();
         }
-
-        // ===== ДУЭЛЬ =====
+    </script>        // ===== ДУЭЛЬ С БОТОМ =====
         const DUEL_DIFFICULTIES = { easy: { botSpeed: 250, reward: 30 }, medium: { botSpeed: 150, reward: 60 }, hard: { botSpeed: 90, reward: 120 } };
         let duelDifficulty = 'easy', duelActive = false, duelPlayerScore = 0, duelBotScore = 0, duelTimeLeft = 10;
         let duelTimerInterval = null, duelBotInterval = null;
@@ -2402,34 +2350,26 @@ body.season-halloween .season-badge.halloween {
             setTimeout(() => {
                 document.getElementById('checkoutContent').innerHTML = `<h2>💳 Оформление заказа</h2><div class="checkout-summary" id="checkoutSummary"></div><button class="modal-btn" onclick="confirmCheckout()">Оформить заказ</button>`;
             }, 300);
-        }        // ===== КАРТА =====
+        }
+
+        // ===== КАРТА =====
         const MAP_DATA = {
             ru: {
-                lab: { t: 'Заброшенная лаборатория', d: 'Здесь Аки заразился аномалией (арка 1).' },
-                base: { t: 'Штаб Эпсилона', d: 'Секретная база. Здесь Аки получил чип.' },
-                sector: { t: 'Старый сектор', d: 'Заброшенные лаборатории, где создали вирус «Эхо».' },
-                factory: { t: 'Старый завод (Сектор 7)', d: 'Аки встретил Зейна и узнал правду об «Омеге».' },
-                bunker: { t: 'Бункер «Свидетелей»', d: 'Убежище Зейна, Миры, Корва, Тени и Вейна.' },
-                home: { t: 'Дом Аки', d: 'Аки отдыхал после заданий и скрывался от Эпсилона.' },
-                camp: { t: 'Лес у костра', d: 'Аки, Лира и другие отдыхали здесь в 7-й арке.' },
-                ruins: { t: 'Руины Эпсилона', d: 'Остатки старого штаба. Здесь Аки находит файлы Синдиката.' },
-                cryos: { t: 'Ледяная тюрьма «Криос»', d: 'Секретная тюрьма Эпсилона. Мутанты, которых нельзя убить.' },
-                forest: { t: 'Гнилой Лес', d: 'Зона аномалии. Деревья-мутанты, споры, монстры.' },
-                city: { t: 'Город-призрак «Сектор 0»', d: 'Мегаполис, уничтоженный аномалией.' },
-                ship: { t: 'Корабль-ковчег «Ноев»', d: 'Затонувший лайнер с артефактами. 5-й сезон.' },
-                abyss: { t: 'Разлом «Бездна»', d: 'Трещина, ведущая к источнику аномалии.' },
-                hospital: { t: 'Госпиталь «Мира»', d: 'Место экспериментов Вейна и создания «Эхо».' },
-                default: 'Нажми на любую точку на карте, чтобы узнать больше о локации'
+                lab: { t: 'Заброшенная лаборатория', d: 'Здесь Аки заразился аномалией (арка 1).' }, base: { t: 'Штаб Эпсилона', d: 'Секретная база. Здесь Аки получил чип.' },
+                sector: { t: 'Старый сектор', d: 'Заброшенные лаборатории, где создали вирус «Эхо».' }, factory: { t: 'Старый завод', d: 'Аки встретил Зейна и узнал правду об «Омеге».' },
+                bunker: { t: 'Бункер «Свидетелей»', d: 'Убежище Зейна, Миры, Корва, Тени и Вейна.' }, home: { t: 'Дом Аки', d: 'Аки отдыхал после заданий и скрывался от Эпсилона.' },
+                camp: { t: 'Лес у костра', d: 'Аки, Лира и другие отдыхали здесь в 7-й арке.' }, ruins: { t: 'Руины Эпсилона', d: 'Остатки старого штаба.' },
+                cryos: { t: 'Ледяная тюрьма', d: 'Секретная тюрьма Эпсилона.' }, forest: { t: 'Гнилой Лес', d: 'Зона аномалии.' },
+                city: { t: 'Город-призрак', d: 'Мегаполис, уничтоженный аномалией.' }, ship: { t: 'Корабль-ковчег', d: 'Затонувший лайнер с артефактами.' },
+                abyss: { t: 'Разлом «Бездна»', d: 'Трещина, ведущая к источнику аномалии.' }, hospital: { t: 'Госпиталь «Мира»', d: 'Место экспериментов Вейна.' },
+                default: 'Нажми на любую точку на карте'
             },
             en: {
-                lab: { t: 'Abandoned Lab', d: 'Aki got infected here.' }, base: { t: 'Epsilon HQ', d: 'Secret base.' },
-                sector: { t: 'Old Sector', d: 'Where "Echo" virus was created.' }, factory: { t: 'Old Factory', d: 'Aki met Zane here.' },
-                bunker: { t: 'Witnesses Bunker', d: 'Refuge of the Witnesses.' }, home: { t: "Aki's House", d: 'Aki rested here.' },
-                camp: { t: 'Forest Campfire', d: 'Last peaceful day.' }, ruins: { t: 'Epsilon Ruins', d: 'Remains of old HQ.' },
-                cryos: { t: 'Ice Prison', d: 'Secret Epsilon prison.' }, forest: { t: 'Rotting Forest', d: 'Anomaly zone.' },
-                city: { t: 'Ghost City', d: 'Destroyed metropolis.' }, ship: { t: 'Ark Ship', d: 'Sunken liner.' },
-                abyss: { t: 'Rift', d: 'Anomaly source.' }, hospital: { t: 'Hospital', d: 'Experiments place.' },
-                default: 'Click on any point'
+                lab: { t: 'Abandoned Lab', d: 'Aki got infected here.' }, base: { t: 'Epsilon HQ', d: 'Secret base.' }, sector: { t: 'Old Sector', d: 'Where "Echo" virus was created.' },
+                factory: { t: 'Old Factory', d: 'Aki met Zane here.' }, bunker: { t: 'Witnesses Bunker', d: 'Refuge of the Witnesses.' }, home: { t: "Aki's House", d: 'Aki rested here.' },
+                camp: { t: 'Forest Campfire', d: 'Last peaceful day.' }, ruins: { t: 'Epsilon Ruins', d: 'Remains of old HQ.' }, cryos: { t: 'Ice Prison', d: 'Secret prison.' },
+                forest: { t: 'Rotting Forest', d: 'Anomaly zone.' }, city: { t: 'Ghost City', d: 'Destroyed metropolis.' }, ship: { t: 'Ark Ship', d: 'Sunken liner.' },
+                abyss: { t: 'Rift', d: 'Anomaly source.' }, hospital: { t: 'Hospital', d: 'Experiments place.' }, default: 'Click on any point'
             }
         };
         function showMapInfo(key) {
@@ -2455,7 +2395,7 @@ body.season-halloween .season-badge.halloween {
             { id: 'a7', title: 'Тишина перед бурей', emoji: '🌙', sub: 'Сезон 2 • Арка 7', season: 2, showcase: 'aki', title_en: 'Calm', sub_en: 'Season 2 • Arc 7' },
             { id: 'a8', title: 'Пустота', emoji: '🕳️', sub: 'Сезон 3 • Арка 8', season: 3, showcase: 'aki', title_en: 'Void', sub_en: 'Season 3 • Arc 8' },
             { id: 'a9', title: 'Поиски', emoji: '🔍', sub: 'Сезон 3 • Арка 9', season: 3, showcase: 'aki', title_en: 'Search', sub_en: 'Season 3 • Arc 9' },
-            { id: 'a10', title: 'Поиски (продолжение)', emoji: '🏭', sub: 'Сезон 3 • Арка 10', season: 3, showcase: 'epsilon', title_en: 'Search 2', sub_en: 'Season 3 • Arc 10' },
+            { id: 'a10', title: 'Поиски 2', emoji: '🏭', sub: 'Сезон 3 • Арка 10', season: 3, showcase: 'epsilon', title_en: 'Search 2', sub_en: 'Season 3 • Arc 10' },
             { id: 'a11', title: 'Разговор', emoji: '💬', sub: 'Сезон 3 • Арка 11', season: 3, showcase: 'chronicles', title_en: 'Talk', sub_en: 'Season 3 • Arc 11' },
             { id: 'a12', title: 'Сомнение', emoji: '❓', sub: 'Сезон 4 • Арка 12', season: 4, showcase: 'chronicles', title_en: 'Doubt', sub_en: 'Season 4 • Arc 12' },
             { id: 'a13', title: 'Давление', emoji: '⏳', sub: 'Сезон 4 • Арка 13', season: 4, showcase: 'chronicles', title_en: 'Pressure', sub_en: 'Season 4 • Arc 13' },
@@ -2518,7 +2458,7 @@ body.season-halloween .season-badge.halloween {
                         ec.appendChild(epEl);
                     });
                 } else {
-                    ec.innerHTML = `<p style="color:var(--text-dim); font-style:italic;">${currentLang === 'ru' ? 'Арки ещё в разработке...' : 'In development...'}</p>`;
+                    ec.innerHTML = `<p style="color:var(--text-dim); font-style:italic;">${currentLang === 'ru' ? 'В разработке...' : 'In development...'}</p>`;
                 }
                 item.querySelector('.season-header').addEventListener('click', () => {
                     const isActive = item.classList.contains('active');
@@ -2530,18 +2470,12 @@ body.season-halloween .season-badge.halloween {
 
         // ===== МАГАЗИН =====
         const PRODUCTS = [
-            { id: 1, name: 'Футболка с рогами Аки', emoji: '👕', name_en: 'Aki Horns T-Shirt' },
-            { id: 2, name: 'Реверс-брелок', emoji: '🔑', name_en: 'Reverse Keychain' },
-            { id: 3, name: 'Значок «Эпсилон»', emoji: '🎖️', name_en: 'Epsilon Badge' },
-            { id: 4, name: 'Постер «Свидетели»', emoji: '🖼️', name_en: 'Witnesses Poster' },
-            { id: 5, name: 'Худи с чипом', emoji: '🧥', name_en: 'Chip Hoodie' },
-            { id: 6, name: 'Кружка «Аномалия»', emoji: '☕', name_en: 'Anomaly Mug' },
-            { id: 7, name: 'Кепка «Омега»', emoji: '🧢', name_en: 'Omega Cap' },
-            { id: 8, name: 'Футболка Аки', emoji: '🎽', name_en: 'Aki T-Shirt' },
-            { id: 9, name: 'Худи Аки', emoji: '🧥', name_en: 'Aki Hoodie' },
-            { id: 10, name: 'Постер Аки', emoji: '🖼️', name_en: 'Aki Poster' },
-            { id: 11, name: 'Кружка «Аки»', emoji: '☕', name_en: 'Aki Mug' },
-            { id: 12, name: 'Кепка Аки', emoji: '🧢', name_en: 'Aki Cap' },
+            { id: 1, name: 'Футболка с рогами Аки', emoji: '👕', name_en: 'Aki Horns T-Shirt' }, { id: 2, name: 'Реверс-брелок', emoji: '🔑', name_en: 'Reverse Keychain' },
+            { id: 3, name: 'Значок «Эпсилон»', emoji: '🎖️', name_en: 'Epsilon Badge' }, { id: 4, name: 'Постер «Свидетели»', emoji: '🖼️', name_en: 'Witnesses Poster' },
+            { id: 5, name: 'Худи с чипом', emoji: '🧥', name_en: 'Chip Hoodie' }, { id: 6, name: 'Кружка «Аномалия»', emoji: '☕', name_en: 'Anomaly Mug' },
+            { id: 7, name: 'Кепка «Омега»', emoji: '🧢', name_en: 'Omega Cap' }, { id: 8, name: 'Футболка Аки', emoji: '🎽', name_en: 'Aki T-Shirt' },
+            { id: 9, name: 'Худи Аки', emoji: '🧥', name_en: 'Aki Hoodie' }, { id: 10, name: 'Постер Аки', emoji: '🖼️', name_en: 'Aki Poster' },
+            { id: 11, name: 'Кружка «Аки»', emoji: '☕', name_en: 'Aki Mug' }, { id: 12, name: 'Кепка Аки', emoji: '🧢', name_en: 'Aki Cap' },
             { id: 13, name: 'Стикерпак', emoji: '🎨', free: true, name_en: 'Sticker Pack' }
         ];
         function renderShop() {
@@ -2549,16 +2483,11 @@ body.season-halloween .season-badge.halloween {
             if (!grid) return;
             const favs = getFavorites();
             const filtered = currentShopTab === 'fav' ? PRODUCTS.filter(p => favs.includes(p.id)) : PRODUCTS;
-            if (currentShopTab === 'fav' && filtered.length === 0) {
-                grid.innerHTML = `<div class="leaderboard-empty" style="grid-column:1/-1;">Пока ничего в избранном. Нажми ❤️ на товаре!</div>`;
-                return;
-            }
+            if (currentShopTab === 'fav' && filtered.length === 0) { grid.innerHTML = `<div class="leaderboard-empty" style="grid-column:1/-1;">Пока ничего в избранном. Нажми ❤️ на товаре!</div>`; return; }
             grid.innerHTML = '';
             filtered.forEach(product => {
                 const isFav = favs.includes(product.id);
-                let priceHTML = product.free
-                    ? `<div class="shop-discount">-100%</div><div class="shop-price free">${currentLang === 'ru' ? 'БЕСПЛАТНО 🎉' : 'FREE 🎉'}</div>`
-                    : `<div class="shop-price no-price">100 🪙</div>`;
+                let priceHTML = product.free ? `<div class="shop-discount">-100%</div><div class="shop-price free">${currentLang === 'ru' ? 'БЕСПЛАТНО 🎉' : 'FREE 🎉'}</div>` : `<div class="shop-price no-price">100 🪙</div>`;
                 const pName = currentLang === 'ru' ? product.name : product.name_en;
                 const item = document.createElement('div');
                 item.className = 'shop-item acrylic';
@@ -2621,9 +2550,7 @@ body.season-halloween .season-badge.halloween {
             const cart = getCart();
             list.innerHTML = '';
             if (cart.length === 0) { empty.style.display = 'block'; totalRow.style.display = 'none'; if (checkoutBtn) checkoutBtn.style.display = 'none'; return; }
-            empty.style.display = 'none';
-            totalRow.style.display = 'flex';
-            if (checkoutBtn) checkoutBtn.style.display = 'block';
+            empty.style.display = 'none'; totalRow.style.display = 'flex'; if (checkoutBtn) checkoutBtn.style.display = 'block';
             cart.forEach(item => {
                 const name = currentLang === 'ru' ? item.name : item.name_en;
                 const row = document.createElement('div');
@@ -2637,17 +2564,11 @@ body.season-halloween .season-badge.halloween {
         function buyItem(name, isFree, product = null) {
             const user = getCurrentUser();
             if (!user) { document.getElementById('authRequiredModal').classList.add('active'); return; }
-            if (isFree && product) {
-                addToCart(product);
-                showNotification((currentLang === 'ru' ? 'В корзину: ' : 'Added: ') + name, 'success');
-                addXP(5);
-            } else {
-                window.open(TELEGRAM_CHANNEL, '_blank');
-                showNotification((currentLang === 'ru' ? 'Telegram: ' : 'Telegram: ') + name, 'success');
-            }
+            if (isFree && product) { addToCart(product); showNotification((currentLang === 'ru' ? 'В корзину: ' : 'Added: ') + name, 'success'); addXP(5); }
+            else { window.open(TELEGRAM_CHANNEL, '_blank'); showNotification((currentLang === 'ru' ? 'Telegram: ' : 'Telegram: ') + name, 'success'); }
         }
 
-        // ===== ПОИСК =====
+        // ===== ПОИСК / ЭПИЗОДЫ / ВИШЛИСТ =====
         function openSearch() { document.getElementById('searchModal').classList.add('active'); }
         function closeSearch() { document.getElementById('searchModal').classList.remove('active'); }
         function doSearch() {
@@ -2659,27 +2580,18 @@ body.season-halloween .season-badge.halloween {
                 closeSearch();
             }
         }
-
-        // ===== ЭПИЗОДЫ =====
         function openEpisode(sub, title) {
             const user = getCurrentUser();
-            if (user) {
-                const ep = EPISODES.find(e => (currentLang === 'ru' ? e.sub : e.sub_en) === sub);
-                if (ep) localStorage.setItem('aki_last_watched_' + user.nickname, ep.id);
-                addXP(20);
-            }
+            if (user) { const ep = EPISODES.find(e => (currentLang === 'ru' ? e.sub : e.sub_en) === sub); if (ep) localStorage.setItem('aki_last_watched_' + user.nickname, ep.id); addXP(20); }
             document.getElementById('episodeTitle').textContent = title;
             document.getElementById('episodeInfo').textContent = sub + (currentLang === 'ru' ? ' — в разработке' : ' — in development');
             document.getElementById('episodeModal').classList.add('active');
         }
         function closeEpisode() { document.getElementById('episodeModal').classList.remove('active'); }
         function renderEpisodeCard(ep, container) {
-            const card = document.createElement('div');
-            card.className = 'card';
-            const user = getCurrentUser();
-            const inWatchlist = user && getWatchlist().includes(ep.id);
-            const title = currentLang === 'ru' ? ep.title : ep.title_en;
-            const sub = currentLang === 'ru' ? ep.sub : ep.sub_en;
+            const card = document.createElement('div'); card.className = 'card';
+            const user = getCurrentUser(); const inWatchlist = user && getWatchlist().includes(ep.id);
+            const title = currentLang === 'ru' ? ep.title : ep.title_en; const sub = currentLang === 'ru' ? ep.sub : ep.sub_en;
             card.innerHTML = `<button class="card-add ${inWatchlist ? 'added' : ''}">${inWatchlist ? '✓' : '+'}</button><div class="card-image">${ep.emoji}</div><div class="card-content"><div class="card-title">${title}</div><div class="card-subtitle">${sub}</div></div>`;
             card.addEventListener('click', (e) => { if (!e.target.classList.contains('card-add')) openEpisode(sub, title); });
             card.querySelector('.card-add').addEventListener('click', (e) => { e.stopPropagation(); toggleWatchlist(ep.id, card.querySelector('.card-add')); });
@@ -2688,178 +2600,105 @@ body.season-halloween .season-badge.halloween {
         function renderAllEpisodes() {
             const grids = { allGrid: 'all', akiGrid: 'aki', epsilonGrid: 'epsilon', chroniclesGrid: 'chronicles', season6Grid: 6, season7Grid: 7, season8Grid: 8 };
             Object.keys(grids).forEach(id => {
-                const el = document.getElementById(id);
-                if (!el) return;
-                el.innerHTML = '';
+                const el = document.getElementById(id); if (!el) return; el.innerHTML = '';
                 const filter = grids[id];
-                EPISODES.filter(ep => {
-                    if (filter === 'all') return true;
-                    if (typeof filter === 'number') return ep.season === filter;
-                    return ep.showcase === filter;
-                }).forEach(ep => renderEpisodeCard(ep, el));
+                EPISODES.filter(ep => { if (filter === 'all') return true; if (typeof filter === 'number') return ep.season === filter; return ep.showcase === filter; }).forEach(ep => renderEpisodeCard(ep, el));
             });
         }
         function renderContinue() {
-            const user = getCurrentUser();
-            const section = document.getElementById('continueSection'), grid = document.getElementById('continueGrid');
-            if (!section || !grid) return;
-            if (!user) { section.style.display = 'none'; return; }
-            const last = localStorage.getItem('aki_last_watched_' + user.nickname);
-            if (!last) { section.style.display = 'none'; return; }
-            const ep = EPISODES.find(e => e.id === last);
-            if (!ep) { section.style.display = 'none'; return; }
-            section.style.display = 'block';
-            grid.innerHTML = '';
-            renderEpisodeCard(ep, grid);
+            const user = getCurrentUser(); const section = document.getElementById('continueSection'), grid = document.getElementById('continueGrid');
+            if (!section || !grid) return; if (!user) { section.style.display = 'none'; return; }
+            const last = localStorage.getItem('aki_last_watched_' + user.nickname); if (!last) { section.style.display = 'none'; return; }
+            const ep = EPISODES.find(e => e.id === last); if (!ep) { section.style.display = 'none'; return; }
+            section.style.display = 'block'; grid.innerHTML = ''; renderEpisodeCard(ep, grid);
         }
         function getWatchlist() {
-            const user = getCurrentUser();
-            if (!user) return [];
-            const raw = localStorage.getItem('aki_watchlist_' + user.nickname);
-            return raw ? JSON.parse(raw) : [];
+            const user = getCurrentUser(); if (!user) return [];
+            const raw = localStorage.getItem('aki_watchlist_' + user.nickname); return raw ? JSON.parse(raw) : [];
         }
-        function saveWatchlist(list) {
-            const user = getCurrentUser();
-            if (!user) return;
-            localStorage.setItem('aki_watchlist_' + user.nickname, JSON.stringify(list));
-        }
+        function saveWatchlist(list) { const user = getCurrentUser(); if (!user) return; localStorage.setItem('aki_watchlist_' + user.nickname, JSON.stringify(list)); }
         function toggleWatchlist(epId, btn) {
-            const user = getCurrentUser();
-            if (!user) { document.getElementById('authRequiredModal').classList.add('active'); return; }
+            const user = getCurrentUser(); if (!user) { document.getElementById('authRequiredModal').classList.add('active'); return; }
             let list = getWatchlist();
-            if (list.includes(epId)) {
-                list = list.filter(id => id !== epId);
-                btn.classList.remove('added'); btn.textContent = '+';
-                showNotification(currentLang === 'ru' ? 'Убрано из списка' : 'Removed');
-            } else {
-                list.push(epId);
-                btn.classList.add('added'); btn.textContent = '✓';
-                showNotification(currentLang === 'ru' ? 'Добавлено в список' : 'Added', 'success');
-                addXP(10);
-                incrementDailyTask('watch2', 1);
-            }
-            saveWatchlist(list);
-            renderWatchlist();
+            if (list.includes(epId)) { list = list.filter(id => id !== epId); btn.classList.remove('added'); btn.textContent = '+'; showNotification(currentLang === 'ru' ? 'Убрано' : 'Removed'); }
+            else { list.push(epId); btn.classList.add('added'); btn.textContent = '✓'; showNotification(currentLang === 'ru' ? 'Добавлено' : 'Added', 'success'); addXP(10); incrementDailyTask('watch2', 1); }
+            saveWatchlist(list); renderWatchlist();
         }
         function renderWatchlist() {
-            const user = getCurrentUser();
-            const section = document.getElementById('watchlistSection'), grid = document.getElementById('watchlistGrid');
-            if (!section || !grid) return;
-            if (!user) { section.style.display = 'none'; return; }
-            const list = getWatchlist();
-            if (list.length === 0) { section.style.display = 'none'; return; }
-            section.style.display = 'block';
-            grid.innerHTML = '';
-            list.forEach(id => { const ep = EPISODES.find(e => e.id === id); if (ep) renderEpisodeCard(ep, grid); });
+            const user = getCurrentUser(); const section = document.getElementById('watchlistSection'), grid = document.getElementById('watchlistGrid');
+            if (!section || !grid) return; if (!user) { section.style.display = 'none'; return; }
+            const list = getWatchlist(); if (list.length === 0) { section.style.display = 'none'; return; }
+            section.style.display = 'block'; grid.innerHTML = ''; list.forEach(id => { const ep = EPISODES.find(e => e.id === id); if (ep) renderEpisodeCard(ep, grid); });
         }
         function showShowcase(name, event) {
             document.querySelectorAll('.showcase-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.showcase-tab').forEach(t => t.classList.remove('active'));
-            document.getElementById('showcase-' + name).classList.add('active');
-            event.target.classList.add('active');
+            document.getElementById('showcase-' + name).classList.add('active'); event.target.classList.add('active');
         }
 
-        // ===== ПРЕДСКАЗАНИЯ (Дед Мороз зимой) =====
+        // ===== ПРЕДСКАЗАНИЯ =====
         const PREDICTIONS = {
-            ru: ["Аномалия — это не энергия. Это форма жизни.", "Ты больше не человек. И не монстр.", "Они вернулись. И они ищут тебя.", "Ты — наш единственный шанс.", "Эпсилон не спасает мир. Эпсилон исправляет свою ошибку.", "Доверяй только себе. Остальные врут.", "Второй шанс дают только один раз.", "Свидетели не те, кем кажутся.", "Омега уже здесь.", "Правда — у каждого своя."],
+            ru: ["Аномалия — это не энергия. Это форма жизни.", "Ты больше не человек.", "Они вернулись.", "Ты — наш единственный шанс.", "Эпсилон не спасает мир. Эпсилон исправляет свою ошибку.", "Доверяй только себе.", "Второй шанс дают только один раз.", "Свидетели не те, кем кажутся.", "Омега уже здесь.", "Правда — у каждого своя."],
             en: ["Anomaly is not energy.", "You are no longer human.", "They are back.", "You are our only chance.", "Epsilon fixes its mistake.", "Trust only yourself.", "A second chance is given only once.", "The Witnesses are not who they seem.", "Omega is already here.", "The truth is different for everyone."],
-            winter_ru: ["🎅 Дед Мороз говорит: в новом году тебя ждёт удача!", "🎄 Ёлка шепчет: твой подарок уже под ней.", "❄️ Снежинка на твоей ладони — к счастью.", "🎁 Дед Мороз: я знаю, что ты хочешь. Но не скажу!", "⛄ Снеговик передаёт: не грусти, всё будет хорошо.", "✨ Звезда на небе — твой знак."],
-            winter_en: ["🎅 Santa says: luck awaits you in the new year!", "🎄 The tree whispers: your gift is under it.", "❄️ A snowflake on your palm means happiness.", "🎁 Santa: I know what you want. But I won't say!", "⛄ Snowman says: don't be sad, everything will be fine.", "✨ A star in the sky is your sign."]
+            winter_ru: ["🎅 Дед Мороз: в новом году тебя ждёт удача!", "🎄 Ёлка шепчет: твой подарок уже под ней.", "❄️ Снежинка на твоей ладони — к счастью.", "🎁 Дед Мороз: я знаю, что ты хочешь. Но не скажу!", "⛄ Снеговик передаёт: не грусти, всё будет хорошо.", "✨ Звезда на небе — твой знак."],
+            winter_en: ["🎅 Santa says: luck awaits you!", "🎄 The tree whispers: your gift is under it.", "❄️ A snowflake on your palm means happiness.", "🎁 Santa: I know what you want. But I won't say!", "⛄ Snowman says: don't be sad.", "✨ A star in the sky is your sign."]
         };
         function getPrediction() {
-            const textEl = document.getElementById('predictionText');
-            textEl.style.opacity = '0';
+            const textEl = document.getElementById('predictionText'); textEl.style.opacity = '0';
             setTimeout(() => {
                 const isWinter = getCurrentSeason() === 'newyear';
-                let arr;
-                if (isWinter) arr = currentLang === 'ru' ? PREDICTIONS.winter_ru : PREDICTIONS.winter_en;
-                else arr = currentLang === 'ru' ? PREDICTIONS.ru : PREDICTIONS.en;
-                textEl.textContent = arr[Math.floor(Math.random() * arr.length)];
-                textEl.style.opacity = '1';
-                const titleEl = document.getElementById('predictionTitle');
-                if (titleEl) titleEl.textContent = isWinter ? '🎅 Предсказание от Деда Мороза' : '🔮 Предсказание от Алисы';
+                let arr = isWinter ? (currentLang === 'ru' ? PREDICTIONS.winter_ru : PREDICTIONS.winter_en) : (currentLang === 'ru' ? PREDICTIONS.ru : PREDICTIONS.en);
+                textEl.textContent = arr[Math.floor(Math.random() * arr.length)]; textEl.style.opacity = '1';
+                const titleEl = document.getElementById('predictionTitle'); if (titleEl) titleEl.textContent = isWinter ? '🎅 Предсказание от Деда Мороза' : '🔮 Предсказание от Алисы';
             }, 300);
         }
 
         // ===== ПРОМОКОДЫ =====
         const PROMOCODES = {
-            "EPSILON2026": { reward: "vip", message: "⭐ VIP!" }, "AKI100": { reward: "cart+1", message: "🛒 +1 товар!" },
-            "ANOMALY": { reward: "cart+2", message: "🩸 +2 товара!" }, "ECHO": { reward: "cart+3", message: "🦠 +3 товара!" },
-            "OMEGA": { reward: "vip", message: "👁️ VIP «Омега»!" }, "WITNESS": { reward: "cart+4", message: "💬 +4 товара!" },
-            "REVERSE": { reward: "cart+2", message: "🔑 +2 товара!" }, "CHIP": { reward: "cart+1", message: "⚡ +1 товар!" },
-            "QUARTZ": { reward: "cart+3", message: "💎 +3 товара!" }, "WELCOME": { reward: "cart+1", message: "👋 +1 товар!" },
-            "WHEEL2026": { reward: "cart+2", message: "🎡 +2 товара с колеса!" }
+            "EPSILON2026": { reward: "vip", message: "⭐ VIP!" }, "AKI100": { reward: "cart+1", message: "🛒 +1 товар!" }, "ANOMALY": { reward: "cart+2", message: "🩸 +2 товара!" },
+            "ECHO": { reward: "cart+3", message: "🦠 +3 товара!" }, "OMEGA": { reward: "vip", message: "👁️ VIP «Омега»!" }, "WITNESS": { reward: "cart+4", message: "💬 +4 товара!" },
+            "REVERSE": { reward: "cart+2", message: "🔑 +2 товара!" }, "CHIP": { reward: "cart+1", message: "⚡ +1 товар!" }, "QUARTZ": { reward: "cart+3", message: "💎 +3 товара!" },
+            "WELCOME": { reward: "cart+1", message: "👋 +1 товар!" }, "WHEEL2026": { reward: "cart+2", message: "🎡 +2 товара с колеса!" }
         };
-        function getUsedPromos() {
-            const user = getCurrentUser();
-            if (!user) return [];
-            const raw = localStorage.getItem('aki_used_promos_' + user.nickname);
-            return raw ? JSON.parse(raw) : [];
-        }
-        function saveUsedPromos(promos) {
-            const user = getCurrentUser();
-            if (!user) return;
-            localStorage.setItem('aki_used_promos_' + user.nickname, JSON.stringify(promos));
-        }
+        function getUsedPromos() { const user = getCurrentUser(); if (!user) return []; const raw = localStorage.getItem('aki_used_promos_' + user.nickname); return raw ? JSON.parse(raw) : []; }
+        function saveUsedPromos(promos) { const user = getCurrentUser(); if (!user) return; localStorage.setItem('aki_used_promos_' + user.nickname, JSON.stringify(promos)); }
         function applyPromo() {
-            const input = document.getElementById('promoInput');
-            const code = input.value.trim().toUpperCase();
-            const user = getCurrentUser();
+            const input = document.getElementById('promoInput'); const code = input.value.trim().toUpperCase(); const user = getCurrentUser();
             if (!user) { document.getElementById('authRequiredModal').classList.add('active'); return; }
             if (!code) { showNotification(currentLang === 'ru' ? 'Введи промокод' : 'Enter promo', 'error'); return; }
-            const used = getUsedPromos();
-            if (used.includes(code)) { showNotification(currentLang === 'ru' ? 'Уже использован' : 'Already used', 'error'); return; }
-            const promo = PROMOCODES[code];
-            if (!promo) { showNotification(currentLang === 'ru' ? 'Неверный промокод' : 'Invalid', 'error'); return; }
+            const used = getUsedPromos(); if (used.includes(code)) { showNotification(currentLang === 'ru' ? 'Уже использован' : 'Already used', 'error'); return; }
+            const promo = PROMOCODES[code]; if (!promo) { showNotification(currentLang === 'ru' ? 'Неверный промокод' : 'Invalid', 'error'); return; }
             if (promo.reward.startsWith('cart+')) {
-                const amount = parseInt(promo.reward.replace('cart+', ''));
-                const bonus = PRODUCTS.find(p => p.free) || PRODUCTS[0];
-                const cart = getCart();
-                const existing = cart.find(i => i.id === bonus.id);
-                if (existing) existing.qty += amount;
-                else cart.push({ id: bonus.id, name: bonus.name, name_en: bonus.name_en, emoji: bonus.emoji, qty: amount });
+                const amount = parseInt(promo.reward.replace('cart+', '')); const bonus = PRODUCTS.find(p => p.free) || PRODUCTS[0];
+                const cart = getCart(); const existing = cart.find(i => i.id === bonus.id);
+                if (existing) existing.qty += amount; else cart.push({ id: bonus.id, name: bonus.name, name_en: bonus.name_en, emoji: bonus.emoji, qty: amount });
                 saveCart(cart);
-            } else if (promo.reward === 'vip') {
-                localStorage.setItem('aki_vip_' + user.nickname, 'true');
-            }
-            used.push(code);
-            saveUsedPromos(used);
-            document.getElementById('promoReward').textContent = promo.message;
-            document.getElementById('promoModal').classList.add('active');
-            input.value = '';
-            addXP(50);
+            } else if (promo.reward === 'vip') { localStorage.setItem('aki_vip_' + user.nickname, 'true'); }
+            used.push(code); saveUsedPromos(used); document.getElementById('promoReward').textContent = promo.message;
+            document.getElementById('promoModal').classList.add('active'); input.value = ''; addXP(50);
         }
         function closePromoModal() { document.getElementById('promoModal').classList.remove('active'); }
         function closeAuthRequired() { document.getElementById('authRequiredModal').classList.remove('active'); }
 
-        // ===== УВЕДОМЛЕНИЯ =====
+        // ===== УВЕДОМЛЕНИЯ / ПЕРЕВОДЫ =====
         function showNotification(text, type = '') {
-            const notif = document.createElement('div');
-            notif.className = 'notification ' + type;
-            notif.textContent = text;
-            document.body.appendChild(notif);
-            setTimeout(() => notif.classList.add('show'), 10);
+            const notif = document.createElement('div'); notif.className = 'notification ' + type; notif.textContent = text;
+            document.body.appendChild(notif); setTimeout(() => notif.classList.add('show'), 10);
             setTimeout(() => { notif.classList.remove('show'); setTimeout(() => notif.remove(), 400); }, 3000);
         }
-
-        // ===== ПЕРЕВОДЫ =====
         const translations = {
-            ru: { nav_home: "Главная", nav_characters: "Персонажи", nav_lore: "Лор", nav_shop: "Магазин", nav_seasons: "Сезоны", nav_music: "Музыка", nav_coop: "Сотрудничество", nav_about: "О проекте", btn_login: "Войти", btn_try: "ПОПРОБОВАТЬ", btn_about: "О проекте", hero_title: "АКИ И ЭПСИЛОН", hero_desc: "Тайная организация, которая спасает мир от аномалий и монстров.", promo_placeholder: "🎟 Введите промокод", promo_btn: "Применить", continue_title: "⏯ ПРОДОЛЖИТЬ ПРОСМОТР", showcase_title: "🎬 ВИТРИНЫ", showcase_all: "Все", showcase_aki: "Аки", showcase_epsilon: "Эпсилон", showcase_chronicles: "Свидетели", watchlist_title: "📌 БУДУ СМОТРЕТЬ", banner_title: "СЛЕДИ ЗА ПРОЕКТОМ", banner_desc: "Подписывайся на Telegram и YouTube", footer_text: "© 2026 Аки и Эпсилон.", modal_register: "Регистрация", modal_login: "Вход", label_nick: "Никнейм", label_pass: "Пароль", label_gender: "Пол", gender_choose: "Выбери пол", gender_male: "Мужской", gender_female: "Женский", btn_create: "Создать аккаунт", btn_login: "Войти", have_account: "Уже есть аккаунт?", no_account: "Нет аккаунта?", btn_login_link: "Войти", btn_register_link: "Зарегистрироваться", promo_modal_title: "Промокод активирован!", promo_modal_btn: "Отлично!", auth_required_title: "Требуется вход", auth_required_text: "Войди или зарегистрируйся", search_title: "🔍 Поиск", search_placeholder: "Поиск...", search_btn: "Найти", cart_title: "🛒 Корзина", cart_btn: "Закрыть", shop_title: "🛒 МАГАЗИН", music_title: "🎵 МУЗЫКА", music_artist: "Эпсилон Soundtrack", music_1: "Aki Theme", music_2: "Epsilon March", music_3: "Anomaly", music_4: "Resurrection", music_5: "Witnesses", music_6: "Final Battle", coop_title: "🤝 СОТРУДНИЧЕСТВО", coop_form_title: "Напишите нам", coop_name: "Ваше имя", coop_email: "Email", coop_message: "Сообщение", coop_send: "Отправить", about_title: "📖 О ПРОЕКТЕ", about_heading: "Аки и Эпсилон", about_text: "История о парне Аки.", map_title: "🗺️ КАРТА ЭПСИЛОНА" },
-            en: { nav_home: "Home", nav_characters: "Characters", nav_lore: "Lore", nav_shop: "Shop", nav_seasons: "Seasons", nav_music: "Music", nav_coop: "Coop", nav_about: "About", btn_login: "Login", btn_try: "TRY", btn_about: "About", hero_title: "AKI & EPSILON", hero_desc: "Secret organization.", promo_placeholder: "🎟 Enter promo", promo_btn: "Apply", continue_title: "⏯ CONTINUE", showcase_title: "🎬 SHOWCASES", showcase_all: "All", showcase_aki: "Aki", showcase_epsilon: "Epsilon", showcase_chronicles: "Witnesses", watchlist_title: "📌 WATCHLIST", banner_title: "FOLLOW", banner_desc: "Subscribe", footer_text: "© 2026 Aki & Epsilon.", modal_register: "Registration", modal_login: "Login", label_nick: "Nickname", label_pass: "Password", label_gender: "Gender", gender_choose: "Choose", gender_male: "Male", gender_female: "Female", btn_create: "Create", btn_login: "Login", have_account: "Have account?", no_account: "No account?", btn_login_link: "Login", btn_register_link: "Register", promo_modal_title: "Activated!", promo_modal_btn: "Great!", auth_required_title: "Login required", auth_required_text: "Log in or register", search_title: "🔍 Search", search_placeholder: "Search...", search_btn: "Search", cart_title: "🛒 Cart", cart_btn: "Close", shop_title: "🛒 SHOP", music_title: "🎵 MUSIC", music_artist: "Epsilon Soundtrack", music_1: "Aki Theme", music_2: "Epsilon March", music_3: "Anomaly", music_4: "Resurrection", music_5: "Witnesses", music_6: "Final Battle", coop_title: "🤝 COOP", coop_form_title: "Write to us", coop_name: "Name", coop_email: "Email", coop_message: "Message", coop_send: "Send", about_title: "📖 ABOUT", about_heading: "Aki & Epsilon", about_text: "Story about Aki.", map_title: "🗺️ EPSILON MAP" }
+            ru: { nav_home: "Главная", nav_characters: "Персонажи", nav_lore: "Лор", nav_shop: "Магазин", nav_seasons: "Сезоны", nav_music: "Музыка", nav_coop: "Сотрудничество", nav_about: "О проекте", btn_login: "Войти", btn_try: "ПОПРОБОВАТЬ", btn_about: "О проекте", hero_title: "АКИ И ЭПСИЛОН", hero_desc: "Тайная организация...", promo_placeholder: "🎟 Введите промокод", promo_btn: "Применить", continue_title: "⏯ ПРОДОЛЖИТЬ ПРОСМОТР", showcase_title: "🎬 ВИТРИНЫ", showcase_all: "Все", showcase_aki: "Аки", showcase_epsilon: "Эпсилон", showcase_chronicles: "Свидетели", watchlist_title: "📌 БУДУ СМОТРЕТЬ", banner_title: "СЛЕДИ ЗА ПРОЕКТОМ", banner_desc: "Подписывайся...", footer_text: "© 2026 Аки и Эпсилон.", modal_register: "Регистрация", modal_login: "Вход", label_nick: "Никнейм", label_pass: "Пароль", label_gender: "Пол", gender_choose: "Выбери пол", gender_male: "Мужской", gender_female: "Женский", btn_create: "Создать", have_account: "Уже есть аккаунт?", no_account: "Нет аккаунта?", btn_login_link: "Войти", btn_register_link: "Зарегистрироваться", promo_modal_title: "Промокод активирован!", promo_modal_btn: "Отлично!", auth_required_title: "Требуется вход", auth_required_text: "Войди...", search_title: "🔍 Поиск", search_placeholder: "Поиск...", search_btn: "Найти", cart_title: "🛒 Корзина", cart_btn: "Закрыть", shop_title: "🛒 МАГАЗИН", music_title: "🎵 МУЗЫКА", music_artist: "Эпсилон Soundtrack", coop_title: "🤝 СОТРУДНИЧЕСТВО", coop_form_title: "Напишите нам", coop_name: "Ваше имя", coop_email: "Email", coop_message: "Сообщение", coop_send: "Отправить", about_title: "📖 О ПРОЕКТЕ", about_heading: "Аки и Эпсилон", about_text: "История...", map_title: "🗺️ КАРТА ЭПСИЛОНА" },
+            en: { nav_home: "Home", nav_characters: "Characters", nav_lore: "Lore", nav_shop: "Shop", nav_seasons: "Seasons", nav_music: "Music", nav_coop: "Coop", nav_about: "About", btn_login: "Login", btn_try: "TRY", btn_about: "About", hero_title: "AKI & EPSILON", hero_desc: "Secret org...", promo_placeholder: "🎟 Enter promo", promo_btn: "Apply", continue_title: "⏯ CONTINUE", showcase_title: "🎬 SHOWCASES", showcase_all: "All", showcase_aki: "Aki", showcase_epsilon: "Epsilon", showcase_chronicles: "Witnesses", watchlist_title: "📌 WATCHLIST", banner_title: "FOLLOW", banner_desc: "Subscribe", footer_text: "© 2026 Aki & Epsilon.", modal_register: "Registration", modal_login: "Login", label_nick: "Nick", label_pass: "Pass", label_gender: "Gender", gender_choose: "Choose", gender_male: "Male", gender_female: "Female", btn_create: "Create", have_account: "Have account?", no_account: "No account?", btn_login_link: "Login", btn_register_link: "Register", promo_modal_title: "Activated!", promo_modal_btn: "Great!", auth_required_title: "Login required", auth_required_text: "Log in...", search_title: "🔍 Search", search_placeholder: "Search...", search_btn: "Search", cart_title: "🛒 Cart", cart_btn: "Close", shop_title: "🛒 SHOP", music_title: "🎵 MUSIC", music_artist: "Epsilon Soundtrack", coop_title: "🤝 COOP", coop_form_title: "Write to us", coop_name: "Name", coop_email: "Email", coop_message: "Message", coop_send: "Send", about_title: "📖 ABOUT", about_heading: "Aki & Epsilon", about_text: "Story...", map_title: "🗺️ EPSILON MAP" }
         };
-        let currentLang = 'ru';
-        let isSwitching = false;
-
+        let currentLang = 'ru'; let isSwitching = false;
         function toggleLang() {
-            if (isSwitching) return;
-            isSwitching = true;
+            if (isSwitching) return; isSwitching = true;
             const elements = document.querySelectorAll('[data-i18n], [data-i18n-placeholder]');
             elements.forEach(el => { el.style.transition = 'opacity 0.2s'; el.style.opacity = '0'; });
             setTimeout(() => {
                 currentLang = currentLang === 'ru' ? 'en' : 'ru';
                 document.getElementById('langBtn').textContent = currentLang.toUpperCase() + ' ▾';
-                applyLang();
-                renderAllEpisodes(); renderContinue(); renderWatchlist(); renderShop(); updateXPBar();
+                applyLang(); renderAllEpisodes(); renderContinue(); renderWatchlist(); renderShop(); updateXPBar();
                 renderDailyTasks(); renderAchievements(); renderFriends(); renderQuotes(); renderTimeline();
                 if (document.getElementById('page-seasons').classList.contains('active')) renderSeasons();
                 if (document.getElementById('page-characters').classList.contains('active')) renderCharacters();
@@ -2882,551 +2721,261 @@ body.season-halloween .season-badge.halloween {
         function saveUsers(users) { localStorage.setItem('aki_users', JSON.stringify(users)); }
         function getCurrentUser() { const u = localStorage.getItem('aki_current_user'); return u ? JSON.parse(u) : null; }
         function setCurrentUser(user) { if (user) localStorage.setItem('aki_current_user', JSON.stringify(user)); else localStorage.removeItem('aki_current_user'); }
-        function openAuth(mode) {
-            const modal = document.getElementById('authModal');
-            modal.style.display = 'flex';
-            setTimeout(() => modal.classList.add('active'), 10);
-            switchForm(mode || 'register');
-        }
-        function closeAuth() {
-            const modal = document.getElementById('authModal');
-            modal.classList.remove('active');
-            setTimeout(() => modal.style.display = 'none', 200);
-            document.getElementById('regError').textContent = '';
-            document.getElementById('logError').textContent = '';
-        }
+        function openAuth(mode) { const modal = document.getElementById('authModal'); modal.style.display = 'flex'; setTimeout(() => modal.classList.add('active'), 10); switchForm(mode || 'register'); }
+        function closeAuth() { const modal = document.getElementById('authModal'); modal.classList.remove('active'); setTimeout(() => modal.style.display = 'none', 200); document.getElementById('regError').textContent = ''; document.getElementById('logError').textContent = ''; }
         function switchForm(mode) {
             const t = translations[currentLang];
-            if (mode === 'login') {
-                document.getElementById('registerForm').style.display = 'none';
-                document.getElementById('loginForm').style.display = 'block';
-                document.getElementById('modalTitle').textContent = t.modal_login;
-            } else {
-                document.getElementById('registerForm').style.display = 'block';
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('modalTitle').textContent = t.modal_register;
-            }
+            if (mode === 'login') { document.getElementById('registerForm').style.display = 'none'; document.getElementById('loginForm').style.display = 'block'; document.getElementById('modalTitle').textContent = t.modal_login; }
+            else { document.getElementById('registerForm').style.display = 'block'; document.getElementById('loginForm').style.display = 'none'; document.getElementById('modalTitle').textContent = t.modal_register; }
         }
         function register() {
-            const nick = document.getElementById('regNick').value.trim();
-            const pass = document.getElementById('regPass').value;
-            const avatarUrl = document.getElementById('regAvatar').value.trim();
-            const gender = document.getElementById('regGender').value;
-            const errorEl = document.getElementById('regError');
-            const ADMIN_SECRET = "superadmin123";
-            if (nick.toLowerCase() === 'the_misteraki' && pass !== ADMIN_SECRET) { errorEl.textContent = currentLang === 'ru' ? 'Ник занят.' : 'Taken.'; return; }
+            const nick = document.getElementById('regNick').value.trim(); const pass = document.getElementById('regPass').value; const avatarUrl = document.getElementById('regAvatar').value.trim(); const gender = document.getElementById('regGender').value; const errorEl = document.getElementById('regError');
             if (!nick || nick.length < 2) { errorEl.textContent = currentLang === 'ru' ? 'Ник мин 2' : 'Nick min 2'; return; }
             if (!pass || pass.length < 4) { errorEl.textContent = currentLang === 'ru' ? 'Пароль мин 4' : 'Pass min 4'; return; }
             if (!gender) { errorEl.textContent = currentLang === 'ru' ? 'Выбери пол' : 'Choose gender'; return; }
-            const users = getUsers();
-            if (users[nick]) { errorEl.textContent = currentLang === 'ru' ? 'Ник занят' : 'Taken'; return; }
-            let finalPass = pass;
-            if (nick.toLowerCase() === 'the_misteraki' && pass === ADMIN_SECRET) finalPass = "mypassword123";
-            users[nick] = { password: finalPass, gender, avatar: avatarUrl || null };
-            saveUsers(users);
-            setCurrentUser({ nickname: nick, gender, avatar: avatarUrl || null });
-            errorEl.textContent = '';
-            closeAuth();
-            updateUserArea();
-            renderContinue(); renderWatchlist(); renderAllEpisodes();
-            renderDailyTasks(); updateDailyBonusButton(); renderAchievements(); renderFriends();
-            applyCursorClass();
-            showNotification(currentLang === 'ru' ? `Добро пожаловать, ${nick}!` : `Welcome, ${nick}!`, 'success');
+            const users = getUsers(); if (users[nick]) { errorEl.textContent = currentLang === 'ru' ? 'Ник занят' : 'Taken'; return; }
+            users[nick] = { password: pass, gender, avatar: avatarUrl || null }; saveUsers(users); setCurrentUser({ nickname: nick, gender, avatar: avatarUrl || null });
+            errorEl.textContent = ''; closeAuth(); updateUserArea(); renderContinue(); renderWatchlist(); renderAllEpisodes(); renderDailyTasks(); updateDailyBonusButton(); renderAchievements(); renderFriends(); applyCursorClass(); showNotification(currentLang === 'ru' ? `Добро пожаловать, ${nick}!` : `Welcome, ${nick}!`, 'success');
         }
         function login() {
-            const nick = document.getElementById('logNick').value.trim();
-            const pass = document.getElementById('logPass').value;
-            const errorEl = document.getElementById('logError');
+            const nick = document.getElementById('logNick').value.trim(); const pass = document.getElementById('logPass').value; const errorEl = document.getElementById('logError');
             if (!nick || !pass) { errorEl.textContent = currentLang === 'ru' ? 'Заполни поля' : 'Fill'; return; }
             const users = getUsers();
             if (!users[nick]) { errorEl.textContent = currentLang === 'ru' ? 'Не найден' : 'Not found'; return; }
             if (users[nick].password !== pass) { errorEl.textContent = currentLang === 'ru' ? 'Неверный пароль' : 'Wrong'; return; }
             setCurrentUser({ nickname: nick, gender: users[nick].gender, avatar: users[nick].avatar || null });
-            errorEl.textContent = '';
-            closeAuth();
-            updateUserArea();
-            renderContinue(); renderWatchlist(); renderAllEpisodes();
-            renderDailyTasks(); updateDailyBonusButton(); renderAchievements(); renderFriends();
-            applySeason(); applyCursorClass();
-            showNotification(currentLang === 'ru' ? `С возвращением, ${nick}!` : `Welcome back, ${nick}!`, 'success');
+            errorEl.textContent = ''; closeAuth(); updateUserArea(); renderContinue(); renderWatchlist(); renderAllEpisodes(); renderDailyTasks(); updateDailyBonusButton(); renderAchievements(); renderFriends(); applySeason(); applyCursorClass(); showNotification(currentLang === 'ru' ? `С возвращением, ${nick}!` : `Welcome back, ${nick}!`, 'success');
         }
         function logout() {
-            setCurrentUser(null);
-            updateUserArea();
-            document.getElementById('cartCount').textContent = '0';
+            setCurrentUser(null); updateUserArea(); document.getElementById('cartCount').textContent = '0';
             renderContinue(); renderWatchlist(); renderAllEpisodes(); renderDailyTasks(); renderAchievements(); renderFriends();
-            document.body.classList.remove('cursor-crosshair', 'cursor-reverse', 'cursor-chip', 'cursor-anomaly', 'cursor-redstone', 'cursor-star', 'cursor-skull', 'cursor-nuke');
-            document.body.style.cursor = '';
-            const ccStyle = document.getElementById('customCursorStyle');
-            if (ccStyle) ccStyle.remove();
+            document.body.classList.remove('cursor-crosshair', 'cursor-reverse', 'cursor-chip', 'cursor-anomaly', 'cursor-redstone', 'cursor-star', 'cursor-skull', 'cursor-nuke'); document.body.style.cursor = '';
+            const ccStyle = document.getElementById('customCursorStyle'); if (ccStyle) ccStyle.remove();
             showNotification(currentLang === 'ru' ? 'Ты вышел' : 'Logged out');
         }
         function updateUserArea() {
-            const userArea = document.getElementById('userArea');
-            const user = getCurrentUser();
-            const t = translations[currentLang];
+            const userArea = document.getElementById('userArea'); const user = getCurrentUser(); const t = translations[currentLang];
             if (user) {
-                const genderColor = user.gender === 'male' ? '#4a90e2' : '#e24a90';
-                const genderIcon = user.gender === 'male' ? '👨' : '👩';
+                const genderColor = user.gender === 'male' ? '#4a90e2' : '#e24a90'; const genderIcon = user.gender === 'male' ? '👨' : '👩';
                 const avatarHTML = user.avatar ? `<img src="${user.avatar}" onerror="this.style.display='none'; this.parentElement.innerHTML='${genderIcon}';">` : genderIcon;
                 userArea.innerHTML = `<button class="user-btn" onclick="openProfile()"><span class="avatar" id="userAvatarWrap" style="background:linear-gradient(145deg,${genderColor},#8b0000);overflow:hidden;padding:0;">${avatarHTML}</span><span class="name" id="userNameWrap">${user.nickname}</span></button>`;
-                updateCartCount();
-                applyUserCustomization();
-                updateXPBar();
-                updateCoinsDisplay();
-            } else {
-                userArea.innerHTML = `<button class="user-btn" onclick="openAuth('login')"><span class="avatar">👤</span><span class="name">${t.btn_login}</span></button>`;
-            }
+                updateCartCount(); applyUserCustomization(); updateXPBar(); updateCoinsDisplay();
+            } else { userArea.innerHTML = `<button class="user-btn" onclick="openAuth('login')"><span class="avatar">👤</span><span class="name">${t.btn_login}</span></button>`; }
         }
 
         // ===== ПРОФИЛЬ =====
-        const NAME_COLORS = [
-            { id: 'default', color: '#ffffff', label: 'Стандарт' }, { id: 'red', color: '#ff3333', label: 'Алый' },
-            { id: 'orange', color: '#ff8c00', label: 'Огненный' }, { id: 'yellow', color: '#ffd700', label: 'Золотой' },
-            { id: 'green', color: '#00ff88', label: 'Изумруд' }, { id: 'cyan', color: '#00e5ff', label: 'Ледяной' },
-            { id: 'blue', color: '#5865F2', label: 'Стальной' }, { id: 'purple', color: '#b388ff', label: 'Мистический' },
-            { id: 'pink', color: '#e24a90', label: 'Розовый' }
-        ];
-        const AVATAR_FRAMES = [
-            { id: 'none', label: 'Без рамки', css: '3px solid transparent' }, { id: 'basic', label: 'Классика', css: '3px solid #ff3333' },
-            { id: 'glow', label: 'Свечение', css: '3px solid #ff3333; box-shadow: 0 0 20px #ff3333' },
-            { id: 'gold', label: 'Золото', css: '3px solid #ffd700; box-shadow: 0 0 20px #ffd700' },
-            { id: 'cyan', label: 'Лёд', css: '3px solid #00e5ff; box-shadow: 0 0 20px #00e5ff' },
-            { id: 'purple', label: 'Мистика', css: '3px solid #b388ff; box-shadow: 0 0 20px #b388ff' }
-        ];
-        const STATUS_BADGES = [
-            { id: 'agent', label: 'Агент Эпсилона' }, { id: 'witness', label: 'Свидетель' },
-            { id: 'omega', label: 'Омега' }, { id: 'ghost', label: 'Призрак' },
-            { id: 'newbie', label: 'Новобранец' }, { id: 'veteran', label: 'Ветеран' }
-        ];
-        function getCustomization() {
-            const user = getCurrentUser();
-            if (!user) return { color: 'default', frame: 'basic', status: 'agent' };
-            const c = localStorage.getItem('aki_custom_' + user.nickname);
-            return c ? JSON.parse(c) : { color: 'default', frame: 'basic', status: 'agent' };
-        }
-        function saveCustomization(c) {
-            const user = getCurrentUser();
-            if (!user) return;
-            localStorage.setItem('aki_custom_' + user.nickname, JSON.stringify(c));
-        }
+        const NAME_COLORS = [{ id: 'default', color: '#ffffff', label: 'Стандарт' }, { id: 'red', color: '#ff3333', label: 'Алый' }, { id: 'orange', color: '#ff8c00', label: 'Огненный' }, { id: 'yellow', color: '#ffd700', label: 'Золотой' }, { id: 'green', color: '#00ff88', label: 'Изумруд' }, { id: 'cyan', color: '#00e5ff', label: 'Ледяной' }, { id: 'blue', color: '#5865F2', label: 'Стальной' }, { id: 'purple', color: '#b388ff', label: 'Мистический' }, { id: 'pink', color: '#e24a90', label: 'Розовый' }];
+        const AVATAR_FRAMES = [{ id: 'none', label: 'Без рамки', css: '3px solid transparent' }, { id: 'basic', label: 'Классика', css: '3px solid #ff3333' }, { id: 'glow', label: 'Свечение', css: '3px solid #ff3333; box-shadow: 0 0 20px #ff3333' }, { id: 'gold', label: 'Золото', css: '3px solid #ffd700; box-shadow: 0 0 20px #ffd700' }, { id: 'cyan', label: 'Лёд', css: '3px solid #00e5ff; box-shadow: 0 0 20px #00e5ff' }, { id: 'purple', label: 'Мистика', css: '3px solid #b388ff; box-shadow: 0 0 20px #b388ff' }];
+        const STATUS_BADGES = [{ id: 'agent', label: 'Агент Эпсилона' }, { id: 'witness', label: 'Свидетель' }, { id: 'omega', label: 'Омега' }, { id: 'ghost', label: 'Призрак' }, { id: 'newbie', label: 'Новобранец' }, { id: 'veteran', label: 'Ветеран' }];
+        function getCustomization() { const user = getCurrentUser(); if (!user) return { color: 'default', frame: 'basic', status: 'agent' }; const c = localStorage.getItem('aki_custom_' + user.nickname); return c ? JSON.parse(c) : { color: 'default', frame: 'basic', status: 'agent' }; }
+        function saveCustomization(c) { const user = getCurrentUser(); if (!user) return; localStorage.setItem('aki_custom_' + user.nickname, JSON.stringify(c)); }
         function applyUserCustomization() {
-            const user = getCurrentUser();
-            if (!user) return;
-            const c = getCustomization();
-            const colorObj = NAME_COLORS.find(x => x.id === c.color) || NAME_COLORS[0];
-            const frameObj = AVATAR_FRAMES.find(x => x.id === c.frame) || AVATAR_FRAMES[0];
-            const statusObj = STATUS_BADGES.find(x => x.id === c.status) || STATUS_BADGES[0];
-            const nameWrap = document.getElementById('userNameWrap');
-            const avatarWrap = document.getElementById('userAvatarWrap');
+            const user = getCurrentUser(); if (!user) return;
+            const c = getCustomization(); const colorObj = NAME_COLORS.find(x => x.id === c.color) || NAME_COLORS[0]; const frameObj = AVATAR_FRAMES.find(x => x.id === c.frame) || AVATAR_FRAMES[0]; const statusObj = STATUS_BADGES.find(x => x.id === c.status) || STATUS_BADGES[0];
+            const nameWrap = document.getElementById('userNameWrap'); const avatarWrap = document.getElementById('userAvatarWrap');
             if (nameWrap) nameWrap.style.color = colorObj.color === '#ffffff' ? '' : colorObj.color;
             if (avatarWrap) avatarWrap.style.cssText = `overflow: hidden; padding: 0; border: ${frameObj.css};`;
-            const userBtn = document.querySelector('#userArea .user-btn');
-            if (userBtn) userBtn.title = `${user.nickname} — ${statusObj.label}`;
+            const userBtn = document.querySelector('#userArea .user-btn'); if (userBtn) userBtn.title = `${user.nickname} — ${statusObj.label}`;
         }
         function openProfile() {
-            const user = getCurrentUser();
-            if (!user) return;
-            const c = getCustomization();
-            const genderIcon = user.gender === 'male' ? '👨' : '👩';
-            const previewAvatar = document.getElementById('profilePreviewAvatar');
+            const user = getCurrentUser(); if (!user) return;
+            const c = getCustomization(); const genderIcon = user.gender === 'male' ? '👨' : '👩'; const previewAvatar = document.getElementById('profilePreviewAvatar');
             if (user.avatar) previewAvatar.innerHTML = `<img src="${user.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none';this.parentElement.textContent='${genderIcon}';">`;
             else previewAvatar.textContent = genderIcon;
-            document.getElementById('profilePreviewName').textContent = user.nickname;
-            updateXPBar();
-            const colorOpts = document.getElementById('colorOptions');
-            colorOpts.innerHTML = '';
-            NAME_COLORS.forEach(cOpt => {
-                const el = document.createElement('div');
-                el.className = 'color-option' + (cOpt.id === c.color ? ' selected' : '');
-                el.style.background = cOpt.color;
-                el.title = cOpt.label;
-                el.onclick = () => {
-                    document.querySelectorAll('#colorOptions .color-option').forEach(x => x.classList.remove('selected'));
-                    el.classList.add('selected');
-                    const cur = getCustomization(); cur.color = cOpt.id; saveCustomization(cur);
-                    updateProfilePreview();
-                };
-                colorOpts.appendChild(el);
-            });
-            const frameOpts = document.getElementById('frameOptions');
-            frameOpts.innerHTML = '';
-            AVATAR_FRAMES.forEach(fOpt => {
-                const el = document.createElement('button');
-                el.className = 'frame-option' + (fOpt.id === c.frame ? ' selected' : '');
-                el.textContent = fOpt.label;
-                el.onclick = () => {
-                    document.querySelectorAll('#frameOptions .frame-option').forEach(x => x.classList.remove('selected'));
-                    el.classList.add('selected');
-                    const cur = getCustomization(); cur.frame = fOpt.id; saveCustomization(cur);
-                    updateProfilePreview();
-                };
-                frameOpts.appendChild(el);
-            });
-            const statusOpts = document.getElementById('statusOptions');
-            statusOpts.innerHTML = '';
-            STATUS_BADGES.forEach(sOpt => {
-                const el = document.createElement('button');
-                el.className = 'status-option' + (sOpt.id === c.status ? ' selected' : '');
-                el.textContent = sOpt.label;
-                el.onclick = () => {
-                    document.querySelectorAll('#statusOptions .status-option').forEach(x => x.classList.remove('selected'));
-                    el.classList.add('selected');
-                    const cur = getCustomization(); cur.status = sOpt.id; saveCustomization(cur);
-                    updateProfilePreview();
-                };
-                statusOpts.appendChild(el);
-            });
-            renderCursorOptions();
-            renderAchievements();
-            updateProfilePreview();
-            document.getElementById('profileModal').classList.add('active');
+            document.getElementById('profilePreviewName').textContent = user.nickname; updateXPBar();
+            const colorOpts = document.getElementById('colorOptions'); colorOpts.innerHTML = '';
+            NAME_COLORS.forEach(cOpt => { const el = document.createElement('div'); el.className = 'color-option' + (cOpt.id === c.color ? ' selected' : ''); el.style.background = cOpt.color; el.title = cOpt.label; el.onclick = () => { document.querySelectorAll('#colorOptions .color-option').forEach(x => x.classList.remove('selected')); el.classList.add('selected'); const cur = getCustomization(); cur.color = cOpt.id; saveCustomization(cur); updateProfilePreview(); }; colorOpts.appendChild(el); });
+            const frameOpts = document.getElementById('frameOptions'); frameOpts.innerHTML = '';
+            AVATAR_FRAMES.forEach(fOpt => { const el = document.createElement('button'); el.className = 'frame-option' + (fOpt.id === c.frame ? ' selected' : ''); el.textContent = fOpt.label; el.onclick = () => { document.querySelectorAll('#frameOptions .frame-option').forEach(x => x.classList.remove('selected')); el.classList.add('selected'); const cur = getCustomization(); cur.frame = fOpt.id; saveCustomization(cur); updateProfilePreview(); }; frameOpts.appendChild(el); });
+            const statusOpts = document.getElementById('statusOptions'); statusOpts.innerHTML = '';
+            STATUS_BADGES.forEach(sOpt => { const el = document.createElement('button'); el.className = 'status-option' + (sOpt.id === c.status ? ' selected' : ''); el.textContent = sOpt.label; el.onclick = () => { document.querySelectorAll('#statusOptions .status-option').forEach(x => x.classList.remove('selected')); el.classList.add('selected'); const cur = getCustomization(); cur.status = sOpt.id; saveCustomization(cur); updateProfilePreview(); }; statusOpts.appendChild(el); });
+            renderCursorOptions(); renderAchievements(); updateProfilePreview(); document.getElementById('profileModal').classList.add('active');
         }
         function updateProfilePreview() {
-            const c = getCustomization();
-            const colorObj = NAME_COLORS.find(x => x.id === c.color) || NAME_COLORS[0];
-            const frameObj = AVATAR_FRAMES.find(x => x.id === c.frame) || AVATAR_FRAMES[0];
-            const statusObj = STATUS_BADGES.find(x => x.id === c.status) || STATUS_BADGES[0];
-            const nameEl = document.getElementById('profilePreviewName');
-            nameEl.style.color = colorObj.color === '#ffffff' ? 'var(--text)' : colorObj.color;
-            nameEl.style.textShadow = colorObj.color === '#ffffff' ? 'none' : `0 0 15px ${colorObj.color}`;
-            const avatarEl = document.getElementById('profilePreviewAvatar');
-            avatarEl.style.cssText = `width:70px;height:70px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:2rem;overflow:hidden;background:linear-gradient(145deg,var(--panel-2),var(--bg));border:${frameObj.css};`;
+            const c = getCustomization(); const colorObj = NAME_COLORS.find(x => x.id === c.color) || NAME_COLORS[0]; const frameObj = AVATAR_FRAMES.find(x => x.id === c.frame) || AVATAR_FRAMES[0]; const statusObj = STATUS_BADGES.find(x => x.id === c.status) || STATUS_BADGES[0];
+            const nameEl = document.getElementById('profilePreviewName'); nameEl.style.color = colorObj.color === '#ffffff' ? 'var(--text)' : colorObj.color; nameEl.style.textShadow = colorObj.color === '#ffffff' ? 'none' : `0 0 15px ${colorObj.color}`;
+            const avatarEl = document.getElementById('profilePreviewAvatar'); avatarEl.style.cssText = `width:70px;height:70px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:2rem;overflow:hidden;background:linear-gradient(145deg,var(--panel-2),var(--bg));border:${frameObj.css};`;
             document.getElementById('profilePreviewBadge').textContent = statusObj.label;
         }
-        function saveProfileCustomization() {
-            applyUserCustomization();
-            showNotification(currentLang === 'ru' ? 'Сохранено!' : 'Saved!', 'success');
-            closeProfile();
-        }
+        function saveProfileCustomization() { applyUserCustomization(); showNotification(currentLang === 'ru' ? 'Сохранено!' : 'Saved!', 'success'); closeProfile(); }
         function closeProfile() { document.getElementById('profileModal').classList.remove('active'); }
 
-        // ===== ТЕМА =====
-        function toggleTheme() {
-            const isLight = document.body.classList.toggle('theme-light');
-            document.getElementById('themeBtn').textContent = isLight ? '☀️' : '🌙';
-            localStorage.setItem('aki_theme', isLight ? 'light' : 'dark');
-        }
-        function loadTheme() {
-            const saved = localStorage.getItem('aki_theme');
-            if (saved === 'light') {
-                document.body.classList.add('theme-light');
-                document.getElementById('themeBtn').textContent = '☀️';
-            }
-        }
+        // ===== ТЕМА / ПАСХАЛКА / НАВИГАЦИЯ =====
+        function toggleTheme() { const isLight = document.body.classList.toggle('theme-light'); document.getElementById('themeBtn').textContent = isLight ? '☀️' : '🌙'; localStorage.setItem('aki_theme', isLight ? 'light' : 'dark'); }
+        function loadTheme() { const saved = localStorage.getItem('aki_theme'); if (saved === 'light') { document.body.classList.add('theme-light'); document.getElementById('themeBtn').textContent = '☀️'; } }
 
-        // ===== ПАСХАЛКА MRREDSTONE_UA + ЯДЕРКА =====
         function redisoneyEasterEgg() {
-            const modal = document.getElementById('redisoneyModal');
-            if (!modal) return;
-            launchNuke();
-            setTimeout(() => {
-                modal.classList.add('active');
-                addXP(15);
-                unlockAchievement('easter_egg');
-            }, 1200);
+            const modal = document.getElementById('redisoneyModal'); if (!modal) return;
+            launchNuke(); setTimeout(() => { modal.classList.add('active'); addXP(15); unlockAchievement('easter_egg'); }, 1200);
         }
         function closeRedisoney() { const m = document.getElementById('redisoneyModal'); if (m) m.classList.remove('active'); }
         function launchNuke() {
-            document.body.classList.add('nuke-shake');
-            setTimeout(() => document.body.classList.remove('nuke-shake'), 1200);
-            const flash = document.createElement('div'); flash.className = 'nuke-flash'; document.body.appendChild(flash);
-            setTimeout(() => flash.remove(), 1600);
-            const wave = document.createElement('div'); wave.className = 'nuke-shockwave'; document.body.appendChild(wave);
-            setTimeout(() => wave.remove(), 1600);
-            const mushroom = document.createElement('div'); mushroom.className = 'nuke-mushroom'; mushroom.textContent = '☢️'; document.body.appendChild(mushroom);
-            setTimeout(() => mushroom.remove(), 1600);
-            const rad = document.createElement('div'); rad.className = 'nuke-radiation'; document.body.appendChild(rad);
-            setTimeout(() => rad.remove(), 1600);
+            document.body.classList.add('nuke-shake'); setTimeout(() => document.body.classList.remove('nuke-shake'), 1200);
+            const flash = document.createElement('div'); flash.className = 'nuke-flash'; document.body.appendChild(flash); setTimeout(() => flash.remove(), 1600);
+            const wave = document.createElement('div'); wave.className = 'nuke-shockwave'; document.body.appendChild(wave); setTimeout(() => wave.remove(), 1600);
+            const mushroom = document.createElement('div'); mushroom.className = 'nuke-mushroom'; mushroom.textContent = '☢️'; document.body.appendChild(mushroom); setTimeout(() => mushroom.remove(), 1600);
+            const rad = document.createElement('div'); rad.className = 'nuke-radiation'; document.body.appendChild(rad); setTimeout(() => rad.remove(), 1600);
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const siren = ctx.createOscillator(); const sirenGain = ctx.createGain();
-                siren.type = 'sawtooth'; siren.frequency.setValueAtTime(300, ctx.currentTime);
-                siren.frequency.linearRampToValueAtTime(900, ctx.currentTime + 0.6);
-                siren.frequency.linearRampToValueAtTime(300, ctx.currentTime + 1.2);
-                sirenGain.gain.setValueAtTime(0.08, ctx.currentTime);
-                sirenGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.3);
-                siren.connect(sirenGain); sirenGain.connect(ctx.destination); siren.start(); siren.stop(ctx.currentTime + 1.3);
-                const bufferSize = ctx.sampleRate * 1.2;
-                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-                const data = buffer.getChannelData(0);
-                for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 2);
-                const noise = ctx.createBufferSource(); noise.buffer = buffer;
-                const noiseGain = ctx.createGain();
-                noiseGain.gain.setValueAtTime(0.25, ctx.currentTime);
-                noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
-                const filter = ctx.createBiquadFilter(); filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(2000, ctx.currentTime);
-                filter.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 1.2);
-                noise.connect(filter); filter.connect(noiseGain); noiseGain.connect(ctx.destination); noise.start();
-                const boom = ctx.createOscillator(); const boomGain = ctx.createGain();
-                boom.type = 'sine'; boom.frequency.setValueAtTime(60, ctx.currentTime);
-                boom.frequency.exponentialRampToValueAtTime(20, ctx.currentTime + 1.0);
-                boomGain.gain.setValueAtTime(0.3, ctx.currentTime);
-                boomGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.0);
-                boom.connect(boomGain); boomGain.connect(ctx.destination); boom.start(); boom.stop(ctx.currentTime + 1.0);
+                const siren = ctx.createOscillator(); const sirenGain = ctx.createGain(); siren.type = 'sawtooth'; siren.frequency.setValueAtTime(300, ctx.currentTime); siren.frequency.linearRampToValueAtTime(900, ctx.currentTime + 0.6); siren.frequency.linearRampToValueAtTime(300, ctx.currentTime + 1.2); sirenGain.gain.setValueAtTime(0.08, ctx.currentTime); sirenGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.3); siren.connect(sirenGain); sirenGain.connect(ctx.destination); siren.start(); siren.stop(ctx.currentTime + 1.3);
+                const bufferSize = ctx.sampleRate * 1.2; const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate); const data = buffer.getChannelData(0); for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 2);
+                const noise = ctx.createBufferSource(); noise.buffer = buffer; const noiseGain = ctx.createGain(); noiseGain.gain.setValueAtTime(0.25, ctx.currentTime); noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2); const filter = ctx.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.setValueAtTime(2000, ctx.currentTime); filter.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 1.2); noise.connect(filter); filter.connect(noiseGain); noiseGain.connect(ctx.destination); noise.start();
+                const boom = ctx.createOscillator(); const boomGain = ctx.createGain(); boom.type = 'sine'; boom.frequency.setValueAtTime(60, ctx.currentTime); boom.frequency.exponentialRampToValueAtTime(20, ctx.currentTime + 1.0); boomGain.gain.setValueAtTime(0.3, ctx.currentTime); boomGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.0); boom.connect(boomGain); boomGain.connect(ctx.destination); boom.start(); boom.stop(ctx.currentTime + 1.0);
             } catch (err) {}
         }
 
-        // ===== ПРЕДЛОЖЕНИЕ / COOP / ТАЙМЕР =====
         function sendSuggestion() {
-            const textEl = document.getElementById('suggestText');
-            const nameEl = document.getElementById('suggestName');
-            const text = textEl ? textEl.value.trim() : '';
-            const name = nameEl ? nameEl.value.trim() : '';
+            const textEl = document.getElementById('suggestText'); const nameEl = document.getElementById('suggestName'); const text = textEl ? textEl.value.trim() : ''; const name = nameEl ? nameEl.value.trim() : '';
             if (!text || text.length < 5) { showNotification(currentLang === 'ru' ? 'Напиши идею (мин 5)' : 'Write an idea (min 5)', 'error'); return; }
-            const user = getCurrentUser();
-            const all = JSON.parse(localStorage.getItem('aki_suggestions') || '[]');
+            const user = getCurrentUser(); const all = JSON.parse(localStorage.getItem('aki_suggestions') || '[]');
             all.push({ name: name || (user ? user.nickname : 'Аноним'), text, date: new Date().toISOString() });
             localStorage.setItem('aki_suggestions', JSON.stringify(all));
-            if (textEl) textEl.value = '';
-            if (nameEl) nameEl.value = '';
-            addXP(25);
-            incrementDailyTask('idea1', 1);
-            showNotification(currentLang === 'ru' ? '💡 Спасибо! Идея отправлена.' : '💡 Thanks!', 'success');
+            if (textEl) textEl.value = ''; if (nameEl) nameEl.value = ''; addXP(25); incrementDailyTask('idea1', 1);
+            showNotification(currentLang === 'ru' ? '💡 Спасибо!' : '💡 Thanks!', 'success');
         }
-        function sendCoop() {
-            showNotification(currentLang === 'ru' ? 'Сообщение отправлено!' : 'Message sent!', 'success');
-            addXP(15);
-        }
+        function sendCoop() { showNotification(currentLang === 'ru' ? 'Отправлено!' : 'Sent!', 'success'); addXP(15); }
+
         const NEXT_RELEASE = { title: "1 арка 1 сезона", date: "2026-11-01T19:10:00" };
         let timerInterval = null;
         function startTimer() {
-            const titleEl = document.getElementById('timerTitle');
-            if (!titleEl) return;
-            titleEl.innerHTML = `<span>${NEXT_RELEASE.title}</span>`;
+            const titleEl = document.getElementById('timerTitle'); if (!titleEl) return; titleEl.innerHTML = `<span>${NEXT_RELEASE.title}</span>`;
             const target = new Date(NEXT_RELEASE.date).getTime();
             function tick() {
                 let diff = target - Date.now(); if (diff < 0) diff = 0;
-                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                const m = Math.floor((diff / (1000 * 60)) % 60);
-                const s = Math.floor((diff / 1000) % 60);
-                const els = { timerDays: d, timerHours: h, timerMinutes: m, timerSeconds: s };
-                Object.keys(els).forEach(id => { const el = document.getElementById(id); if (el) el.textContent = String(els[id]).padStart(2, '0'); });
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24)); const h = Math.floor((diff / (1000 * 60 * 60)) % 24); const m = Math.floor((diff / (1000 * 60)) % 60); const s = Math.floor((diff / 1000) % 60);
+                const els = { timerDays: d, timerHours: h, timerMinutes: m, timerSeconds: s }; Object.keys(els).forEach(id => { const el = document.getElementById(id); if (el) el.textContent = String(els[id]).padStart(2, '0'); });
             }
             tick(); if (timerInterval) clearInterval(timerInterval); timerInterval = setInterval(tick, 1000);
         }
 
-        // ===== ЦИТАТЫ =====
+        // ===== ЦИТАТЫ / ТАЙМЛАЙН =====
         const QUOTES = [
-            { text: 'Аномалия — это не энергия. Это форма жизни. Древняя. Она была здесь до нас.', author: 'Алиса', author_en: 'Alice' },
-            { text: 'Ты больше не человек. И не монстр. Ты что-то между.', author: 'Алиса', author_en: 'Alice' },
-            { text: 'Они вернулись. И они ищут тебя.', author: 'Зейн', author_en: 'Zane' },
-            { text: 'Эпсилон не спасает мир. Эпсилон исправляет свою ошибку.', author: 'Кай', author_en: 'Kai' },
-            { text: 'Доверяй только себе. Остальные врут.', author: 'Кай', author_en: 'Kai' },
-            { text: 'Я боюсь потерять вас. Всех. Как потеряла других.', author: 'Алиса', author_en: 'Alice' },
-            { text: 'Ты умер и вернулся. Я готов ко всему.', author: 'Кай', author_en: 'Kai' },
-            { text: 'Второй шанс дают только один раз.', author: 'Алиса', author_en: 'Alice' },
-            { text: 'Свидетели не те, кем кажутся.', author: 'Мира', author_en: 'Mira' },
-            { text: 'Омега уже здесь. Просто ты их не видишь.', author: 'Анастасия', author_en: 'Anastasia' },
-            { text: 'Твоя кровь светится. Ты — уникальный случай.', author: 'Вейн', author_en: 'Wayne' },
-            { text: 'Правда — у каждого своя.', author: 'Зейн', author_en: 'Zane' },
-            { text: 'Я не блогер. Я — аномалия в мире контента.', author: 'MrRedstone_UA', author_en: 'MrRedstone_UA' },
-            { text: 'Красный камень — это не блок. Это аномалия.', author: 'MrRedstone_UA', author_en: 'MrRedstone_UA' }
+            { text: 'Аномалия — это не энергия. Это форма жизни. Древняя. Она была здесь до нас.', author: 'Алиса', author_en: 'Alice' }, { text: 'Ты больше не человек. И не монстр. Ты что-то между.', author: 'Алиса', author_en: 'Alice' }, { text: 'Они вернулись. И они ищут тебя.', author: 'Зейн', author_en: 'Zane' },
+            { text: 'Эпсилон не спасает мир. Эпсилон исправляет свою ошибку.', author: 'Кай', author_en: 'Kai' }, { text: 'Доверяй только себе. Остальные врут.', author: 'Кай', author_en: 'Kai' }, { text: 'Я боюсь потерять вас. Всех. Как потеряла других.', author: 'Алиса', author_en: 'Alice' },
+            { text: 'Ты умер и вернулся. Я готов ко всему.', author: 'Кай', author_en: 'Kai' }, { text: 'Второй шанс дают только один раз.', author: 'Алиса', author_en: 'Alice' }, { text: 'Свидетели не те, кем кажутся.', author: 'Мира', author_en: 'Mira' },
+            { text: 'Омега уже здесь. Просто ты их не видишь.', author: 'Анастасия', author_en: 'Anastasia' }, { text: 'Твоя кровь светится. Ты — уникальный случай.', author: 'Вейн', author_en: 'Wayne' }, { text: 'Правда — у каждого своя.', author: 'Зейн', author_en: 'Zane' },
+            { text: 'Я не блогер. Я — аномалия в мире контента.', author: 'MrRedstone_UA', author_en: 'MrRedstone_UA' }, { text: 'Красный камень — это не блок. Это аномалия.', author: 'MrRedstone_UA', author_en: 'MrRedstone_UA' }
         ];
         function renderQuotes() {
-            const grid = document.getElementById('quotesGrid');
-            if (!grid) return;
-            grid.innerHTML = QUOTES.map((q, i) => {
-                const author = currentLang === 'ru' ? q.author : q.author_en;
-                return `<div class="quote-card" onclick="copyQuote(${i})"><button class="quote-copy" onclick="event.stopPropagation(); copyQuote(${i})">📋</button><div class="quote-text">«${q.text}»</div><div class="quote-author">— ${author}</div></div>`;
-            }).join('');
+            const grid = document.getElementById('quotesGrid'); if (!grid) return;
+            grid.innerHTML = QUOTES.map((q, i) => { const author = currentLang === 'ru' ? q.author : q.author_en; return `<div class="quote-card" onclick="copyQuote(${i})"><button class="quote-copy" onclick="event.stopPropagation(); copyQuote(${i})">📋</button><div class="quote-text">«${q.text}»</div><div class="quote-author">— ${author}</div></div>`; }).join('');
         }
         function copyQuote(index) {
-            const q = QUOTES[index];
-            if (!q) return;
+            const q = QUOTES[index]; if (!q) return;
             const text = `«${q.text}» — ${currentLang === 'ru' ? q.author : q.author_en}`;
-            navigator.clipboard.writeText(text).then(() => {
-                showNotification(currentLang === 'ru' ? '📋 Скопировано!' : '📋 Copied!', 'success');
-            }).catch(() => {
-                showNotification(currentLang === 'ru' ? 'Не удалось скопировать' : 'Copy failed', 'error');
-            });
+            navigator.clipboard.writeText(text).then(() => { showNotification(currentLang === 'ru' ? '📋 Скопировано!' : '📋 Copied!', 'success'); }).catch(() => { showNotification(currentLang === 'ru' ? 'Не удалось скопировать' : 'Copy failed', 'error'); });
         }
 
-        // ===== ТАЙМЛАЙН =====
         const TIMELINE_EVENTS = [
-            { date: 'За 30 лет до начала', date_en: '30 years before', title: 'Основание Эпсилона', title_en: 'Epsilon founded', desc: 'Тайная организация создана для борьбы с аномалиями.', desc_en: 'Secret organization created.', emoji: '🏢' },
-            { date: 'Арка 1', date_en: 'Arc 1', title: 'Заражение Аки', title_en: 'Aki infected', desc: 'Аки находит аномалию в заброшенной лаборатории.', desc_en: 'Aki finds an anomaly.', emoji: '🩸' },
-            { date: 'Арка 3', date_en: 'Arc 3', title: 'Смерть и воскрешение', title_en: 'Death', desc: 'Аки умирает и возвращается с рогами.', desc_en: 'Aki dies and returns.', emoji: '💀' },
-            { date: 'Арка 6', date_en: 'Arc 6', title: 'Вирус «Эхо»', title_en: '"Echo" virus', desc: 'Создан вирус, стирающий память.', desc_en: 'Memory-erasing virus created.', emoji: '🦠' },
+            { date: 'За 30 лет до начала', date_en: '30 years before', title: 'Основание Эпсилона', title_en: 'Epsilon founded', desc: 'Тайная организация создана.', desc_en: 'Secret org created.', emoji: '🏢' },
+            { date: 'Арка 1', date_en: 'Arc 1', title: 'Заражение Аки', title_en: 'Aki infected', desc: 'Аки находит аномалию.', desc_en: 'Aki finds anomaly.', emoji: '🩸' },
+            { date: 'Арка 3', date_en: 'Arc 3', title: 'Смерть и воскрешение', title_en: 'Death', desc: 'Аки умирает и возвращается.', desc_en: 'Aki dies and returns.', emoji: '💀' },
+            { date: 'Арка 6', date_en: 'Arc 6', title: 'Вирус «Эхо»', title_en: '"Echo" virus', desc: 'Создан вирус.', desc_en: 'Virus created.', emoji: '🦠' },
             { date: 'Арка 8', date_en: 'Arc 8', title: 'Плен у «Омеги»', title_en: 'Omega captivity', desc: 'Аки пробуждается в плену.', desc_en: 'Aki wakes in captivity.', emoji: '🕳️' },
-            { date: 'Арка 15', date_en: 'Arc 15', title: 'Бой с Реном', title_en: 'Fight with Ren', desc: 'Аки выживает после боя с Реном.', desc_en: 'Aki survives the fight.', emoji: '⚔️' },
+            { date: 'Арка 15', date_en: 'Arc 15', title: 'Бой с Реном', title_en: 'Fight with Ren', desc: 'Аки выживает.', desc_en: 'Aki survives.', emoji: '⚔️' },
             { date: 'Арка 20', date_en: 'Arc 20', title: 'Омега выходит', title_en: 'Omega emerges', desc: 'Анастасия выходит из тени.', desc_en: 'Anastasia emerges.', emoji: '👁️' },
-            { date: 'Арка 25', date_en: 'Arc 25', title: 'Новая эра', title_en: 'New Era', desc: 'Аки уничтожает чип и становится свободным.', desc_en: 'Aki destroys the chip.', emoji: '🌅' },
-            { date: 'Арка 30', date_en: 'Arc 30', title: 'Новый Эпсилон', title_en: 'New Epsilon', desc: 'Аки создаёт новый Эпсилон без чипов.', desc_en: 'Aki creates a new Epsilon.', emoji: '🛡️' },
-            { date: 'Арка 35', date_en: 'Arc 35', title: 'Финальная жертва', title_en: 'Final sacrifice', desc: 'Аки выбирает между миром и собой.', desc_en: 'Aki chooses.', emoji: '💔' }
+            { date: 'Арка 25', date_en: 'Arc 25', title: 'Новая эра', title_en: 'New Era', desc: 'Аки уничтожает чип.', desc_en: 'Aki destroys chip.', emoji: '🌅' },
+            { date: 'Арка 30', date_en: 'Arc 30', title: 'Новый Эпсилон', title_en: 'New Epsilon', desc: 'Аки создаёт новый Эпсилон.', desc_en: 'Aki creates new Epsilon.', emoji: '🛡️' },
+            { date: 'Арка 35', date_en: 'Arc 35', title: 'Финальная жертва', title_en: 'Final sacrifice', desc: 'Аки выбирает.', desc_en: 'Aki chooses.', emoji: '💔' }
         ];
         function renderTimeline() {
-            const wrap = document.getElementById('timelineWrap');
-            if (!wrap) return;
-            wrap.innerHTML = TIMELINE_EVENTS.map(ev => {
-                const date = currentLang === 'ru' ? ev.date : ev.date_en;
-                const title = currentLang === 'ru' ? ev.title : ev.title_en;
-                const desc = currentLang === 'ru' ? ev.desc : ev.desc_en;
-                return `<div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-date">${date}</div><div class="timeline-event-title"><span class="timeline-emoji">${ev.emoji}</span>${title}</div><div class="timeline-event-desc">${desc}</div></div></div>`;
-            }).join('');
+            const wrap = document.getElementById('timelineWrap'); if (!wrap) return;
+            wrap.innerHTML = TIMELINE_EVENTS.map(ev => { const date = currentLang === 'ru' ? ev.date : ev.date_en; const title = currentLang === 'ru' ? ev.title : ev.title_en; const desc = currentLang === 'ru' ? ev.desc : ev.desc_en; return `<div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-date">${date}</div><div class="timeline-event-title"><span class="timeline-emoji">${ev.emoji}</span>${title}</div><div class="timeline-event-desc">${desc}</div></div></div>`; }).join('');
         }
 
-        // ===== ПОЛНЫЙ СПИСОК ПЕРСОНАЖЕЙ =====
+        // ===== ПЕРСОНАЖИ / ЛОР =====
         const CHARACTERS = [
-            { id: 'aki', name: 'Аки', name_en: 'Aki', emoji: '🎭', role: 'Главный герой', role_en: 'Main Character', age: '19 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#ff3333', group: 'main', short: 'Обычный человек. Без силы. С реверсом и опытом.', short_en: 'A regular human.', full: 'Любопытный, упрямый. Всегда проверяет реверс перед миссией. У него нет силы — только опыт и реверс.', full_en: 'Curious, stubborn. No power — only experience and reverse.', tags: ['Главный герой', 'Агент', 'Реверс'], tags_en: ['Main', 'Agent', 'Reverse'] },
-            { id: 'alice', name: 'Алиса', name_en: 'Alice', emoji: '🕶️', role: 'Глава Эпсилона', role_en: 'Epsilon Head', age: '35 лет', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#b388ff', group: 'epsilon', short: 'Холодная, расчётливая. Знает больше, чем говорит.', short_en: 'Cold, calculating.', full: 'Глава Эпсилона. Боится потерять агентов.', full_en: 'Head of Epsilon.', tags: ['Глава', 'Совет', 'Тайна'], tags_en: ['Head', 'Council', 'Secret'] },
-            { id: 'kai', name: 'Кай', name_en: 'Kai', emoji: '🛡️', role: 'Напарник Аки', role_en: 'Partner', age: '22 года', status: 'dead', statusText: '🔴 Погиб', statusText_en: '🔴 Deceased', color: '#4a90e2', group: 'main', short: 'Спокойный, опытный. Наставник Аки.', short_en: 'Calm, experienced mentor.', full: 'Погиб в 3-й арке, защищая Аки.', full_en: 'Died in arc 3 protecting Aki.', tags: ['Напарник', 'Наставник', 'Погиб'], tags_en: ['Partner', 'Mentor', 'Died'] },
-            { id: 'ren', name: 'Рен', name_en: 'Ren', emoji: '🗡️', role: 'Агент-антагонист', role_en: 'Antagonist', age: '28 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#ff6b00', group: 'epsilon', short: 'Жестокий, амбициозный. Считает Аки угрозой.', short_en: 'Cruel, ambitious.', full: 'Агент Эпсилона, который считает Аки угрозой.', full_en: 'Epsilon agent.', tags: ['Антагонист', 'Эпсилон'], tags_en: ['Antagonist', 'Epsilon'] },
-            { id: 'lira', name: 'Лира', name_en: 'Lira', emoji: '🌸', role: 'Напарница Аки', role_en: 'Partner', age: '20 лет', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#e24a90', group: 'main', short: 'Добрая, но сильная.', short_en: 'Kind but strong.', full: 'Новый напарник Аки после исчезновения Эпсилона.', full_en: 'Aki\'s new partner.', tags: ['Напарница', 'Сезон 3'], tags_en: ['Partner', 'Season 3'] },
-            { id: 'wayne', name: 'Доктор Вейн', name_en: 'Dr. Wayne', emoji: '🧪', role: 'Учёный', role_en: 'Scientist', age: '50 лет', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#00bcd4', group: 'epsilon', short: 'Одержим наукой. Хочет использовать Аки.', short_en: 'Obsessed with science.', full: 'Учёный Эпсилона. Позже раскаялся. Свидетель.', full_en: 'Epsilon scientist. Now a Witness.', tags: ['Учёный', 'Свидетели'], tags_en: ['Scientist', 'Witnesses'] },
-            { id: 'tim', name: 'Тим', name_en: 'Tim', emoji: '👦', role: 'Друг Аки', role_en: 'Friend', age: '19 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#4caf50', group: 'main', short: 'Друг детства Аки.', short_en: 'Childhood friend.', full: 'Пошёл с Аки в заброшку в арке 1.', full_en: 'Went with Aki to the abandoned place.', tags: ['Друг', 'Арка 1'], tags_en: ['Friend', 'Arc 1'] },
-            { id: 'rok', name: 'Рок', name_en: 'Rok', emoji: '🧢', role: 'Друг Аки', role_en: 'Friend', age: '20 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#ff9800', group: 'main', short: 'Трусливый, но верный.', short_en: 'Cowardly but loyal.', full: 'Помог вытащить Аки из заброшки.', full_en: 'Helped pull Aki out.', tags: ['Друг', 'Арка 1'], tags_en: ['Friend', 'Arc 1'] },
-            { id: 'scientist', name: 'Учёный-создатель', name_en: 'Creator Scientist', emoji: '☣️', role: 'Создатель «Эхо»', role_en: '"Echo" Creator', age: 'неизвестно', status: 'dead', statusText: '🔴 Погиб', statusText_en: '🔴 Deceased', color: '#9c27b0', group: 'epsilon', short: 'Создал вирус «Эхо». Погиб от него.', short_en: 'Created "Echo".', full: 'Перед смертью передал Аки формулу антивируса.', full_en: 'Gave Aki the antivirus formula.', tags: ['Учёный', 'Вирус'], tags_en: ['Scientist', 'Virus'] },
-            { id: 'holt', name: 'Советник Холт', name_en: 'Councilor Holt', emoji: '⚖️', role: 'Совет Эпсилона', role_en: 'Council', age: '60 лет', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#9e9e9e', group: 'epsilon', short: 'Глава Совета. Безжалостный.', short_en: 'Ruthless Council head.', full: 'Приказал создать «Эхо» и скрыть правду.', full_en: 'Ordered "Echo".', tags: ['Совет', 'Антагонист'], tags_en: ['Council', 'Antagonist'] },
-            { id: 'eva', name: 'Анастасия', name_en: 'Anastasia', emoji: '👁️‍🗨️', role: 'Лидер «Омеги»', role_en: '"Omega" Leader', age: '30 лет', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#000000', group: 'witnesses', short: 'Фанатичка. Хочет очистить мир.', short_en: 'Fanatic.', full: 'Истинный лидер «Омеги». Считает аномалии карой.', full_en: 'True Omega leader.', tags: ['Омега', 'Фанатик'], tags_en: ['Omega', 'Fanatic'] },
-            { id: 'kronos', name: 'Кронос', name_en: 'Kronos', emoji: '👹', role: 'Мутант-разумник', role_en: 'Mutant', age: '35 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#8b0000', group: 'main', short: 'Бывший напарник Кая. Мутант с разумом.', short_en: 'Mutant with a mind.', full: 'Мутировал, но сохранил разум. В 6-м сезоне — союзник Аки.', full_en: 'Mutated but kept his mind.', tags: ['Мутант', 'Сезон 6'], tags_en: ['Mutant', 'Season 6'] },
-            { id: 'markus', name: 'Маркус', name_en: 'Markus', emoji: '🦅', role: 'Лидер Синдиката', role_en: 'Syndicate Leader', age: '40 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#ffd700', group: 'epsilon', short: 'Бывший агент. Основал Синдикат.', short_en: 'Former agent.', full: 'Хочет использовать аномалии для контроля над миром.', full_en: 'Wants to use anomalies.', tags: ['Синдикат', 'Сезон 7'], tags_en: ['Syndicate', 'Season 7'] },
-            { id: 'jess', name: 'Джесс', name_en: 'Jess', emoji: '💻', role: 'Хакер', role_en: 'Hacker', age: '22 года', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#00e5ff', group: 'main', short: 'Хакер. Помогает Аки за защиту.', short_en: 'Hacker.', full: 'Взломала базы Эпсилона.', full_en: 'Hacked Epsilon databases.', tags: ['Хакер', 'Сезон 7'], tags_en: ['Hacker', 'Season 7'] },
-            { id: 'jericho', name: 'Иерихон', name_en: 'Jericho', emoji: '🧬', role: 'Идеальный агент', role_en: 'Perfect Agent', age: '1 год', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#b388ff', group: 'main', short: 'Мутант из ДНК Аки и Кроноса.', short_en: 'Mutant from DNA.', full: 'Считает себя «сыном» Аки и Кроноса.', full_en: 'Considers himself the "son".', tags: ['Мутант', 'Сезон 7'], tags_en: ['Mutant', 'Season 7'] },
-            { id: 'therapist', name: 'Психотерапевт', name_en: 'Therapist', emoji: '🧠', role: 'Маньяк-учёный', role_en: 'Maniac', age: '45 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#d32f2f', group: 'epsilon', short: 'Хочет "вылечить" Аки.', short_en: 'Wants to "cure" Aki.', full: 'Бывший учёный. Убивает агентов "Нового Эпсилона".', full_en: 'Former scientist. Kills agents.', tags: ['Маньяк', 'Сезон 8'], tags_en: ['Maniac', 'Season 8'] },
-            { id: 'agent_zero', name: 'Агент Ноль', name_en: 'Agent Zero', emoji: '🤖', role: 'Идеальный агент', role_en: 'Perfect Agent', age: '25 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#607d8b', group: 'epsilon', short: 'Без эмоций. Противоположность Аки.', short_en: 'No emotions.', full: 'Идеальный агент "Нового Эпсилона".', full_en: 'Perfect agent.', tags: ['Агент', 'Сезон 8'], tags_en: ['Agent', 'Season 8'] },
-            { id: 'vera', name: 'Вера', name_en: 'Vera', emoji: '👧', role: 'Скрытый мутант', role_en: 'Hidden Mutant', age: '20 лет', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#e91e63', group: 'main', short: 'Сестра-близнец Агента Ноль.', short_en: 'Agent Zero\'s twin.', full: 'Сохранила эмоции, но тело мутировало.', full_en: 'Retained emotions.', tags: ['Мутант', 'Сезон 8'], tags_en: ['Mutant', 'Season 8'] },
-            { id: 'crow', name: 'Доктор Кроу', name_en: 'Dr. Crow', emoji: '🐦', role: 'Новый учёный', role_en: 'New Scientist', age: '35 лет', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#00bcd4', group: 'epsilon', short: 'Изучает аномалию в теле Аки.', short_en: 'Studies anomaly.', full: 'Пытается спасти Аки.', full_en: 'Tries to save Aki.', tags: ['Учёный', 'Сезон 8'], tags_en: ['Scientist', 'Season 8'] },
-            { id: 'voice', name: 'Голос', name_en: 'Voice', emoji: '🗣️', role: 'Сущность', role_en: 'Entity', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#9c27b0', group: 'main', short: 'Аномалия в голове Аки.', short_en: 'Anomaly in head.', full: 'Пытается склонить Аки на свою сторону.', full_en: 'Tries to win Aki over.', tags: ['Аномалия', 'Сезон 8'], tags_en: ['Anomaly', 'Season 8'] },
-            { id: 'zein', name: 'Зейн', name_en: 'Zane', emoji: '🕵️', role: 'Лидер Свидетелей', role_en: 'Witnesses Leader', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#5865F2', group: 'witnesses', short: 'Холодный, расчётливый. Врёт Аки.', short_en: 'Cold, calculating.', full: 'Бывший агент Эпсилона.', full_en: 'Former Epsilon agent.', tags: ['Лидер', 'Свидетели', 'Предатель'], tags_en: ['Leader', 'Witnesses', 'Traitor'] },
-            { id: 'mira', name: 'Мира', name_en: 'Mira', emoji: '💉', role: 'Свидетель-медик', role_en: 'Medic', age: 'неизвестно', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#00bfa5', group: 'witnesses', short: 'Добрая, но сломленная.', short_en: 'Kind but broken.', full: 'Не давит на Аки.', full_en: 'Doesn\'t pressure Aki.', tags: ['Свидетели', 'Медик'], tags_en: ['Witnesses', 'Medic'] },
-            { id: 'korv', name: 'Корв', name_en: 'Korv', emoji: '💻', role: 'Свидетель-техник', role_en: 'Technician', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#00e676', group: 'witnesses', short: 'Гений-параноик.', short_en: 'Genius-paranoid.', full: 'Давит на Аки.', full_en: 'Pressures Aki.', tags: ['Свидетели', 'Техник'], tags_en: ['Witnesses', 'Technician'] },
-            { id: 'ten', name: 'Тень', name_en: 'Shadow', emoji: '🌑', role: 'Свидетель-стиратель', role_en: 'Eraser', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#424242', group: 'witnesses', short: 'Молчаливый, опасный.', short_en: 'Silent, dangerous.', full: 'Бывший «стиратель» памяти.', full_en: 'Former memory eraser.', tags: ['Свидетели', 'Стиратель'], tags_en: ['Witnesses', 'Eraser'] }
+            { id: 'aki', name: 'Аки', name_en: 'Aki', emoji: '🎭', role: 'Главный герой', role_en: 'Main Character', age: '19 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#ff3333', group: 'main', short: 'Обычный человек. Без силы.', short_en: 'Regular human.', full: 'Любопытный. У него нет силы — только опыт.', full_en: 'Curious. No power.', tags: ['Главный герой', 'Реверс'], tags_en: ['Main', 'Reverse'] },
+            { id: 'alice', name: 'Алиса', name_en: 'Alice', emoji: '🕶️', role: 'Глава Эпсилона', role_en: 'Epsilon Head', age: '35 лет', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#b388ff', group: 'epsilon', short: 'Холодная, расчётливая.', short_en: 'Cold.', full: 'Глава Эпсилона.', full_en: 'Head of Epsilon.', tags: ['Глава', 'Совет'], tags_en: ['Head', 'Council'] },
+            { id: 'kai', name: 'Кай', name_en: 'Kai', emoji: '🛡️', role: 'Напарник Аки', role_en: 'Partner', age: '22 года', status: 'dead', statusText: '🔴 Погиб', statusText_en: '🔴 Deceased', color: '#4a90e2', group: 'main', short: 'Наставник Аки.', short_en: 'Mentor.', full: 'Погиб в 3-й арке.', full_en: 'Died in arc 3.', tags: ['Напарник', 'Погиб'], tags_en: ['Partner', 'Died'] },
+            { id: 'ren', name: 'Рен', name_en: 'Ren', emoji: '🗡️', role: 'Агент-антагонист', role_en: 'Antagonist', age: '28 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#ff6b00', group: 'epsilon', short: 'Считает Аки угрозой.', short_en: 'Threat.', full: 'Жестокий, амбициозный.', full_en: 'Cruel.', tags: ['Антагонист'], tags_en: ['Antagonist'] },
+            { id: 'lira', name: 'Лира', name_en: 'Lira', emoji: '🌸', role: 'Напарница Аки', role_en: 'Partner', age: '20 лет', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#e24a90', group: 'main', short: 'Добрая, но сильная.', short_en: 'Kind.', full: 'Новый напарник Аки.', full_en: 'New partner.', tags: ['Напарница'], tags_en: ['Partner'] },
+            { id: 'wayne', name: 'Доктор Вейн', name_en: 'Dr. Wayne', emoji: '🧪', role: 'Учёный', role_en: 'Scientist', age: '50 лет', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#00bcd4', group: 'epsilon', short: 'Одержим наукой.', short_en: 'Science.', full: 'Учёный Эпсилона. Свидетель.', full_en: 'Scientist. Witness.', tags: ['Учёный'], tags_en: ['Scientist'] },
+            { id: 'tim', name: 'Тим', name_en: 'Tim', emoji: '👦', role: 'Друг Аки', role_en: 'Friend', age: '19 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#4caf50', group: 'main', short: 'Друг детства Аки.', short_en: 'Friend.', full: 'Пошёл с Аки в заброшку.', full_en: 'Went with Aki.', tags: ['Друг'], tags_en: ['Friend'] },
+            { id: 'rok', name: 'Рок', name_en: 'Rok', emoji: '🧢', role: 'Друг Аки', role_en: 'Friend', age: '20 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#ff9800', group: 'main', short: 'Трусливый, но верный.', short_en: 'Loyal.', full: 'Помог вытащить Аки.', full_en: 'Helped Aki.', tags: ['Друг'], tags_en: ['Friend'] },
+            { id: 'scientist', name: 'Учёный-создатель', name_en: 'Creator Scientist', emoji: '☣️', role: 'Создатель «Эхо»', role_en: '"Echo" Creator', age: 'неизвестно', status: 'dead', statusText: '🔴 Погиб', statusText_en: '🔴 Deceased', color: '#9c27b0', group: 'epsilon', short: 'Создал вирус «Эхо».', short_en: 'Created "Echo".', full: 'Погиб от вируса.', full_en: 'Died from virus.', tags: ['Учёный'], tags_en: ['Scientist'] },
+            { id: 'holt', name: 'Советник Холт', name_en: 'Councilor Holt', emoji: '⚖️', role: 'Совет Эпсилона', role_en: 'Council', age: '60 лет', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#9e9e9e', group: 'epsilon', short: 'Глава Совета.', short_en: 'Council head.', full: 'Приказал скрыть правду.', full_en: 'Ordered cover-up.', tags: ['Совет'], tags_en: ['Council'] },
+            { id: 'eva', name: 'Анастасия', name_en: 'Anastasia', emoji: '👁️‍🗨️', role: 'Лидер «Омеги»', role_en: '"Omega" Leader', age: '30 лет', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#000000', group: 'witnesses', short: 'Фанатичка.', short_en: 'Fanatic.', full: 'Хочет очистить мир.', full_en: 'Wants to cleanse world.', tags: ['Омега'], tags_en: ['Omega'] },
+            { id: 'kronos', name: 'Кронос', name_en: 'Kronos', emoji: '👹', role: 'Мутант-разумник', role_en: 'Mutant', age: '35 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#8b0000', group: 'main', short: 'Мутант с разумом.', short_en: 'Mutant with mind.', full: 'Союзник Аки.', full_en: 'Aki\'s ally.', tags: ['Мутант'], tags_en: ['Mutant'] },
+            { id: 'markus', name: 'Маркус', name_en: 'Markus', emoji: '🦅', role: 'Лидер Синдиката', role_en: 'Syndicate Leader', age: '40 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#ffd700', group: 'epsilon', short: 'Основал Синдикат.', short_en: 'Founded Syndicate.', full: 'Хочет контролировать мир.', full_en: 'Wants control.', tags: ['Синдикат'], tags_en: ['Syndicate'] },
+            { id: 'jess', name: 'Джесс', name_en: 'Jess', emoji: '💻', role: 'Хакер', role_en: 'Hacker', age: '22 года', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#00e5ff', group: 'main', short: 'Хакер.', short_en: 'Hacker.', full: 'Помогает Аки.', full_en: 'Helps Aki.', tags: ['Хакер'], tags_en: ['Hacker'] },
+            { id: 'jericho', name: 'Иерихон', name_en: 'Jericho', emoji: '🧬', role: 'Идеальный агент', role_en: 'Perfect Agent', age: '1 год', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#b388ff', group: 'main', short: 'Мутант из ДНК Аки.', short_en: 'Mutant.', full: 'Считает себя «сыном».', full_en: 'Considers himself "son".', tags: ['Мутант'], tags_en: ['Mutant'] },
+            { id: 'therapist', name: 'Психотерапевт', name_en: 'Therapist', emoji: '🧠', role: 'Маньяк-учёный', role_en: 'Maniac', age: '45 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#d32f2f', group: 'epsilon', short: 'Хочет "вылечить" Аки.', short_en: 'Wants to cure.', full: 'Бывший учёный.', full_en: 'Former scientist.', tags: ['Маньяк'], tags_en: ['Maniac'] },
+            { id: 'agent_zero', name: 'Агент Ноль', name_en: 'Agent Zero', emoji: '🤖', role: 'Идеальный агент', role_en: 'Perfect Agent', age: '25 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#607d8b', group: 'epsilon', short: 'Без эмоций.', short_en: 'No emotions.', full: 'Противоположность Аки.', full_en: 'Opposite of Aki.', tags: ['Агент'], tags_en: ['Agent'] },
+            { id: 'vera', name: 'Вера', name_en: 'Vera', emoji: '👧', role: 'Скрытый мутант', role_en: 'Hidden Mutant', age: '20 лет', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#e91e63', group: 'main', short: 'Сестра Ноль.', short_en: 'Zero\'s sister.', full: 'Сохранила эмоции.', full_en: 'Retained emotions.', tags: ['Мутант'], tags_en: ['Mutant'] },
+            { id: 'crow', name: 'Доктор Кроу', name_en: 'Dr. Crow', emoji: '🐦', role: 'Новый учёный', role_en: 'New Scientist', age: '35 лет', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#00bcd4', group: 'epsilon', short: 'Изучает аномалию.', short_en: 'Studies anomaly.', full: 'Пытается спасти Аки.', full_en: 'Tries to save Aki.', tags: ['Учёный'], tags_en: ['Scientist'] },
+            { id: 'voice', name: 'Голос', name_en: 'Voice', emoji: '🗣️', role: 'Сущность', role_en: 'Entity', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#9c27b0', group: 'main', short: 'Аномалия в голове.', short_en: 'Anomaly in head.', full: 'Пытается склонить Аки.', full_en: 'Tries to win Aki.', tags: ['Аномалия'], tags_en: ['Anomaly'] },
+            { id: 'zein', name: 'Зейн', name_en: 'Zane', emoji: '🕵️', role: 'Лидер Свидетелей', role_en: 'Witnesses Leader', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#5865F2', group: 'witnesses', short: 'Холодный. Врёт Аки.', short_en: 'Lies to Aki.', full: 'Бывший агент Эпсилона.', full_en: 'Former Epsilon agent.', tags: ['Лидер'], tags_en: ['Leader'] },
+            { id: 'mira', name: 'Мира', name_en: 'Mira', emoji: '💉', role: 'Свидетель-медик', role_en: 'Medic', age: 'неизвестно', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#00bfa5', group: 'witnesses', short: 'Добрая, но сломленная.', short_en: 'Kind.', full: 'Не давит на Аки.', full_en: 'Doesn\'t pressure Aki.', tags: ['Медик'], tags_en: ['Medic'] },
+            { id: 'korv', name: 'Корв', name_en: 'Korv', emoji: '💻', role: 'Свидетель-техник', role_en: 'Technician', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#00e676', group: 'witnesses', short: 'Гений-параноик.', short_en: 'Paranoid.', full: 'Давит на Аки.', full_en: 'Pressures Aki.', tags: ['Техник'], tags_en: ['Technician'] },
+            { id: 'ten', name: 'Тень', name_en: 'Shadow', emoji: '🌑', role: 'Свидетель-стиратель', role_en: 'Eraser', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#424242', group: 'witnesses', short: 'Молчаливый.', short_en: 'Silent.', full: 'Бывший «стиратель».', full_en: 'Former eraser.', tags: ['Стиратель'], tags_en: ['Eraser'] }
         ];
         let currentCharFilter = 'all';
         function renderCharacters() {
-            const grid = document.getElementById('charGrid');
-            if (!grid) return;
-            grid.innerHTML = '';
+            const grid = document.getElementById('charGrid'); if (!grid) return; grid.innerHTML = '';
             CHARACTERS.filter(c => currentCharFilter === 'all' || c.group === currentCharFilter).forEach(char => {
-                const card = document.createElement('div');
-                card.className = 'char-card acrylic';
-                card.style.setProperty('--char-color', char.color);
-                const name = currentLang === 'ru' ? char.name : char.name_en;
-                const role = currentLang === 'ru' ? char.role : char.role_en;
-                const desc = currentLang === 'ru' ? char.short : char.short_en;
-                const status = currentLang === 'ru' ? char.statusText : char.statusText_en;
+                const card = document.createElement('div'); card.className = 'char-card acrylic'; card.style.setProperty('--char-color', char.color);
+                const name = currentLang === 'ru' ? char.name : char.name_en; const role = currentLang === 'ru' ? char.role : char.role_en;
+                const desc = currentLang === 'ru' ? char.short : char.short_en; const status = currentLang === 'ru' ? char.statusText : char.statusText_en;
                 card.innerHTML = `<div class="char-avatar">${char.emoji}</div><div class="char-name">${name}</div><div class="char-role">${role}</div><div class="char-desc">${desc}</div><span class="char-badge ${char.status}">${status}</span>`;
-                card.addEventListener('click', () => openCharModal(char));
-                grid.appendChild(card);
+                card.addEventListener('click', () => openCharModal(char)); grid.appendChild(card);
             });
         }
-        function filterChars(group, event) {
-            currentCharFilter = group;
-            document.querySelectorAll('#page-characters .showcase-tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            renderCharacters();
-        }
+        function filterChars(group, event) { currentCharFilter = group; document.querySelectorAll('#page-characters .showcase-tab').forEach(t => t.classList.remove('active')); event.target.classList.add('active'); renderCharacters(); }
         function openCharModal(char) {
-            const modal = document.getElementById('charModal');
-            const content = document.getElementById('charModalContent');
-            const body = document.getElementById('charModalBody');
+            const modal = document.getElementById('charModal'); const content = document.getElementById('charModalContent'); const body = document.getElementById('charModalBody');
             if (!modal || !content || !body) return;
             content.style.setProperty('--char-color', char.color);
-            const name = currentLang === 'ru' ? char.name : char.name_en;
-            const role = currentLang === 'ru' ? char.role : char.role_en;
-            const status = currentLang === 'ru' ? char.statusText : char.statusText_en;
-            const full = currentLang === 'ru' ? char.full : char.full_en;
-            const tags = currentLang === 'ru' ? char.tags : char.tags_en;
+            const name = currentLang === 'ru' ? char.name : char.name_en; const role = currentLang === 'ru' ? char.role : char.role_en; const status = currentLang === 'ru' ? char.statusText : char.statusText_en;
+            const full = currentLang === 'ru' ? char.full : char.full_en; const tags = currentLang === 'ru' ? char.tags : char.tags_en;
             body.innerHTML = `<div class="char-modal-header"><div class="char-modal-avatar">${char.emoji}</div><div class="char-modal-title"><h2>${name}</h2><div class="char-modal-role">${role}${char.age ? ' · ' + char.age : ''}</div></div></div><div class="char-modal-section"><h4>${currentLang === 'ru' ? 'Статус' : 'Status'}</h4><span class="char-badge ${char.status}">${status}</span></div><div class="char-modal-section"><h4>${currentLang === 'ru' ? 'Описание' : 'Description'}</h4><p>${full}</p></div><div class="char-modal-section"><h4>${currentLang === 'ru' ? 'Теги' : 'Tags'}</h4><div class="char-modal-tags">${tags.map(t => `<span class="char-tag">${t}</span>`).join('')}</div></div>`;
             modal.classList.add('active');
         }
         function closeCharModal() { document.getElementById('charModal').classList.remove('active'); }
 
-        // ===== ЛОР =====
         const LORE_SECTIONS = [
-            { icon: '🌍', title: 'Мир', title_en: 'World', body: '<p><strong>Аномалии</strong> — зоны, где реальность искажена. <strong>Монстры</strong> — мутировавшие существа. <strong>Реверс</strong> — оружие Эпсилона.</p>', body_en: '<p><strong>Anomalies</strong> — distorted zones. <strong>Monsters</strong> — mutants. <strong>Reverse</strong> — weapon.</p>' },
-            { icon: '🕶️', title: 'Организация Эпсилон', title_en: 'Epsilon', body: '<p>Тайная организация, основанная 30 лет назад. Форма: чёрный пиджак, белая рубашка, чёрный галстук. Чип в шее. 100+ агентов.</p>', body_en: '<p>Secret organization. 100+ agents.</p>' },
-            { icon: '👁️', title: 'Что такое «Омега»?', title_en: 'Omega', body: '<p>Тайная группировка, которая знает правду об Эпсилоне. Лидер — <strong>Анастасия</strong>.</p>', body_en: '<p>Secret group. Leader — Anastasia.</p>' },
-            { icon: '👥', title: 'Кто такие «Свидетели»?', title_en: 'Witnesses', body: '<p>Бывшие агенты Эпсилона. Зейн, Мира, Корв, Тень, Вейн.</p>', body_en: '<p>Former agents.</p>' },
-            { icon: '🩸', title: 'Сезон 1: «Аномалия»', title_en: 'Season 1', body: '<ul><li>Арка 1: Заброшка, разлом, заражение.</li><li>Арка 2: Допрос Алисы.</li><li>Арка 3: Смерть и воскрешение.</li><li>Арка 4: Конфликт с Реном.</li><li>Арка 5: Потеря силы.</li></ul>', body_en: '<ul><li>Arc 1: Rift.</li><li>Arc 2: Alice.</li><li>Arc 3: Death.</li><li>Arc 4: Ren.</li><li>Arc 5: Loss.</li></ul>' },
-            { icon: '🌙', title: 'Сезон 2: «Тишина»', title_en: 'Season 2', body: '<ul><li>Арка 6: Вирус «Эхо». Печать.</li><li>Арка 7: Тишина перед бурей.</li></ul>', body_en: '<ul><li>Arc 6: "Echo".</li><li>Arc 7: Calm.</li></ul>' },
-            { icon: '🕳️', title: 'Сезон 3: «Без силы»', title_en: 'Season 3', body: '<ul><li>Арка 8: Плен у «Омеги».</li><li>Арка 9: Встреча с Лирой.</li><li>Арка 10: Встреча с Зейном.</li><li>Арка 11: Правда.</li></ul>', body_en: '<ul><li>Arc 8: Captivity.</li><li>Arc 9: Lira.</li><li>Arc 10: Zane.</li><li>Arc 11: Truth.</li></ul>' },
-            { icon: '❓', title: 'Сезон 4: «Свидетели»', title_en: 'Season 4', body: '<ul><li>Арка 12: Свидетели.</li><li>Арка 13: Эпсилон ищет.</li><li>Арка 14: Проект Эхо.</li><li>Арка 15: Бой с Реном.</li></ul>', body_en: '<ul><li>Arc 12: Witnesses.</li><li>Arc 13: Search.</li><li>Arc 14: Project Echo.</li><li>Arc 15: Fight.</li></ul>' },
-            { icon: '💥', title: 'Сезон 5: «Война»', title_en: 'Season 5', body: '<ul><li>Арка 16: Охота.</li><li>Арка 17: Союзники.</li><li>Арка 18: Тайна Алисы.</li><li>Арка 19: Война.</li><li>Арка 20: Омега.</li></ul>', body_en: '<ul><li>Arc 16: Hunt.</li><li>Arc 17: Allies.</li><li>Arc 18: Secret.</li><li>Arc 19: War.</li><li>Arc 20: Omega.</li></ul>' },
-            { icon: '🌅', title: 'Сезон 6: «Новая эра»', title_en: 'Season 6', body: '<ul><li>Арка 21: Побег.</li><li>Арка 22: Совет.</li><li>Арка 23: Осада.</li><li>Арка 24: Кронос.</li><li>Арка 25: Свобода.</li></ul>', body_en: '<ul><li>Arc 21: Escape.</li><li>Arc 22: Council.</li><li>Arc 23: Siege.</li><li>Arc 24: Kronos.</li><li>Arc 25: Freedom.</li></ul>' },
-            { icon: '🏚️', title: 'Сезон 7: «Эхо прошлого»', title_en: 'Season 7', body: '<ul><li>Арка 26: Руины.</li><li>Арка 27: Маркус.</li><li>Арка 28: Иерихон.</li><li>Арка 29: Джесс.</li><li>Арка 30: Новый Эпсилон.</li></ul>', body_en: '<ul><li>Arc 26: Ruins.</li><li>Arc 27: Markus.</li><li>Arc 28: Jericho.</li><li>Arc 29: Jess.</li><li>Arc 30: New Epsilon.</li></ul>' },
-            { icon: '🪞', title: 'Сезон 8: «Тёмное отражение»', title_en: 'Season 8', body: '<ul><li>Арка 31: Тёмное отражение.</li><li>Арка 32: Кукловод.</li><li>Арка 33: Голоса.</li><li>Арка 34: Близнецы.</li><li>Арка 35: Финальная жертва.</li></ul>', body_en: '<ul><li>Arc 31: Dark.</li><li>Arc 32: Puppeteer.</li><li>Arc 33: Voices.</li><li>Arc 34: Twins.</li><li>Arc 35: Final.</li></ul>' }
+            { icon: '🌍', title: 'Мир', title_en: 'World', body: '<p><strong>Аномалии</strong> — зоны, где реальность искажена. <strong>Монстры</strong> — мутировавшие существа. <strong>Реверс</strong> — оружие Эпсилона.</p>', body_en: '<p><strong>Anomalies</strong> — distorted zones.</p>' },
+            { icon: '🕶️', title: 'Организация Эпсилон', title_en: 'Epsilon', body: '<p>Тайная организация, основанная 30 лет назад. Чип в шее. 100+ агентов.</p>', body_en: '<p>Secret organization. 100+ agents.</p>' },
+            { icon: '👁️', title: 'Что такое «Омега»?', title_en: 'Omega', body: '<p>Тайная группировка. Лидер — <strong>Анастасия</strong>.</p>', body_en: '<p>Secret group. Leader — Anastasia.</p>' },
+            { icon: '👥', title: 'Кто такие «Свидетели»?', title_en: 'Witnesses', body: '<p>Бывшие агенты. Зейн, Мира, Корв, Тень, Вейн.</p>', body_en: '<p>Former agents.</p>' },
+            { icon: '🩸', title: 'Сезон 1: «Аномалия»', title_en: 'Season 1', body: '<ul><li>Арка 1: Заражение.</li><li>Арка 3: Смерть и воскрешение.</li><li>Арка 5: Потеря силы.</li></ul>', body_en: '<ul><li>Arc 1: Infection.</li><li>Arc 3: Death.</li><li>Arc 5: Loss.</li></ul>' },
+            { icon: '🌙', title: 'Сезон 2: «Тишина»', title_en: 'Season 2', body: '<ul><li>Арка 6: Вирус «Эхо».</li><li>Арка 7: Тишина.</li></ul>', body_en: '<ul><li>Arc 6: "Echo".</li><li>Arc 7: Calm.</li></ul>' },
+            { icon: '🕳️', title: 'Сезон 3: «Без силы»', title_en: 'Season 3', body: '<ul><li>Арка 8: Плен.</li><li>Арка 11: Правда.</li></ul>', body_en: '<ul><li>Arc 8: Captivity.</li><li>Arc 11: Truth.</li></ul>' },
+            { icon: '❓', title: 'Сезон 4: «Свидетели»', title_en: 'Season 4', body: '<ul><li>Арка 12: Встреча.</li><li>Арка 15: Бой с Реном.</li></ul>', body_en: '<ul><li>Arc 12: Meeting.</li><li>Arc 15: Fight.</li></ul>' },
+            { icon: '💥', title: 'Сезон 5: «Война»', title_en: 'Season 5', body: '<ul><li>Арка 16: Охота.</li><li>Арка 20: Омега.</li></ul>', body_en: '<ul><li>Arc 16: Hunt.</li><li>Arc 20: Omega.</li></ul>' },
+            { icon: '🌅', title: 'Сезон 6: «Новая эра»', title_en: 'Season 6', body: '<ul><li>Арка 21: Побег.</li><li>Арка 25: Свобода.</li></ul>', body_en: '<ul><li>Arc 21: Escape.</li><li>Arc 25: Freedom.</li></ul>' },
+            { icon: '🏚️', title: 'Сезон 7: «Эхо прошлого»', title_en: 'Season 7', body: '<ul><li>Арка 26: Руины.</li><li>Арка 30: Новый Эпсилон.</li></ul>', body_en: '<ul><li>Arc 26: Ruins.</li><li>Arc 30: New Epsilon.</li></ul>' },
+            { icon: '🪞', title: 'Сезон 8: «Тёмное отражение»', title_en: 'Season 8', body: '<ul><li>Арка 31: Тёмное отражение.</li><li>Арка 35: Финальная жертва.</li></ul>', body_en: '<ul><li>Arc 31: Dark.</li><li>Arc 35: Final.</li></ul>' }
         ];
         function renderLore() {
-            const wrapper = document.getElementById('loreAccordion');
-            if (!wrapper) return;
-            wrapper.innerHTML = '';
+            const wrapper = document.getElementById('loreAccordion'); if (!wrapper) return; wrapper.innerHTML = '';
             LORE_SECTIONS.forEach(section => {
-                const item = document.createElement('div');
-                item.className = 'lore-item acrylic';
-                const title = currentLang === 'ru' ? section.title : section.title_en;
-                const body = currentLang === 'ru' ? section.body : section.body_en;
+                const item = document.createElement('div'); item.className = 'lore-item acrylic';
+                const title = currentLang === 'ru' ? section.title : section.title_en; const body = currentLang === 'ru' ? section.body : section.body_en;
                 item.innerHTML = `<div class="lore-header"><div class="lore-header-left"><div class="lore-icon">${section.icon}</div><div class="lore-header-title">${title}</div></div><div class="lore-header-icon">▼</div></div><div class="lore-body"><div class="lore-body-inner">${body}</div></div>`;
                 wrapper.appendChild(item);
-                item.querySelector('.lore-header').addEventListener('click', () => {
-                    const isActive = item.classList.contains('active');
-                    document.querySelectorAll('.lore-item').forEach(i => i.classList.remove('active'));
-                    if (!isActive) item.classList.add('active');
-                });
+                item.querySelector('.lore-header').addEventListener('click', () => { const isActive = item.classList.contains('active'); document.querySelectorAll('.lore-item').forEach(i => i.classList.remove('active')); if (!isActive) item.classList.add('active'); });
             });
         }
 
-        // ===== НАВИГАЦИЯ =====
         function showPage(page) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            const targetPage = document.getElementById('page-' + page);
-            if (targetPage) targetPage.classList.add('active');
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); const targetPage = document.getElementById('page-' + page); if (targetPage) targetPage.classList.add('active');
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             const pageMap = { home: 0, characters: 1, lore: 2, shop: 3, seasons: 4, music: 5, quotes: 6, coop: 7, about: 8 };
-            const navBtns = document.querySelectorAll('.nav-btn');
-            if (navBtns[pageMap[page]]) navBtns[pageMap[page]].classList.add('active');
+            const navBtns = document.querySelectorAll('.nav-btn'); if (navBtns[pageMap[page]]) navBtns[pageMap[page]].classList.add('active');
             document.querySelectorAll('.bottom-nav-item').forEach(btn => btn.classList.toggle('active', btn.dataset.page === page));
-            if (page === 'shop') { renderShop(); renderDealBanner(); }
-            if (page === 'seasons') renderSeasons();
-            if (page === 'characters') renderCharacters();
-            if (page === 'lore') renderLore();
-            if (page === 'quotes') renderQuotes();
-            if (page === 'home') { renderAllEpisodes(); renderContinue(); renderWatchlist(); renderTimeline(); }
+            if (page === 'shop') { renderShop(); renderDealBanner(); } if (page === 'seasons') renderSeasons(); if (page === 'characters') renderCharacters(); if (page === 'lore') renderLore(); if (page === 'quotes') renderQuotes(); if (page === 'home') { renderAllEpisodes(); renderContinue(); renderWatchlist(); renderTimeline(); }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ===== ESC / ИНИЦИАЛИЗАЦИЯ =====
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeAuth(); closePromoModal(); closeAuthRequired(); closeSearch(); closeCart();
-                closeEpisode(); closeCharModal(); closeProfile(); closeRedisoney(); closeLeaderboard(); closeCheckout();
-            }
+            if (e.key === 'Escape') { closeAuth(); closePromoModal(); closeAuthRequired(); closeSearch(); closeCart(); closeEpisode(); closeCharModal(); closeProfile(); closeRedisoney(); closeLeaderboard(); closeCheckout(); }
             if (e.key === 'Enter' && document.activeElement.id === 'promoInput') applyPromo();
         });
 
-        loadTheme();
-        initLoadingScreen();
-        initAnimatedBg();
-        startTimer();
-        updateUserArea();
-        applyLang();
-        renderAllEpisodes();
-        renderContinue();
-        renderWatchlist();
-        renderShop();
-        renderSeasons();
-        renderDailyTasks();
-        updateDailyBonusButton();
-        renderAchievements();
-        renderWheelLabels();
-        updateWheelButton();
-        applySeason();
-        resetDuelUI();
-        renderFriends();
-        switchGameMode('normal');
-        updateGameRecord();
-        updateCartCount();
-        applyCursorClass();
-        updateCoinsDisplay();
-        renderDealBanner();
-        renderQuotes();
-        renderTimeline();
-        setInterval(updateDailyBonusButton, 60000);
-        setInterval(updateWheelButton, 60000);
-        setInterval(renderDealBanner, 60000);
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        loadTheme(); initLoadingScreen(); initAnimatedBg(); startTimer(); updateUserArea(); applyLang(); renderAllEpisodes(); renderContinue(); renderWatchlist(); renderShop(); renderSeasons(); renderDailyTasks(); updateDailyBonusButton(); renderAchievements(); renderWheelLabels(); updateWheelButton(); applySeason(); resetDuelUI(); renderFriends(); switchGameMode('normal'); updateGameRecord(); updateCartCount(); applyCursorClass(); updateCoinsDisplay(); renderDealBanner(); renderQuotes(); renderTimeline();
+        setInterval(updateDailyBonusButton, 60000); setInterval(updateWheelButton, 60000); setInterval(renderDealBanner, 60000);
     </script>
 </body>
 </html>
