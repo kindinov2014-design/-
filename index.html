@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0a0a0f">
     <title>Аки и Эпсилон | Официальная платформа</title>
     <style>
-        /* ... (все ваши стили остаются без изменений до блока с профилем) ... */
+        /* ... (все ваши стили остаются без изменений) ... */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         :root {
@@ -1280,17 +1280,251 @@ body, body.theme-light { background:#080809 !important; background-image:radial-
     </div>
 
     <!-- ... (остальные страницы: модалки, футер, скрипты) ... -->
-    <!-- ВАЖНО: Все остальные части файла остаются как в исходнике, за исключением изменений в скриптах ниже -->
     <script>
-    // ... (ваш исходный JS код) ...
     // ============================================================
-    // ИЗМЕНЕНИЯ ДЛЯ ВЫПОЛНЕНИЯ ЗАПРОСА
+    // ИСПРАВЛЕННЫЙ СКРИПТ - ГЛАВНОЕ
     // ============================================================
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. СКРЫТИЕ ЭКРАНА ЗАГРУЗКИ
+        const loadingScreen = document.getElementById('loadingScreen');
+        const loadingBarFill = document.getElementById('loadingBarFill');
+        const loadingText = document.getElementById('loadingText');
+        
+        if (loadingScreen) {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 20;
+                if (progress > 100) progress = 100;
+                if (loadingBarFill) loadingBarFill.style.width = progress + '%';
+                if (loadingText) loadingText.textContent = 'Загрузка... ' + Math.round(progress) + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loadingScreen.classList.add('hidden');
+                    }, 300);
+                }
+            }, 100);
+        }
 
-    // --- 1. УЛУЧШЕНИЕ ИГРЫ "РЕВЕРС" (ДОБАВЛЕНИЕ УРОВНЕЙ) ---
+        // 2. ИНИЦИАЛИЗАЦИЯ ТАЙМЕРА (ЗАГЛУШКА)
+        function updateTimer() {
+            const now = new Date();
+            // Устанавливаем дату релиза (например, через 10 дней от текущей)
+            const releaseDate = new Date();
+            releaseDate.setDate(now.getDate() + 10);
+            releaseDate.setHours(12, 0, 0, 0);
+            
+            const diff = releaseDate - now;
+            if (diff <= 0) return;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            const daysEl = document.getElementById('timerDays');
+            const hoursEl = document.getElementById('timerHours');
+            const minutesEl = document.getElementById('timerMinutes');
+            const secondsEl = document.getElementById('timerSeconds');
+            
+            if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+            if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+            if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+            if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+        }
+        updateTimer();
+        setInterval(updateTimer, 1000);
+
+        // 3. ИНИЦИАЛИЗАЦИЯ РЕКОРДОВ
+        const gameRecord = localStorage.getItem('gameRecord') || 0;
+        const frenzyRecord = localStorage.getItem('frenzyRecord') || 0;
+        const gameRecordEl = document.getElementById('gameRecord');
+        const frenzyRecordEl = document.getElementById('frenzyRecord');
+        if (gameRecordEl) gameRecordEl.textContent = gameRecord;
+        if (frenzyRecordEl) frenzyRecordEl.textContent = frenzyRecord;
+    });
+
+    // ============================================================
+    // ЗАГЛУШКИ ДЛЯ ВСЕХ ФУНКЦИЙ, ЧТОБЫ НЕ БЫЛО ОШИБОК
+    // ============================================================
+    window.showPage = function(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        const page = document.getElementById('page-' + pageId);
+        if (page) page.classList.add('active');
+        
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        const navBtn = document.querySelector(`.nav-btn[onclick*="${pageId}"]`);
+        if (navBtn) navBtn.classList.add('active');
+    };
+
+    window.toggleTheme = function() {
+        document.body.classList.toggle('theme-light');
+    };
+
+    window.openAuth = function(mode) {
+        // Создаём модалку, если её нет
+        let modal = document.getElementById('authModal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'authModal';
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal">
+                    <button class="modal-close" onclick="closeModal('authModal')">&times;</button>
+                    <h2>Вход</h2>
+                    <div class="form-group"><label>Логин</label><input type="text" id="authLogin"></div>
+                    <div class="form-group"><label>Пароль</label><input type="password" id="authPassword"></div>
+                    <button class="modal-btn" onclick="closeModal('authModal'); showNotification('✅ Вход выполнен (демо)'); localStorage.setItem('isLoggedIn','true');">Войти</button>
+                    <div class="modal-switch"><a onclick="closeModal('authModal'); showNotification('Регистрация (демо)')">Зарегистрироваться</a></div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        modal.classList.add('active');
+    };
+
+    window.openCart = function() {
+        showNotification('🛒 Корзина пуста (демо)');
+    };
+
+    window.applyPromo = function() {
+        const input = document.getElementById('promoInput');
+        if (input && input.value.trim()) {
+            showNotification('🎟 Промокод применён! (демо)');
+            input.value = '';
+        } else {
+            showNotification('Введите промокод', 'error');
+        }
+    };
+
+    window.getPrediction = function() {
+        const predictions = [
+            'Сегодня тебя ждёт неожиданная встреча.',
+            'Твоя сила — в спокойствии.',
+            'Остерегайся зеркал. Они знают больше.',
+            'Аномалия уже рядом.',
+            'Ты найдёшь то, что потерял.',
+            'Не доверяй тишине.'
+        ];
+        const el = document.getElementById('predictionText');
+        if (el) el.textContent = predictions[Math.floor(Math.random() * predictions.length)];
+    };
+
+    window.showMapInfo = function(loc) {
+        const info = document.getElementById('mapInfo');
+        if (info) {
+            const data = {
+                lab: 'Лаборатория — место, где всё началось.',
+                base: 'Штаб Эпсилона — центр управления.',
+                sector: 'Старый сектор — заброшенные руины.'
+            };
+            info.innerHTML = `<strong>${loc}</strong><p>${data[loc] || 'Информация засекречена.'}</p>`;
+        }
+    };
+
+    window.showShowcase = function(type, event) {
+        document.querySelectorAll('.showcase-content').forEach(el => el.classList.remove('active'));
+        const el = document.getElementById('showcase-' + type);
+        if (el) el.classList.add('active');
+        document.querySelectorAll('.showcase-tab').forEach(el => el.classList.remove('active'));
+        if (event && event.target) event.target.classList.add('active');
+    };
+
+    window.filterChars = function(type, event) {
+        // Заглушка
+        document.querySelectorAll('.char-card').forEach(card => {
+            if (type === 'all') card.style.display = 'block';
+            else card.style.display = card.dataset.type === type ? 'block' : 'none';
+        });
+        document.querySelectorAll('.showcase-tab').forEach(el => el.classList.remove('active'));
+        if (event && event.target) event.target.classList.add('active');
+    };
+
+    window.addFriend = function() {
+        const input = document.getElementById('friendNickInput');
+        if (input && input.value.trim()) {
+            const list = document.getElementById('friendsList');
+            if (list) {
+                const card = document.createElement('div');
+                card.className = 'friend-card';
+                card.innerHTML = `
+                    <div class="friend-avatar">👤</div>
+                    <div class="friend-info"><div class="friend-name">${input.value}</div><div class="friend-status">Добавлен</div></div>
+                    <div class="friend-record">0</div>
+                    <button class="friend-remove" onclick="this.parentElement.remove()">✕</button>
+                `;
+                list.appendChild(card);
+            }
+            input.value = '';
+            showNotification('👥 Друг добавлен!');
+        }
+    };
+
+    // --- ДУЭЛЬ ---
+    let duelDifficulty = 'easy';
+    let duelPlayerScore = 0;
+    let duelBotScore = 0;
+    let duelTimer = null;
+    let duelTimeLeft = 10;
+    let duelActive = false;
+
+    window.selectDuelDifficulty = function(diff) {
+        duelDifficulty = diff;
+        document.querySelectorAll('.duel-diff-btn').forEach(el => el.classList.remove('active'));
+        const btn = document.querySelector(`.duel-diff-btn[data-diff="${diff}"]`);
+        if (btn) btn.classList.add('active');
+    };
+
+    window.duelClick = function() {
+        if (!duelActive) {
+            // Старт
+            duelActive = true;
+            duelPlayerScore = 0;
+            duelBotScore = 0;
+            duelTimeLeft = 10;
+            document.getElementById('duelPlayerScore').textContent = '0';
+            document.getElementById('duelBotScore').textContent = '0';
+            document.getElementById('duelPlayerBar').style.width = '0%';
+            document.getElementById('duelBotBar').style.width = '0%';
+            document.getElementById('duelResult').textContent = '';
+            document.getElementById('duelClickBtn').textContent = 'ЖМИ!';
+            
+            duelTimer = setInterval(() => {
+                duelTimeLeft -= 0.1;
+                document.getElementById('duelTimer').textContent = duelTimeLeft.toFixed(1) + ' сек';
+                
+                // Бот кликает случайно
+                if (Math.random() < 0.3) {
+                    duelBotScore++;
+                    document.getElementById('duelBotScore').textContent = duelBotScore;
+                    const maxScore = Math.max(duelPlayerScore, duelBotScore, 1);
+                    document.getElementById('duelPlayerBar').style.width = (duelPlayerScore / maxScore * 100) + '%';
+                    document.getElementById('duelBotBar').style.width = (duelBotScore / maxScore * 100) + '%';
+                }
+                
+                if (duelTimeLeft <= 0) {
+                    clearInterval(duelTimer);
+                    duelActive = false;
+                    document.getElementById('duelClickBtn').textContent = 'ЖМИ!';
+                    const resultEl = document.getElementById('duelResult');
+                    if (duelPlayerScore > duelBotScore) resultEl.textContent = '🎉 Победа!';
+                    else if (duelPlayerScore < duelBotScore) resultEl.textContent = '💀 Поражение...';
+                    else resultEl.textContent = '🤝 Ничья!';
+                }
+            }, 100);
+        } else {
+            // Клик
+            duelPlayerScore++;
+            document.getElementById('duelPlayerScore').textContent = duelPlayerScore;
+            const maxScore = Math.max(duelPlayerScore, duelBotScore, 1);
+            document.getElementById('duelPlayerBar').style.width = (duelPlayerScore / maxScore * 100) + '%';
+        }
+    };
+
+    // --- РЕВЕРС ---
     let gameLevel = 1;
     let gameLevelDisplay = document.getElementById('gameLevelDisplay');
-    // Переменные для управления уровнями
     let gameSpawnInterval = null;
     let gameCountdownInterval = null;
     let gameTimeLeft = 40;
@@ -1298,20 +1532,30 @@ body, body.theme-light { background:#080809 !important; background-image:radial-
     let gameCombo = 0;
     let currentGameMode = 'normal';
 
-    function startGame() {
-        if (gameSpawnInterval || gameCountdownInterval) return; // Prevent double start
+    window.switchGameMode = function(mode) {
+        currentGameMode = mode;
+        document.querySelectorAll('.game-mode-tab').forEach(el => el.classList.remove('active'));
+        if (mode === 'normal') document.getElementById('modeNormal').classList.add('active');
+        else document.getElementById('modeBoss').classList.add('active');
+        if (gameSpawnInterval) {
+            clearInterval(gameSpawnInterval);
+            scheduleSpawn();
+        }
+    };
+
+    window.startGame = function() {
+        if (gameSpawnInterval || gameCountdownInterval) return;
         gameScore = 0;
         gameLevel = 1;
         gameTimeLeft = 40;
         gameCombo = 0;
-        gameLevelDisplay.textContent = gameLevel;
+        if (gameLevelDisplay) gameLevelDisplay.textContent = gameLevel;
         document.getElementById('gameScore').textContent = gameScore;
         document.getElementById('gameTime').textContent = gameTimeLeft;
         document.getElementById('gameOverlay').style.display = 'none';
         document.getElementById('gameCombo').classList.remove('active');
         document.querySelectorAll('.game-target, .boss-target').forEach(el => el.remove());
 
-        // Запуск таймера
         gameCountdownInterval = setInterval(() => {
             gameTimeLeft--;
             document.getElementById('gameTime').textContent = gameTimeLeft;
@@ -1320,19 +1564,15 @@ body, body.theme-light { background:#080809 !important; background-image:radial-
             }
         }, 1000);
 
-        // Запуск спавна целей
         spawnGameTarget();
         scheduleSpawn();
-    }
+    };
 
     function scheduleSpawn() {
         if (gameSpawnInterval) clearInterval(gameSpawnInterval);
         if (gameTimeLeft <= 0) return;
-
-        // Логика уровней: чем выше уровень, тем чаще спавн
         let baseSpawnTime = currentGameMode === 'boss' ? 1000 : 800;
-        let spawnTime = Math.max(200, baseSpawnTime - (gameLevel * 50)); // Уменьшаем интервал с уровнем, но не менее 200мс
-
+        let spawnTime = Math.max(200, baseSpawnTime - (gameLevel * 50));
         gameSpawnInterval = setInterval(() => {
             if (gameTimeLeft <= 0) return;
             spawnGameTarget();
@@ -1344,42 +1584,35 @@ body, body.theme-light { background:#080809 !important; background-image:radial-
         if (!gameArea) return;
         const target = document.createElement('div');
         let isBoss = false;
-        if (currentGameMode === 'boss' && Math.random() < 0.2) { // 20% шанс босса в режиме босс-раш
+        if (currentGameMode === 'boss' && Math.random() < 0.2) {
             target.className = 'boss-target';
             target.textContent = '👹';
             isBoss = true;
-        } else if (Math.random() < 0.3) { // 30% шанс быстрой цели
+        } else if (Math.random() < 0.3) {
             target.className = 'game-target fast';
             target.textContent = '⚡';
         } else {
             target.className = 'game-target';
             target.textContent = '💀';
         }
-
-        // Случайная позиция
         const maxX = gameArea.clientWidth - (isBoss ? 70 : 40);
         const maxY = gameArea.clientHeight - (isBoss ? 70 : 40);
         target.style.left = Math.random() * maxX + 'px';
         target.style.top = Math.random() * maxY + 'px';
         target.style.position = 'absolute';
 
-        // Обработчик клика
         target.onclick = (e) => {
             e.stopPropagation();
             let points = 1;
-            if (isBoss) {
-                points = 10;
-            } else if (target.classList.contains('fast')) {
-                points = 3;
-            }
+            if (isBoss) points = 10;
+            else if (target.classList.contains('fast')) points = 3;
             gameScore += points;
             gameCombo++;
-            // Логика уровней: каждые 5 целей повышают уровень
             if (gameCombo % 5 === 0) {
                 gameLevel++;
-                gameLevelDisplay.textContent = gameLevel;
+                if (gameLevelDisplay) gameLevelDisplay.textContent = gameLevel;
                 showNotification(`🔥 Уровень ${gameLevel}! Цели появляются быстрее!`);
-                scheduleSpawn(); // Перезапускаем спавн с новым интервалом
+                scheduleSpawn();
             }
             document.getElementById('gameScore').textContent = gameScore;
             document.getElementById('gameCombo').textContent = `x${gameCombo} КОМБО!`;
@@ -1388,6 +1621,15 @@ body, body.theme-light { background:#080809 !important; background-image:radial-
             target.remove();
         };
         gameArea.appendChild(target);
+    }
+
+    function createSplatter(x, y) {
+        const splatter = document.createElement('div');
+        splatter.className = 'splatter';
+        splatter.style.left = (x - 5) + 'px';
+        splatter.style.top = (y - 5) + 'px';
+        document.body.appendChild(splatter);
+        setTimeout(() => splatter.remove(), 500);
     }
 
     function endGame() {
@@ -1404,7 +1646,6 @@ body, body.theme-light { background:#080809 !important; background-image:radial-
             <button class="game-start-btn" onclick="startGame()">Играть снова</button>
             <button class="leaderboard-btn" onclick="openLeaderboard()">🏆 Топ рекордов</button>
         `;
-        // Сохранение рекорда
         let record = parseInt(localStorage.getItem('gameRecord')) || 0;
         if (gameScore > record) {
             localStorage.setItem('gameRecord', gameScore);
@@ -1412,7 +1653,7 @@ body, body.theme-light { background:#080809 !important; background-image:radial-
         }
     }
 
-    // --- 2. НОВАЯ МИНИ-ИГРА "КЛИК-ФРЕНЗИ" ---
+    // --- КЛИК-ФРЕНЗИ ---
     let frenzyScore = 0;
     let frenzyTimeLeft = 5.0;
     let frenzyInterval = null;
@@ -1420,7 +1661,7 @@ body, body.theme-light { background:#080809 !important; background-image:radial-
     let frenzyRecord = parseInt(localStorage.getItem('frenzyRecord')) || 0;
     document.getElementById('frenzyRecord').textContent = frenzyRecord;
 
-    function startFrenzy() {
+    window.startFrenzy = function() {
         if (frenzyActive) return;
         frenzyActive = true;
         frenzyScore = 0;
@@ -1452,23 +1693,112 @@ body, body.theme-light { background:#080809 !important; background-image:radial-
                 }
             }
         }, 100);
-    }
+    };
 
-    function frenzyClick() {
+    window.frenzyClick = function() {
         if (!frenzyActive) return;
         frenzyScore++;
         document.getElementById('frenzyScore').textContent = frenzyScore;
-    }
+    };
 
-    // --- 3. УЛУЧШЕНИЕ ПРОФИЛЯ ---
-    // Этот код будет работать, если у вас уже есть функция открытия профиля.
-    // Я добавлю улучшения в HTML-структуру модального окна профиля.
-    // Поскольку в исходном файле нет полной реализации профиля,
-    // я создам его структуру и логику для демонстрации.
+    // --- ЛИДЕРБОРД (ЗАГЛУШКА) ---
+    window.openLeaderboard = function() {
+        showNotification('🏆 Таблица рекордов (демо)');
+    };
 
-    // Функция для открытия профиля (если она не была определена)
-    function openProfile() {
-        // Проверяем, существует ли уже модальное окно профиля, если нет - создаём
+    // --- АРХИВ, ТЕРМИНАЛ, МИССИИ, ФРАКЦИИ ---
+    window.revealFile = function(btn, text) {
+        const secret = btn.parentElement.querySelector('.file-secret');
+        if (secret) {
+            secret.hidden = false;
+            secret.textContent = text;
+            btn.style.display = 'none';
+        }
+    };
+
+    window.runTerminal = function() {
+        const input = document.getElementById('terminalInput');
+        const output = document.getElementById('terminalOutput');
+        if (!input || !output) return;
+        const cmd = input.value.trim().toUpperCase();
+        input.value = '';
+        if (cmd === 'EPSILON' || cmd === 'AKI' || cmd === 'ECHO' || cmd === 'OMEGA') {
+            output.textContent = '✅ Доступ разрешён. Добро пожаловать, агент.';
+        } else {
+            output.textContent = '❌ Доступ запрещён. Неверный код.';
+        }
+    };
+
+    window.chooseMission = function(choice) {
+        const result = document.getElementById('missionResult');
+        if (!result) return;
+        const texts = [
+            'Вы вошли в сектор. Сигнал был ловушкой. Но вы нашли улику.',
+            'Питание отключено. Сектор замолчал. Возможно, навсегда.',
+            'Подкрепление прибыло. Операция завершена успешно.'
+        ];
+        result.textContent = texts[choice] || 'Неизвестное решение.';
+    };
+
+    window.resetMission = function() {
+        const result = document.getElementById('missionResult');
+        if (result) result.textContent = 'Ожидание решения оперативника…';
+    };
+
+    window.chooseFaction = function(faction) {
+        const status = document.getElementById('factionStatus');
+        if (!status) return;
+        const names = { epsilon: 'Эпсилон', omega: 'Омега', witnesses: 'Свидетели' };
+        status.textContent = `✅ Вы выбрали сторону: ${names[faction] || faction}`;
+    };
+
+    window.sendSuggestion = function() {
+        const name = document.getElementById('suggestName');
+        const text = document.getElementById('suggestText');
+        if (text && text.value.trim()) {
+            showNotification('💡 Идея отправлена! Спасибо!');
+            if (name) name.value = '';
+            text.value = '';
+        } else {
+            showNotification('Напишите идею', 'error');
+        }
+    };
+
+    window.sendCoop = function() {
+        showNotification('📨 Сообщение отправлено! (демо)');
+    };
+
+    window.toggleLang = function() {
+        const btn = document.getElementById('langBtn');
+        if (btn) btn.textContent = btn.textContent.includes('RU') ? 'EN ▾' : 'RU ▾';
+        showNotification('🌐 Смена языка (демо)');
+    };
+
+    window.openSearch = function() {
+        showNotification('🔍 Поиск (демо)');
+    };
+
+    window.showNotification = function(message, type = 'success') {
+        const notif = document.createElement('div');
+        notif.className = `notification ${type}`;
+        notif.textContent = message;
+        document.body.appendChild(notif);
+        notif.style.transform = 'translateX(0)';
+        setTimeout(() => {
+            notif.style.transform = 'translateX(400px)';
+            setTimeout(() => notif.remove(), 300);
+        }, 3000);
+    };
+
+    window.closeModal = function(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) modal.classList.remove('active');
+    };
+
+    // ============================================================
+    // ПРОФИЛЬ (УЛУЧШЕННЫЙ)
+    // ============================================================
+    window.openProfile = function() {
         let modal = document.getElementById('profileModal');
         if (!modal) {
             modal = document.createElement('div');
@@ -1509,218 +1839,4 @@ body, body.theme-light { background:#080809 !important; background-image:radial-
                         <div class="profile-section-title">Статус</div>
                         <div class="status-options">
                             <div class="status-option selected" onclick="selectStatus(this, 'active')">🟢 Активен</div>
-                            <div class="status-option" onclick="selectStatus(this, 'idle')">🟡 Отошёл</div>
-                            <div class="status-option" onclick="selectStatus(this, 'dnd')">🔴 Не беспокоить</div>
-                            <div class="status-option" onclick="selectStatus(this, 'invisible')">⚫ Невидимка</div>
-                        </div>
-                    </div>
-                    <div class="profile-section">
-                        <div class="profile-section-title">Курсор</div>
-                        <div class="cursor-options">
-                            <div class="cursor-option selected" data-cursor="default" onclick="selectCursor(this, 'default')">
-                                <div class="cursor-option-icon">🖱️</div><div class="cursor-option-label">Стандарт</div>
-                            </div>
-                            <div class="cursor-option" data-cursor="crosshair" onclick="selectCursor(this, 'crosshair')">
-                                <div class="cursor-option-icon">✛</div><div class="cursor-option-label">Прицел</div>
-                            </div>
-                            <div class="cursor-option" data-cursor="reverse" onclick="selectCursor(this, 'reverse')">
-                                <div class="cursor-option-icon">🔄</div><div class="cursor-option-label">Реверс</div>
-                            </div>
-                            <div class="cursor-option" data-cursor="chip" onclick="selectCursor(this, 'chip')">
-                                <div class="cursor-option-icon">💠</div><div class="cursor-option-label">Чип</div>
-                            </div>
-                            <div class="cursor-option" data-cursor="anomaly" onclick="selectCursor(this, 'anomaly')">
-                                <div class="cursor-option-icon">🩸</div><div class="cursor-option-label">Аномалия</div>
-                            </div>
-                            <div class="cursor-option" data-cursor="skull" onclick="selectCursor(this, 'skull')">
-                                <div class="cursor-option-icon">💀</div><div class="cursor-option-label">Череп</div>
-                            </div>
-                            <div class="cursor-option" data-cursor="nuke" onclick="selectCursor(this, 'nuke')">
-                                <div class="cursor-option-icon">☢️</div><div class="cursor-option-label">Ядерный</div>
-                            </div>
-                        </div>
-                        <div class="cursor-custom-input">
-                            <input type="text" id="customCursorInput" placeholder="Свой курсор (эмодзи)">
-                            <button onclick="setCustomCursor()">OK</button>
-                        </div>
-                    </div>
-                    <div class="profile-section">
-                        <div class="profile-section-title">Достижения</div>
-                        <div class="achievements-grid">
-                            <div class="achievement-card unlocked" title="Первый шаг">
-                                <div class="achievement-icon">🥇</div>
-                                <div class="achievement-name">Первый шаг</div>
-                                <div class="achievement-desc">Зарегистрироваться</div>
-                            </div>
-                            <div class="achievement-card unlocked" title="Игрок">
-                                <div class="achievement-icon">🎮</div>
-                                <div class="achievement-name">Игрок</div>
-                                <div class="achievement-desc">Сыграть в любую игру</div>
-                            </div>
-                            <div class="achievement-card locked" title="Реверс-мастер">
-                                <div class="achievement-icon">🔁</div>
-                                <div class="achievement-name">Реверс-мастер</div>
-                                <div class="achievement-desc">Набрать 50 очков в Реверсе</div>
-                            </div>
-                            <div class="achievement-card locked" title="Клик-мания">
-                                <div class="achievement-icon">⚡</div>
-                                <div class="achievement-name">Клик-мания</div>
-                                <div class="achievement-desc">Набрать 30 очков в Клик-Френзи</div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="modal-btn" onclick="saveProfile()">Сохранить</button>
-                </div>
-            `;
-            document.body.appendChild(modal);
-        }
-        // Загружаем сохранённые настройки (заглушка)
-        modal.classList.add('active');
-    }
-
-    // Вспомогательные функции для профиля
-    function closeModal(modalId) {
-        document.getElementById(modalId).classList.remove('active');
-    }
-    function selectFrame(el, frameType) {
-        document.querySelectorAll('#profileModal .frame-option').forEach(opt => opt.classList.remove('selected'));
-        el.classList.add('selected');
-    }
-    function selectColor(el, color) {
-        document.querySelectorAll('#profileModal .color-option').forEach(opt => opt.classList.remove('selected'));
-        el.classList.add('selected');
-        // Можно сохранить цвет для дальнейшего использования
-    }
-    function selectStatus(el, status) {
-        document.querySelectorAll('#profileModal .status-option').forEach(opt => opt.classList.remove('selected'));
-        el.classList.add('selected');
-    }
-    function selectCursor(el, cursorType) {
-        document.querySelectorAll('#profileModal .cursor-option').forEach(opt => opt.classList.remove('selected'));
-        el.classList.add('selected');
-        // Удаляем все классы курсоров с body
-        document.body.classList.remove('cursor-crosshair', 'cursor-reverse', 'cursor-chip', 'cursor-anomaly', 'cursor-skull', 'cursor-nuke');
-        // Добавляем нужный класс
-        if (cursorType !== 'default') {
-            document.body.classList.add('cursor-' + cursorType);
-        }
-    }
-    function setCustomAvatar() {
-        const input = document.getElementById('customAvatarUrl');
-        const val = input.value.trim();
-        if (val) {
-            const avatarEl = document.getElementById('profileAvatarLarge');
-            if (val.startsWith('http')) {
-                avatarEl.innerHTML = `<img src="${val}" alt="avatar" style="width:100%;height:100%;object-fit:cover;">`;
-            } else {
-                avatarEl.textContent = val; // эмодзи
-            }
-            input.value = '';
-        }
-    }
-    function setCustomCursor() {
-        const input = document.getElementById('customCursorInput');
-        const val = input.value.trim();
-        if (val) {
-            // Генерируем SVG-курсор с этим эмодзи
-            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="16" y="24" font-size="24" text-anchor="middle">${val}</text></svg>`;
-            const encoded = encodeURIComponent(svg);
-            document.body.style.cursor = `url('data:image/svg+xml;utf8,${encoded}') 16 16, auto`;
-            // Удаляем классы курсоров, чтобы не перебивали
-            document.body.classList.remove('cursor-crosshair', 'cursor-reverse', 'cursor-chip', 'cursor-anomaly', 'cursor-skull', 'cursor-nuke');
-            // Устанавливаем на все элементы
-            const style = document.createElement('style');
-            style.id = 'customCursorStyle';
-            document.getElementById('customCursorStyle')?.remove();
-            style.textContent = `body, body * { cursor: url('data:image/svg+xml;utf8,${encoded}') 16 16, auto !important; }`;
-            document.head.appendChild(style);
-            input.value = '';
-        }
-    }
-    function saveProfile() {
-        showNotification('✅ Профиль сохранён!');
-        closeModal('profileModal');
-    }
-
-    // Вызываем openProfile при нажатии на кнопку пользователя, если она ещё не была назначена
-    // (в исходном коде кнопка "Войти" ведёт на auth, но для демонстрации улучшенного профиля я перенаправляю)
-    // Чтобы сохранить логику входа, я оставлю openAuth, но добавлю openProfile как отдельную функцию.
-    // В реальном коде вы можете объединить их.
-
-    // Для демонстрации: если пользователь авторизован, кнопка ведёт в профиль.
-    // Пока просто добавлю кнопку вызова профиля в консоль или через отдельное действие.
-    // Например, при клике на иконку пользователя, если пользователь "вошёл", открывать профиль.
-    // Но поскольку авторизация не реализована, я просто добавлю кнопку в то же место.
-    // Изменю onclick у user-btn на openProfile, если пользователь авторизован.
-    // Пока оставлю как есть, но добавлю слушатель.
-
-    document.addEventListener('DOMContentLoaded', () => {
-        // Находим кнопку пользователя и меняем поведение
-        const userBtn = document.querySelector('#userArea .user-btn');
-        if (userBtn) {
-            // Удаляем старый onclick
-            userBtn.removeAttribute('onclick');
-            userBtn.addEventListener('click', () => {
-                // Проверяем, авторизован ли пользователь (заглушка)
-                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-                if (isLoggedIn) {
-                    openProfile();
-                } else {
-                    openAuth('login');
-                }
-            });
-        }
-    });
-
-    // Переопределяем openAuth, чтобы он мог устанавливать isLoggedIn
-    // В реальном коде это делается после успешной аутентификации
-    const originalOpenAuth = window.openAuth;
-    window.openAuth = function(mode) {
-        // Вызываем оригинальную функцию, если она есть
-        if (typeof originalOpenAuth === 'function') {
-            originalOpenAuth(mode);
-        } else {
-            // Заглушка, если оригинальной функции нет
-            showNotification('Форма входа временно недоступна. Используйте демо-режим.');
-        }
-        // Для демонстрации профиля: после "входа" устанавливаем флаг
-        // В реальном коде это должно происходить после успешной аутентификации
-        // localStorage.setItem('isLoggedIn', 'true');
-    };
-
-    // Чтобы профиль можно было открыть, я добавлю кнопку в консоль или создам глобальную функцию
-    window.openProfile = openProfile;
-
-    // Обновляем рекорд для игры "Реверс" при загрузке
-    document.addEventListener('DOMContentLoaded', () => {
-        const gameRecord = localStorage.getItem('gameRecord') || 0;
-        document.getElementById('gameRecord').textContent = gameRecord;
-        // Рекорд для френзи
-        document.getElementById('frenzyRecord').textContent = frenzyRecord;
-    });
-
-    // ... (остальной ваш JS код, включая функции для дуэли, друзей и т.д.) ...
-
-    // Вспомогательная функция для уведомлений (если её нет)
-    if (typeof showNotification !== 'function') {
-        window.showNotification = function(message, type = 'success') {
-            const notif = document.createElement('div');
-            notif.className = `notification ${type}`;
-            notif.textContent = message;
-            document.body.appendChild(notif);
-            notif.style.transform = 'translateX(0)';
-            setTimeout(() => {
-                notif.style.transform = 'translateX(400px)';
-                setTimeout(() => notif.remove(), 300);
-            }, 3000);
-        };
-    }
-
-    // ... (ваш исходный JS код, включая функции для дуэли, друзей и т.д.) ...
-    // ============================================================
-    // КОНЕЦ ИЗМЕНЕНИЙ
-    // ============================================================
-    </script>
-
-</body>
-</html>
+                            <div class="status-option" onclick="selectStatus(this, 'idle')">
