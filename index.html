@@ -22,16 +22,11 @@
             --accent: #e63946; --accent-hover: #d62828; --accent-glow: rgba(230,57,70,0.3);
             --border: rgba(0,0,0,0.08); --border-soft: rgba(0,0,0,0.15);
         }
-        body {
-            background-color: var(--bg); color: var(--text);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6; overflow-x: hidden; position: relative;
-            background: radial-gradient(circle at 50% 0%, var(--bg-2) 0%, var(--bg) 60%);
-        }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; overflow-x: hidden; position: relative; background: radial-gradient(circle at 50% 0%, var(--bg-2) 0%, var(--bg) 60%); }
         #bg-glow { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; background: radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--accent-glow), transparent 80%); opacity: 0.4; transition: background 0.1s ease; }
         body.theme-light #bg-glow { opacity: 0.15; }
-        .topbar { background-color: rgba(10, 10, 15, 0.85); padding: 10px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-        body.theme-light .topbar { background-color: rgba(255, 255, 255, 0.85); }
+        .topbar { background-color: rgba(10,10,15,0.85); padding: 10px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        body.theme-light .topbar { background-color: rgba(255,255,255,0.85); }
         .logo { font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: 1px; display: flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; user-select: none; }
         .logo span { color: var(--accent); font-size: 1.7rem; }
         .topbar-nav { display: flex; gap: 5px; background: var(--border); padding: 6px 10px; border-radius: 30px; border: 1px solid var(--border); }
@@ -46,7 +41,7 @@
         .cart-count { position: absolute; top: -3px; right: -3px; background: #fff; color: var(--accent); font-size: 0.7rem; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .user-btn { display: flex; align-items: center; gap: 8px; background: linear-gradient(145deg, #8b0000, var(--accent)); color: #fff; padding: 8px 16px; border-radius: 30px; border: none; cursor: pointer; font-weight: 700; font-size: 0.85rem; font-family: inherit; }
         .user-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px var(--accent-glow); }
-        .user-btn .avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; overflow: hidden; }
+        .user-btn .avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; overflow: hidden; }
         .user-btn .avatar img { width: 100%; height: 100%; object-fit: cover; }
         .lang-btn { background: var(--border); border: 1px solid var(--border-soft); color: var(--text); padding: 8px 12px; border-radius: 30px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; min-width: 60px; }
         .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -66,8 +61,6 @@
         .btn-secondary:hover { border-color: var(--accent); background: var(--panel-2); transform: translateY(-3px); }
         .btn-discord { background: var(--discord); color: #fff; }
         .btn-discord:hover { background: #4752C4; transform: translateY(-3px); }
-        .cinema-wrap { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; margin-bottom: 20px; border: 1px solid var(--border-soft); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .cinema-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
         .xp-container { background: var(--bg); border-radius: 10px; padding: 15px; margin-bottom: 20px; border: 1px solid var(--border-soft); }
         .xp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; }
         .xp-level { color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
@@ -75,7 +68,7 @@
         .xp-bar-fill { height: 100%; background: linear-gradient(90deg, #ff3333, #ff8c00); width: 0%; transition: width 0.4s ease; border-radius: 6px; }
         .xp-text { text-align: right; font-size: 0.75rem; color: var(--text-muted); margin-top: 5px; }
         .timer-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
-        .timer-box { background: var(--panel); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .timer-box { background: var(--panel); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         .timer-label { color: var(--accent); font-size: 0.85rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
         .timer-title { font-size: 1.6rem; color: var(--text); font-weight: 900; margin-bottom: 20px; }
         .timer-title span { color: var(--accent); }
@@ -84,21 +77,19 @@
         .timer-num { font-size: 2.2rem; font-weight: 900; color: var(--accent); line-height: 1; }
         .timer-cell-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 6px; font-weight: 700; }
         .game-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
-        .game-box { background: var(--panel); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .game-box { background: var(--panel); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; text-align: center; }
         .game-title { font-size: 1.5rem; color: var(--accent); font-weight: 900; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
         .game-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
         .game-mode-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
-        .game-mode-tab { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 10px 22px; border-radius: 25px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; transition: all 0.2s; }
+        .game-mode-tab { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 10px 22px; border-radius: 25px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; }
         .game-mode-tab:hover { color: var(--text); border-color: var(--accent); }
         .game-mode-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
         .game-area { position: relative; width: 100%; height: 300px; background: var(--bg); border: 1px solid var(--border-soft); border-radius: 16px; overflow: hidden; margin-bottom: 20px; cursor: crosshair; user-select: none; }
         .game-target { position: absolute; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #fff; border: 2px solid #fff; }
         .game-target.fast { background: #ffd700; width: 30px; height: 30px; font-size: 1rem; }
         .game-target.boss { background: #8b0000; width: 60px; height: 60px; font-size: 2rem; border: 3px solid #ffd700; }
-        .game-target:active { transform: scale(0.8); }
         .boss-target { position: absolute; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle, #ff0000, #8b0000); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; border: 3px solid #ffd700; box-shadow: 0 0 25px rgba(255,0,0,0.7); animation: bossPulse 1s ease-in-out infinite; }
-        @keyframes bossPulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(255,0,0,0.7); } 50% { transform: scale(1.1); box-shadow: 0 0 45px rgba(255,0,0,1); } }
-        .boss-target:active { transform: scale(0.85); }
+        @keyframes bossPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         .splatter { position: absolute; width: 10px; height: 10px; background: #ff3333; border-radius: 50%; pointer-events: none; z-index: 10; animation: splatter-anim 0.5s ease-out forwards; }
         @keyframes splatter-anim { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
         .game-stats { display: flex; justify-content: center; gap: 30px; margin-bottom: 15px; flex-wrap: wrap; }
@@ -112,8 +103,8 @@
         .game-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20; color: #fff; text-align: center; padding: 20px; }
         .game-overlay h3 { font-size: 2rem; margin-bottom: 10px; color: var(--accent); }
         .game-overlay p { font-size: 1rem; margin-bottom: 20px; }
-        .leaderboard-btn { background: linear-gradient(120deg, #ffd700, #ff8c00); color: #000; padding: 12px 28px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; margin-top: 15px; transition: transform 0.2s, box-shadow 0.3s; }
-        .leaderboard-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 200, 0, 0.5); }
+        .leaderboard-btn { background: linear-gradient(120deg, #ffd700, #ff8c00); color: #000; padding: 12px 28px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; margin-top: 15px; }
+        .leaderboard-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,200,0,0.5); }
         .promo { max-width: 1200px; margin: 40px auto; padding: 0 60px; display: flex; gap: 15px; }
         .promo-input { flex: 1; background: var(--panel); border: 1px solid var(--border-soft); border-radius: 15px; padding: 20px 30px; color: var(--text); font-size: 0.95rem; text-align: center; font-family: inherit; }
         .promo-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
@@ -155,7 +146,7 @@
         .card { flex: 0 0 300px; background: var(--panel); border: 1px solid var(--border-soft); border-radius: 16px; overflow: hidden; cursor: pointer; position: relative; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .card-image { width: 100%; height: 180px; background: linear-gradient(135deg, var(--bg-2), var(--bg)); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; }
-        .card-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.8) 100%); }
+        .card-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8) 100%); }
         .card-content { padding: 18px; }
         .card-title { font-size: 1.1rem; font-weight: 800; color: var(--text); margin-bottom: 5px; }
         .card-subtitle { font-size: 0.8rem; color: var(--accent); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
@@ -211,10 +202,10 @@
         .char-role { font-size: 0.72rem; color: var(--char-color, var(--accent)); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
         .char-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; min-height: 50px; }
         .char-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
-        .char-badge.alive { background: rgba(0, 255, 136, 0.12); color: var(--success); border: 1px solid rgba(0, 255, 136, 0.3); }
-        .char-badge.dead { background: rgba(255, 51, 51, 0.12); color: var(--accent); border: 1px solid rgba(255, 51, 51, 0.3); }
-        .char-badge.unknown { background: rgba(255, 200, 0, 0.12); color: var(--warn); border: 1px solid rgba(255, 200, 0, 0.3); }
-        .char-badge.captive { background: rgba(150, 100, 255, 0.12); color: #b388ff; border: 1px solid rgba(150, 100, 255, 0.3); }
+        .char-badge.alive { background: rgba(0,255,136,0.12); color: var(--success); border: 1px solid rgba(0,255,136,0.3); }
+        .char-badge.dead { background: rgba(255,51,51,0.12); color: var(--accent); border: 1px solid rgba(255,51,51,0.3); }
+        .char-badge.unknown { background: rgba(255,200,0,0.12); color: var(--warn); border: 1px solid rgba(255,200,0,0.3); }
+        .char-badge.captive { background: rgba(150,100,255,0.12); color: #b388ff; border: 1px solid rgba(150,100,255,0.3); }
         .lore-accordion-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
         .lore-item { background: var(--panel); border: 2px solid var(--border-soft); border-radius: 16px; margin-bottom: 15px; overflow: hidden; }
         .lore-item.active { border-color: var(--accent); }
@@ -241,8 +232,8 @@
         .season-accordion-item.active .season-header-number { color: var(--accent); -webkit-text-stroke: 0; }
         .season-header-title { font-size: 1.3rem; color: var(--text); font-weight: 800; }
         .season-header-badge { display: inline-block; padding: 4px 12px; border-radius: 15px; font-size: 0.65rem; font-weight: 800; margin-left: 10px; vertical-align: middle; }
-        .badge-dev { background: rgba(255, 200, 0, 0.15); color: var(--warn); border: 1px solid rgba(255, 200, 0, 0.4); }
-        .badge-soon { background: rgba(255, 51, 51, 0.15); color: var(--accent); border: 1px solid rgba(255, 51, 51, 0.4); }
+        .badge-dev { background: rgba(255,200,0,0.15); color: var(--warn); border: 1px solid rgba(255,200,0,0.4); }
+        .badge-soon { background: rgba(255,51,51,0.15); color: var(--accent); border: 1px solid rgba(255,51,51,0.4); }
         .season-header-icon { font-size: 1.5rem; color: var(--accent); transition: transform 0.3s ease; }
         .season-accordion-item.active .season-header-icon { transform: rotate(180deg); }
         .season-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
@@ -253,7 +244,7 @@
         .season-episode-item:hover { background: var(--panel-2); transform: translateX(5px); }
         .season-episode-title { color: var(--text); font-weight: 700; font-size: 1rem; }
         .season-episode-sub { color: var(--accent); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; }
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 20px; padding: 40px; max-width: 450px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .modal-close { position: absolute; top: 15px; right: 20px; background: transparent; border: none; color: var(--text-dim); font-size: 1.8rem; cursor: pointer; }
@@ -308,17 +299,17 @@
         .bottom-nav-item { flex: 1; background: transparent; border: none; color: var(--text-dim); font-family: inherit; font-size: 0.6rem; font-weight: 700; padding: 6px 2px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; }
         .bottom-nav-item .bn-icon { font-size: 1.2rem; }
         .bottom-nav-item.active { color: var(--accent); }
-        .cart-item { display: flex; align-items: center; gap: 12px; background: var(--bg); border: 1px solid var(--border-soft); border-radius: 12px; padding: 10px 14px; margin-bottom: 10px; animation: pageFade 0.2s ease; }
+        .cart-item { display: flex; align-items: center; gap: 12px; background: var(--bg); border: 1px solid var(--border-soft); border-radius: 12px; padding: 10px 14px; margin-bottom: 10px; }
         .cart-item-emoji { font-size: 1.8rem; flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--panel); border-radius: 10px; }
         .cart-item-info { flex: 1; min-width: 0; }
         .cart-item-name { color: var(--text); font-weight: 700; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .cart-item-qty { color: var(--text-dim); font-size: 0.75rem; margin-top: 2px; }
         .cart-item-remove { background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 1rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: inherit; transition: all 0.2s ease; }
         .cart-item-remove:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: scale(1.08); }
-        .acrylic { position: relative; background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); border: 1px solid rgba(255, 255, 255, 0.18); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15); border-radius: 20px; overflow: hidden; }
-        body.theme-light .acrylic { background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.7); }
-        .acrylic::before { content: ''; position: absolute; inset: -2px; border-radius: inherit; padding: 2px; background: linear-gradient(120deg, rgba(0, 229, 255, 0.55), rgba(179, 136, 255, 0.55), rgba(255, 51, 51, 0.55), rgba(0, 229, 255, 0.55)); background-size: 300% 300%; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: waterFlow 6s linear infinite; pointer-events: none; filter: blur(0.4px); opacity: 0.9; }
-        .acrylic::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(120% 80% at 10% 0%, rgba(0, 229, 255, 0.12), transparent 60%), radial-gradient(120% 80% at 90% 100%, rgba(179, 136, 255, 0.12), transparent 60%); pointer-events: none; mix-blend-mode: screen; }
+        .acrylic { position: relative; background: rgba(255,255,255,0.06); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); border: 1px solid rgba(255,255,255,0.18); box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15); border-radius: 20px; overflow: hidden; }
+        body.theme-light .acrylic { background: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.7); }
+        .acrylic::before { content: ''; position: absolute; inset: -2px; border-radius: inherit; padding: 2px; background: linear-gradient(120deg, rgba(0,229,255,0.55), rgba(179,136,255,0.55), rgba(255,51,51,0.55), rgba(0,229,255,0.55)); background-size: 300% 300%; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: waterFlow 6s linear infinite; pointer-events: none; filter: blur(0.4px); opacity: 0.9; }
+        .acrylic::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(120% 80% at 10% 0%, rgba(0,229,255,0.12), transparent 60%), radial-gradient(120% 80% at 90% 100%, rgba(179,136,255,0.12), transparent 60%); pointer-events: none; mix-blend-mode: screen; }
         @keyframes waterFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .suggest-section { max-width: 900px; margin: 60px auto; padding: 0 60px; }
         .suggest-box { padding: 40px; text-align: center; }
@@ -326,11 +317,11 @@
         .suggest-title span { color: var(--accent); }
         .suggest-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; }
         .suggest-form { display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto; }
-        .suggest-input, .suggest-textarea { width: 100%; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 12px; padding: 14px 18px; color: var(--text); font-size: 1rem; font-family: inherit; transition: border-color 0.3s, box-shadow 0.3s; }
-        body.theme-light .suggest-input, body.theme-light .suggest-textarea { background: rgba(255, 255, 255, 0.6); border-color: rgba(0, 0, 0, 0.15); }
+        .suggest-input, .suggest-textarea { width: 100%; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.18); border-radius: 12px; padding: 14px 18px; color: var(--text); font-size: 1rem; font-family: inherit; }
+        body.theme-light .suggest-input, body.theme-light .suggest-textarea { background: rgba(255,255,255,0.6); border-color: rgba(0,0,0,0.15); }
         .suggest-input:focus, .suggest-textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
         .suggest-textarea { min-height: 120px; resize: vertical; }
-        .suggest-btn { background: linear-gradient(120deg, var(--accent), #b388ff); color: #fff; padding: 16px 40px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: transform 0.2s, box-shadow 0.3s; }
+        .suggest-btn { background: linear-gradient(120deg, var(--accent), #b388ff); color: #fff; padding: 16px 40px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; }
         .suggest-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--accent-glow); }
         .daily-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
         .daily-box { padding: 30px; }
@@ -350,7 +341,7 @@
         .daily-progress-fill { height: 100%; background: linear-gradient(90deg, #ff3333, #ff8c00); border-radius: 3px; transition: width 0.3s; }
         .daily-bonus-box { margin-top: 15px; padding: 20px; text-align: center; background: linear-gradient(120deg, rgba(255,215,0,0.15), rgba(255,140,0,0.1)); border: 2px solid #ffd700; border-radius: 16px; }
         .daily-bonus-title { font-size: 1.1rem; font-weight: 900; color: #ffd700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-        .daily-bonus-btn { background: linear-gradient(120deg, #ffd700, #ff8c00); color: #000; padding: 14px 35px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.95rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 1px; transition: transform 0.2s, box-shadow 0.3s; }
+        .daily-bonus-btn { background: linear-gradient(120deg, #ffd700, #ff8c00); color: #000; padding: 14px 35px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.95rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 1px; }
         .daily-bonus-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,200,0,0.5); }
         .daily-bonus-btn:disabled { background: var(--border-soft); color: var(--text-dim); cursor: not-allowed; }
         .daily-bonus-timer { color: var(--text-muted); font-size: 0.8rem; margin-top: 10px; }
@@ -378,7 +369,7 @@
         .wheel-disc::after { content: '🎁'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2.5rem; width: 70px; height: 70px; background: var(--panel); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 3px solid var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
         .wheel-labels { position: absolute; inset: 0; pointer-events: none; }
         .wheel-label { position: absolute; font-size: 0.75rem; font-weight: 900; color: #fff; text-shadow: 0 0 4px #000, 0 0 8px #000; white-space: nowrap; }
-        .wheel-spin-btn { background: linear-gradient(120deg, #ff3333, #b388ff); color: #fff; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.95rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 1px; transition: transform 0.2s, box-shadow 0.3s; }
+        .wheel-spin-btn { background: linear-gradient(120deg, #ff3333, #b388ff); color: #fff; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 900; font-size: 0.95rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 1px; }
         .wheel-spin-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px var(--accent-glow); }
         .wheel-spin-btn:disabled { background: var(--border-soft); color: var(--text-dim); cursor: not-allowed; }
         .wheel-timer { color: var(--text-muted); font-size: 0.8rem; margin-top: 10px; }
@@ -386,18 +377,16 @@
         body.season-newyear { --accent: #00e5ff; --accent-hover: #33ebff; --accent-glow: rgba(0,229,255,0.5); --bg: #001018; --bg-2: #001a26; }
         body.season-halloween .logo::after { content: ' 🎃'; font-size: 1.2rem; }
         body.season-newyear .logo::after { content: ' ❄️'; font-size: 1.2rem; }
-        .season-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; animation: redisoneyPulse 2s ease-in-out infinite alternate; }
+        .season-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
         .season-badge.halloween { background: rgba(255,140,0,0.2); color: #ff8c00; border: 1px solid #ff8c00; }
         .season-badge.newyear { background: rgba(0,229,255,0.2); color: #00e5ff; border: 1px solid #00e5ff; }
-        @keyframes redisoneyPulse { from { box-shadow: 0 0 15px rgba(255,51,51,0.3); } to { box-shadow: 0 0 40px rgba(255,51,51,0.6); } }
-        @keyframes redisoneyBounce { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-12px) rotate(5deg); } }
         .duel-section { max-width: 900px; margin: 40px auto; padding: 0 60px; }
         .duel-box { padding: 30px; text-align: center; }
         .duel-title { font-size: 1.4rem; font-weight: 900; color: var(--text); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
         .duel-title span { color: var(--accent); }
         .duel-sub { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px; }
         .duel-difficulty { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
-        .duel-diff-btn { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; transition: all 0.2s; }
+        .duel-diff-btn { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; }
         .duel-diff-btn:hover { color: var(--text); border-color: var(--accent); }
         .duel-diff-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
         .duel-arena { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
@@ -413,8 +402,8 @@
         .duel-side.player .duel-side-bar-fill { background: linear-gradient(90deg, #ff3333, #ff8c00); }
         .duel-side.bot .duel-side-bar-fill { background: linear-gradient(90deg, #5865F2, #00e5ff); }
         .duel-timer { font-size: 1.2rem; font-weight: 900; color: var(--accent); margin-bottom: 15px; }
-        .duel-click-btn { background: linear-gradient(120deg, var(--accent), #b388ff); color: #fff; padding: 30px 60px; border: none; border-radius: 20px; font-weight: 900; font-size: 1.3rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 2px; transition: transform 0.1s, box-shadow 0.2s; width: 100%; user-select: none; }
-        .duel-click-btn:active { transform: scale(0.95); box-shadow: 0 0 30px var(--accent-glow); }
+        .duel-click-btn { background: linear-gradient(120deg, var(--accent), #b388ff); color: #fff; padding: 30px 60px; border: none; border-radius: 20px; font-weight: 900; font-size: 1.3rem; text-transform: uppercase; cursor: pointer; font-family: inherit; letter-spacing: 2px; width: 100%; user-select: none; }
+        .duel-click-btn:active { transform: scale(0.95); }
         .duel-click-btn:disabled { background: var(--border-soft); color: var(--text-dim); cursor: not-allowed; }
         .duel-result { font-size: 1.2rem; font-weight: 900; margin-top: 15px; min-height: 30px; }
         .duel-result.win { color: var(--success); }
@@ -428,7 +417,7 @@
         .friends-add-row { display: flex; gap: 8px; margin-bottom: 20px; }
         .friends-input { flex: 1; background: rgba(0,0,0,0.25); border: 1px solid var(--border-soft); border-radius: 12px; padding: 12px 16px; color: var(--text); font-size: 0.95rem; font-family: inherit; }
         .friends-input:focus { outline: none; border-color: var(--accent); }
-        .friends-add-btn { background: var(--accent); color: #fff; padding: 12px 24px; border: none; border-radius: 12px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+        .friends-add-btn { background: var(--accent); color: #fff; padding: 12px 24px; border: none; border-radius: 12px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; cursor: pointer; font-family: inherit; }
         .friends-add-btn:hover { background: var(--accent-hover); }
         .friends-list { display: flex; flex-direction: column; gap: 10px; }
         .friend-card { display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-soft); border-radius: 12px; padding: 12px 16px; }
@@ -437,21 +426,20 @@
         .friend-info { flex: 1; min-width: 0; }
         .friend-name { color: var(--text); font-weight: 800; font-size: 0.95rem; }
         .friend-status { color: var(--text-dim); font-size: 0.75rem; margin-top: 2px; }
-        .friend-status.online { color: var(--success); }
         .friend-record { color: #ffd700; font-weight: 900; font-size: 0.85rem; white-space: nowrap; }
-        .friend-remove { background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: inherit; transition: all 0.2s; }
+        .friend-remove { background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: inherit; }
         .friend-remove:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
         .friends-empty { text-align: center; color: var(--text-dim); padding: 30px 0; font-style: italic; }
-        .leaderboard-modal { background: linear-gradient(160deg, #1a0f00, #0f0f15 70%, #1a0505); border: 2px solid #ffd700; border-radius: 20px; padding: 35px 25px; max-width: 520px; width: 100%; position: relative; box-shadow: 0 0 50px rgba(255, 200, 0, 0.3); max-height: 85vh; overflow-y: auto; }
+        .leaderboard-modal { background: linear-gradient(160deg, #1a0f00, #0f0f15 70%, #1a0505); border: 2px solid #ffd700; border-radius: 20px; padding: 35px 25px; max-width: 520px; width: 100%; position: relative; box-shadow: 0 0 50px rgba(255,200,0,0.3); max-height: 85vh; overflow-y: auto; }
         .leaderboard-title { font-size: 1.6rem; font-weight: 900; text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; background: linear-gradient(90deg, #ffd700, #ff8c00, #ffd700); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: waterFlow 3s linear infinite; }
         .leaderboard-mode-tabs { display: flex; gap: 6px; justify-content: center; margin-bottom: 15px; }
         .leaderboard-mode-tab { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.75rem; font-family: inherit; }
         .leaderboard-mode-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
         .leaderboard-list { display: flex; flex-direction: column; gap: 8px; }
-        .leaderboard-row { display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px 16px; animation: pageFade 0.2s ease; }
-        .leaderboard-row.top-1 { background: linear-gradient(120deg, rgba(255, 215, 0, 0.25), rgba(255, 140, 0, 0.15)); border-color: #ffd700; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
-        .leaderboard-row.top-2 { background: linear-gradient(120deg, rgba(192, 192, 192, 0.2), rgba(160, 160, 160, 0.1)); border-color: #c0c0c0; }
-        .leaderboard-row.top-3 { background: linear-gradient(120deg, rgba(205, 127, 50, 0.2), rgba(139, 69, 19, 0.1)); border-color: #cd7f32; }
+        .leaderboard-row { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px 16px; }
+        .leaderboard-row.top-1 { background: linear-gradient(120deg, rgba(255,215,0,0.25), rgba(255,140,0,0.15)); border-color: #ffd700; box-shadow: 0 0 20px rgba(255,215,0,0.3); }
+        .leaderboard-row.top-2 { background: linear-gradient(120deg, rgba(192,192,192,0.2), rgba(160,160,160,0.1)); border-color: #c0c0c0; }
+        .leaderboard-row.top-3 { background: linear-gradient(120deg, rgba(205,127,50,0.2), rgba(139,69,19,0.1)); border-color: #cd7f32; }
         .leaderboard-rank { font-size: 1.3rem; font-weight: 900; min-width: 38px; text-align: center; color: var(--accent); }
         .leaderboard-row.top-1 .leaderboard-rank { color: #ffd700; text-shadow: 0 0 10px #ffd700; }
         .leaderboard-row.top-2 .leaderboard-rank { color: #c0c0c0; }
@@ -462,40 +450,41 @@
         .leaderboard-loading { text-align: center; color: var(--text-dim); padding: 20px; font-size: 0.85rem; }
         .leaderboard-loading::after { content: ''; display: inline-block; width: 16px; height: 16px; border: 2px solid var(--border-soft); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px; vertical-align: middle; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .leaderboard-clear-btn { width: 100%; margin-top: 20px; background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); padding: 12px; border-radius: 10px; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; }
+        .leaderboard-clear-btn { width: 100%; margin-top: 20px; background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); padding: 12px; border-radius: 10px; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
         .leaderboard-clear-btn:hover { border-color: var(--accent); color: var(--accent); }
-        .redisoney-modal { background: linear-gradient(160deg, #1a0000, #0a0a0f 60%, #1a0a2e); border: 2px solid #ff3333; border-radius: 20px; padding: 40px 30px; max-width: 520px; width: 100%; text-align: center; position: relative; box-shadow: 0 0 60px rgba(255, 51, 51, 0.5), 0 0 120px rgba(179, 136, 255, 0.2); animation: redisoneyPulse 2s ease-in-out infinite alternate; }
+        .redisoney-modal { background: linear-gradient(160deg, #1a0000, #0a0a0f 60%, #1a0a2e); border: 2px solid #ff3333; border-radius: 20px; padding: 40px 30px; max-width: 520px; width: 100%; text-align: center; position: relative; box-shadow: 0 0 60px rgba(255,51,51,0.5), 0 0 120px rgba(179,136,255,0.2); animation: redisoneyPulse 2s ease-in-out infinite alternate; }
+        @keyframes redisoneyPulse { from { box-shadow: 0 0 40px rgba(255,51,51,0.4); } to { box-shadow: 0 0 80px rgba(255,51,51,0.7); } }
         .redisoney-emoji { font-size: 5rem; margin-bottom: 15px; animation: redisoneyBounce 1.2s ease-in-out infinite; }
+        @keyframes redisoneyBounce { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-12px) rotate(5deg); } }
         .redisoney-title { font-size: 1.7rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(90deg, #ff3333, #ffd700, #b388ff, #00e5ff, #ff3333); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: waterFlow 4s linear infinite; margin-bottom: 15px; }
         .redisoney-text { color: #e0e0e0; font-size: 1rem; line-height: 1.7; margin-bottom: 25px; font-style: italic; }
-        .redisoney-quote { color: #ffd700; font-size: 1.05rem; font-weight: 700; margin-bottom: 25px; padding: 15px; border-left: 3px solid #ff3333; border-right: 3px solid #b388ff; border-radius: 8px; background: rgba(255, 51, 51, 0.08); }
-        .redisoney-btn { display: inline-block; background: linear-gradient(120deg, #ff3333, #b388ff); color: #fff; padding: 14px 35px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; text-decoration: none; transition: transform 0.2s, box-shadow 0.3s; }
-        .redisoney-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 51, 51, 0.5); }
+        .redisoney-quote { color: #ffd700; font-size: 1.05rem; font-weight: 700; margin-bottom: 25px; padding: 15px; border-left: 3px solid #ff3333; border-right: 3px solid #b388ff; border-radius: 8px; background: rgba(255,51,51,0.08); }
+        .redisoney-btn { display: inline-block; background: linear-gradient(120deg, #ff3333, #b388ff); color: #fff; padding: 14px 35px; border: none; border-radius: 30px; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; text-decoration: none; }
+        .redisoney-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,51,51,0.5); }
         .redisoney-sub { margin-top: 18px; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
-        .footer-easter { display: inline-block; margin-top: 12px; color: var(--text-dim); font-size: 0.9rem; letter-spacing: 4px; cursor: pointer; opacity: 0.6; transition: opacity 0.3s, color 0.3s, text-shadow 0.3s; user-select: none; }
+        .footer-easter { display: inline-block; margin-top: 12px; color: var(--text-dim); font-size: 0.9rem; letter-spacing: 4px; cursor: pointer; opacity: 0.6; transition: opacity 0.3s, color 0.3s; user-select: none; }
         .footer-easter:hover { opacity: 1; color: #ff3333; text-shadow: 0 0 10px #ff3333; }
         .redisoney-nuke-badge { display: inline-block; font-size: 2rem; margin-bottom: 10px; animation: redisoneyBounce 1.5s ease-in-out infinite; filter: drop-shadow(0 0 12px #ffcc00); }
         .nuke-flash { position: fixed; inset: 0; background: radial-gradient(circle at center, #fff 0%, #ffdd00 15%, #ff6600 35%, #ff0000 60%, #330000 100%); z-index: 99999; pointer-events: none; opacity: 0; animation: nukeFlash 1.5s ease-out forwards; }
         @keyframes nukeFlash { 0% { opacity: 0; transform: scale(0.2); } 10% { opacity: 1; transform: scale(1); } 40% { opacity: 0.9; transform: scale(1.05); } 100% { opacity: 0; transform: scale(2); } }
-        .nuke-shockwave { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; border: 4px solid rgba(255, 220, 0, 0.9); box-shadow: 0 0 60px 20px rgba(255, 100, 0, 0.6); transform: translate(-50%, -50%) scale(0); z-index: 99998; pointer-events: none; animation: nukeWave 1.4s ease-out forwards; }
-        @keyframes nukeWave { 0% { transform: translate(-50%, -50%) scale(0); opacity: 1; border-width: 8px; } 100% { transform: translate(-50%, -50%) scale(120); opacity: 0; border-width: 1px; } }
-        .nuke-mushroom { position: fixed; top: 50%; left: 50%; width: 120px; height: 120px; transform: translate(-50%, -50%) scale(0); z-index: 99997; pointer-events: none; font-size: 100px; line-height: 1; text-align: center; animation: nukeMushroom 1.4s ease-out forwards; filter: drop-shadow(0 0 40px #ff6600); }
-        @keyframes nukeMushroom { 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; } 20% { opacity: 1; } 100% { transform: translate(-50%, -50%) scale(6) rotate(90deg); opacity: 0; } }
+        .nuke-shockwave { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; border: 4px solid rgba(255,220,0,0.9); box-shadow: 0 0 60px 20px rgba(255,100,0,0.6); transform: translate(-50%,-50%) scale(0); z-index: 99998; pointer-events: none; animation: nukeWave 1.4s ease-out forwards; }
+        @keyframes nukeWave { 0% { transform: translate(-50%,-50%) scale(0); opacity: 1; border-width: 8px; } 100% { transform: translate(-50%,-50%) scale(120); opacity: 0; border-width: 1px; } }
+        .nuke-mushroom { position: fixed; top: 50%; left: 50%; width: 120px; height: 120px; transform: translate(-50%,-50%) scale(0); z-index: 99997; pointer-events: none; font-size: 100px; line-height: 1; text-align: center; animation: nukeMushroom 1.4s ease-out forwards; filter: drop-shadow(0 0 40px #ff6600); }
+        @keyframes nukeMushroom { 0% { transform: translate(-50%,-50%) scale(0) rotate(0deg); opacity: 0; } 20% { opacity: 1; } 100% { transform: translate(-50%,-50%) scale(6) rotate(90deg); opacity: 0; } }
         body.nuke-shake { animation: nukeShake 1.2s cubic-bezier(.36,.07,.19,.97) both; }
-        @keyframes nukeShake { 0%, 100% { transform: translate(0, 0) rotate(0); } 10% { transform: translate(-10px, -8px) rotate(-1deg); } 20% { transform: translate(12px, 6px) rotate(1deg); } 30% { transform: translate(-8px, 10px) rotate(-1deg); } 40% { transform: translate(10px, -6px) rotate(1deg); } 50% { transform: translate(-12px, 8px) rotate(-1deg); } 60% { transform: translate(8px, -10px) rotate(1deg); } 70% { transform: translate(-6px, 6px) rotate(-0.5deg); } 80% { transform: translate(6px, -6px) rotate(0.5deg); } 90% { transform: translate(-4px, 4px) rotate(0); } }
-        .nuke-radiation { position: fixed; inset: 0; pointer-events: none; z-index: 99996; background-image: repeating-linear-gradient(45deg, rgba(255, 200, 0, 0.05) 0, rgba(255, 200, 0, 0.05) 2px, transparent 2px, transparent 8px); opacity: 0; animation: nukeRadiation 1.5s ease-out forwards; }
+        @keyframes nukeShake { 0%,100% { transform: translate(0,0) rotate(0); } 10% { transform: translate(-10px,-8px) rotate(-1deg); } 20% { transform: translate(12px,6px) rotate(1deg); } 30% { transform: translate(-8px,10px) rotate(-1deg); } 40% { transform: translate(10px,-6px) rotate(1deg); } 50% { transform: translate(-12px,8px) rotate(-1deg); } 60% { transform: translate(8px,-10px) rotate(1deg); } 70% { transform: translate(-6px,6px) rotate(-0.5deg); } 80% { transform: translate(6px,-6px) rotate(0.5deg); } 90% { transform: translate(-4px,4px) rotate(0); } }
+        .nuke-radiation { position: fixed; inset: 0; pointer-events: none; z-index: 99996; background-image: repeating-linear-gradient(45deg, rgba(255,200,0,0.05) 0, rgba(255,200,0,0.05) 2px, transparent 2px, transparent 8px); opacity: 0; animation: nukeRadiation 1.5s ease-out forwards; }
         @keyframes nukeRadiation { 0% { opacity: 0; } 20% { opacity: 1; } 100% { opacity: 0; } }
+        /* Курсоры */
         .cursor-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin-top: 10px; }
         .cursor-option { background: rgba(0,0,0,0.2); border: 2px solid var(--border-soft); border-radius: 10px; padding: 10px 8px; text-align: center; cursor: pointer; transition: all 0.2s; }
         .cursor-option:hover { border-color: var(--accent); }
         .cursor-option.selected { border-color: var(--accent); background: rgba(255,51,51,0.1); box-shadow: 0 0 15px var(--accent-glow); }
         .cursor-option-icon { font-size: 1.5rem; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; height: 30px; }
-        .cursor-option-label { font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .cursor-option-label { font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
         .cursor-custom-input { display: flex; gap: 6px; margin-top: 10px; }
         .cursor-custom-input input { flex: 1; background: rgba(0,0,0,0.25); border: 1px solid var(--border-soft); border-radius: 10px; padding: 10px 12px; color: var(--text); font-size: 0.85rem; font-family: inherit; }
-        .cursor-custom-input input:focus { outline: none; border-color: var(--accent); }
         .cursor-custom-input button { background: var(--accent); color: #fff; border: none; border-radius: 10px; padding: 10px 16px; font-weight: 800; font-size: 0.8rem; cursor: pointer; font-family: inherit; text-transform: uppercase; }
-        .cursor-custom-input button:hover { background: var(--accent-hover); }
         body.cursor-crosshair, body.cursor-crosshair * { cursor: crosshair !important; }
         body.cursor-reverse, body.cursor-reverse * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="%23ff3333" stroke="white" stroke-width="2"/><text x="16" y="21" font-size="14" text-anchor="middle" fill="white" font-weight="bold">R</text></svg>') 16 16, auto !important; }
         body.cursor-chip, body.cursor-chip * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><rect x="8" y="8" width="16" height="16" rx="3" fill="%2300e5ff" stroke="white" stroke-width="2"/><circle cx="16" cy="16" r="3" fill="white"/></svg>') 16 16, auto !important; }
@@ -504,12 +493,92 @@
         body.cursor-star, body.cursor-star * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="16" y="24" font-size="24" text-anchor="middle">⭐</text></svg>') 16 16, auto !important; }
         body.cursor-skull, body.cursor-skull * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="16" y="24" font-size="24" text-anchor="middle">💀</text></svg>') 16 16, auto !important; }
         body.cursor-nuke, body.cursor-nuke * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="16" y="24" font-size="24" text-anchor="middle">☢️</text></svg>') 16 16, auto !important; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); } 20%, 40%, 60%, 80% { transform: translateX(5px); } }
+        /* Профиль компактный */
+        .profile-modal { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 20px; padding: 28px 26px; max-width: 440px; width: 100%; max-height: 78vh; overflow-y: auto; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.4); scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg); }
+        .profile-modal::-webkit-scrollbar { width: 6px; }
+        .profile-modal::-webkit-scrollbar-track { background: var(--bg); border-radius: 3px; }
+        .profile-modal::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+        .profile-modal .modal-close { position: sticky; top: 0; float: right; margin-left: 10px; background: var(--panel); border: 1px solid var(--border-soft); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; z-index: 10; font-size: 1.4rem; color: var(--text-dim); cursor: pointer; transition: all 0.2s; }
+        .profile-modal .modal-close:hover { color: var(--accent); border-color: var(--accent); transform: rotate(90deg); }
+        .profile-modal h2 { font-size: 1.1rem !important; margin-bottom: 14px !important; }
+        .profile-modal .profile-avatar-large { width: 70px !important; height: 70px !important; font-size: 2rem !important; }
+        .profile-modal .profile-section-title { font-size: 0.8rem !important; margin: 12px 0 6px !important; }
+        .profile-modal .color-option { width: 26px !important; height: 26px !important; }
+        .profile-modal .frame-option, .profile-modal .status-option { padding: 6px 10px !important; font-size: 0.68rem !important; }
+        .profile-modal .cursor-options { grid-template-columns: repeat(auto-fit, minmax(75px, 1fr)) !important; gap: 6px !important; }
+        .profile-modal .cursor-option { padding: 8px 6px !important; }
+        .profile-modal .cursor-option-icon { font-size: 1.2rem !important; height: 24px !important; }
+        .profile-modal .cursor-option-label { font-size: 0.6rem !important; }
+        .profile-modal .achievements-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important; gap: 8px !important; }
+        .profile-modal .achievement-card { padding: 10px 6px !important; }
+        .profile-modal .achievement-icon { font-size: 1.5rem !important; margin-bottom: 4px !important; }
+        .profile-modal .achievement-name { font-size: 0.68rem !important; }
+        .profile-modal .achievement-desc { font-size: 0.55rem !important; }
+        .profile-modal .modal-btn { padding: 12px !important; font-size: 0.85rem !important; margin-top: 16px !important; }
+        /* Цитаты */
+        .quotes-section { max-width: 1000px; margin: 60px auto; padding: 0 60px; }
+        .quotes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+        .quote-card { background: var(--panel); border: 1px solid var(--border-soft); border-left: 4px solid var(--accent); border-radius: 12px; padding: 20px 22px; position: relative; cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
+        .quote-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+        .quote-text { font-size: 0.95rem; color: var(--text); font-style: italic; line-height: 1.6; margin-bottom: 10px; }
+        .quote-author { font-size: 0.8rem; color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .quote-copy { position: absolute; top: 10px; right: 10px; background: transparent; border: 1px solid var(--border-soft); color: var(--text-dim); width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; }
+        .quote-card:hover .quote-copy { opacity: 1; }
+        .quote-copy:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+        /* Таймлайн */
+        .timeline-section { max-width: 900px; margin: 60px auto; padding: 0 60px; }
+        .timeline-title { font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 25px; }
+        .timeline-title span { color: var(--accent); }
+        .timeline-wrap { position: relative; padding-left: 40px; }
+        .timeline-wrap::before { content: ''; position: absolute; left: 15px; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--accent), #b388ff, #00e5ff); border-radius: 2px; }
+        .timeline-item { position: relative; margin-bottom: 30px; }
+        .timeline-dot { position: absolute; left: -32px; top: 8px; width: 20px; height: 20px; border-radius: 50%; background: var(--panel); border: 3px solid var(--accent); box-shadow: 0 0 15px var(--accent-glow); z-index: 2; }
+        .timeline-card { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 14px; padding: 18px 22px; transition: transform 0.2s, border-color 0.2s; }
+        .timeline-card:hover { transform: translateX(5px); border-color: var(--accent); }
+        .timeline-date { font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+        .timeline-event-title { font-size: 1.05rem; color: var(--text); font-weight: 800; margin-bottom: 6px; }
+        .timeline-event-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        .timeline-emoji { font-size: 1.5rem; margin-right: 8px; }
+        /* Монеты, избранное, скидки */
+        .coins-badge { display: inline-flex; align-items: center; gap: 4px; background: linear-gradient(120deg, #ffd700, #ff8c00); color: #000; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-size: 0.75rem; box-shadow: 0 2px 8px rgba(255,200,0,0.4); cursor: help; }
+        .fav-btn { position: absolute; top: 10px; left: 10px; background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-dim); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; z-index: 6; transition: all 0.2s; }
+        .fav-btn:hover { border-color: #e24a90; color: #e24a90; transform: scale(1.1); }
+        .fav-btn.active { background: #e24a90; color: #fff; border-color: #e24a90; }
+        .fav-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
+        .fav-tab { background: var(--panel); border: 1px solid var(--border-soft); color: var(--text-muted); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; }
+        .fav-tab.active { background: #e24a90; color: #fff; border-color: #e24a90; }
+        .deal-banner { background: linear-gradient(120deg, rgba(255,51,51,0.15), rgba(255,140,0,0.1)); border: 2px solid var(--accent); border-radius: 16px; padding: 20px 24px; margin-bottom: 25px; text-align: center; position: relative; overflow: hidden; }
+        .deal-banner::before { content: '🔥'; position: absolute; top: -10px; right: 10px; font-size: 4rem; opacity: 0.15; transform: rotate(15deg); }
+        .deal-title { font-size: 1.2rem; color: var(--accent); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+        .deal-product { font-size: 1rem; color: var(--text); font-weight: 700; margin-bottom: 6px; }
+        .deal-price { font-size: 1.5rem; color: #ffd700; font-weight: 900; }
+        .deal-old-price { font-size: 0.9rem; color: var(--text-dim); text-decoration: line-through; margin-left: 8px; }
+        .deal-timer { font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; }
+        .checkout-summary { background: var(--bg); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .checkout-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 0.9rem; color: var(--text-muted); }
+        .checkout-row.total { border-top: 1px dashed var(--border-soft); padding-top: 10px; margin-top: 6px; font-size: 1rem; color: var(--text); font-weight: 800; }
+        .checkout-row.total .checkout-coins { color: #ffd700; font-size: 1.15rem; }
+        .checkout-success { text-align: center; padding: 30px 20px; }
+        .checkout-success-icon { font-size: 5rem; margin-bottom: 15px; animation: redisoneyBounce 1s ease-in-out infinite; }
+        .checkout-success-title { font-size: 1.4rem; color: var(--success); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        .checkout-success-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+        #animated-bg { position: fixed; inset: 0; z-index: -3; pointer-events: none; overflow: hidden; opacity: 0.5; }
+        #animated-bg .falling { position: absolute; color: rgba(255,51,51,0.35); font-family: monospace; font-weight: 900; animation: fallDown linear infinite; text-shadow: 0 0 10px rgba(255,51,51,0.5); }
+        @keyframes fallDown { 0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+        #loadingScreen { position: fixed; inset: 0; z-index: 99999; background: radial-gradient(circle at center, #1a0505 0%, #0a0a0f 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+        #loadingScreen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loading-logo { font-size: 3rem; font-weight: 900; color: var(--text); letter-spacing: 6px; margin-bottom: 20px; text-shadow: 0 0 30px var(--accent-glow); animation: loadingPulse 1.5s ease-in-out infinite; }
+        .loading-logo span { color: var(--accent); }
+        @keyframes loadingPulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } }
+        .loading-bar { width: 280px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-bottom: 12px; }
+        .loading-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #b388ff); width: 0%; border-radius: 3px; transition: width 0.3s ease; box-shadow: 0 0 15px var(--accent-glow); }
+        .loading-text { color: var(--text-dim); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; }
+        @keyframes shake { 0%,100% { transform: translateX(0); } 10%,30%,50%,70%,90% { transform: translateX(-5px); } 20%,40%,60%,80% { transform: translateX(5px); } }
         @keyframes flashFade { 0% { opacity: 1; } 100% { opacity: 0; } }
         @media (max-width: 1100px) { .topbar-nav { display: none; } }
         @media (max-width: 1024px) {
             .hero h1 { font-size: 3rem; }
-            .section-wrapper, .promo, .big-banner, .about-section, .showcase-tabs, .prediction-section, .map-section, .season-accordion-wrapper, .char-grid, .lore-accordion-wrapper, .coop-section, .shop-grid, .music-grid, .timer-section, .game-section, .daily-section, .wheel-section, .duel-section, .friends-section { padding-left: 30px; padding-right: 30px; }
+            .section-wrapper, .promo, .big-banner, .about-section, .showcase-tabs, .prediction-section, .map-section, .season-accordion-wrapper, .char-grid, .lore-accordion-wrapper, .coop-section, .shop-grid, .music-grid, .timer-section, .game-section, .daily-section, .wheel-section, .duel-section, .friends-section, .quotes-section, .timeline-section { padding-left: 30px; padding-right: 30px; }
         }
         @media (max-width: 768px) {
             .topbar { padding: 8px 12px; gap: 8px; }
@@ -544,14 +613,14 @@
             .prediction-text { font-size: 1rem; min-height: 70px; }
             .prediction-btn { width: 100%; padding: 14px 20px; font-size: 0.85rem; }
             .map-container { padding: 14px; border-radius: 18px; }
-            .map-svg { height: auto; aspect-ratio: 4 / 3; min-height: 320px; }
+            .map-svg { height: auto; aspect-ratio: 4/3; min-height: 320px; }
             .map-info { padding: 16px 18px; font-size: 0.9rem; }
             .map-info strong { font-size: 1.05rem; }
             .section-title { font-size: 1.35rem; margin-bottom: 16px; }
             .showcase-tabs { gap: 8px; padding: 0 20px; }
             .showcase-tab { padding: 9px 16px; font-size: 0.75rem; flex: 1 1 auto; text-align: center; }
             .showcase-description { padding: 18px 20px; font-size: 0.88rem; }
-            .carousel { gap: 12px; padding: 0 20px 16px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+            .carousel { gap: 12px; padding: 0 20px 16px; scroll-snap-type: x mandatory; }
             .card { flex: 0 0 78vw; scroll-snap-align: start; }
             .card-image { height: 150px; font-size: 3rem; }
             .big-banner { margin: 40px auto; } .big-banner-inner { padding: 32px 20px; border-radius: 16px; } .big-banner h2 { font-size: 1.5rem; } .big-banner p { font-size: 0.9rem; }
@@ -562,10 +631,10 @@
             .lore-header { padding: 16px 18px; } .lore-icon { font-size: 1.5rem; } .lore-header-title { font-size: 1rem; } .lore-body-inner { padding: 0 18px 20px; padding-top: 16px; font-size: 0.88rem; }
             .season-header { padding: 16px 18px; } .season-header-left { gap: 12px; } .season-header-number { font-size: 1.7rem; } .season-header-title { font-size: 0.95rem; } .season-header-badge { display: inline-block; margin: 4px 0 0; font-size: 0.58rem; } .season-body-inner { padding: 18px 18px 20px; } .season-episode-item { padding: 12px 14px; } .season-episode-title { font-size: 0.88rem; } .season-episode-sub { font-size: 0.68rem; }
             .modal-overlay { padding: 14px; }
-            .modal, .profile-modal { padding: 26px 20px; max-height: 92vh; max-height: 92svh; overflow-y: auto; border-radius: 16px; }
+            .modal, .profile-modal { padding: 26px 20px; max-height: 92vh; overflow-y: auto; border-radius: 16px; }
             .modal h2 { font-size: 1.25rem; margin-bottom: 18px; } .modal-close { top: 10px; right: 14px; font-size: 1.5rem; }
             .form-group label { font-size: 0.7rem; } .form-group input, .form-group select { padding: 12px 14px; font-size: 16px; } .modal-btn { padding: 14px; font-size: 0.85rem; }
-            .promo-modal, .auth-required { padding: 30px 22px; max-height: 90vh; max-height: 90svh; overflow-y: auto; } .promo-title { font-size: 1.3rem; } .promo-emoji, .auth-required-emoji { font-size: 3.5rem; } .auth-required-title { font-size: 1.2rem; } .auth-required-buttons { flex-direction: column; } .auth-required-btn { width: 100%; }
+            .promo-modal, .auth-required { padding: 30px 22px; max-height: 90vh; overflow-y: auto; } .promo-title { font-size: 1.3rem; } .promo-emoji, .auth-required-emoji { font-size: 3.5rem; } .auth-required-title { font-size: 1.2rem; } .auth-required-buttons { flex-direction: column; } .auth-required-btn { width: 100%; }
             .notification { top: auto; bottom: 80px; right: 12px; left: 12px; max-width: none; font-size: 0.85rem; padding: 14px 18px; transform: translateY(120px); } .notification.show { transform: translateY(0); }
             .suggest-section { padding: 0 20px; margin: 40px auto; } .suggest-box { padding: 26px 20px; } .suggest-title { font-size: 1.2rem; }
             .redisoney-modal { padding: 30px 20px; } .redisoney-emoji { font-size: 3.5rem; } .redisoney-title { font-size: 1.3rem; }
@@ -582,6 +651,17 @@
             .achievement-toast { top: auto; bottom: 80px; right: 12px; left: 12px; max-width: none; transform: translateY(200px); }
             .achievement-toast.show { transform: translateY(0); right: 12px; }
             .achievements-grid { grid-template-columns: 1fr 1fr; }
+            .quotes-section, .timeline-section { padding: 0 20px; margin: 40px auto; }
+            .timeline-title, .quotes-title { font-size: 1.4rem; }
+            .timeline-wrap { padding-left: 30px; }
+            .timeline-wrap::before { left: 10px; }
+            .timeline-dot { left: -27px; width: 16px; height: 16px; }
+            .deal-banner { padding: 16px; }
+            .deal-title { font-size: 1rem; }
+            .deal-price { font-size: 1.2rem; }
+            .loading-logo { font-size: 2rem; letter-spacing: 3px; }
+            .loading-bar { width: 220px; }
+            .checkout-success-icon { font-size: 3.5rem; }
         }
         @media (max-width: 420px) {
             .shop-grid, .music-grid, .char-grid { grid-template-columns: 1fr; }
@@ -589,6 +669,16 @@
         }
     </style>
 </head><body>
+
+    <!-- ЗАГРУЗОЧНЫЙ ЭКРАН -->
+    <div id="loadingScreen">
+        <div class="loading-logo">АКИ<span>×</span>ЭПСИЛОН</div>
+        <div class="loading-bar"><div class="loading-bar-fill" id="loadingBarFill"></div></div>
+        <div class="loading-text" id="loadingText">Загрузка...</div>
+    </div>
+
+    <!-- АНИМИРОВАННЫЙ ФОН -->
+    <div id="animated-bg"></div>
 
     <div id="bg-glow"></div>
 
@@ -602,12 +692,17 @@
             <button class="nav-btn" onclick="showPage('shop')" data-i18n="nav_shop">Магазин</button>
             <button class="nav-btn" onclick="showPage('seasons')" data-i18n="nav_seasons">Сезоны</button>
             <button class="nav-btn" onclick="showPage('music')" data-i18n="nav_music">Музыка</button>
+            <button class="nav-btn" onclick="showPage('quotes')">Цитаты</button>
             <button class="nav-btn" onclick="showPage('coop')" data-i18n="nav_coop">Сотрудничество</button>
             <button class="nav-btn" onclick="showPage('about')" data-i18n="nav_about">О проекте</button>
         </div>
         <div class="topbar-right">
             <button class="icon-btn search-btn" onclick="openSearch()" title="Поиск">🔍</button>
             <button class="icon-btn theme-btn" onclick="toggleTheme()" title="Сменить тему" id="themeBtn">🌙</button>
+            <div class="coins-badge" id="coinsBadge" title="Монеты" style="display:none;">
+                <span class="coin-icon">🪙</span>
+                <span id="coinsCount">0</span>
+            </div>
             <div id="userArea">
                 <button class="user-btn" onclick="openAuth('login')">
                     <span class="avatar">👤</span>
@@ -762,6 +857,12 @@
             </div>
         </div>
 
+        <!-- ТАЙМЛАЙН -->
+        <div class="timeline-section">
+            <h2 class="timeline-title">📅 <span>ТАЙМЛАЙН</span></h2>
+            <div class="timeline-wrap" id="timelineWrap"></div>
+        </div>
+
         <!-- КАРТА -->
         <div class="map-section">
             <h2 class="map-title" data-i18n="map_title">🗺️ <span>КАРТА ЭПСИЛОНА</span></h2>
@@ -862,27 +963,27 @@
             <div class="carousel" id="allGrid"></div>
         </div>
         <div class="section-wrapper showcase-content" id="showcase-aki">
-            <div class="showcase-description acrylic"><strong>КТО ТАКОЙ АКИ?</strong><br>Аки — 19-летний парень, который любил исследовать заброшки. Нашёл странный камень, заразился аномалией, вступил в Эпсилон, умер, воскрес — но потерял силу. Теперь он обычный человек с реверсом и опытом.</div>
+            <div class="showcase-description acrylic"><strong>КТО ТАКОЙ АКИ?</strong><br>Аки — 19-летний парень. Нашёл странный камень, заразился аномалией, вступил в Эпсилон, умер, воскрес — но потерял силу.</div>
             <div class="carousel" id="akiGrid"></div>
         </div>
         <div class="section-wrapper showcase-content" id="showcase-epsilon">
-            <div class="showcase-description acrylic"><strong>ЧТО ТАКОЕ ЭПСИЛОН?</strong><br>Тайная организация, основанная 30 лет назад. Спасает мир от аномалий и монстров. Тайно. Жёстко. Без благодарности. 100+ агентов, несколько баз.</div>
+            <div class="showcase-description acrylic"><strong>ЧТО ТАКОЕ ЭПСИЛОН?</strong><br>Тайная организация, основанная 30 лет назад. Спасает мир от аномалий и монстров. Тайно. Жёстко. Без благодарности.</div>
             <div class="carousel" id="epsilonGrid"></div>
         </div>
         <div class="section-wrapper showcase-content" id="showcase-chronicles">
-            <div class="showcase-description acrylic"><strong>СВИДЕТЕЛИ</strong><br>«Свидетели» — бывшие агенты Эпсилона, которые узнали правду и ушли. Зейн, Мира, Корв, Тень, Вейн.</div>
+            <div class="showcase-description acrylic"><strong>СВИДЕТЕЛИ</strong><br>Бывшие агенты Эпсилона, которые узнали правду и ушли. Зейн, Мира, Корв, Тень, Вейн.</div>
             <div class="carousel" id="chroniclesGrid"></div>
         </div>
         <div class="section-wrapper showcase-content" id="showcase-season6">
-            <div class="showcase-description acrylic"><strong>СЕЗОН 6: «НОВАЯ ЭРА»</strong><br>Финал истории. Война закончена. Эпсилон больше не будет прежним. Арки 21–25.</div>
+            <div class="showcase-description acrylic"><strong>СЕЗОН 6: «НОВАЯ ЭРА»</strong><br>Финал истории. Война закончена. Арки 21–25.</div>
             <div class="carousel" id="season6Grid"></div>
         </div>
         <div class="section-wrapper showcase-content" id="showcase-season7">
-            <div class="showcase-description acrylic"><strong>СЕЗОН 7: «ЭХО ПРОШЛОГО»</strong><br>После падения Эпсилона Аки пытается жить обычной жизнью, но появляется «Синдикат». Арки 26–30.</div>
+            <div class="showcase-description acrylic"><strong>СЕЗОН 7: «ЭХО ПРОШЛОГО»</strong><br>После падения Эпсилона появляется «Синдикат». Арки 26–30.</div>
             <div class="carousel" id="season7Grid"></div>
         </div>
         <div class="section-wrapper showcase-content" id="showcase-season8">
-            <div class="showcase-description acrylic"><strong>СЕЗОН 8: «ТЁМНОЕ ОТРАЖЕНИЕ»</strong><br>Новый Эпсилон, маньяк, голоса в голове и цена героизма. Арки 31–35.</div>
+            <div class="showcase-description acrylic"><strong>СЕЗОН 8: «ТЁМНОЕ ОТРАЖЕНИЕ»</strong><br>Новый Эпсилон, маньяк, голоса в голове. Арки 31–35.</div>
             <div class="carousel" id="season8Grid"></div>
         </div>
 
@@ -948,6 +1049,16 @@
         <div class="showcase-description acrylic" style="max-width: 1200px; margin: 0 auto 25px; margin-left: 60px; margin-right: 60px;">
             <strong>ВНИМАНИЕ:</strong> весь мерч — <strong>вымышленный</strong>. Цен нет, в реальной жизни он не продаётся. Пока что. 😉
         </div>
+        <div class="deal-banner" id="dealBanner" style="display:none;">
+            <div class="deal-title">🔥 СКИДКА ДНЯ</div>
+            <div class="deal-product" id="dealProduct">—</div>
+            <div><span class="deal-price" id="dealPrice">0</span><span class="deal-old-price" id="dealOldPrice">0</span></div>
+            <div class="deal-timer" id="dealTimer">Обновляется в 00:00</div>
+        </div>
+        <div class="showcase-tabs" style="justify-content: center;">
+            <button class="showcase-tab active" id="shopTabAll" onclick="switchShopTab('all')">🛒 Все товары</button>
+            <button class="showcase-tab" id="shopTabFav" onclick="switchShopTab('fav')">❤️ Избранное</button>
+        </div>
         <div class="shop-grid" id="shopGrid"></div>
     </div>
 
@@ -964,7 +1075,7 @@
         <div class="section-wrapper" style="margin-top: 40px;">
             <h2 class="section-title" data-i18n="music_title">🎵 <span>МУЗЫКА</span></h2>
         </div>
-        <div class="showcase-description acrylic" style="max-width: 1200px; margin: 0 auto 25px; margin-left: 60px; margin-right: 60px; text-align: center; border-left: none; border: 2px dashed rgba(255, 51, 51, 0.4); border-radius: 16px;">
+        <div class="showcase-description acrylic" style="max-width: 1200px; margin: 0 auto 25px; margin-left: 60px; margin-right: 60px; text-align: center; border-left: none; border: 2px dashed rgba(255,51,51,0.4); border-radius: 16px;">
             <strong>ВНИМАНИЕ:</strong> музыкальный раздел находится в разработке. Скоро здесь появятся треки! 🎧
         </div>
         <div class="music-grid">
@@ -986,6 +1097,16 @@
             <div class="music-item" onclick="showNotification('🎵 Трек ещё в разработке. Скоро!', 'error')">
                 <div class="music-cover">🥁</div><div class="music-name" data-i18n="music_6">Final Battle</div><div class="music-artist" data-i18n="music_artist">Эпсилон Soundtrack</div>
             </div>
+        </div>
+    </div>
+
+    <!-- ============ QUOTES ============ -->
+    <div class="page" id="page-quotes">
+        <div class="section-wrapper" style="margin-top: 40px;">
+            <h2 class="section-title">💬 <span>ЦИТАТЫ</span></h2>
+        </div>
+        <div class="quotes-section">
+            <div class="quotes-grid" id="quotesGrid"></div>
         </div>
     </div>
 
@@ -1145,6 +1266,7 @@
                 <span>Всего товаров:</span>
                 <span id="cartTotalCount" style="color: var(--accent);">0</span>
             </div>
+            <button class="modal-btn" id="checkoutBtn" onclick="openCheckout()" style="display:none; background: linear-gradient(120deg, #ffd700, #ff8c00); color: #000;">💳 Оформить заказ</button>
             <button class="modal-btn" onclick="closeCart()" data-i18n="cart_btn">Закрыть</button>
         </div>
     </div>
@@ -1163,8 +1285,8 @@
     <!-- ПРОФИЛЬ (с ачивками и курсорами) -->
     <div class="modal-overlay" id="profileModal">
         <div class="profile-modal acrylic">
-            <button class="modal-close" onclick="closeProfile()">×</button>
-            <h2 style="font-size:1.3rem; color:var(--text); margin-bottom:20px; text-align:center; letter-spacing:2px; text-transform:uppercase;">⚙️ Настройки профиля</h2>
+            <button class="modal-close" onclick="closeProfile()" title="Закрыть">×</button>
+            <h2 style="font-size:1.1rem; color:var(--text); margin-bottom:14px; text-align:center; letter-spacing:1.5px; text-transform:uppercase;">⚙️ Настройки профиля</h2>
             <div class="profile-preview">
                 <div class="profile-avatar-large" id="profilePreviewAvatar">👤</div>
                 <div class="profile-preview-name" id="profilePreviewName">Ник</div>
@@ -1193,7 +1315,7 @@
             <button onclick="resetCursor()" style="background:transparent; border:1px solid var(--border-soft); color:var(--text-dim); padding:8px 14px; border-radius:10px; font-size:0.75rem; cursor:pointer; font-family:inherit; margin-top:8px; width:100%;">Сбросить курсор</button>
             <div class="profile-section-title">🏆 Достижения</div>
             <div class="achievements-grid" id="achievementsGrid"></div>
-            <button class="modal-btn" onclick="saveProfileCustomization()" style="margin-top:25px;">Сохранить</button>
+            <button class="modal-btn" onclick="saveProfileCustomization()" style="margin-top:16px;">Сохранить</button>
         </div>
     </div>
 
@@ -1215,6 +1337,18 @@
             </div>
             <div class="leaderboard-list" id="leaderboardList"></div>
             <button class="leaderboard-clear-btn" onclick="clearLeaderboard()">Очистить локальный топ</button>
+        </div>
+    </div>
+
+    <!-- ОФОРМЛЕНИЕ ЗАКАЗА -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal acrylic" style="max-width: 440px;">
+            <button class="modal-close" onclick="closeCheckout()">×</button>
+            <div id="checkoutContent">
+                <h2>💳 Оформление заказа</h2>
+                <div class="checkout-summary" id="checkoutSummary"></div>
+                <button class="modal-btn" onclick="confirmCheckout()">Оформить заказ</button>
+            </div>
         </div>
     </div>
 
@@ -1252,6 +1386,49 @@
                 ticking = true;
             }
         });
+
+        // ===== ЗАГРУЗОЧНЫЙ ЭКРАН + АНИМИРОВАННЫЙ ФОН =====
+        function initLoadingScreen() {
+            const screen = document.getElementById('loadingScreen');
+            const fill = document.getElementById('loadingBarFill');
+            const text = document.getElementById('loadingText');
+            if (!screen || !fill) return;
+            const steps = ['Загрузка...', 'Загрузка данных...', 'Загрузка персонажей...', 'Почти готово...', 'Готово!'];
+            let progress = 0;
+            let stepIndex = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 25 + 10;
+                if (progress > 100) progress = 100;
+                fill.style.width = progress + '%';
+                if (stepIndex < steps.length && progress > (stepIndex + 1) * 20) {
+                    stepIndex++;
+                    if (text && steps[stepIndex]) text.textContent = steps[stepIndex];
+                }
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        screen.classList.add('hidden');
+                        setTimeout(() => { screen.style.display = 'none'; }, 700);
+                    }, 400);
+                }
+            }, 350);
+        }
+        function initAnimatedBg() {
+            const bg = document.getElementById('animated-bg');
+            if (!bg) return;
+            const symbols = ['🩸', '⚡', '💥', '👁️', '🧬', '☢️', '🔑', '🎭', '💀', '🕳️'];
+            const count = 20;
+            for (let i = 0; i < count; i++) {
+                const el = document.createElement('div');
+                el.className = 'falling';
+                el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.fontSize = (Math.random() * 20 + 12) + 'px';
+                el.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                el.style.animationDelay = (Math.random() * 15) + 's';
+                bg.appendChild(el);
+            }
+        }
 
         // ===== 30 УРОВНЕЙ XP =====
         const XP_LEVELS = [
@@ -1303,6 +1480,7 @@
             }
             updateXPBar();
             checkAchievementsAfterXP();
+            updateCoinsDisplay();
         }
         function getLevelIndex(xp) {
             for (let i = XP_LEVELS.length - 1; i >= 0; i--) {
@@ -1327,6 +1505,32 @@
             if (fillEl) fillEl.style.width = `${Math.min(100, progress)}%`;
             const textEl = document.getElementById('xpText');
             if (textEl) textEl.textContent = `${xp} / ${nextLevel.xp} XP`;
+        }
+
+        // ===== МОНЕТЫ =====
+        const COINS_PER_XP = 10;
+        function getUserCoins() {
+            const user = getCurrentUser();
+            if (!user) return 0;
+            const xp = parseInt(localStorage.getItem('aki_xp_' + user.nickname) || 0);
+            const spent = parseInt(localStorage.getItem('aki_coins_spent_' + user.nickname) || 0);
+            return Math.floor(xp / COINS_PER_XP) - spent;
+        }
+        function spendCoins(amount) {
+            const user = getCurrentUser();
+            if (!user) return false;
+            const coins = getUserCoins();
+            if (coins < amount) return false;
+            const spent = parseInt(localStorage.getItem('aki_coins_spent_' + user.nickname) || 0);
+            localStorage.setItem('aki_coins_spent_' + user.nickname, spent + amount);
+            updateCoinsDisplay();
+            return true;
+        }
+        function updateCoinsDisplay() {
+            const el = document.getElementById('coinsCount');
+            if (el) el.textContent = getUserCoins();
+            const badge = document.getElementById('coinsBadge');
+            if (badge) badge.style.display = getCurrentUser() ? 'inline-flex' : 'none';
         }
 
         // ===== ИГРА: РЕВЕРС + БОСС-РАШ =====
@@ -1381,11 +1585,8 @@
                 const rand = Math.random();
                 let points = 1, timeToLive = 1500;
                 const isBossMode = currentGameMode === 'boss';
-                if (isBossMode) {
-                    target.className = 'boss-target';
-                    target.textContent = '👹';
-                    points = 3; timeToLive = 1600;
-                } else {
+                if (isBossMode) { target.className = 'boss-target'; target.textContent = '👹'; points = 3; timeToLive = 1600; }
+                else {
                     target.className = 'game-target';
                     if (rand > 0.85) { target.classList.add('boss'); target.textContent = '👹'; points = 3; timeToLive = 2000; }
                     else if (rand > 0.6) { target.classList.add('fast'); target.textContent = '⚡'; points = 1; timeToLive = 800; }
@@ -1983,6 +2184,110 @@
             }).join('');
             const urlInput = document.getElementById('customCursorUrl');
             if (urlInput && settings.id === 'custom') urlInput.value = settings.customUrl || '';
+        }
+
+        // ===== ИЗБРАННОЕ =====
+        function getFavorites() {
+            const user = getCurrentUser();
+            if (!user) return [];
+            const raw = localStorage.getItem('aki_favorites_' + user.nickname);
+            return raw ? JSON.parse(raw) : [];
+        }
+        function saveFavorites(list) {
+            const user = getCurrentUser();
+            if (!user) return;
+            localStorage.setItem('aki_favorites_' + user.nickname, JSON.stringify(list));
+        }
+        function toggleFavorite(productId) {
+            const user = getCurrentUser();
+            if (!user) { document.getElementById('authRequiredModal').classList.add('active'); return; }
+            let favs = getFavorites();
+            if (favs.includes(productId)) {
+                favs = favs.filter(id => id !== productId);
+                showNotification(currentLang === 'ru' ? 'Убрано из избранного' : 'Removed from favorites');
+            } else {
+                favs.push(productId);
+                showNotification(currentLang === 'ru' ? '❤️ Добавлено в избранное' : '❤️ Added to favorites', 'success');
+            }
+            saveFavorites(favs);
+            renderShop();
+        }
+        let currentShopTab = 'all';
+        function switchShopTab(tab) {
+            currentShopTab = tab;
+            document.getElementById('shopTabAll').classList.toggle('active', tab === 'all');
+            document.getElementById('shopTabFav').classList.toggle('active', tab === 'fav');
+            renderShop();
+        }
+
+        // ===== СКИДКА ДНЯ =====
+        function getTodayDeal() {
+            const dayNum = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
+            const seed = dayNum % 1000;
+            const paidProducts = PRODUCTS.filter(p => !p.free);
+            const idx = seed % paidProducts.length;
+            return { product: paidProducts[idx], discount: 50 };
+        }
+        function renderDealBanner() {
+            const banner = document.getElementById('dealBanner');
+            if (!banner) return;
+            const deal = getTodayDeal();
+            if (!deal.product) { banner.style.display = 'none'; return; }
+            banner.style.display = 'block';
+            const name = currentLang === 'ru' ? deal.product.name : deal.product.name_en;
+            document.getElementById('dealProduct').textContent = `${deal.product.emoji} ${name}`;
+            const basePrice = 100;
+            document.getElementById('dealPrice').textContent = `${Math.floor(basePrice * (1 - deal.discount / 100))} 🪙`;
+            document.getElementById('dealOldPrice').textContent = `${basePrice} 🪙`;
+            const now = new Date();
+            const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+            const left = endOfDay - now;
+            const h = Math.floor(left / (1000 * 60 * 60));
+            const m = Math.floor((left / (1000 * 60)) % 60);
+            document.getElementById('dealTimer').textContent = `До конца скидки: ${h}ч ${m}м`;
+        }
+
+        // ===== ОФОРМЛЕНИЕ ЗАКАЗА =====
+        function openCheckout() {
+            const user = getCurrentUser();
+            if (!user) { document.getElementById('authRequiredModal').classList.add('active'); return; }
+            const cart = getCart();
+            if (cart.length === 0) { showNotification(currentLang === 'ru' ? 'Корзина пуста' : 'Cart is empty', 'error'); return; }
+            const summary = document.getElementById('checkoutSummary');
+            let totalItems = 0, totalCoins = 0;
+            const rows = cart.map(item => {
+                totalItems += item.qty;
+                const price = PRODUCTS.find(p => p.id === item.id)?.free ? 0 : 100;
+                totalCoins += price * item.qty;
+                const name = currentLang === 'ru' ? item.name : item.name_en;
+                return `<div class="checkout-row"><span>${item.emoji} ${name} × ${item.qty}</span><span>${price * item.qty} 🪙</span></div>`;
+            }).join('');
+            summary.innerHTML = `${rows}<div class="checkout-row"><span>Товаров:</span><span>${totalItems}</span></div><div class="checkout-row total"><span>Итого:</span><span class="checkout-coins">${totalCoins} 🪙</span></div><div class="checkout-row"><span>У тебя монет:</span><span style="color:${getUserCoins() >= totalCoins ? 'var(--success)' : 'var(--accent)'};">${getUserCoins()} 🪙</span></div>`;
+            closeCart();
+            document.getElementById('checkoutModal').classList.add('active');
+        }
+        function confirmCheckout() {
+            const cart = getCart();
+            let totalCoins = 0;
+            cart.forEach(item => {
+                const price = PRODUCTS.find(p => p.id === item.id)?.free ? 0 : 100;
+                totalCoins += price * item.qty;
+            });
+            if (!spendCoins(totalCoins)) {
+                showNotification(currentLang === 'ru' ? 'Недостаточно монет!' : 'Not enough coins!', 'error');
+                return;
+            }
+            const content = document.getElementById('checkoutContent');
+            content.innerHTML = `<div class="checkout-success"><div class="checkout-success-icon">🎉</div><div class="checkout-success-title">Заказ оформлен!</div><div class="checkout-success-text">Спасибо за заказ! Товары вымышленные, но монеты списаны по-настоящему (шутка — это игра).</div><button class="modal-btn" onclick="closeCheckout()" style="margin-top: 20px;">Отлично!</button></div>`;
+            saveCart([]);
+            updateCartCount();
+            addXP(20);
+        }
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('checkoutContent').innerHTML = `<h2>💳 Оформление заказа</h2><div class="checkout-summary" id="checkoutSummary"></div><button class="modal-btn" onclick="confirmCheckout()">Оформить заказ</button>`;
+            }, 300);
         }        // ===== КАРТА =====
         const MAP_DATA = {
             ru: {
@@ -2003,20 +2308,13 @@
                 default: 'Нажми на любую точку на карте, чтобы узнать больше о локации'
             },
             en: {
-                lab: { t: 'Abandoned Lab', d: 'Aki got infected here.' },
-                base: { t: 'Epsilon HQ', d: 'Secret base.' },
-                sector: { t: 'Old Sector', d: 'Where "Echo" virus was created.' },
-                factory: { t: 'Old Factory', d: 'Aki met Zane here.' },
-                bunker: { t: 'Witnesses Bunker', d: 'Refuge of the Witnesses.' },
-                home: { t: "Aki's House", d: 'Aki rested here.' },
-                camp: { t: 'Forest Campfire', d: 'Last peaceful day.' },
-                ruins: { t: 'Epsilon Ruins', d: 'Remains of old HQ.' },
-                cryos: { t: 'Ice Prison', d: 'Secret Epsilon prison.' },
-                forest: { t: 'Rotting Forest', d: 'Anomaly zone.' },
-                city: { t: 'Ghost City', d: 'Destroyed metropolis.' },
-                ship: { t: 'Ark Ship', d: 'Sunken liner.' },
-                abyss: { t: 'Rift', d: 'Anomaly source.' },
-                hospital: { t: 'Hospital', d: 'Experiments place.' },
+                lab: { t: 'Abandoned Lab', d: 'Aki got infected here.' }, base: { t: 'Epsilon HQ', d: 'Secret base.' },
+                sector: { t: 'Old Sector', d: 'Where "Echo" virus was created.' }, factory: { t: 'Old Factory', d: 'Aki met Zane here.' },
+                bunker: { t: 'Witnesses Bunker', d: 'Refuge of the Witnesses.' }, home: { t: "Aki's House", d: 'Aki rested here.' },
+                camp: { t: 'Forest Campfire', d: 'Last peaceful day.' }, ruins: { t: 'Epsilon Ruins', d: 'Remains of old HQ.' },
+                cryos: { t: 'Ice Prison', d: 'Secret Epsilon prison.' }, forest: { t: 'Rotting Forest', d: 'Anomaly zone.' },
+                city: { t: 'Ghost City', d: 'Destroyed metropolis.' }, ship: { t: 'Ark Ship', d: 'Sunken liner.' },
+                abyss: { t: 'Rift', d: 'Anomaly source.' }, hospital: { t: 'Hospital', d: 'Experiments place.' },
                 default: 'Click on any point'
             }
         };
@@ -2135,20 +2433,30 @@
         function renderShop() {
             const grid = document.getElementById('shopGrid');
             if (!grid) return;
+            const favs = getFavorites();
+            const filtered = currentShopTab === 'fav' ? PRODUCTS.filter(p => favs.includes(p.id)) : PRODUCTS;
+            if (currentShopTab === 'fav' && filtered.length === 0) {
+                grid.innerHTML = `<div class="leaderboard-empty" style="grid-column:1/-1;">Пока ничего в избранном. Нажми ❤️ на товаре!</div>`;
+                return;
+            }
             grid.innerHTML = '';
-            PRODUCTS.forEach(product => {
+            filtered.forEach(product => {
+                const isFav = favs.includes(product.id);
                 let priceHTML = product.free
                     ? `<div class="shop-discount">-100%</div><div class="shop-price free">${currentLang === 'ru' ? 'БЕСПЛАТНО 🎉' : 'FREE 🎉'}</div>`
-                    : `<div class="shop-price no-price">${currentLang === 'ru' ? 'Цена ещё нет — не продаётся.' : 'No price yet.'}</div>`;
+                    : `<div class="shop-price no-price">100 🪙</div>`;
                 const pName = currentLang === 'ru' ? product.name : product.name_en;
                 const item = document.createElement('div');
                 item.className = 'shop-item acrylic';
-                item.innerHTML = `${priceHTML}<div class="shop-emoji">${product.emoji}</div><div class="shop-name">${pName}</div><button class="shop-buy">${currentLang === 'ru' ? 'Купить' : 'Buy'}</button>`;
+                item.innerHTML = `<button class="fav-btn ${isFav ? 'active' : ''}" title="В избранное">${isFav ? '❤️' : '🤍'}</button>${priceHTML}<div class="shop-emoji">${product.emoji}</div><div class="shop-name">${pName}</div><button class="shop-buy">${currentLang === 'ru' ? 'Купить' : 'Buy'}</button>`;
+                const favBtn = item.querySelector('.fav-btn');
+                favBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleFavorite(product.id); });
                 const buyBtn = item.querySelector('.shop-buy');
                 buyBtn.addEventListener('click', (e) => { e.stopPropagation(); buyItem(pName, !!product.free, product); });
                 item.addEventListener('click', () => buyItem(pName, !!product.free, product));
                 grid.appendChild(item);
             });
+            renderDealBanner();
         }
 
         // ===== КОРЗИНА =====
@@ -2188,17 +2496,20 @@
             const user = getCurrentUser();
             if (!user) { document.getElementById('authRequiredModal').classList.add('active'); return; }
             renderCartModal();
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            if (checkoutBtn) checkoutBtn.style.display = getCart().length > 0 ? 'block' : 'none';
             document.getElementById('cartModal').classList.add('active');
         }
         function closeCart() { document.getElementById('cartModal').classList.remove('active'); }
         function renderCartModal() {
-            const list = document.getElementById('cartItemsList'), empty = document.getElementById('cartEmptyMsg'), totalRow = document.getElementById('cartTotalRow'), totalCount = document.getElementById('cartTotalCount');
+            const list = document.getElementById('cartItemsList'), empty = document.getElementById('cartEmptyMsg'), totalRow = document.getElementById('cartTotalRow'), totalCount = document.getElementById('cartTotalCount'), checkoutBtn = document.getElementById('checkoutBtn');
             if (!list || !empty || !totalRow || !totalCount) return;
             const cart = getCart();
             list.innerHTML = '';
-            if (cart.length === 0) { empty.style.display = 'block'; totalRow.style.display = 'none'; return; }
+            if (cart.length === 0) { empty.style.display = 'block'; totalRow.style.display = 'none'; if (checkoutBtn) checkoutBtn.style.display = 'none'; return; }
             empty.style.display = 'none';
             totalRow.style.display = 'flex';
+            if (checkoutBtn) checkoutBtn.style.display = 'block';
             cart.forEach(item => {
                 const name = currentLang === 'ru' ? item.name : item.name_en;
                 const row = document.createElement('div');
@@ -2235,7 +2546,7 @@
             }
         }
 
-        // ===== ЭПИЗОДЫ / ВИШЛИСТ =====
+        // ===== ЭПИЗОДЫ =====
         function openEpisode(sub, title) {
             const user = getCurrentUser();
             if (user) {
@@ -2412,7 +2723,7 @@
 
         // ===== ПЕРЕВОДЫ =====
         const translations = {
-            ru: { nav_home: "Главная", nav_characters: "Персонажи", nav_lore: "Лор", nav_shop: "Магазин", nav_seasons: "Сезоны", nav_music: "Музыка", nav_coop: "Сотрудничество", nav_about: "О проекте", btn_login: "Войти", btn_try: "ПОПРОБОВАТЬ", btn_about: "О проекте", hero_title: "АКИ И ЭПСИЛОН", hero_desc: "Тайная организация, которая спасает мир от аномалий и монстров. Тайно. Жёстко. Без благодарности.", promo_placeholder: "🎟 Введите промокод", promo_btn: "Применить", continue_title: "⏯ ПРОДОЛЖИТЬ ПРОСМОТР", showcase_title: "🎬 ВИТРИНЫ", showcase_all: "Все", showcase_aki: "Аки", showcase_epsilon: "Эпсилон", showcase_chronicles: "Свидетели", watchlist_title: "📌 БУДУ СМОТРЕТЬ", banner_title: "СЛЕДИ ЗА ПРОЕКТОМ", banner_desc: "Подписывайся на Telegram и YouTube", footer_text: "© 2026 Аки и Эпсилон.", modal_register: "Регистрация", modal_login: "Вход", label_nick: "Никнейм", label_pass: "Пароль", label_gender: "Пол", gender_choose: "Выбери пол", gender_male: "Мужской", gender_female: "Женский", btn_create: "Создать аккаунт", btn_login: "Войти", have_account: "Уже есть аккаунт?", no_account: "Нет аккаунта?", btn_login_link: "Войти", btn_register_link: "Зарегистрироваться", promo_modal_title: "Промокод активирован!", promo_modal_btn: "Отлично!", auth_required_title: "Требуется вход", auth_required_text: "Войди или зарегистрируйся", search_title: "🔍 Поиск", search_placeholder: "Поиск...", search_btn: "Найти", cart_title: "🛒 Корзина", cart_btn: "Закрыть", shop_title: "🛒 МАГАЗИН", music_title: "🎵 МУЗЫКА", music_artist: "Эпсилон Soundtrack", music_1: "Aki Theme", music_2: "Epsilon March", music_3: "Anomaly", music_4: "Resurrection", music_5: "Witnesses", music_6: "Final Battle", coop_title: "🤝 СОТРУДНИЧЕСТВО", coop_form_title: "Напишите нам", coop_name: "Ваше имя", coop_email: "Email", coop_message: "Сообщение", coop_send: "Отправить", about_title: "📖 О ПРОЕКТЕ", about_heading: "Аки и Эпсилон", about_text: "История о парне Аки.", map_title: "🗺️ КАРТА ЭПСИЛОНА" },
+            ru: { nav_home: "Главная", nav_characters: "Персонажи", nav_lore: "Лор", nav_shop: "Магазин", nav_seasons: "Сезоны", nav_music: "Музыка", nav_coop: "Сотрудничество", nav_about: "О проекте", btn_login: "Войти", btn_try: "ПОПРОБОВАТЬ", btn_about: "О проекте", hero_title: "АКИ И ЭПСИЛОН", hero_desc: "Тайная организация, которая спасает мир от аномалий и монстров.", promo_placeholder: "🎟 Введите промокод", promo_btn: "Применить", continue_title: "⏯ ПРОДОЛЖИТЬ ПРОСМОТР", showcase_title: "🎬 ВИТРИНЫ", showcase_all: "Все", showcase_aki: "Аки", showcase_epsilon: "Эпсилон", showcase_chronicles: "Свидетели", watchlist_title: "📌 БУДУ СМОТРЕТЬ", banner_title: "СЛЕДИ ЗА ПРОЕКТОМ", banner_desc: "Подписывайся на Telegram и YouTube", footer_text: "© 2026 Аки и Эпсилон.", modal_register: "Регистрация", modal_login: "Вход", label_nick: "Никнейм", label_pass: "Пароль", label_gender: "Пол", gender_choose: "Выбери пол", gender_male: "Мужской", gender_female: "Женский", btn_create: "Создать аккаунт", btn_login: "Войти", have_account: "Уже есть аккаунт?", no_account: "Нет аккаунта?", btn_login_link: "Войти", btn_register_link: "Зарегистрироваться", promo_modal_title: "Промокод активирован!", promo_modal_btn: "Отлично!", auth_required_title: "Требуется вход", auth_required_text: "Войди или зарегистрируйся", search_title: "🔍 Поиск", search_placeholder: "Поиск...", search_btn: "Найти", cart_title: "🛒 Корзина", cart_btn: "Закрыть", shop_title: "🛒 МАГАЗИН", music_title: "🎵 МУЗЫКА", music_artist: "Эпсилон Soundtrack", music_1: "Aki Theme", music_2: "Epsilon March", music_3: "Anomaly", music_4: "Resurrection", music_5: "Witnesses", music_6: "Final Battle", coop_title: "🤝 СОТРУДНИЧЕСТВО", coop_form_title: "Напишите нам", coop_name: "Ваше имя", coop_email: "Email", coop_message: "Сообщение", coop_send: "Отправить", about_title: "📖 О ПРОЕКТЕ", about_heading: "Аки и Эпсилон", about_text: "История о парне Аки.", map_title: "🗺️ КАРТА ЭПСИЛОНА" },
             en: { nav_home: "Home", nav_characters: "Characters", nav_lore: "Lore", nav_shop: "Shop", nav_seasons: "Seasons", nav_music: "Music", nav_coop: "Coop", nav_about: "About", btn_login: "Login", btn_try: "TRY", btn_about: "About", hero_title: "AKI & EPSILON", hero_desc: "Secret organization.", promo_placeholder: "🎟 Enter promo", promo_btn: "Apply", continue_title: "⏯ CONTINUE", showcase_title: "🎬 SHOWCASES", showcase_all: "All", showcase_aki: "Aki", showcase_epsilon: "Epsilon", showcase_chronicles: "Witnesses", watchlist_title: "📌 WATCHLIST", banner_title: "FOLLOW", banner_desc: "Subscribe", footer_text: "© 2026 Aki & Epsilon.", modal_register: "Registration", modal_login: "Login", label_nick: "Nickname", label_pass: "Password", label_gender: "Gender", gender_choose: "Choose", gender_male: "Male", gender_female: "Female", btn_create: "Create", btn_login: "Login", have_account: "Have account?", no_account: "No account?", btn_login_link: "Login", btn_register_link: "Register", promo_modal_title: "Activated!", promo_modal_btn: "Great!", auth_required_title: "Login required", auth_required_text: "Log in or register", search_title: "🔍 Search", search_placeholder: "Search...", search_btn: "Search", cart_title: "🛒 Cart", cart_btn: "Close", shop_title: "🛒 SHOP", music_title: "🎵 MUSIC", music_artist: "Epsilon Soundtrack", music_1: "Aki Theme", music_2: "Epsilon March", music_3: "Anomaly", music_4: "Resurrection", music_5: "Witnesses", music_6: "Final Battle", coop_title: "🤝 COOP", coop_form_title: "Write to us", coop_name: "Name", coop_email: "Email", coop_message: "Message", coop_send: "Send", about_title: "📖 ABOUT", about_heading: "Aki & Epsilon", about_text: "Story about Aki.", map_title: "🗺️ EPSILON MAP" }
         };
         let currentLang = 'ru';
@@ -2428,7 +2739,7 @@
                 document.getElementById('langBtn').textContent = currentLang.toUpperCase() + ' ▾';
                 applyLang();
                 renderAllEpisodes(); renderContinue(); renderWatchlist(); renderShop(); updateXPBar();
-                renderDailyTasks(); renderAchievements(); renderFriends();
+                renderDailyTasks(); renderAchievements(); renderFriends(); renderQuotes(); renderTimeline();
                 if (document.getElementById('page-seasons').classList.contains('active')) renderSeasons();
                 if (document.getElementById('page-characters').classList.contains('active')) renderCharacters();
                 if (document.getElementById('page-lore').classList.contains('active')) renderLore();
@@ -2541,6 +2852,7 @@
                 updateCartCount();
                 applyUserCustomization();
                 updateXPBar();
+                updateCoinsDisplay();
             } else {
                 userArea.innerHTML = `<button class="user-btn" onclick="openAuth('login')"><span class="avatar">👤</span><span class="name">${t.btn_login}</span></button>`;
             }
@@ -2658,7 +2970,7 @@
             nameEl.style.color = colorObj.color === '#ffffff' ? 'var(--text)' : colorObj.color;
             nameEl.style.textShadow = colorObj.color === '#ffffff' ? 'none' : `0 0 15px ${colorObj.color}`;
             const avatarEl = document.getElementById('profilePreviewAvatar');
-            avatarEl.style.cssText = `width:90px;height:90px;border-radius:50%;margin:0 auto 15px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;overflow:hidden;background:linear-gradient(145deg,var(--panel-2),var(--bg));border:${frameObj.css};`;
+            avatarEl.style.cssText = `width:70px;height:70px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:2rem;overflow:hidden;background:linear-gradient(145deg,var(--panel-2),var(--bg));border:${frameObj.css};`;
             document.getElementById('profilePreviewBadge').textContent = statusObj.label;
         }
         function saveProfileCustomization() {
@@ -2775,6 +3087,66 @@
             tick(); if (timerInterval) clearInterval(timerInterval); timerInterval = setInterval(tick, 1000);
         }
 
+        // ===== ЦИТАТЫ =====
+        const QUOTES = [
+            { text: 'Аномалия — это не энергия. Это форма жизни. Древняя. Она была здесь до нас.', author: 'Алиса', author_en: 'Alice' },
+            { text: 'Ты больше не человек. И не монстр. Ты что-то между.', author: 'Алиса', author_en: 'Alice' },
+            { text: 'Они вернулись. И они ищут тебя.', author: 'Зейн', author_en: 'Zane' },
+            { text: 'Эпсилон не спасает мир. Эпсилон исправляет свою ошибку.', author: 'Кай', author_en: 'Kai' },
+            { text: 'Доверяй только себе. Остальные врут.', author: 'Кай', author_en: 'Kai' },
+            { text: 'Я боюсь потерять вас. Всех. Как потеряла других.', author: 'Алиса', author_en: 'Alice' },
+            { text: 'Ты умер и вернулся. Я готов ко всему.', author: 'Кай', author_en: 'Kai' },
+            { text: 'Второй шанс дают только один раз.', author: 'Алиса', author_en: 'Alice' },
+            { text: 'Свидетели не те, кем кажутся.', author: 'Мира', author_en: 'Mira' },
+            { text: 'Омега уже здесь. Просто ты их не видишь.', author: 'Анастасия', author_en: 'Anastasia' },
+            { text: 'Твоя кровь светится. Ты — уникальный случай.', author: 'Вейн', author_en: 'Wayne' },
+            { text: 'Правда — у каждого своя.', author: 'Зейн', author_en: 'Zane' },
+            { text: 'Я не блогер. Я — аномалия в мире контента.', author: 'MrRedstone_UA', author_en: 'MrRedstone_UA' },
+            { text: 'Красный камень — это не блок. Это аномалия.', author: 'MrRedstone_UA', author_en: 'MrRedstone_UA' }
+        ];
+        function renderQuotes() {
+            const grid = document.getElementById('quotesGrid');
+            if (!grid) return;
+            grid.innerHTML = QUOTES.map((q, i) => {
+                const author = currentLang === 'ru' ? q.author : q.author_en;
+                return `<div class="quote-card" onclick="copyQuote(${i})"><button class="quote-copy" onclick="event.stopPropagation(); copyQuote(${i})">📋</button><div class="quote-text">«${q.text}»</div><div class="quote-author">— ${author}</div></div>`;
+            }).join('');
+        }
+        function copyQuote(index) {
+            const q = QUOTES[index];
+            if (!q) return;
+            const text = `«${q.text}» — ${currentLang === 'ru' ? q.author : q.author_en}`;
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification(currentLang === 'ru' ? '📋 Скопировано!' : '📋 Copied!', 'success');
+            }).catch(() => {
+                showNotification(currentLang === 'ru' ? 'Не удалось скопировать' : 'Copy failed', 'error');
+            });
+        }
+
+        // ===== ТАЙМЛАЙН =====
+        const TIMELINE_EVENTS = [
+            { date: 'За 30 лет до начала', date_en: '30 years before', title: 'Основание Эпсилона', title_en: 'Epsilon founded', desc: 'Тайная организация создана для борьбы с аномалиями.', desc_en: 'Secret organization created.', emoji: '🏢' },
+            { date: 'Арка 1', date_en: 'Arc 1', title: 'Заражение Аки', title_en: 'Aki infected', desc: 'Аки находит аномалию в заброшенной лаборатории.', desc_en: 'Aki finds an anomaly.', emoji: '🩸' },
+            { date: 'Арка 3', date_en: 'Arc 3', title: 'Смерть и воскрешение', title_en: 'Death', desc: 'Аки умирает и возвращается с рогами.', desc_en: 'Aki dies and returns.', emoji: '💀' },
+            { date: 'Арка 6', date_en: 'Arc 6', title: 'Вирус «Эхо»', title_en: '"Echo" virus', desc: 'Создан вирус, стирающий память.', desc_en: 'Memory-erasing virus created.', emoji: '🦠' },
+            { date: 'Арка 8', date_en: 'Arc 8', title: 'Плен у «Омеги»', title_en: 'Omega captivity', desc: 'Аки пробуждается в плену.', desc_en: 'Aki wakes in captivity.', emoji: '🕳️' },
+            { date: 'Арка 15', date_en: 'Arc 15', title: 'Бой с Реном', title_en: 'Fight with Ren', desc: 'Аки выживает после боя с Реном.', desc_en: 'Aki survives the fight.', emoji: '⚔️' },
+            { date: 'Арка 20', date_en: 'Arc 20', title: 'Омега выходит', title_en: 'Omega emerges', desc: 'Анастасия выходит из тени.', desc_en: 'Anastasia emerges.', emoji: '👁️' },
+            { date: 'Арка 25', date_en: 'Arc 25', title: 'Новая эра', title_en: 'New Era', desc: 'Аки уничтожает чип и становится свободным.', desc_en: 'Aki destroys the chip.', emoji: '🌅' },
+            { date: 'Арка 30', date_en: 'Arc 30', title: 'Новый Эпсилон', title_en: 'New Epsilon', desc: 'Аки создаёт новый Эпсилон без чипов.', desc_en: 'Aki creates a new Epsilon.', emoji: '🛡️' },
+            { date: 'Арка 35', date_en: 'Arc 35', title: 'Финальная жертва', title_en: 'Final sacrifice', desc: 'Аки выбирает между миром и собой.', desc_en: 'Aki chooses.', emoji: '💔' }
+        ];
+        function renderTimeline() {
+            const wrap = document.getElementById('timelineWrap');
+            if (!wrap) return;
+            wrap.innerHTML = TIMELINE_EVENTS.map(ev => {
+                const date = currentLang === 'ru' ? ev.date : ev.date_en;
+                const title = currentLang === 'ru' ? ev.title : ev.title_en;
+                const desc = currentLang === 'ru' ? ev.desc : ev.desc_en;
+                return `<div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-date">${date}</div><div class="timeline-event-title"><span class="timeline-emoji">${ev.emoji}</span>${title}</div><div class="timeline-event-desc">${desc}</div></div></div>`;
+            }).join('');
+        }
+
         // ===== ПОЛНЫЙ СПИСОК ПЕРСОНАЖЕЙ =====
         const CHARACTERS = [
             { id: 'aki', name: 'Аки', name_en: 'Aki', emoji: '🎭', role: 'Главный герой', role_en: 'Main Character', age: '19 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#ff3333', group: 'main', short: 'Обычный человек. Без силы. С реверсом и опытом.', short_en: 'A regular human.', full: 'Любопытный, упрямый. Всегда проверяет реверс перед миссией. У него нет силы — только опыт и реверс.', full_en: 'Curious, stubborn. No power — only experience and reverse.', tags: ['Главный герой', 'Агент', 'Реверс'], tags_en: ['Main', 'Agent', 'Reverse'] },
@@ -2842,20 +3214,20 @@
         }
         function closeCharModal() { document.getElementById('charModal').classList.remove('active'); }
 
-        // ===== ЛОР (СЕЗОНЫ 1–8) =====
+        // ===== ЛОР =====
         const LORE_SECTIONS = [
             { icon: '🌍', title: 'Мир', title_en: 'World', body: '<p><strong>Аномалии</strong> — зоны, где реальность искажена. <strong>Монстры</strong> — мутировавшие существа. <strong>Реверс</strong> — оружие Эпсилона.</p>', body_en: '<p><strong>Anomalies</strong> — distorted zones. <strong>Monsters</strong> — mutants. <strong>Reverse</strong> — weapon.</p>' },
             { icon: '🕶️', title: 'Организация Эпсилон', title_en: 'Epsilon', body: '<p>Тайная организация, основанная 30 лет назад. Форма: чёрный пиджак, белая рубашка, чёрный галстук. Чип в шее. 100+ агентов.</p>', body_en: '<p>Secret organization. 100+ agents.</p>' },
             { icon: '👁️', title: 'Что такое «Омега»?', title_en: 'Omega', body: '<p>Тайная группировка, которая знает правду об Эпсилоне. Лидер — <strong>Анастасия</strong>.</p>', body_en: '<p>Secret group. Leader — Anastasia.</p>' },
             { icon: '👥', title: 'Кто такие «Свидетели»?', title_en: 'Witnesses', body: '<p>Бывшие агенты Эпсилона, которые узнали правду. Зейн, Мира, Корв, Тень, Вейн.</p>', body_en: '<p>Former agents who learned the truth.</p>' },
-            { icon: '🩸', title: 'Сезон 1: «Аномалия»', title_en: 'Season 1: Anomaly', body: '<ul><li>Арка 1: Заброшка, разлом, заражение.</li><li>Арка 2: Допрос Алисы, первое задание с Каем.</li><li>Арка 3: Смерть и воскрешение.</li><li>Арка 4: Конфликт с Реном.</li><li>Арка 5: Потеря силы.</li></ul>', body_en: '<ul><li>Arc 1: Abandoned place, rift.</li><li>Arc 2: Alice, first mission.</li><li>Arc 3: Death and resurrection.</li><li>Arc 4: Conflict with Ren.</li><li>Arc 5: Loss of power.</li></ul>' },
-            { icon: '🌙', title: 'Сезон 2: «Тишина»', title_en: 'Season 2: Silence', body: '<ul><li>Арка 6: Вирус «Эхо». Печать.</li><li>Арка 7: Тишина перед бурей, дом Аки, вечер у костра, красная луна.</li></ul>', body_en: '<ul><li>Arc 6: "Echo" virus.</li><li>Arc 7: Calm before the storm.</li></ul>' },
-            { icon: '🕳️', title: 'Сезон 3: «Без силы»', title_en: 'Season 3: Without Power', body: '<ul><li>Арка 8: Пробуждение в плену у «Омеги».</li><li>Арка 9: Разрушенный штаб, встреча с Лирой.</li><li>Арка 10: Координаты «Сектор 7», встреча с Зейном.</li><li>Арка 11: Зейн раскрывает правду.</li></ul>', body_en: '<ul><li>Arc 8: Captivity.</li><li>Arc 9: Meeting Lira.</li><li>Arc 10: Meeting Zane.</li><li>Arc 11: Zane reveals truth.</li></ul>' },
-            { icon: '❓', title: 'Сезон 4: «Свидетели»', title_en: 'Season 4: Witnesses', body: '<ul><li>Арка 12: Встреча со Свидетелями.</li><li>Арка 13: Эпсилон ищет Аки.</li><li>Арка 14: Аки находит документы «Проект Эхо».</li><li>Арка 15: Бой с Реном, Аки выживает.</li></ul>', body_en: '<ul><li>Arc 12: Meeting Witnesses.</li><li>Arc 13: Epsilon searches.</li><li>Arc 14: "Project Echo" documents.</li><li>Arc 15: Fight with Ren.</li></ul>' },
-            { icon: '💥', title: 'Сезон 5: «Война»', title_en: 'Season 5: War', body: '<ul><li>Арка 16: Охота Эпсилона.</li><li>Арка 17: Союзники.</li><li>Арка 18: Тайна Алисы.</li><li>Арка 19: Война начинается.</li><li>Арка 20: Омега выходит из тени.</li></ul>', body_en: '<ul><li>Arc 16: Hunt.</li><li>Arc 17: Allies.</li><li>Arc 18: Alice\'s secret.</li><li>Arc 19: War begins.</li><li>Arc 20: Omega emerges.</li></ul>' },
-            { icon: '🌅', title: 'Сезон 6: «Новая эра»', title_en: 'Season 6: New Era', body: '<p><strong>Финал истории.</strong></p><ul><li>Арка 21: Аки и Лира сбегают из штаба.</li><li>Арка 22: Советник Холт приказывает уничтожить Свидетелей.</li><li>Арка 23: Анастасия атакует базу.</li><li>Арка 24: Аки встречает Кроноса.</li><li>Арка 25: Аки уничтожает чип и становится свободным.</li></ul>', body_en: '<p><strong>Finale.</strong></p><ul><li>Arc 21: Aki and Lira escape.</li><li>Arc 22: Holt orders destruction.</li><li>Arc 23: Anastasia attacks.</li><li>Arc 24: Aki meets Kronos.</li><li>Arc 25: Aki destroys chip.</li></ul>' },
-            { icon: '🏚️', title: 'Сезон 7: «Эхо прошлого»', title_en: 'Season 7: Echo of the Past', body: '<p>После падения Эпсилона появляется <strong>Синдикат</strong> во главе с <strong>Маркусом</strong>.</p><ul><li>Арка 26: Руины, файлы о проекте «Иерихон».</li><li>Арка 27: Аки встречает Маркуса.</li><li>Арка 28: Аки встречает Иерихона.</li><li>Арка 29: Аки объединяется с Джесс.</li><li>Арка 30: Аки создаёт новый Эпсилон.</li></ul>', body_en: '<p>After Epsilon falls, the Syndicate appears.</p><ul><li>Arc 26: Ruins.</li><li>Arc 27: Markus.</li><li>Arc 28: Jericho.</li><li>Arc 29: Jess.</li><li>Arc 30: New Epsilon.</li></ul>' },
-            { icon: '🪞', title: 'Сезон 8: «Тёмное отражение»', title_en: 'Season 8: Dark Reflection', body: '<p>Даже без чипов организация может стать монстром. Появляется <strong>Психотерапевт</strong>.</p><ul><li>Арка 31: Тёмное отражение.</li><li>Арка 32: Кукловод.</li><li>Арка 33: Голоса в голове.</li><li>Арка 34: Агент Ноль и Вера.</li><li>Арка 35: Финальная жертва.</li></ul>', body_en: '<p>Therapist appears.</p><ul><li>Arc 31: Dark reflection.</li><li>Arc 32: Puppeteer.</li><li>Arc 33: Voices.</li><li>Arc 34: Agent Zero and Vera.</li><li>Arc 35: Final sacrifice.</li></ul>' }
+            { icon: '🩸', title: 'Сезон 1: «Аномалия»', title_en: 'Season 1', body: '<ul><li>Арка 1: Заброшка, разлом, заражение.</li><li>Арка 2: Допрос Алисы, первое задание с Каем.</li><li>Арка 3: Смерть и воскрешение.</li><li>Арка 4: Конфликт с Реном.</li><li>Арка 5: Потеря силы.</li></ul>', body_en: '<ul><li>Arc 1: Abandoned place, rift.</li><li>Arc 2: Alice, first mission.</li><li>Arc 3: Death and resurrection.</li><li>Arc 4: Conflict with Ren.</li><li>Arc 5: Loss of power.</li></ul>' },
+            { icon: '🌙', title: 'Сезон 2: «Тишина»', title_en: 'Season 2', body: '<ul><li>Арка 6: Вирус «Эхо». Печать.</li><li>Арка 7: Тишина перед бурей, дом Аки, вечер у костра, красная луна.</li></ul>', body_en: '<ul><li>Arc 6: "Echo" virus.</li><li>Arc 7: Calm before the storm.</li></ul>' },
+            { icon: '🕳️', title: 'Сезон 3: «Без силы»', title_en: 'Season 3', body: '<ul><li>Арка 8: Пробуждение в плену у «Омеги».</li><li>Арка 9: Разрушенный штаб, встреча с Лирой.</li><li>Арка 10: Координаты «Сектор 7», встреча с Зейном.</li><li>Арка 11: Зейн раскрывает правду.</li></ul>', body_en: '<ul><li>Arc 8: Captivity.</li><li>Arc 9: Meeting Lira.</li><li>Arc 10: Meeting Zane.</li><li>Arc 11: Zane reveals truth.</li></ul>' },
+            { icon: '❓', title: 'Сезон 4: «Свидетели»', title_en: 'Season 4', body: '<ul><li>Арка 12: Встреча со Свидетелями.</li><li>Арка 13: Эпсилон ищет Аки.</li><li>Арка 14: Аки находит документы «Проект Эхо».</li><li>Арка 15: Бой с Реном, Аки выживает.</li></ul>', body_en: '<ul><li>Arc 12: Meeting Witnesses.</li><li>Arc 13: Epsilon searches.</li><li>Arc 14: "Project Echo" documents.</li><li>Arc 15: Fight with Ren.</li></ul>' },
+            { icon: '💥', title: 'Сезон 5: «Война»', title_en: 'Season 5', body: '<ul><li>Арка 16: Охота Эпсилона.</li><li>Арка 17: Союзники.</li><li>Арка 18: Тайна Алисы.</li><li>Арка 19: Война начинается.</li><li>Арка 20: Омега выходит из тени.</li></ul>', body_en: '<ul><li>Arc 16: Hunt.</li><li>Arc 17: Allies.</li><li>Arc 18: Alice\'s secret.</li><li>Arc 19: War begins.</li><li>Arc 20: Omega emerges.</li></ul>' },
+            { icon: '🌅', title: 'Сезон 6: «Новая эра»', title_en: 'Season 6', body: '<p><strong>Финал истории.</strong></p><ul><li>Арка 21: Аки и Лира сбегают из штаба.</li><li>Арка 22: Советник Холт приказывает уничтожить Свидетелей.</li><li>Арка 23: Анастасия атакует базу.</li><li>Арка 24: Аки встречает Кроноса.</li><li>Арка 25: Аки уничтожает чип и становится свободным.</li></ul>', body_en: '<p><strong>Finale.</strong></p><ul><li>Arc 21: Aki and Lira escape.</li><li>Arc 22: Holt orders destruction.</li><li>Arc 23: Anastasia attacks.</li><li>Arc 24: Aki meets Kronos.</li><li>Arc 25: Aki destroys chip.</li></ul>' },
+            { icon: '🏚️', title: 'Сезон 7: «Эхо прошлого»', title_en: 'Season 7', body: '<p>После падения Эпсилона появляется <strong>Синдикат</strong> во главе с <strong>Маркусом</strong>.</p><ul><li>Арка 26: Руины, файлы о проекте «Иерихон».</li><li>Арка 27: Аки встречает Маркуса.</li><li>Арка 28: Аки встречает Иерихона.</li><li>Арка 29: Аки объединяется с Джесс.</li><li>Арка 30: Аки создаёт новый Эпсилон.</li></ul>', body_en: '<p>After Epsilon falls, the Syndicate appears.</p><ul><li>Arc 26: Ruins.</li><li>Arc 27: Markus.</li><li>Arc 28: Jericho.</li><li>Arc 29: Jess.</li><li>Arc 30: New Epsilon.</li></ul>' },
+            { icon: '🪞', title: 'Сезон 8: «Тёмное отражение»', title_en: 'Season 8', body: '<p>Даже без чипов организация может стать монстром. Появляется <strong>Психотерапевт</strong>.</p><ul><li>Арка 31: Тёмное отражение.</li><li>Арка 32: Кукловод.</li><li>Арка 33: Голоса в голове.</li><li>Арка 34: Агент Ноль и Вера.</li><li>Арка 35: Финальная жертва.</li></ul>', body_en: '<p>Therapist appears.</p><ul><li>Arc 31: Dark reflection.</li><li>Arc 32: Puppeteer.</li><li>Arc 33: Voices.</li><li>Arc 34: Agent Zero and Vera.</li><li>Arc 35: Final sacrifice.</li></ul>' }
         ];
         function renderLore() {
             const wrapper = document.getElementById('loreAccordion');
@@ -2882,15 +3254,16 @@
             const targetPage = document.getElementById('page-' + page);
             if (targetPage) targetPage.classList.add('active');
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            const pageMap = { home: 0, characters: 1, lore: 2, shop: 3, seasons: 4, music: 5, coop: 6, about: 7 };
+            const pageMap = { home: 0, characters: 1, lore: 2, shop: 3, seasons: 4, music: 5, quotes: 6, coop: 7, about: 8 };
             const navBtns = document.querySelectorAll('.nav-btn');
             if (navBtns[pageMap[page]]) navBtns[pageMap[page]].classList.add('active');
             document.querySelectorAll('.bottom-nav-item').forEach(btn => btn.classList.toggle('active', btn.dataset.page === page));
-            if (page === 'shop') renderShop();
+            if (page === 'shop') { renderShop(); renderDealBanner(); }
             if (page === 'seasons') renderSeasons();
             if (page === 'characters') renderCharacters();
             if (page === 'lore') renderLore();
-            if (page === 'home') { renderAllEpisodes(); renderContinue(); renderWatchlist(); }
+            if (page === 'quotes') renderQuotes();
+            if (page === 'home') { renderAllEpisodes(); renderContinue(); renderWatchlist(); renderTimeline(); }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -2898,12 +3271,14 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeAuth(); closePromoModal(); closeAuthRequired(); closeSearch(); closeCart();
-                closeEpisode(); closeCharModal(); closeProfile(); closeRedisoney(); closeLeaderboard();
+                closeEpisode(); closeCharModal(); closeProfile(); closeRedisoney(); closeLeaderboard(); closeCheckout();
             }
             if (e.key === 'Enter' && document.activeElement.id === 'promoInput') applyPromo();
         });
 
         loadTheme();
+        initLoadingScreen();
+        initAnimatedBg();
         startTimer();
         updateUserArea();
         applyLang();
@@ -2924,8 +3299,13 @@
         updateGameRecord();
         updateCartCount();
         applyCursorClass();
+        updateCoinsDisplay();
+        renderDealBanner();
+        renderQuotes();
+        renderTimeline();
         setInterval(updateDailyBonusButton, 60000);
         setInterval(updateWheelButton, 60000);
+        setInterval(renderDealBanner, 60000);
     </script>
 </body>
 </html>
