@@ -4582,5 +4582,32 @@ setTimeout(()=>{if(Math.random()<.7)triggerGlitch();},9000);setInterval(()=>{if(
 })();
 </script>
 
+\n<!-- Исправленное окно профиля: в исходном HTML отсутствовала разметка, которую открывает openProfile() -->
+<div id="profileModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle" onclick="if(event.target===this)closeProfile()">
+  <div class="modal profile-modal">
+    <button type="button" class="modal-close" aria-label="Закрыть профиль" onclick="closeProfile()">×</button>
+    <h2 id="profileModalTitle" class="profile-title-enhanced">👤 Профиль оперативника</h2>
+    <div class="profile-command-card" style="padding:16px;border:1px solid var(--border-soft);border-radius:14px;background:linear-gradient(135deg,var(--panel-2),var(--bg));">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <div id="profilePreviewAvatar" class="profile-preview-avatar" style="width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;overflow:hidden;background:var(--panel-2);border:3px solid var(--accent);">👤</div>
+        <div style="min-width:0;flex:1;text-align:left"><h3 id="profilePreviewName" style="font-size:1.3rem;overflow-wrap:anywhere">Оперативник</h3><div id="profilePreviewBadge" style="color:var(--accent);font-weight:800;font-size:.82rem">Агент Эпсилона</div><div id="profileCommandStatus" style="color:var(--text-muted);font-size:.8rem;margin-top:4px">Готов к заданиям</div></div>
+      </div>
+      <div class="profile-mini-stats" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+        <span style="flex:1;min-width:90px;padding:10px;background:var(--bg);border-radius:10px">Уровень <b id="profileStatLevel">1</b></span>
+        <span style="flex:1;min-width:90px;padding:10px;background:var(--bg);border-radius:10px">Опыт XP <b id="profileStatXP">0</b></span>
+        <span style="flex:1;min-width:90px;padding:10px;background:var(--bg);border-radius:10px">Достижения <b id="profileStatAchievements">0</b></span>
+      </div>
+      <button id="profileDailyBtn" type="button" class="profile-daily-btn modal-btn" onclick="claimProfileDailyReward()" style="margin-top:14px"><strong id="profileDailyText">Забрать бонус оперативника · +20 XP</strong></button>
+    </div>
+    <div class="xp-container"><div class="xp-header"><span class="xp-level">Прогресс оперативника</span><span id="xpLevelText">XP</span></div><div class="xp-bar-bg"><div id="xpBarFill" class="xp-bar-fill"></div></div><div id="xpText" class="xp-text">0 XP</div></div>
+    <section class="profile-section" style="margin-top:18px"><h3 style="margin-bottom:8px">🎨 Цвет имени</h3><div id="colorOptions" class="color-options"></div></section>
+    <section class="profile-section" style="margin-top:18px"><h3 style="margin-bottom:8px">🛡️ Рамка аватара</h3><div id="frameOptions" class="frame-options"></div></section>
+    <section class="profile-section" style="margin-top:18px"><h3 style="margin-bottom:8px">🏷️ Статус оперативника</h3><div id="statusOptions" class="status-options"></div></section>
+    <section class="profile-section" style="margin-top:18px"><h3 style="margin-bottom:8px">🖱️ Курсор сайта</h3><div id="cursorOptions" class="cursor-options"></div><input id="customCursorUrl" type="url" placeholder="Ссылка на свой курсор (если выбран пользовательский)" style="width:100%;margin-top:8px;padding:10px;border-radius:9px;border:1px solid var(--border-soft);background:var(--bg);color:var(--text)"></section>
+    <section class="profile-section" style="margin-top:18px"><h3 style="margin-bottom:8px">🏆 Достижения</h3><div id="achievementsGrid" class="achievements-grid"></div></section>
+    <button type="button" class="modal-btn" onclick="saveProfileCustomization()">Сохранить профиль</button>
+  </div>
+</div>
+
 </body>
 </html>
