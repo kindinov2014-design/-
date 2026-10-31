@@ -280,6 +280,18 @@
         .about-socials a.ds:hover { background: var(--discord); color: #fff; border-color: var(--discord); }
         .char-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 60px; }
         .char-card { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 18px; padding: 25px 20px; text-align: center; cursor: pointer; position: relative; overflow: hidden; }
+        .char-card.unrevealed { background: #050505; border: 1px solid #292929; color: #fff; }
+        .char-card.unrevealed::before { background: linear-gradient(90deg, #111, #555, #111); }
+        .char-card.unrevealed:hover { border-color: #777; box-shadow: 0 12px 34px rgba(0,0,0,.35); }
+        .char-unknown-mark { width: 90px; height: 90px; margin: 0 auto 15px; display:flex; align-items:center; justify-content:center; border-radius: 50%; background: radial-gradient(circle, #202020 0%, #050505 72%); border: 2px solid #454545; color: #f5f5f5; font-size: 3rem; font-weight: 900; text-shadow: 0 0 18px rgba(255,255,255,.22); }
+        .char-card.unrevealed .char-name { color: #f5f5f5; letter-spacing: .22em; }
+        .char-card.unrevealed .char-role, .char-card.unrevealed .char-desc { color: #777; }
+        .char-card.unrevealed .char-badge { background: #151515; color: #aaa; border-color: #333; }
+        .char-unrevealed-notice { text-align:center; padding: 28px 12px 20px; }
+        .char-unrevealed-question { width: 104px; height: 104px; margin: 0 auto 22px; display:flex; align-items:center; justify-content:center; border-radius: 50%; background: radial-gradient(circle, #242424, #050505 72%); border: 1px solid #555; color: #fff; font-size: 4rem; font-weight: 900; box-shadow: 0 0 40px rgba(255,255,255,.08); }
+        .char-unrevealed-notice h2 { color: var(--text); font-size: 1.45rem; margin-bottom: 12px; }
+        .char-unrevealed-notice p { color: var(--text-muted); line-height: 1.8; font-size: .95rem; max-width: 430px; margin: 0 auto; }
+
         .char-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--char-color, var(--accent)); }
         .char-card:hover { transform: translateY(-5px); border-color: var(--char-color, var(--accent)); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .char-avatar { width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.8rem; background: var(--bg); border: 3px solid var(--char-color, var(--accent)); overflow: hidden; }
@@ -874,7 +886,8 @@
         .cursor-portal, .cursor-portal * { cursor: alias !important; }
         .cursor-neon, .cursor-neon * { cursor: help !important; }
         @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; transition-duration:.01ms!important; } }
-        </style>
+.epsilon-location-groups{grid-template-columns:1fr}.epsilon-directory-heading{align-items:flex-start;flex-direction:column}}
+</style>
 
     <style id="summer-theme-overrides">
       body { background-image: radial-gradient(ellipse at 82% 0%, rgba(255,194,72,.2), transparent 30%), radial-gradient(ellipse at 15% 22%, rgba(47,165,89,.22), transparent 42%), linear-gradient(180deg, rgba(7,34,21,.18), transparent 70%); }
@@ -1270,6 +1283,118 @@ button:active:not(:disabled) { transform:translateY(0) scale(.97); }
 </style>
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23070709'/%3E%3Cpath d='M32 7 L57 52 H7 Z' fill='none' stroke='%23ff2438' stroke-width='4'/%3E%3Ctext x='32' y='43' font-size='30' font-family='Arial,sans-serif' font-weight='bold' text-anchor='middle' fill='%23ff2438'%3Eε%3C/text%3E%3C/svg%3E">
+
+<style id="epsilon-smooth-cursor-polish">
+/* Global motion polish */
+:root {
+  --motion-fast: 180ms;
+  --motion-base: 320ms;
+  --motion-slow: 560ms;
+  --motion-ease: cubic-bezier(.22,.8,.25,1);
+}
+html { scroll-behavior: smooth; }
+body, button, a, input, textarea, select {
+  -webkit-tap-highlight-color: transparent;
+}
+button, a, .clickable, [role="button"] {
+  transition:
+    color var(--motion-fast) ease,
+    background-color var(--motion-base) var(--motion-ease),
+    border-color var(--motion-base) var(--motion-ease),
+    box-shadow var(--motion-base) var(--motion-ease),
+    filter var(--motion-base) var(--motion-ease);
+}
+button:active, [role="button"]:active { filter: brightness(.94); }
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.page { animation: epsilonPageIn .48s var(--motion-ease) both; }
+.page:not(.active) { animation: none; }
+.modal-overlay, .overlay {
+  transition: opacity .28s ease, visibility .28s ease, backdrop-filter .28s ease;
+}
+.char-modal-content, #charModalContent {
+  animation: epsilonModalIn .38s var(--motion-ease) both;
+  transform-origin: center;
+}
+@keyframes epsilonPageIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes epsilonModalIn {
+  from { opacity: 0; transform: translateY(18px) scale(.975); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Custom cursor — desktop mouse/trackpad only */
+@media (hover: hover) and (pointer: fine) {
+  body.epsilon-cursor-enabled,
+  body.epsilon-cursor-enabled *:not(input):not(textarea):not(select):not([contenteditable="true"]) {
+    cursor: none !important;
+  }
+  #epsilonCursorRing, #epsilonCursorDot {
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 2147483000;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  #epsilonCursorRing {
+    width: 38px; height: 38px;
+    border: 1.5px solid var(--accent, #e21b2d);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--accent, #e21b2d) 8%, transparent);
+    box-shadow: 0 0 18px var(--accent-glow, rgba(226,27,45,.35)), inset 0 0 12px rgba(255,255,255,.035);
+    transform: translate3d(-100px,-100px,0) scale(1);
+    transition: width .22s ease, height .22s ease, border-color .22s ease,
+      background .22s ease, opacity .2s ease, transform .12s ease-out;
+    backdrop-filter: blur(2px);
+  }
+  #epsilonCursorDot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent, #e21b2d);
+    box-shadow: 0 0 10px var(--accent, #e21b2d);
+    transform: translate3d(-100px,-100px,0);
+    transition: opacity .2s ease;
+  }
+  body.epsilon-cursor-visible #epsilonCursorRing,
+  body.epsilon-cursor-visible #epsilonCursorDot { opacity: 1; }
+  body.epsilon-cursor-hover #epsilonCursorRing {
+    width: 54px; height: 54px;
+    background: color-mix(in srgb, var(--accent, #e21b2d) 16%, transparent);
+    box-shadow: 0 0 28px var(--accent-glow, rgba(226,27,45,.45));
+  }
+  body.epsilon-cursor-down #epsilonCursorRing { transform: translate3d(var(--cursor-x),var(--cursor-y),0) translate(-50%,-50%) scale(.78); }
+}
+@media (hover: none), (pointer: coarse) {
+  #epsilonCursorRing, #epsilonCursorDot { display: none !important; }
+}
+</style>
+
+
+<style id="investigations-center-styles">
+#page-investigations{max-width:1440px;margin:auto;padding:22px clamp(14px,3vw,40px) 54px;box-sizing:border-box;color:var(--text)}
+#page-investigations .case-status-panel,#page-investigations .case-list,#page-investigations .case-workspace,#page-investigations .case-notes{border:1px solid rgba(255,65,85,.24);border-radius:18px;background:linear-gradient(145deg,rgba(30,19,26,.88),rgba(11,12,17,.88));padding:clamp(16px,2.4vw,25px);box-shadow:0 14px 40px #0002}
+#page-investigations .case-status-panel{max-width:1120px;margin:0 auto 18px;display:grid;grid-template-columns:1fr;gap:12px}#page-investigations .case-kicker{font:800 10px/1.4 ui-monospace,monospace;letter-spacing:.16em;color:#ff687a}#page-investigations .case-status-panel h3{margin:6px 0}#page-investigations .case-status-panel p,#page-investigations .case-heading p,#page-investigations .case-notes p{color:var(--muted);line-height:1.6;margin:6px 0}
+#page-investigations .case-progress-track{height:8px;background:#08090d;border-radius:20px;overflow:hidden}#page-investigations #caseProgressFill{height:100%;width:0;background:linear-gradient(90deg,#b21c38,#ff6678);transition:width .35s}
+#page-investigations .case-layout{max-width:1120px;margin:auto;display:grid;grid-template-columns:minmax(210px,.7fr) minmax(0,2fr);gap:18px;align-items:start}#page-investigations .case-list{display:grid;gap:10px}#page-investigations .case-list button{width:100%;text-align:left;padding:13px;border:1px solid #ffffff18;border-radius:12px;background:#ffffff08;color:var(--text);cursor:pointer;margin-top:9px}#page-investigations .case-list button.active{border-color:#ff526b;background:#ff304c16}#page-investigations .case-list button:disabled{opacity:.35;cursor:not-allowed}#page-investigations .case-list small{display:block;color:var(--muted);margin-top:4px}
+#page-investigations .case-heading{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:18px}#page-investigations .case-heading h3{font-size:clamp(21px,3vw,28px);margin:6px 0}#page-investigations .case-status-chip{font-size:10px;font-weight:900;letter-spacing:.08em;padding:7px 10px;border-radius:99px;border:1px solid #ff647655;color:#ff8a99;white-space:nowrap}#page-investigations .case-section-label{font:800 10px/1.5 ui-monospace,monospace;letter-spacing:.1em;color:#ff8795;margin:20px 0 10px}
+#page-investigations .case-evidence-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}#page-investigations .case-evidence{min-width:0;text-align:left;padding:14px;border:1px solid #ffffff1b;border-radius:12px;background:#ffffff06;color:var(--text);cursor:pointer}#page-investigations .case-evidence.active{border-color:#ff526b;background:#ff304c16}#page-investigations .case-evidence b,#page-investigations .case-evidence small{display:block}#page-investigations .case-evidence small{color:var(--muted);margin-top:6px;font-size:11px}#page-investigations .case-reading{min-height:74px;white-space:pre-line;line-height:1.6;padding:14px;border:1px solid #ffffff18;border-radius:12px;color:var(--text);background:#0003}
+#page-investigations .case-link-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}#page-investigations .case-link{padding:11px;border:1px dashed #ff647655;border-radius:11px;background:#ff304c09;color:var(--text);cursor:pointer}#page-investigations .case-link.selected{border-style:solid;background:#ff304c24;box-shadow:0 0 0 1px #ff526b44}#page-investigations .case-link small{display:block;color:var(--muted);margin-top:4px}#page-investigations .case-hint{color:var(--muted);font-size:12px;min-height:18px}#page-investigations .case-conclusions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}#page-investigations .case-conclusions button{padding:12px;border:1px solid #ff647655;border-radius:11px;background:#ff304c0b;color:var(--text);cursor:pointer;text-align:left;line-height:1.45}#page-investigations .case-conclusions button:hover,#page-investigations .case-link:hover,#page-investigations .case-evidence:hover{border-color:#ff526b}#page-investigations .case-feedback{margin-top:12px;min-height:44px;padding:12px;border-radius:10px;background:#0003;color:#ff9aa6;white-space:pre-line;line-height:1.5}#page-investigations .case-notes{max-width:1120px;margin:18px auto 0}
+@media(max-width:780px){#page-investigations .case-layout{grid-template-columns:1fr}#page-investigations .case-list{grid-template-columns:1fr}#page-investigations .case-evidence-grid,#page-investigations .case-link-board,#page-investigations .case-conclusions{grid-template-columns:1fr}#page-investigations .case-heading{flex-direction:column}}
+</style>
+
 </head><body>
 
     <!-- ЗАГРУЗОЧНЫЙ ЭКРАН -->
@@ -1279,6 +1404,33 @@ button:active:not(:disabled) { transform:translateY(0) scale(.97); }
         <div class="loading-text" id="loadingText">Загрузка...</div>
         <button id="skipLoadingBtn" type="button" class="skip-loading-btn" onclick="skipLoadingScreen()">Пропустить интро ↗</button>
     </div>
+    <script>
+    // Аварийное управление интро: экран не должен зависать, даже если
+    // основной скрипт сайта остановится из-за другой ошибки.
+    (function () {
+        var loader = document.getElementById('loadingScreen');
+        if (!loader) return;
+        var hidden = false;
+        window.skipLoadingScreen = function () {
+            if (hidden) return;
+            hidden = true;
+            loader.classList.add('hidden');
+            window.setTimeout(function () { loader.style.display = 'none'; }, 700);
+        };
+        var fill = document.getElementById('loadingBarFill');
+        if (fill) {
+            var value = 0;
+            var emergencyProgress = window.setInterval(function () {
+                if (hidden) { window.clearInterval(emergencyProgress); return; }
+                value = Math.min(100, value + 12);
+                fill.style.width = value + '%';
+                if (value >= 100) window.clearInterval(emergencyProgress);
+            }, 300);
+        }
+        // Защита от ошибок и зависания остальных скриптов.
+        window.setTimeout(window.skipLoadingScreen, 8000);
+    })();
+    </script>
 
     <!-- АНИМИРОВАННЫЙ ФОН -->
     <div id="animated-bg"></div>
@@ -1300,6 +1452,7 @@ button:active:not(:disabled) { transform:translateY(0) scale(.97); }
             <button class="nav-btn" onclick="showPage('quotes')">Цитаты</button>
             <button class="nav-btn" onclick="showPage('archive')">🗝️ Секретный архив</button>
             <button class="nav-btn" onclick="showPage('terminal')">⌨ Терминал</button>
+            <button class="nav-btn" onclick="showPage('investigations')">🧩 Расследования</button>
             <button class="nav-btn" onclick="showPage('missions')">🎮 Миссии</button>
             <button class="nav-btn" onclick="showPage('coop')" data-i18n="nav_coop">Сотрудничество</button>
             <button class="nav-btn" onclick="showPage('about')" data-i18n="nav_about">О проекте</button>
@@ -1709,6 +1862,24 @@ button:active:not(:disabled) { transform:translateY(0) scale(.97); }
           </div>
           <div class="investigation-result" id="investigationResult" aria-live="polite"></div>
         </section>
+    </div>
+
+
+    <!-- ============ INVESTIGATIONS ============ -->
+    <div class="page" id="page-investigations">
+      <div class="section-wrapper" style="margin-top:40px"><h2 class="section-title">🧩 <span>ЦЕНТР РАССЛЕДОВАНИЙ</span></h2></div>
+      <p class="feature-intro" style="max-width:1100px;margin:0 auto 22px">Изучай документы, сопоставляй факты и фиксируй версии. Не каждая зацепка является доказательством — отделяй подтверждённое от предположений.</p>
+      <section class="case-status-panel acrylic"><div><span class="case-kicker">АРХИВ ОПЕРАТИВНИКА</span><h3>Текущий прогресс</h3><p id="caseProgressText">Дела ещё не изучены.</p></div><div class="case-progress-track"><div id="caseProgressFill"></div></div></section>
+      <div class="case-layout">
+        <aside class="case-list acrylic"><div class="case-kicker">СПИСОК ДЕЛ</div><div id="caseList"></div></aside>
+        <section class="case-workspace acrylic"><div class="case-heading"><div><div class="case-kicker" id="caseCode">CASE FILE 01</div><h3 id="caseTitle">Сигнал из сектора 09</h3><p id="caseBrief">Выбери дело, чтобы начать.</p></div><span class="case-status-chip" id="caseStatusChip">НОВОЕ ДЕЛО</span></div>
+          <div class="case-section-label">01 / МАТЕРИАЛЫ ДЕЛА — нажми на документ, чтобы изучить</div><div class="case-evidence-grid" id="caseEvidenceGrid"></div>
+          <div class="case-reading" id="caseReading" aria-live="polite">Материалы дела пока не изучены.</div>
+          <div class="case-section-label">02 / ДОСКА СВЯЗЕЙ — выбери две разные улики</div><div class="case-link-board" id="caseLinkBoard"></div><p class="case-hint" id="caseLinkHint">Связи помогают строить версии, но не заменяют доказательства.</p>
+          <div class="case-section-label">03 / ИТОГОВОЕ ЗАКЛЮЧЕНИЕ</div><div class="case-conclusions" id="caseConclusions"></div><div class="case-feedback" id="caseFeedback" aria-live="polite">Изучи материалы, затем зафиксируй вывод.</div>
+        </section>
+      </div>
+      <section class="case-notes acrylic"><div class="case-kicker">ПРАВИЛА РАССЛЕДОВАНИЯ</div><p>Прогресс сохраняется в этом браузере. Доступ к следующему делу открывается после обоснованного заключения по текущему. Неверная версия не стирает найденные улики — можно продолжить расследование.</p></section>
     </div>
 
     <!-- ============ CHARACTERS ============ -->
@@ -2820,6 +2991,28 @@ button:active:not(:disabled) { transform:translateY(0) scale(.97); }
                 elias_passage: { t: 'Закрытый проход', d: 'На копии карты обозначен проход без точных координат. Неизвестно, ведёт ли он в подземную часть храма или за пределы комплекса.' },
                 elias_lastmark: { t: 'Последняя отметка Элиаса', d: 'Последняя известная отметка на схеме. Она не доказывает, что Элиас находился здесь в момент исчезновения.' },
                 elias_unknown: { t: 'Неизвестная зона', d: 'Участок карты намеренно не подписан. Маркус оставил пометку: «Не делать выводов без второго источника».' },
+                command: { t: 'Командный центр', d: 'Отсюда отслеживают агентов, операции и сигналы по всем секторам.', level: 'IV' },
+                council: { t: 'Зал совета', d: 'Закрытые заседания руководства Эпсилона. Вход только по персональному разрешению.', level: 'IV' },
+                alice_office: { t: 'Кабинет Алисы', d: 'Личный кабинет главы Эпсилона. Доступ ограничен руководством.', level: 'IV' },
+                archive: { t: 'Архив организации', d: 'Документы, отчёты и история операций Эпсилона за десятилетия.', level: 'III' },
+                lab01: { t: 'Лаборатория №01', d: 'Изучение аномалий и неизвестных биологических явлений.', level: 'II' },
+                experiments: { t: 'Зал экспериментов', d: 'Изолированный комплекс для контролируемых исследований.', level: 'III' },
+                containment: { t: 'Камера содержания', d: 'Объект для временного содержания неизвестных существ. Протоколы доступа строжайшие.', level: 'IV' },
+                medical: { t: 'Медицинский блок', d: 'Медицинская помощь и восстановление агентов после операций.', level: 'II' },
+                reverse: { t: 'Отдел разработки Реверса', d: 'Разработка, обслуживание и испытание оружия Реверса.', level: 'III' },
+                metro: { t: 'Заброшенная станция метро', d: 'Неиспользуемая станция. По слухам, отсюда ведут тоннели к закрытым объектам.', level: 'I' },
+                old_district: { t: 'Старый жилой район', d: 'Район с серией необъяснимых происшествий и исчезновений.', level: 'I' },
+                police: { t: 'Полицейский участок', d: 'Местные расследования странных происшествий. Связь с Эпсилоном не подтверждена.', level: 'I' },
+                industrial: { t: 'Промышленная зона', d: 'Заброшенные заводы и склады на окраине города.', level: 'I' },
+                zone07: { t: 'Зона №07', d: 'Территория с нестабильными показателями и искажениями реальности.', level: 'III' },
+                red_forest: { t: 'Красный лес', d: 'Лесная зона, откуда поступают сообщения о пропавших людях.', level: 'II' },
+                rift: { t: 'Разлом', d: 'Нестабильная пространственная аномалия. Приближение запрещено.', level: 'IV' },
+                sub_shrine: { t: 'Подземное святилище', d: 'Неизвестный комплекс под храмом. Происхождение не установлено.', level: 'IV' },
+                black01: { t: 'ОБЪЕКТ BLACK-01', d: 'Статус: неизвестен. Последняя активность: неизвестна. Ответственный: засекречен. ДОСТУП ЗАПРЕЩЁН.', level: 'V' },
+                bunker13: { t: 'Бункер №13', d: 'Назначение объекта не установлено. Все внешние каналы связи отключены.', level: 'V' },
+                deep_archive: { t: 'Подземный архив', d: 'Хранилище документов с ограниченным доступом. Содержимое не раскрывается.', level: 'V' },
+                zero: { t: 'Объект «Ноль»', d: 'Местоположение неизвестно. В реестре Эпсилона отсутствуют подтверждённые координаты.', level: 'V' },
+                observation: { t: 'Комната наблюдения', d: 'Архив видеонаблюдения и записей операций. Доступ контролируется руководством.', level: 'IV' },
                 elias_sublevel: { t: 'Подуровень −1', d: 'За архивным лифтом найден технический этаж, отсутствующий в планах госпиталя. На стене повторяется дата исчезновения Элиаса. Маркус отмечает: дата — улика, но не доказательство причастности госпиталя.' },
                 elias_signal: { t: 'Радиомаяк', d: 'Маяк передаёт три коротких импульса и один длинный. В старой записи Элиаса встречается тот же ритм. Сигнал может быть автоматическим — источник ещё не установлен.' },
                 elias_memorial: { t: 'Комната свидетеля', d: 'В комнате оставлен протокол допроса с вырванной последней страницей. На полях Маркус заметил фразу: «Печать не запирает его снаружи». Значение фразы пока неизвестно.' },
@@ -2844,6 +3037,28 @@ button:active:not(:disabled) { transform:translateY(0) scale(.97); }
                 elias_passage: { t: 'Sealed Passage', d: 'A passage marked without exact coordinates. It is unknown whether it leads beneath the temple or beyond the complex.' },
                 elias_lastmark: { t: 'Elias’s Last Mark', d: 'The last known mark on the diagram. It does not prove Elias was here when he disappeared.' },
                 elias_unknown: { t: 'Unknown Zone', d: 'This area is deliberately unlabeled. Markus left a note: “No conclusions without a second source.”' },
+                command: { t: 'Command Center', d: 'Agents, operations and sector signals are monitored from here.', level: 'IV' },
+                council: { t: 'Council Chamber', d: 'Closed meetings of Epsilon leadership. Personal authorization required.', level: 'IV' },
+                alice_office: { t: "Alice's Office", d: "Private office of Epsilon's head. Leadership access only.", level: 'IV' },
+                archive: { t: 'Organization Archive', d: 'Reports and records documenting decades of Epsilon operations.', level: 'III' },
+                lab01: { t: 'Laboratory No. 01', d: 'Research into anomalies and unknown biological phenomena.', level: 'II' },
+                experiments: { t: 'Experiment Hall', d: 'An isolated facility for controlled research.', level: 'III' },
+                containment: { t: 'Containment Chamber', d: 'Temporary containment for unknown entities. Strict access protocols apply.', level: 'IV' },
+                medical: { t: 'Medical Wing', d: 'Medical care and recovery for agents after operations.', level: 'II' },
+                reverse: { t: 'Reverse Development', d: 'Development, maintenance and testing of Reverse weapons.', level: 'III' },
+                metro: { t: 'Abandoned Metro Station', d: 'A disused station rumored to connect to restricted underground sites.', level: 'I' },
+                old_district: { t: 'Old Residential District', d: 'A district linked to reports of unexplained incidents and disappearances.', level: 'I' },
+                police: { t: 'Police Station', d: 'Local investigations into unusual incidents. Any Epsilon connection is unconfirmed.', level: 'I' },
+                industrial: { t: 'Industrial Zone', d: 'Abandoned factories and warehouses on the edge of the city.', level: 'I' },
+                zone07: { t: 'Zone No. 07', d: 'An area showing unstable readings and reality distortions.', level: 'III' },
+                red_forest: { t: 'Red Forest', d: 'A forest area linked to reports of missing people.', level: 'II' },
+                rift: { t: 'The Rift', d: 'An unstable spatial anomaly. Approaching is prohibited.', level: 'IV' },
+                sub_shrine: { t: 'Underground Shrine', d: 'An unknown complex beneath the temple. Its origin is unverified.', level: 'IV' },
+                black01: { t: 'BLACK-01 FACILITY', d: 'Status: unknown. Last activity: unknown. Person in charge: classified. ACCESS DENIED.', level: 'V' },
+                bunker13: { t: 'Bunker No. 13', d: "The facility's purpose is unknown. All external communication channels are offline.", level: 'V' },
+                deep_archive: { t: 'Underground Archive', d: 'A restricted repository. Its contents remain undisclosed.', level: 'V' },
+                zero: { t: 'Object Zero', d: 'Location unknown. No verified coordinates exist in Epsilon records.', level: 'V' },
+                observation: { t: 'Observation Room', d: 'Archive of surveillance footage and operation records. Leadership access only.', level: 'IV' },
                 elias_sublevel: { t: 'Sublevel −1', d: 'A technical floor missing from the hospital plans lies beyond the archive lift. Elias’s disappearance date is repeated on the wall. Markus notes that a date is a clue, not proof of hospital involvement.' },
                 elias_signal: { t: 'Radio Beacon', d: 'The beacon emits three short pulses and one long pulse, matching a rhythm in an old Elias recording. The signal may be automated; its source is unknown.' },
                 elias_memorial: { t: 'Witness Room', d: 'An interrogation record remains, but its final page has been torn out. Markus noted a phrase in the margin: “The seal does not lock it out.” Its meaning remains unknown.' },
@@ -2904,7 +3119,9 @@ button:active:not(:disabled) { transform:translateY(0) scale(.97); }
             setTimeout(() => {
                 const data = MAP_DATA[currentLang][key] || MAP_DATA[currentLang].default;
                 if (typeof data === 'string') info.innerHTML = data;
-                else info.innerHTML = `<strong>${data.t}</strong>${data.d}`;
+                else {
+                    info.innerHTML = `<strong>${data.t}</strong>${data.d}`;
+                }
                 if (key.startsWith('elias_') && key !== 'elias_secret' && eliasCluesFound.size < 3) {
                     const remaining = 3 - eliasCluesFound.size;
                     info.innerHTML += `<div class="elias-clue-progress">ФРАГМЕНТЫ АРХИВА: ${eliasCluesFound.size}/3 · до восстановления осталось: ${remaining}</div>`;
@@ -4132,7 +4349,16 @@ button:active:not(:disabled) { transform:translateY(0) scale(.97); }
             { id: 'ten', name: 'Тень', name_en: 'Shadow', emoji: '🌑', role: 'Свидетель-стиратель', role_en: 'Eraser', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#424242', group: 'witnesses', short: 'Молчаливый, опасный.', short_en: 'Silent, dangerous.', full: 'Бывший «стиратель» памяти Эпсилона.', full_en: 'Former memory eraser.', tags: ['Свидетели', 'Стиратель'], tags_en: ['Witnesses', 'Eraser'] },
             { id: 'sevrан', name: 'Севран', name_en: 'Sevran', emoji: '🜏', role: 'Архонт культа', role_en: 'Cult Archon', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#9d7bce', group: 'temple', short: 'Лидер Ордена Последней Печати. Верит, что сущность под храмом — бог, которого нужно пробудить.', short_en: 'Leader of the Order of the Last Seal. Believes the entity beneath the temple must awaken.', full: 'Севран руководит тайным культом, который веками охранял забытый храм. Он знает, что печать слабеет, и считает Аки ключом к её открытию. Неясно, хочет ли он освободить сущность или занять её место.', full_en: 'Sevran leads the secret cult guarding the forgotten temple. He believes Aki is the key to opening the weakening seal. It is unclear whether he wants to free the entity or take its place.', tags: ['Сезон 9', 'Культ', 'Архонт', 'Печать'], tags_en: ['Season 9', 'Cult', 'Archon', 'Seal'] },
             { id: 'iona', name: 'Иона', name_en: 'Iona', emoji: '🕯️', role: 'Голос храма', role_en: 'Voice of the Temple', age: '24 года', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#b8a16a', group: 'temple', short: 'Молодая служительница, слышащая шёпот из-под алтаря.', short_en: 'A young acolyte who hears whispers beneath the altar.', full: 'Иона проводит обряды Ордена Последней Печати, но тайно боится того, чему поклоняются остальные. Шёпот иногда называет ей события, которые ещё не произошли. Она может стать проводником Аки внутрь храма — или привести его в ловушку.', full_en: 'Iona performs the Order’s rituals but secretly fears what the others worship. Whispers tell her things that have not happened yet. She may guide Aki into the temple—or lead him into a trap.', tags: ['Сезон 9', 'Послушница', 'Предчувствия'], tags_en: ['Season 9', 'Acolyte', 'Premonitions'] },
-            { id: 'elias', name: 'Элиас', name_en: 'Elias', emoji: '🗝️', role: 'Изгнанный хранитель', role_en: 'Exiled Keeper', age: '61 год', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#648b83', group: 'temple', short: 'Последний хранитель, отказавшийся служить культу.', short_en: 'The last keeper who refused to serve the cult.', full: 'Элиас десятилетиями защищал печать, пока Орден не решил использовать Аки для ритуала. Он исчез после пожара в архиве и оставил карту тайных проходов у госпиталя. Никто не знает, жив ли он и почему символ печати похож на метку аномалии.', full_en: 'Elias guarded the seal for decades until the Order decided to use Aki in a ritual. He vanished after an archive fire, leaving a map of hidden passages near the hospital. No one knows if he is alive or why the seal resembles an anomaly mark.', tags: ['Сезон 9', 'Хранитель', 'Тайная карта'], tags_en: ['Season 9', 'Keeper', 'Secret Map'] }
+            { id: 'elias', name: 'Элиас', name_en: 'Elias', emoji: '🗝️', role: 'Изгнанный хранитель', role_en: 'Exiled Keeper', age: '61 год', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#648b83', group: 'temple', short: 'Последний хранитель, отказавшийся служить культу.', short_en: 'The last keeper who refused to serve the cult.', full: 'Элиас десятилетиями защищал печать, пока Орден не решил использовать Аки для ритуала. Он исчез после пожара в архиве и оставил карту тайных проходов у госпиталя. Никто не знает, жив ли он и почему символ печати похож на метку аномалии.', full_en: 'Elias guarded the seal for decades until the Order decided to use Aki in a ritual. He vanished after an archive fire, leaving a map of hidden passages near the hospital. No one knows if he is alive or why the seal resembles an anomaly mark.', tags: ['Сезон 9', 'Хранитель', 'Тайная карта'], tags_en: ['Season 9', 'Keeper', 'Secret Map'] },
+            { id: 'veil', name: 'Доктор Вейл', name_en: 'Dr. Vale', emoji: '🧬', role: 'Главный научный сотрудник', role_en: 'Chief Research Scientist', age: '47 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#65c9d8', group: 'epsilon', short: 'Учёный Эпсилона, который знает больше, чем рассказывает.', short_en: 'Epsilon scientist who knows more than he tells.', full: 'Доктор Вейл руководит исследованиями аномалий и изучает их влияние на человеческую память. Он редко делится результатами целиком и хранит отдельный архив экспериментов. Его настоящие мотивы остаются предметом споров даже среди руководства.', full_en: 'Dr. Vale leads anomaly research and studies their effects on human memory. He rarely shares complete results and keeps a private archive of experiments. Even the leadership questions his true motives.', tags: ['Эпсилон', 'Учёный', 'Аномалии'], tags_en: ['Epsilon', 'Scientist', 'Anomalies'] },
+            { id: 'reina', name: 'Рейна', name_en: 'Reina', emoji: '🎯', role: 'Руководитель разведки', role_en: 'Head of Intelligence', age: '32 года', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#bd8cff', group: 'epsilon', short: 'Холодная и расчётливая. Контролирует разведывательную сеть Эпсилона.', short_en: 'Cold and calculating. Oversees Epsilon intelligence.', full: 'Рейна руководит сбором информации, наблюдением и проверкой источников. Она почти не показывает эмоций и предпочитает проверять каждый факт лично. Считает, что секреты организации иногда опаснее самих аномалий.', full_en: 'Reina oversees intelligence gathering, surveillance, and source verification. She rarely shows emotion and prefers to verify every fact herself. She believes the organization’s secrets can be more dangerous than the anomalies.', tags: ['Эпсилон', 'Разведка', 'Операции'], tags_en: ['Epsilon', 'Intelligence', 'Operations'] },
+            { id: 'nox', name: 'Нокс', name_en: 'Nox', emoji: '🛡️', role: 'Боец спецподразделения', role_en: 'Special Operations Soldier', age: '29 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#9b9da8', group: 'epsilon', short: 'Молчаливый боец, которому поручают самые опасные задания.', short_en: 'A quiet operative assigned to the most dangerous missions.', full: 'Нокс служит в специальном подразделении Эпсилона. Он немногословен, дисциплинирован и всегда доводит задание до конца. За бронёй скрывается человек, который не любит оставлять товарищей позади.', full_en: 'Nox serves in Epsilon’s special operations unit. He is quiet, disciplined, and always completes his assignments. Behind the armor is someone who refuses to leave teammates behind.', tags: ['Эпсилон', 'Спецотряд', 'Боец'], tags_en: ['Epsilon', 'Special Unit', 'Operative'] },
+            { id: 'zero_entity', name: 'Нулевой', name_en: 'The Zero', emoji: '👁️', role: 'Неизвестная сущность', role_en: 'Unknown Entity', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#ff3547', group: 'witnesses', short: 'Фигура, которая появляется на записях камер в закрытых секторах.', short_en: 'A figure appearing on camera footage in restricted sectors.', full: 'Нулевой впервые был замечен на нескольких записях наблюдения. Камеры фиксируют его в местах, куда никто не входил, а после появления фигуры записи повреждаются. Неизвестно, является ли он существом, человеком или ошибкой системы.', full_en: 'The Zero was first noticed in several surveillance recordings. Cameras capture the figure in places no one entered, and footage becomes corrupted afterward. It is unknown whether it is a creature, a person, or a system error.', tags: ['Аномалия', 'Наблюдение', 'Тайна'], tags_en: ['Anomaly', 'Surveillance', 'Mystery'] },
+            { id: 'stranger', name: 'Незнакомец', name_en: 'The Stranger', emoji: '🎭', role: 'Неизвестный наблюдатель', role_en: 'Unknown Observer', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#8c7b9f', group: 'witnesses', short: 'Появляется перед важными событиями и будто знает будущее.', short_en: 'Appears before major events and seems to know the future.', full: 'Незнакомец не называет своего имени и никогда не остаётся надолго. Он появляется рядом с местами будущих происшествий и оставляет короткие предупреждения. Ни Эпсилону, ни Свидетелям пока не удалось установить его личность.', full_en: 'The Stranger never gives a name and never stays long. They appear near locations of future incidents and leave brief warnings. Neither Epsilon nor the Witnesses have identified them.', tags: ['Загадка', 'Наблюдатель', 'Предупреждения'], tags_en: ['Mystery', 'Observer', 'Warnings'] },
+            { id: 'echo_entity', name: 'Эхо', name_en: 'Echo', emoji: '🪞', role: 'Аномальная сущность', role_en: 'Anomalous Entity', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#65a6c9', group: 'witnesses', short: 'Копирует голоса и внешность людей, с которыми сталкивается.', short_en: 'Mimics the voices and appearances of people it encounters.', full: 'Эхо способно воспроизводить знакомые голоса с пугающей точностью. Свидетели утверждают, что иногда оно принимает облик конкретного человека. Неясно, понимает ли Эхо, кем притворяется, и может ли отличить копию от оригинала.', full_en: 'Echo can reproduce familiar voices with frightening accuracy. Witnesses claim it sometimes takes the appearance of a specific person. It is unclear whether Echo understands its disguises or can distinguish copies from originals.', tags: ['Аномалия', 'Мимикрия', 'Эхо'], tags_en: ['Anomaly', 'Mimicry', 'Echo'] },
+            { id: 'victor', name: 'Виктор', name_en: 'Victor', emoji: '⚖️', role: 'Глава секретного подразделения', role_en: 'Head of a Secret Division', age: '52 года', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#c5a46d', group: 'epsilon', short: 'Руководит подразделением, о котором почти нет сведений.', short_en: 'Leads a division that barely appears in official records.', full: 'Виктор возглавляет закрытое подразделение Эпсилона. Его сотрудники получают задания напрямую и не фигурируют в обычных отчётах. Виктор редко вмешивается лично, но его решения способны изменить ход крупной операции.', full_en: 'Victor leads a closed Epsilon division. Its personnel receive assignments directly and do not appear in ordinary reports. Victor rarely intervenes personally, but his decisions can change the course of a major operation.', tags: ['Эпсилон', 'Руководство', 'Секретное подразделение'], tags_en: ['Epsilon', 'Leadership', 'Secret Division'] },
+            { id: 'cipher', name: 'Сайфер', name_en: 'Cipher', emoji: '💻', role: 'Специалист по кибербезопасности', role_en: 'Cybersecurity Specialist', age: '26 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#54d6c8', group: 'main', short: 'Хакер, который умеет находить слабые места даже в закрытых системах.', short_en: 'A hacker who finds weaknesses in even the most secure systems.', full: 'Сайфер специализируется на цифровых следах, шифрах и проникновении в защищённые сети. Он может помочь Аки восстановить удалённые данные, но никогда не раскрывает, откуда получает инструменты и доступы.', full_en: 'Cipher specializes in digital traces, encryption, and secure network intrusion. He can help Aki recover deleted data, but never reveals where his tools and access come from.', tags: ['Хакер', 'Технологии', 'Расследования'], tags_en: ['Hacker', 'Technology', 'Investigations'] },
+            { id: 'astra', name: 'Астра', name_en: 'Astra', emoji: '✨', role: 'Девушка с предвидением', role_en: 'Precognitive', age: '21 год', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#9b8cff', group: 'main', short: 'Утверждает, что видит фрагменты событий до того, как они происходят.', short_en: 'Claims to see fragments of events before they happen.', full: 'Астра рассказывает о коротких видениях будущего. Иногда её предупреждения сбываются, иногда приводят команду к ложному следу. Она сама не понимает, откуда берутся видения, и боится, что каждое вмешательство меняет увиденный исход.', full_en: 'Astra describes brief visions of the future. Sometimes her warnings come true; other times they lead the team astray. She does not understand where the visions come from and fears that every intervention changes the outcome.', tags: ['Предвидение', 'Тайна', 'Союзник'], tags_en: ['Precognition', 'Mystery', 'Ally'] },
         ];
         let currentCharFilter = 'all';
         function renderCharacters() {
@@ -4141,13 +4367,18 @@ button:active:not(:disabled) { transform:translateY(0) scale(.97); }
             grid.innerHTML = '';
             CHARACTERS.filter(c => currentCharFilter === 'all' || c.group === currentCharFilter).forEach(char => {
                 const card = document.createElement('div');
-                card.className = 'char-card acrylic';
-                card.style.setProperty('--char-color', char.color);
-                const name = currentLang === 'ru' ? char.name : char.name_en;
-                const role = currentLang === 'ru' ? char.role : char.role_en;
-                const desc = currentLang === 'ru' ? char.short : char.short_en;
-                const status = currentLang === 'ru' ? char.statusText : char.statusText_en;
-                card.innerHTML = `<div class="char-avatar">${char.emoji}</div><div class="char-name">${name}</div><div class="char-role">${role}</div><div class="char-desc">${desc}</div><span class="char-badge ${char.status}">${status}</span>`;
+                const isRevealed = true;
+                card.className = 'char-card acrylic' + (isRevealed ? '' : ' unrevealed');
+                card.style.setProperty('--char-color', isRevealed ? char.color : '#555555');
+                if (isRevealed) {
+                    const name = currentLang === 'ru' ? char.name : char.name_en;
+                    const role = currentLang === 'ru' ? char.role : char.role_en;
+                    const desc = currentLang === 'ru' ? char.short : char.short_en;
+                    const status = currentLang === 'ru' ? char.statusText : char.statusText_en;
+                    card.innerHTML = `<div class="char-avatar">${char.emoji}</div><div class="char-name">${name}</div><div class="char-role">${role}</div><div class="char-desc">${desc}</div><span class="char-badge ${char.status}">${status}</span>`;
+                } else {
+                    card.innerHTML = `<div class="char-unknown-mark" aria-hidden="true">?</div><div class="char-name">?????</div><div class="char-role">${currentLang === 'ru' ? 'ПЕРСОНАЖ НЕ РАСКРЫТ' : 'CHARACTER UNREVEALED'}</div><div class="char-desc">${currentLang === 'ru' ? 'Информация пока скрыта' : 'Information is currently hidden'}</div><span class="char-badge unknown">${currentLang === 'ru' ? 'СЕКРЕТНО' : 'CLASSIFIED'}</span>`;
+                }
                 card.addEventListener('click', () => openCharModal(char));
                 grid.appendChild(card);
             });
@@ -4158,20 +4389,59 @@ button:active:not(:disabled) { transform:translateY(0) scale(.97); }
             (event.currentTarget || event.target).classList.add('active');
             renderCharacters();
         }
+        function ensureCharModal() {
+            let modal = document.getElementById('charModal');
+            if (modal) return modal;
+
+            // The character modal was referenced by JavaScript but its HTML
+            // container was missing, so clicks silently returned without opening it.
+            modal = document.createElement('div');
+            modal.id = 'charModal';
+            modal.className = 'modal-overlay';
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-modal', 'true');
+            modal.setAttribute('aria-label', currentLang === 'ru' ? 'Описание персонажа' : 'Character details');
+            modal.innerHTML = `
+                <div class="char-modal acrylic" id="charModalContent">
+                    <button class="modal-close" type="button" aria-label="${currentLang === 'ru' ? 'Закрыть' : 'Close'}" onclick="closeCharModal()">×</button>
+                    <div id="charModalBody"></div>
+                </div>`;
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) closeCharModal();
+            });
+            document.body.appendChild(modal);
+            return modal;
+        }
+
         function openCharModal(char) {
-            const modal = document.getElementById('charModal');
+            if (!char) return;
+            const modal = ensureCharModal();
             const content = document.getElementById('charModalContent');
             const body = document.getElementById('charModalBody');
-            if (!modal || !content || !body) return;
-            content.style.setProperty('--char-color', char.color);
-            const name = currentLang === 'ru' ? char.name : char.name_en;
-            const role = currentLang === 'ru' ? char.role : char.role_en;
-            const status = currentLang === 'ru' ? char.statusText : char.statusText_en;
-            const full = currentLang === 'ru' ? char.full : char.full_en;
-            const tags = currentLang === 'ru' ? char.tags : char.tags_en;
-            body.innerHTML = `<div class="char-modal-header"><div class="char-modal-avatar">${char.emoji}</div><div class="char-modal-title"><h2>${name}</h2><div class="char-modal-role">${role}${char.age ? ' · ' + char.age : ''}</div></div></div><div class="char-modal-section"><h4>${currentLang === 'ru' ? 'Статус' : 'Status'}</h4><span class="char-badge ${char.status}">${status}</span></div><div class="char-modal-section"><h4>${currentLang === 'ru' ? 'Описание' : 'Description'}</h4><p>${full}</p></div><div class="char-modal-section"><h4>${currentLang === 'ru' ? 'Теги' : 'Tags'}</h4><div class="char-modal-tags">${tags.map(t => `<span class="char-tag">${t}</span>`).join('')}</div></div>${char.id === 'markus' ? `<div class="char-modal-section dossier-callout"><h4>🗂️ ${currentLang === 'ru' ? 'Журналистское досье' : 'Journalist Dossier'}</h4><p>${currentLang === 'ru' ? 'Рабочие материалы расследования Маркуса по событиям девятого сезона.' : 'Markus’s working files on the events of Season 9.'}</p><button class="btn-primary" onclick="openMarkusDossier()">${currentLang === 'ru' ? 'Открыть досье' : 'Open dossier'} ↗</button></div>` : ''}`;
+            if (!content || !body) return;
+
+            // Until the character appears in the series, keep their identity and dossier hidden.
+            if (false) {
+                content.style.setProperty('--char-color', '#555555');
+                const message = currentLang === 'ru'
+                    ? 'Этот персонаж ещё не появился в сериале. Дождитесь его появления — тогда мы откроем информацию о нём!'
+                    : 'This character has not appeared in the series yet. Stay tuned — their information will be revealed when they appear!';
+                const heading = currentLang === 'ru' ? 'Персонаж пока не раскрыт' : 'Character not revealed yet';
+                body.innerHTML = `<div class="char-unrevealed-notice"><div class="char-unrevealed-question">?</div><h2>${heading}</h2><p>${message}</p></div>`;
+                modal.classList.add('active');
+                return;
+            }
+
+            content.style.setProperty('--char-color', char.color || 'var(--accent)');
+            const name = currentLang === 'ru' ? char.name : (char.name_en || char.name);
+            const role = currentLang === 'ru' ? char.role : (char.role_en || char.role);
+            const status = currentLang === 'ru' ? char.statusText : (char.statusText_en || char.statusText);
+            const full = currentLang === 'ru' ? char.full : (char.full_en || char.full || char.short);
+            const tags = currentLang === 'ru' ? (char.tags || []) : (char.tags_en || char.tags || []);
+            body.innerHTML = `<div class="char-modal-header"><div class="char-modal-avatar">${char.emoji || '👤'}</div><div class="char-modal-title"><h2>${name}</h2><div class="char-modal-role">${role}${char.age ? ' · ' + char.age : ''}</div></div></div><div class="char-modal-section"><h4>${currentLang === 'ru' ? 'Статус' : 'Status'}</h4><span class="char-badge ${char.status || 'unknown'}">${status || ''}</span></div><div class="char-modal-section"><h4>${currentLang === 'ru' ? 'Описание' : 'Description'}</h4><p>${full || ''}</p></div><div class="char-modal-section"><h4>${currentLang === 'ru' ? 'Теги' : 'Tags'}</h4><div class="char-modal-tags">${tags.map(t => `<span class="char-tag">${t}</span>`).join('')}</div></div>${char.id === 'markus' ? `<div class="char-modal-section dossier-callout"><h4>🗂️ ${currentLang === 'ru' ? 'Журналистское досье' : 'Journalist Dossier'}</h4><p>${currentLang === 'ru' ? 'Рабочие материалы расследования Маркуса по событиям девятого сезона.' : 'Markus’s working files on the events of Season 9.'}</p><button class="btn-primary" onclick="openMarkusDossier()">${currentLang === 'ru' ? 'Открыть досье' : 'Open dossier'} ↗</button></div>` : ''}`;
             modal.classList.add('active');
         }
+
         function openMarkusDossier() {
             const body = document.getElementById('charModalBody');
             if (!body) return;
@@ -4187,7 +4457,10 @@ button:active:not(:disabled) { transform:translateY(0) scale(.97); }
                 <div class="char-modal-section dossier-warning"><h4>⚠️ ${en ? 'Editorial rule' : 'Правило редакции'}</h4><p>${en ? 'Do not publish source identities. Separate verified events from hypotheses. The entity’s identity and the temple’s origin remain unknown.' : 'Не раскрывать личности источников. Отделять подтверждённые события от гипотез. Личность сущности и происхождение храма пока неизвестны.'}</p></div>
                 <button class="btn-secondary" onclick="openCharModal(CHARACTERS.find(c=>c.id==='markus'))">← ${en ? 'Back to Markus' : 'Назад к Маркусу'}</button>`;
         }
-        function closeCharModal() { document.getElementById('charModal').classList.remove('active'); }
+        function closeCharModal() {
+            const modal = document.getElementById('charModal');
+            if (modal) modal.classList.remove('active');
+        }
 
         // ===== ЛОР =====
         const LORE_SECTIONS = [
@@ -4568,8 +4841,7 @@ const messages=[
 function award(id){if(state.achievements.includes(id))return;state.achievements.push(id);persist();renderAchievements();showToast('🏆 Достижение открыто: '+({firstClue:'Первый след',allClues:'Собиратель улик',caseSolved:'Дело закрыто',glitchSeen:'Наблюдатель',allIntercepts:'Перехватчик'}[id]||id));}
 function renderAchievements(){const box=document.getElementById('epsilonAchievementCards');if(!box)return;const all=[['firstClue','🔎','Первый след','Изучи первую улику'],['allClues','🧩','Собиратель улик','Изучи все три улики'],['glitchSeen','👁️','Наблюдатель','Заметь вмешательство системы'],['allIntercepts','📻','Перехватчик','Прослушай все входящие сообщения'],['caseSolved','📁','Дело закрыто','Сделай обоснованный вывод']];box.innerHTML=all.map(a=>`<div class="evidence-card ${state.achievements.includes(a[0])?'inspected':''}"><span>${state.achievements.includes(a[0])?a[1]:'🔒'}</span><b>${state.achievements.includes(a[0])?a[2]:'???'}</b><small>${state.achievements.includes(a[0])?a[3]:'Условие засекречено'}</small></div>`).join('')}
 function showToast(text){let t=document.getElementById('epsilonFeatureToast');if(!t){t=document.createElement('div');t.id='epsilonFeatureToast';document.body.appendChild(t)}t.textContent=text;t.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.classList.remove('show'),3200)}
-window.inspectEvidence=function(i){const item=evidence[i];if(!item)return;if(!state.inspected.includes(i))state.inspected.push(i);document.querySelectorAll('.evidence-card').forEach((el,n)=>el.classList.toggle('inspected',n===i));const out=document.getElementById('evidenceReadout');if(out)out.textContent=item.title+'
-'+item.text;if(state.inspected.length>=1)award('firstClue');if(state.inspected.length===3)award('allClues');persist()};
+window.inspectEvidence=function(i){const item=evidence[i];if(!item)return;if(!state.inspected.includes(i))state.inspected.push(i);document.querySelectorAll('.evidence-card').forEach((el,n)=>el.classList.toggle('inspected',n===i));const out=document.getElementById('evidenceReadout');if(out)out.textContent=item.title+'\n'+item.text;if(state.inspected.length>=1)award('firstClue');if(state.inspected.length===3)award('allClues');persist()};
 window.submitInvestigationTheory=function(choice){const out=document.getElementById('investigationResult');if(state.inspected.length<2){out.textContent='ДОСТУП К ВЫВОДУ ОТКЛОНЁН: изучи хотя бы две улики.';return}if(choice==='unknown'){state.solved=true;out.textContent='ВЫВОД ПРИНЯТ. Источник сигнала пока не установлен. Доказательств недостаточно, чтобы обвинить лабораторию или подтвердить заранее записанное сообщение. +1 запись в журнал расследования.';award('caseSolved');}else{out.textContent='ГИПОТЕЗА СОХРАНЕНА, НО НЕ ПОДТВЕРЖДЕНА. Улики указывают на расхождения во времени, однако не доказывают выбранную версию.'}persist()};
 window.toggleInterceptPanel=function(force){const panel=document.getElementById('interceptDropdown'),btn=document.getElementById('interceptDockTrigger');if(!panel)return;const open=typeof force==='boolean'?force:panel.hidden;panel.hidden=!open;btn?.setAttribute('aria-expanded',String(open));if(open){document.getElementById('interceptUnread').textContent='0';document.getElementById('interceptDock').classList.remove('has-new');if(!state.achievements.includes('glitchSeen'))award('glitchSeen')}};
 window.nextInterceptMessage=function(){messageIndex=(messageIndex+1)%messages.length;const m=messages[messageIndex],el=document.getElementById('interceptMessageContent');el.innerHTML='<strong></strong><p></p><small></small>';el.querySelector('strong').textContent=m[0];el.querySelector('p').textContent=m[1];el.querySelector('small').textContent=m[2];if(!state.seenMessages.includes(messageIndex))state.seenMessages.push(messageIndex);if(state.seenMessages.length>=messages.length)award('allIntercepts');document.getElementById('interceptUnread').textContent='1';document.getElementById('interceptDock').classList.add('has-new');persist()};
@@ -4608,6 +4880,76 @@ setTimeout(()=>{if(Math.random()<.7)triggerGlitch();},9000);setInterval(()=>{if(
     <button type="button" class="modal-btn" onclick="saveProfileCustomization()">Сохранить профиль</button>
   </div>
 </div>
+
+
+<script id="epsilon-smooth-cursor-script">
+(() => {
+  const finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!finePointer || reduceMotion || document.getElementById('epsilonCursorRing')) return;
+
+  const ring = document.createElement('div');
+  ring.id = 'epsilonCursorRing';
+  ring.setAttribute('aria-hidden', 'true');
+  const dot = document.createElement('div');
+  dot.id = 'epsilonCursorDot';
+  dot.setAttribute('aria-hidden', 'true');
+  document.body.append(ring, dot);
+  document.body.classList.add('epsilon-cursor-enabled');
+
+  let x = -100, y = -100, raf = 0;
+  const move = (event) => {
+    x = event.clientX;
+    y = event.clientY;
+    document.body.style.setProperty('--cursor-x', x + 'px');
+    document.body.style.setProperty('--cursor-y', y + 'px');
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const point = `translate3d(${x}px,${y}px,0) translate(-50%,-50%)`;
+      ring.style.transform = point;
+      dot.style.transform = point;
+      document.body.classList.add('epsilon-cursor-visible');
+      raf = 0;
+    });
+  };
+  const interactive = 'a,button,[role="button"],.char-card,.series-card,.icon-btn,.nav-btn,.map-point,label,summary';
+  document.addEventListener('pointermove', move, { passive: true });
+  document.addEventListener('pointerover', (event) => {
+    if (event.target.closest && event.target.closest(interactive)) document.body.classList.add('epsilon-cursor-hover');
+  });
+  document.addEventListener('pointerout', (event) => {
+    if (event.target.closest && event.target.closest(interactive) &&
+        (!event.relatedTarget || !event.relatedTarget.closest || !event.relatedTarget.closest(interactive))) {
+      document.body.classList.remove('epsilon-cursor-hover');
+    }
+  });
+  document.addEventListener('pointerdown', () => document.body.classList.add('epsilon-cursor-down'));
+  document.addEventListener('pointerup', () => document.body.classList.remove('epsilon-cursor-down'));
+  document.addEventListener('mouseleave', () => document.body.classList.remove('epsilon-cursor-visible'));
+  document.addEventListener('mouseenter', () => document.body.classList.add('epsilon-cursor-visible'));
+})();
+</script>
+
+
+<script id="investigations-center-script">
+(()=>{
+const KEY='aki_epsilon_investigation_center_v1';
+const cases=[
+ {code:'CASE FILE 01 · SECTOR 09',title:'Сигнал из сектора 09',brief:'После отключения ретранслятора система продолжила принимать знакомый сигнал. Установи, что именно подтверждают найденные материалы.',evidence:[['📄','Отчёт лаборатории','03:17 · образец A-09','В журнале указан образец A-09, зарегистрированный в 03:17. Поле времени доставки пустое. Это подтверждает пробел в документации, но не указывает, кто его создал.'],['📡','Запись сигнала','Интервал · 11 минут','Одинаковая последовательность импульсов повторяется каждые 11 минут. Метка времени могла появиться при восстановлении файла; оригинал недоступен.'],['🗝️','Записка Элиаса','Без даты и подписи','«Сигнал только подтверждает, что кто-то знает наш вопрос». Авторство записки не подтверждено.']],links:[['Временной пробел','Отчёт + запись'],['Неподтверждённый источник','Запись + записка'],['Авторство под вопросом','Отчёт + записка']],valid:[0,1],conclusions:[['pre','Сигнал точно записали заранее.'],['lab','Лабораторный сбой полностью объясняет сигнал.'],['open','Источник пока не установлен: данных недостаточно.']],correct:'open',success:'Заключение принято. Подтверждены повтор сигнала и пробел в журнале, но источник и причина пока неизвестны. Дело закрыто без преждевременных обвинений.'},
+ {code:'CASE FILE 02 · ARCHIVE',title:'Исчезновение архива',brief:'После пожара часть документов пропала из резервного хранилища. Определи, можно ли установить виновного по сохранившимся записям.',evidence:[['🔥','Отчёт о пожаре','02:41 · архивный блок','Датчики зафиксировали рост температуры в архивном блоке. Запись не содержит данных о причине возгорания.'],['💾','Журнал резервирования','02:39 · копирование прервано','Резервное копирование завершилось с ошибкой за две минуты до тревоги. Неизвестно, было ли это связано с пожаром.'],['🎥','Фрагмент камеры','Повреждённый файл','Видеофайл повреждён. На последнем кадре виден коридор, но людей или действий различить нельзя.']],links:[['Сбой перед тревогой','Пожар + журнал'],['Пробел наблюдения','Журнал + камера'],['Нельзя установить исполнителя','Пожар + камера']],valid:[0,1],conclusions:[['sabotage','Архив точно уничтожили намеренно.'],['accident','Это определённо была случайная авария.'],['unknown','Причина пожара и исчезновения данных не установлена.']],correct:'unknown',success:'Заключение принято. Есть подтверждённые повреждения и сбой резервирования, но данных недостаточно, чтобы отличить аварию от вмешательства.'},
+ {code:'CASE FILE 03 · ZERO',title:'След Нулевого сектора',brief:'На карте организации нет сектора, который продолжает появляться в сигналах. Проверь, что можно считать установленным.',evidence:[['🗺️','Старая карта','Версия · 4.2','На старой карте есть участок без подписи. Неизвестно, обозначает ли он отдельный сектор или техническую зону.'],['📡','Ретранслятор «Шёпот»','Узел отмечен отключённым','Узел передал пакет с координатами. Дата последней проверки оборудования отсутствует.'],['📝','Полевой журнал','Фрагмент · страница 7','«На месте нет входа, но прибор показывает сигнал снизу». Автор и точная дата записи не установлены.']],links:[['Координаты требуют проверки','Карта + ретранслятор'],['Свидетельство не датировано','Ретранслятор + журнал'],['Место не идентифицировано','Карта + журнал']],valid:[0,1],conclusions:[['exists','Нулевой сектор точно существует как объект Эпсилона.'],['fake','Сигнал является подделкой.'],['verify','Есть совпадающие указания на неизвестную зону, но её статус нужно проверить.']],correct:'verify',success:'Заключение принято. Несколько источников указывают на одну неизвестную зону, однако её статус и происхождение пока не доказаны.'}
+];
+let state;try{state=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){};if(!state||typeof state!=='object')state={completed:[],inspected:{},links:{}};
+let current=0,selected=null,activeEvidence=null;
+const el=id=>document.getElementById(id);const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){};render()};
+function render(){if(!el('caseList'))return;el('caseList').innerHTML=cases.map((c,i)=>{const locked=i>0&&!state.completed.includes(i-1),done=state.completed.includes(i);return `<button class="${current===i?'active':''}" ${locked?'disabled':''} onclick="selectInvestigationCase(${i})">${locked?'🔒':done?'✓':'📁'} ${c.title}<small>${locked?'Требуется закрыть предыдущее дело':done?'ДЕЛО ЗАКРЫТО':'ДОСТУПНО ДЛЯ ИЗУЧЕНИЯ'}</small></button>`}).join('');const total=cases.length,done=state.completed.length;el('caseProgressText').textContent=`Закрыто дел: ${done} / ${total} · Изучай документы и фиксируй обоснованные выводы.`;el('caseProgressFill').style.width=(done/total*100)+'%';const c=cases[current];el('caseCode').textContent=c.code;el('caseTitle').textContent=c.title;el('caseBrief').textContent=c.brief;el('caseStatusChip').textContent=state.completed.includes(current)?'ДЕЛО ЗАКРЫТО':'АКТИВНОЕ ДЕЛО';const inspected=state.inspected[current]||[];el('caseEvidenceGrid').innerHTML=c.evidence.map((v,i)=>`<button class="case-evidence ${activeEvidence===i?'active':''}" onclick="readInvestigationEvidence(${i})"><b>${v[0]} ${v[1]}</b><small>${inspected.includes(i)?'ИЗУЧЕНО · ':''}${v[2]}</small></button>`).join('');el('caseLinkBoard').innerHTML=c.links.map((v,i)=>`<button class="case-link ${selected===i?'selected':''}" onclick="chooseInvestigationLink(${i})">${v[0]}<small>${v[1]}</small></button>`).join('');el('caseConclusions').innerHTML=c.conclusions.map(v=>`<button onclick="submitInvestigationConclusion('${v[0]}')">${v[1]}</button>`).join('');if(activeEvidence===null)el('caseReading').textContent='Выбери документ, чтобы открыть содержание.';if(state.completed.includes(current))el('caseFeedback').textContent=c.success;else if(!el('caseFeedback').textContent||el('caseFeedback').textContent.includes('Дело закрыто'))el('caseFeedback').textContent='Изучи материалы, сопоставь улики и зафиксируй вывод.';}
+window.selectInvestigationCase=i=>{if(i<0||i>=cases.length||(i>0&&!state.completed.includes(i-1)))return;current=i;selected=null;activeEvidence=null;el('caseReading').textContent='Выбери документ, чтобы открыть содержание.';el('caseFeedback').textContent='Изучи материалы, сопоставь улики и зафиксируй вывод.';render()};
+window.readInvestigationEvidence=i=>{const c=cases[current];activeEvidence=i;state.inspected[current]=state.inspected[current]||[];if(!state.inspected[current].includes(i))state.inspected[current].push(i);el('caseReading').textContent=c.evidence[i][1]+'\n'+c.evidence[i][3];render()};
+window.chooseInvestigationLink=i=>{if(selected===null){selected=i;el('caseLinkHint').textContent='Связь выбрана. Выбери вторую связь, чтобы сравнить их.';render();return}if(selected===i){selected=null;el('caseLinkHint').textContent='Выбор сброшен.';render();return}const pair=[selected,i].sort((a,b)=>a-b);selected=null;const ok=pair[0]===0&&pair[1]===1;el('caseLinkHint').textContent=ok?'Связь отмечена как подтверждённая двумя материалами.':'Связь сохранена как гипотеза. Нужны дополнительные подтверждения.';render()};
+window.submitInvestigationConclusion=choice=>{const c=cases[current],seen=state.inspected[current]||[];if(seen.length<2){el('caseFeedback').textContent='ЗАКЛЮЧЕНИЕ НЕ ПРИНЯТО: изучи минимум два документа.';return}if(choice===c.correct){if(!state.completed.includes(current))state.completed.push(current);el('caseFeedback').textContent=c.success+(current<cases.length-1?' Следующее дело теперь доступно.':' Все текущие дела закрыты.');save()}else{el('caseFeedback').textContent='ВЕРСИЯ НЕ ПОДТВЕРЖДЕНА. Найденные материалы не доказывают этот вывод. Пересмотри документы и попробуй снова.';}};
+document.addEventListener('DOMContentLoaded',render);render();
+})();
+</script>
 
 </body>
 </html>
