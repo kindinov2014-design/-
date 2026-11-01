@@ -1409,6 +1409,24 @@ button:active, [role="button"]:active { filter: brightness(.94); }
 @media (hover: none), (pointer: coarse) {
   #epsilonCursorRing, #epsilonCursorDot { display: none !important; }
 }
+
+/* The tiny center dot follows the selected cursor theme instead of staying red. */
+@media (hover: hover) and (pointer: fine) {
+  body[data-cursor-theme="default"] #epsilonCursorDot { background:#ff4058; box-shadow:0 0 10px #ff4058; }
+  body[data-cursor-theme="crosshair"] #epsilonCursorDot { background:#ff526b; box-shadow:0 0 10px #ff526b; }
+  body[data-cursor-theme="reverse"] #epsilonCursorDot { background:#fff; box-shadow:0 0 10px #fff; }
+  body[data-cursor-theme="chip"] #epsilonCursorDot { background:#9bf4ff; box-shadow:0 0 10px #00d9ff; }
+  body[data-cursor-theme="anomaly"] #epsilonCursorDot { background:#ff6178; box-shadow:0 0 10px #ff174c; }
+  body[data-cursor-theme="redstone"] #epsilonCursorDot { background:#ff7777; box-shadow:0 0 10px #f22; }
+  body[data-cursor-theme="star"] #epsilonCursorDot { background:#ffe28a; box-shadow:0 0 10px #ffcf33; }
+  body[data-cursor-theme="skull"] #epsilonCursorDot { background:#eee; box-shadow:0 0 10px #aaa; }
+  body[data-cursor-theme="nuke"] #epsilonCursorDot { background:#c9ff65; box-shadow:0 0 12px #9f4; }
+  body[data-cursor-theme="portal"] #epsilonCursorDot { background:#d1aaff; box-shadow:0 0 12px #a66bff; }
+  body[data-cursor-theme="neon"] #epsilonCursorDot { background:#8affc8; box-shadow:0 0 12px #65ffb8; }
+  body[data-cursor-theme="custom"] #epsilonCursorDot { opacity:0; }
+  #epsilonCursorDot { transition:background-color .3s ease,box-shadow .3s ease,opacity .25s ease; }
+}
+
 </style>
 
 
@@ -5064,6 +5082,53 @@ window.submitInvestigationConclusion=choice=>{const c=cases[current],seen=state.
 document.addEventListener('DOMContentLoaded',render);render();
 })();
 </script>
+
+
+<style id="epsilon-alive-polish">
+html { scroll-behavior:smooth; }
+body { -webkit-font-smoothing:antialiased; }
+body::before {
+  content:""; position:fixed; inset:-20%; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(ellipse at 12% 18%, rgba(225,25,55,.075), transparent 38%),
+    radial-gradient(ellipse at 88% 78%, rgba(105,55,190,.055), transparent 40%);
+  animation:epsilonAmbientDrift 24s ease-in-out infinite alternate;
+  transform:translate3d(0,0,0);
+}
+@keyframes epsilonAmbientDrift {
+  0% { transform:translate3d(-1.2%, -.7%, 0) scale(1); opacity:.7; }
+  100% { transform:translate3d(1.2%, .7%, 0) scale(1.045); opacity:1; }
+}
+button, a, input, select, textarea, .feature-card, .char-card, .series-card,
+.profile-section, .profile-modal, .cursor-option, .friend-card, .aki-d24-card {
+  transition-property:color,background-color,border-color,box-shadow,transform,opacity,filter;
+  transition-duration:.28s;
+  transition-timing-function:cubic-bezier(.2,.75,.25,1);
+}
+button:not(:disabled):active { transform:scale(.975); }
+a { text-underline-offset:3px; }
+.feature-card:hover, .char-card:hover, .series-card:hover, .aki-d24-card:hover {
+  filter:brightness(1.055);
+}
+.profile-section {
+  backdrop-filter:blur(10px);
+  box-shadow:0 8px 26px rgba(0,0,0,.12);
+}
+.profile-section:hover {
+  border-color:color-mix(in srgb,var(--accent,#e21b2d) 48%,var(--border-soft,transparent));
+  box-shadow:0 12px 34px rgba(0,0,0,.2),0 0 22px rgba(220,30,55,.07);
+}
+input:focus,select:focus,textarea:focus {
+  outline:none;
+  border-color:var(--accent,#e21b2d)!important;
+  box-shadow:0 0 0 3px rgba(220,30,55,.13),0 0 18px rgba(220,30,55,.08);
+}
+::selection { background:rgba(220,30,55,.32); color:#fff; }
+@media (prefers-reduced-motion:reduce) {
+  body::before { animation:none!important; }
+  html { scroll-behavior:auto; }
+}
+</style>
 
 </body>
 </html>
