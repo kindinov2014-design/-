@@ -641,6 +641,35 @@
         body.cursor-star, body.cursor-star * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="16" y="24" font-size="24" text-anchor="middle">⭐</text></svg>') 16 16, auto !important; }
         body.cursor-skull, body.cursor-skull * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="16" y="24" font-size="24" text-anchor="middle">💀</text></svg>') 16 16, auto !important; }
         body.cursor-nuke, body.cursor-nuke * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="16" y="24" font-size="24" text-anchor="middle">☢️</text></svg>') 16 16, auto !important; }
+        /* Плавные тематические курсоры */
+        .cursor-option { position:relative; overflow:hidden; transform:translateZ(0); transition:transform .28s cubic-bezier(.2,.8,.2,1),border-color .28s,background .28s,box-shadow .28s; }
+        .cursor-option:hover { transform:translateY(-3px) scale(1.025); }
+        .cursor-option.selected { transform:translateY(-2px); }
+        #epsilonCursorRing { transition:width .28s cubic-bezier(.2,.8,.2,1),height .28s cubic-bezier(.2,.8,.2,1),border-radius .32s ease,border-color .28s ease,background-color .28s ease,background-image .28s ease,box-shadow .28s ease,opacity .2s ease,transform .10s ease-out !important; }
+        #epsilonCursorRing::after { content:''; position:absolute; inset:0; display:grid; place-items:center; font-size:17px; line-height:1; text-shadow:0 0 10px currentColor; opacity:.95; transition:opacity .22s,transform .28s; }
+        body[data-cursor-theme="default"] #epsilonCursorRing { width:34px;height:34px;border-radius:50%; }
+        body[data-cursor-theme="crosshair"] #epsilonCursorRing { width:30px;height:30px;border-radius:7px;border:2px solid #ff4b61;box-shadow:0 0 18px #ff304c88,inset 0 0 10px #ff304c33; }
+        body[data-cursor-theme="crosshair"] #epsilonCursorRing::after { content:'✛';color:#ff526b;font-size:22px; }
+        body[data-cursor-theme="reverse"] #epsilonCursorRing { width:34px;height:34px;border-radius:50%;border:2px solid #fff;background:#ed334dcc;box-shadow:0 0 22px #ff334c99; }
+        body[data-cursor-theme="reverse"] #epsilonCursorRing::after { content:'↻';color:#fff;font-size:20px; }
+        body[data-cursor-theme="chip"] #epsilonCursorRing { width:31px;height:31px;border-radius:9px;border:2px solid #7cecff;background:#00c9ee22;box-shadow:0 0 22px #00d9ff88; }
+        body[data-cursor-theme="chip"] #epsilonCursorRing::after { content:'◆';color:#9bf4ff; }
+        body[data-cursor-theme="anomaly"] #epsilonCursorRing { width:36px;height:36px;border-radius:44% 56% 62% 38%;border:2px solid #ff405a;background:#8b001d33;box-shadow:0 0 25px #ff174c99; }
+        body[data-cursor-theme="anomaly"] #epsilonCursorRing::after { content:'✦';color:#ff6178; }
+        body[data-cursor-theme="redstone"] #epsilonCursorRing { width:32px;height:32px;border-radius:5px;border:2px solid #ff6666;background:#a4000033;box-shadow:0 0 22px #f22; }
+        body[data-cursor-theme="redstone"] #epsilonCursorRing::after { content:'▪';color:#ff7777;font-size:24px; }
+        body[data-cursor-theme="star"] #epsilonCursorRing { width:34px;height:34px;border-radius:50%;border:1px solid #ffe28a;background:#ffcf3322;box-shadow:0 0 22px #ffcf3388; }
+        body[data-cursor-theme="star"] #epsilonCursorRing::after { content:'★';color:#ffe28a; }
+        body[data-cursor-theme="skull"] #epsilonCursorRing { width:36px;height:36px;border-radius:12px;border:1px solid #ddd;background:#77777722;box-shadow:0 0 20px #aaa8; }
+        body[data-cursor-theme="skull"] #epsilonCursorRing::after { content:'☠';color:#eee; }
+        body[data-cursor-theme="nuke"] #epsilonCursorRing { width:38px;height:38px;border-radius:50%;border:2px solid #b8ff4b;background:#b8ff4b18;box-shadow:0 0 24px #9f4; }
+        body[data-cursor-theme="nuke"] #epsilonCursorRing::after { content:'☢';color:#c9ff65; }
+        body[data-cursor-theme="portal"] #epsilonCursorRing { width:32px;height:42px;border-radius:50%;border:2px solid #b58cff;background:#8e48ff22;box-shadow:0 0 24px #a66bff99; }
+        body[data-cursor-theme="portal"] #epsilonCursorRing::after { content:'◉';color:#d1aaff; }
+        body[data-cursor-theme="neon"] #epsilonCursorRing { width:34px;height:34px;border-radius:50%;border:2px solid #65ffb8;background:#65ffb822;box-shadow:0 0 28px #65ffb8aa,inset 0 0 12px #65ffb855; }
+        body[data-cursor-theme="neon"] #epsilonCursorRing::after { content:'ϟ';color:#8affc8; }
+        body[data-cursor-theme="custom"] #epsilonCursorRing { width:36px;height:36px;border:0;background-color:transparent;box-shadow:none; }
+        body[data-cursor-theme="custom"] #epsilonCursorRing::after { content:none; }
         /* Профиль компактный */
         .profile-modal { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 18px; padding: 22px 20px; max-width: 390px; width: min(92vw, 390px); max-height: 76vh; overflow-y: auto; overscroll-behavior: contain; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.4); scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg); }
         .profile-modal::-webkit-scrollbar { width: 6px; }
@@ -1395,6 +1424,59 @@ button:active, [role="button"]:active { filter: brightness(.94); }
 @media(max-width:780px){#page-investigations .case-layout{grid-template-columns:1fr}#page-investigations .case-list{grid-template-columns:1fr}#page-investigations .case-evidence-grid,#page-investigations .case-link-board,#page-investigations .case-conclusions{grid-template-columns:1fr}#page-investigations .case-heading{flex-direction:column}}
 </style>
 
+
+<style id="epsilon-profile-dashboard-redesign">
+/* Epsilon profile dashboard — visual-only redesign; existing controls and IDs stay intact. */
+#profileModal.modal-overlay{padding:22px!important;backdrop-filter:blur(12px)!important;background:rgba(3,3,7,.78)!important}
+#profileModal .profile-modal{width:min(760px,96vw)!important;max-width:760px!important;max-height:min(91vh,940px)!important;padding:clamp(18px,3vw,30px)!important;border-radius:24px!important;overflow-x:hidden!important;background:linear-gradient(155deg,#19141b 0%,#0d0d13 52%,#09090d 100%)!important;border:1px solid rgba(255,65,88,.34)!important;box-shadow:0 30px 100px #000b,0 0 55px rgba(255,35,65,.11),inset 0 1px rgba(255,255,255,.055)!important;scrollbar-color:#a92a40 #111!important}
+#profileModal .profile-title-enhanced{display:flex!important;align-items:center!important;gap:10px!important;padding:0 48px 16px 2px!important;margin:0 0 18px!important;font-size:clamp(1.05rem,2.5vw,1.35rem)!important;letter-spacing:1.7px!important;text-transform:uppercase!important;color:#fff!important}
+#profileModal .profile-title-enhanced:before{content:"";width:4px;height:26px;border-radius:8px;background:linear-gradient(#ff7888,#e21d3b);box-shadow:0 0 18px #ff304d;flex:none}
+#profileModal .modal-close{top:20px!important;right:20px!important;width:38px!important;height:38px!important;border-radius:12px!important;background:#21151c!important;border:1px solid #743040!important;color:#ff9aa7!important;font-size:1.5rem!important;transition:transform .25s,background .25s,border-color .25s!important}
+#profileModal .modal-close:hover{background:#451725!important;border-color:#ff536c!important;transform:rotate(90deg)!important}
+#profileModal .profile-command-card{position:relative!important;isolation:isolate!important;overflow:hidden!important;padding:clamp(17px,3vw,25px)!important;margin:0 0 18px!important;border-radius:20px!important;border:1px solid rgba(255,69,91,.42)!important;background:radial-gradient(ellipse at 88% 8%,rgba(255,35,65,.22),transparent 42%),linear-gradient(125deg,rgba(49,24,36,.98),rgba(18,15,22,.98) 62%,rgba(12,12,18,.99))!important;box-shadow:0 16px 42px #0005,inset 0 1px rgba(255,255,255,.06)!important}
+#profileModal .profile-command-card:before{content:"EPSILON // PERSONNEL FILE";position:absolute;right:18px;top:16px;color:rgba(255,130,145,.42);font-size:9px;letter-spacing:2px;font-weight:900;z-index:-1}
+#profileModal .profile-command-card:after{opacity:.07!important;background:repeating-linear-gradient(0deg,transparent 0 7px,rgba(255,255,255,.16) 8px,transparent 9px)!important}
+#profileModal #profilePreviewAvatar{width:92px!important;height:92px!important;min-width:92px!important;border-radius:25px!important;border:2px solid #ff526b!important;background:linear-gradient(145deg,#35202b,#111018)!important;box-shadow:0 0 0 5px rgba(255,55,80,.09),0 0 28px rgba(255,40,70,.24)!important;font-size:2.6rem!important}
+#profileModal #profilePreviewName{font-size:clamp(1.25rem,3vw,1.8rem)!important;line-height:1.15!important;margin:0 0 6px!important;color:#fff!important;letter-spacing:.3px}
+#profileModal #profilePreviewBadge{display:inline-flex!important;align-items:center!important;width:max-content!important;max-width:100%!important;padding:5px 9px!important;border-radius:7px!important;background:rgba(255,55,80,.12)!important;border:1px solid rgba(255,75,100,.24)!important;font-size:.68rem!important;letter-spacing:.7px!important;text-transform:uppercase!important}
+#profileModal #profileCommandStatus{font-size:.76rem!important;color:#aaa3ad!important}
+#profileModal .profile-mini-stats{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;margin:19px 0 13px!important}
+#profileModal .profile-mini-stats>span{display:flex!important;flex-direction:column!important;gap:5px!important;min-width:0!important;padding:13px 12px!important;border:1px solid rgba(255,255,255,.075)!important;border-radius:13px!important;background:rgba(5,5,10,.48)!important;color:#a9a1ab!important;font-size:.66rem!important;letter-spacing:.8px!important;text-transform:uppercase!important}
+#profileModal .profile-mini-stats b{font-size:1.35rem!important;color:#fff!important;letter-spacing:0!important;font-variant-numeric:tabular-nums!important}
+#profileModal .profile-daily-btn{min-height:48px!important;padding:12px 15px!important;border-radius:12px!important;background:linear-gradient(100deg,rgba(198,24,53,.22),rgba(255,64,89,.08))!important;border:1px solid rgba(255,74,98,.42)!important;color:#fff!important}
+#profileModal .profile-daily-btn strong{color:#ff9aa8!important;letter-spacing:.3px}
+#profileModal .profile-section,#profileModal .nickname-editor{position:relative!important;margin:14px 0 0!important;padding:17px!important;border-radius:16px!important;border:1px solid rgba(255,255,255,.075)!important;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012))!important;box-shadow:inset 0 1px rgba(255,255,255,.025)!important}
+#profileModal .profile-section h3,#profileModal .nickname-editor h3{display:flex!important;align-items:center!important;gap:9px!important;margin:0 0 13px!important;color:#f5edf0!important;font-size:.86rem!important;letter-spacing:.6px!important;font-weight:850!important}
+#profileModal .profile-section h3:after,#profileModal .nickname-editor h3:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(255,65,90,.38),transparent)}
+#profileModal .nickname-editor input,#profileModal #customCursorUrl{min-height:43px!important;border-radius:10px!important;border:1px solid rgba(255,255,255,.12)!important;background:#0b0a10!important;color:#fff!important;padding:11px 13px!important;outline:none!important;transition:border-color .2s,box-shadow .2s!important}
+#profileModal .nickname-editor input:focus,#profileModal #customCursorUrl:focus{border-color:#ff526b!important;box-shadow:0 0 0 3px rgba(255,55,80,.12)!important}
+#profileModal .nickname-editor .modal-btn,#profileModal .cursor-custom-input{min-height:42px!important;border-radius:10px!important;padding:10px 15px!important;font-size:.75rem!important;font-weight:850!important}
+#profileModal .nickname-editor small{color:#918995!important;font-size:.68rem!important;line-height:1.5!important}
+#profileModal .xp-container{margin:14px 0 0!important;padding:17px!important;border-radius:16px!important;background:linear-gradient(135deg,rgba(255,44,73,.09),rgba(255,255,255,.018))!important;border:1px solid rgba(255,65,90,.2)!important}
+#profileModal .xp-header{font-size:.76rem!important;color:#e9dfe4!important}
+#profileModal .xp-bar-bg{height:10px!important;border-radius:20px!important;background:#08080d!important;overflow:hidden!important}
+#profileModal .xp-bar-fill{border-radius:20px!important;box-shadow:0 0 14px rgba(255,48,77,.48)!important}
+#profileModal .xp-text{font-size:.7rem!important;color:#a9a1aa!important}
+#profileModal .color-options{grid-template-columns:repeat(auto-fit,minmax(35px,1fr))!important;gap:11px!important}
+#profileModal .color-option{width:34px!important;height:34px!important;border-radius:11px!important}
+#profileModal .frame-options,#profileModal .status-options{gap:9px!important}
+#profileModal .frame-option,#profileModal .status-option{padding:10px 13px!important;border-radius:10px!important;background:#111017!important;border:1px solid rgba(255,255,255,.1)!important;color:#ddd!important;font-size:.72rem!important;transition:all .22s!important}
+#profileModal .frame-option:hover,#profileModal .status-option:hover,#profileModal .cursor-option:hover{transform:translateY(-2px)!important;border-color:#ff526b!important}
+#profileModal .frame-option.selected,#profileModal .status-option.selected{border-color:#ff526b!important;background:rgba(255,48,77,.13)!important;box-shadow:0 0 0 1px rgba(255,48,77,.18)!important}
+#profileModal .cursor-options{grid-template-columns:repeat(auto-fit,minmax(105px,1fr))!important;gap:10px!important}
+#profileModal .cursor-option{border-radius:13px!important;background:#100f15!important;border:1px solid rgba(255,255,255,.09)!important;transition:transform .22s,border-color .22s,background .22s,box-shadow .22s!important}
+#profileModal .cursor-option.selected{border-color:#ff526b!important;background:rgba(255,48,77,.12)!important;box-shadow:0 0 0 1px rgba(255,48,77,.2),0 8px 20px #0003!important}
+#profileModal .achievements-grid{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))!important;gap:10px!important}
+#profileModal .achievement-card{padding:14px 10px!important;border-radius:13px!important;background:rgba(0,0,0,.2)!important;border:1px solid rgba(255,255,255,.075)!important;transition:transform .2s,border-color .2s!important}
+#profileModal .achievement-card:hover{transform:translateY(-2px)!important;border-color:rgba(255,75,100,.42)!important}
+#profileModal .achievement-name{font-size:.72rem!important;color:#f3e9ed!important}
+#profileModal .achievement-desc{font-size:.62rem!important;color:#99919c!important;line-height:1.45!important}
+#profileModal .profile-modal>.modal-btn{margin-top:18px!important;min-height:48px!important;border-radius:12px!important;font-weight:900!important;letter-spacing:.8px!important;background:linear-gradient(100deg,#a91331,#ef3452)!important;box-shadow:0 8px 24px rgba(210,20,55,.2)!important}
+#profileModal .profile-modal>.modal-btn:hover{filter:brightness(1.12)!important;transform:translateY(-1px)!important}
+@media(max-width:560px){#profileModal.modal-overlay{padding:8px!important}#profileModal .profile-modal{width:100%!important;max-height:94vh!important;padding:16px!important;border-radius:18px!important}#profileModal .profile-command-card{padding:15px!important}#profileModal #profilePreviewAvatar{width:72px!important;height:72px!important;min-width:72px!important;border-radius:20px!important;font-size:2rem!important}#profileModal .profile-mini-stats{gap:7px!important}#profileModal .profile-mini-stats>span{padding:10px 7px!important;font-size:.56rem!important}#profileModal .profile-mini-stats b{font-size:1.15rem!important}#profileModal .profile-section,#profileModal .nickname-editor{padding:13px!important}#profileModal .nickname-editor>div{flex-wrap:nowrap!important}#profileModal .nickname-editor input{min-width:0!important}}
+@media(prefers-reduced-motion:reduce){#profileModal *,#profileModal *:before,#profileModal *:after{transition:none!important;animation:none!important}}
+</style>
+
 </head><body>
 
     <!-- ЗАГРУЗОЧНЫЙ ЭКРАН -->
@@ -1404,33 +1486,6 @@ button:active, [role="button"]:active { filter: brightness(.94); }
         <div class="loading-text" id="loadingText">Загрузка...</div>
         <button id="skipLoadingBtn" type="button" class="skip-loading-btn" onclick="skipLoadingScreen()">Пропустить интро ↗</button>
     </div>
-    <script>
-    // Аварийное управление интро: экран не должен зависать, даже если
-    // основной скрипт сайта остановится из-за другой ошибки.
-    (function () {
-        var loader = document.getElementById('loadingScreen');
-        if (!loader) return;
-        var hidden = false;
-        window.skipLoadingScreen = function () {
-            if (hidden) return;
-            hidden = true;
-            loader.classList.add('hidden');
-            window.setTimeout(function () { loader.style.display = 'none'; }, 700);
-        };
-        var fill = document.getElementById('loadingBarFill');
-        if (fill) {
-            var value = 0;
-            var emergencyProgress = window.setInterval(function () {
-                if (hidden) { window.clearInterval(emergencyProgress); return; }
-                value = Math.min(100, value + 12);
-                fill.style.width = value + '%';
-                if (value >= 100) window.clearInterval(emergencyProgress);
-            }, 300);
-        }
-        // Защита от ошибок и зависания остальных скриптов.
-        window.setTimeout(window.skipLoadingScreen, 8000);
-    })();
-    </script>
 
     <!-- АНИМИРОВАННЫЙ ФОН -->
     <div id="animated-bg"></div>
@@ -2781,21 +2836,16 @@ button:active, [role="button"]:active { filter: brightness(.94); }
         // ===== КУРСОРЫ =====
         const CURSORS = [
             { id: 'default', icon: '🖱️', label: 'Стандарт', label_en: 'Default', class: '' },
-            { id: 'crosshair', icon: '➕', label: 'Прицел', label_en: 'Crosshair', class: 'cursor-crosshair' },
-            { id: 'reverse', icon: '⭕', label: 'Реверс', label_en: 'Reverse', class: 'cursor-reverse' },
-            { id: 'chip', icon: '🔷', label: 'Чип', label_en: 'Chip', class: 'cursor-chip' },
-            { id: 'anomaly', icon: '🧬', label: 'Аномалия', label_en: 'Anomaly', class: 'cursor-anomaly' },
-            { id: 'redstone', icon: '🟥', label: 'Редстоун', label_en: 'Redstone', class: 'cursor-redstone' },
-            { id: 'star', icon: '🌟', label: 'Звезда', label_en: 'Star', class: 'cursor-star' },
-            { id: 'skull', icon: '💀', label: 'Череп', label_en: 'Skull', class: 'cursor-skull' },
-            { id: 'nuke', icon: '☢️', label: 'Радиация', label_en: 'Radiation', class: 'cursor-nuke' },
-            { id: 'portal', icon: '🌀', label: 'Портал', label_en: 'Portal', class: 'cursor-portal' },
-            { id: 'neon', icon: '💡', label: 'Неон', label_en: 'Neon', class: 'cursor-neon' },
+            { id: 'crosshair', icon: '🎯', label: 'Прицел', label_en: 'Target', class: 'cursor-crosshair' },
+            { id: 'reverse', icon: '🔴', label: 'Реверс', label_en: 'Reverse', class: 'cursor-reverse' },
+            { id: 'chip', icon: '💠', label: 'Кристалл', label_en: 'Crystal', class: 'cursor-chip' },
             { id: 'anomaly', icon: '🩸', label: 'Аномалия', label_en: 'Anomaly', class: 'cursor-anomaly' },
             { id: 'redstone', icon: '🟥', label: 'Редстоун', label_en: 'Redstone', class: 'cursor-redstone' },
             { id: 'star', icon: '⭐', label: 'Звезда', label_en: 'Star', class: 'cursor-star' },
             { id: 'skull', icon: '💀', label: 'Череп', label_en: 'Skull', class: 'cursor-skull' },
-            { id: 'nuke', icon: '☢️', label: 'Ядерка', label_en: 'Nuke', class: 'cursor-nuke' }
+            { id: 'nuke', icon: '☢️', label: 'Радиация', label_en: 'Radiation', class: 'cursor-nuke' },
+            { id: 'portal', icon: '🌀', label: 'Портал', label_en: 'Portal', class: 'cursor-portal' },
+            { id: 'neon', icon: '⚡', label: 'Неон', label_en: 'Neon', class: 'cursor-neon' }
         ];
         function getCursorSettings() {
             const user = getCurrentUser();
@@ -2813,14 +2863,17 @@ button:active, [role="button"]:active { filter: brightness(.94); }
             document.body.style.cursor = '';
             const settings = getCursorSettings();
             const cursor = CURSORS.find(c => c.id === settings.id) || CURSORS[0];
-            if (cursor.class) { document.body.classList.add(cursor.class); }
-            else if (settings.customUrl) {
-                document.body.style.cursor = `url('${settings.customUrl}') 16 16, auto`;
-                const style = document.getElementById('customCursorStyle') || document.createElement('style');
-                style.id = 'customCursorStyle';
-                style.textContent = `body, body * { cursor: url('${settings.customUrl}') 16 16, auto !important; }`;
-                if (!style.parentNode) document.head.appendChild(style);
+            document.body.dataset.cursorTheme = settings.id || 'default';
+            const ring = document.getElementById('epsilonCursorRing');
+            if (ring) {
+                ring.style.backgroundImage = settings.id === 'custom' && settings.customUrl ? `url("${settings.customUrl.replace(/["\\\\]/g, '')}")` : '';
+                ring.style.backgroundSize = 'contain';
+                ring.style.backgroundPosition = 'center';
+                ring.style.backgroundRepeat = 'no-repeat';
             }
+            if (cursor.class) document.body.classList.add(cursor.class);
+            const customStyle = document.getElementById('customCursorStyle');
+            if (customStyle) customStyle.remove();
         }
         function setCursor(id) {
             const settings = getCursorSettings();
@@ -3938,6 +3991,7 @@ button:active, [role="button"]:active { filter: brightness(.94); }
             if (user.avatar) previewAvatar.innerHTML = `<img src="${user.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none';this.parentElement.textContent='${genderIcon}';">`;
             else previewAvatar.textContent = genderIcon;
             document.getElementById('profilePreviewName').textContent = user.nickname;
+            const nickInput = document.getElementById('profileNicknameInput'); if (nickInput) nickInput.value = user.nickname;
             updateXPBar();
             updateProfileCommandCard(user);
             const colorOpts = document.getElementById('colorOptions');
@@ -3990,6 +4044,57 @@ button:active, [role="button"]:active { filter: brightness(.94); }
             const profilePanel = document.querySelector('#profileModal .profile-modal');
             if (profilePanel) profilePanel.scrollTop = 0;
         }
+        function changeProfileNickname() {
+            const user = getCurrentUser();
+            const field = document.getElementById('profileNicknameInput');
+            if (!user || !field) return;
+            const oldNick = user.nickname;
+            const newNick = field.value.trim();
+            if (!/^[A-Za-z0-9_.-]{3,20}$/.test(newNick)) {
+                showNotification('Ник должен содержать 3–20 символов: латиницу, цифры, _ . -', 'error');
+                return;
+            }
+            const users = getUsers();
+            const duplicate = Object.keys(users).find(k => k.toLowerCase() === newNick.toLowerCase() && k.toLowerCase() !== oldNick.toLowerCase());
+            if (duplicate) { showNotification('Этот никнейм уже занят.', 'error'); return; }
+            if (newNick === oldNick) { showNotification('Никнейм не изменился.', 'info'); return; }
+
+            const accountKey = Object.keys(users).find(k => k.toLowerCase() === oldNick.toLowerCase()) || oldNick;
+            const account = users[accountKey] || {};
+            users[newNick] = { ...account, nickname: newNick };
+            if (accountKey !== newNick) delete users[accountKey];
+            saveUsers(users);
+            setCurrentUser({ nickname: newNick, gender: account.gender || user.gender || '', avatar: account.avatar || user.avatar || null });
+
+            // Переносим персональные данные, чтобы прогресс и настройки не потерялись.
+            const personalPrefixes = ['aki_xp_', 'aki_coins_spent_', 'aki_daily_', 'aki_bonus_', 'aki_achievements_', 'aki_wheel_', 'aki_friends_', 'aki_cursor_', 'aki_favorites_', 'aki_cart_items_', 'aki_last_watched_', 'aki_watchlist_', 'aki_used_promos_', 'aki_vip_', 'aki_custom_', 'aki_profile_daily_'];
+            personalPrefixes.forEach(prefix => {
+                const from = prefix + oldNick, to = prefix + newNick;
+                const value = localStorage.getItem(from);
+                if (value !== null && localStorage.getItem(to) === null) localStorage.setItem(to, value);
+                if (value !== null) localStorage.removeItem(from);
+            });
+            // Обновляем упоминания ника в списках друзей других аккаунтов.
+            Object.keys(users).forEach(key => {
+                const listKey = 'aki_friends_' + key;
+                const raw = localStorage.getItem(listKey);
+                if (!raw) return;
+                const list = safeJSONParse(raw, []);
+                if (Array.isArray(list)) {
+                    const updated = list.map(n => String(n).toLowerCase() === oldNick.toLowerCase() ? newNick : n);
+                    localStorage.setItem(listKey, JSON.stringify(updated));
+                }
+            });
+            const headerName = document.getElementById('userNameWrap');
+            if (headerName) headerName.textContent = newNick;
+            const previewName = document.getElementById('profilePreviewName');
+            if (previewName) previewName.textContent = newNick;
+            updateProfileCommandCard(getCurrentUser());
+            applyUserCustomization();
+            renderFriends();
+            showNotification('Никнейм успешно изменён!', 'success');
+        }
+
         function updateProfileCommandCard(user) {
             const xp = getUserXP();
             const levelIndex = getLevelIndex(xp);
@@ -4343,22 +4448,14 @@ button:active, [role="button"]:active { filter: brightness(.94); }
             { id: 'vera', name: 'Вера', name_en: 'Vera', emoji: '👧', role: 'Скрытый мутант', role_en: 'Hidden Mutant', age: '20 лет', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#e91e63', group: 'main', short: 'Сестра-близнец Агента Ноль.', short_en: 'Agent Zero\'s twin.', full: 'Сохранила эмоции, но тело мутировало.', full_en: 'Retained emotions but mutated.', tags: ['Мутант', 'Сезон 8'], tags_en: ['Mutant', 'Season 8'] },
             { id: 'crow', name: 'Доктор Кроу', name_en: 'Dr. Crow', emoji: '🐦', role: 'Новый учёный', role_en: 'New Scientist', age: '35 лет', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#00bcd4', group: 'epsilon', short: 'Изучает аномалию в теле Аки.', short_en: 'Studies Aki\'s anomaly.', full: 'Пытается спасти Аки, но готов на жертвы.', full_en: 'Tries to save Aki.', tags: ['Учёный', 'Сезон 8'], tags_en: ['Scientist', 'Season 8'] },
             { id: 'voice', name: 'Голос', name_en: 'Voice', emoji: '🗣️', role: 'Сущность', role_en: 'Entity', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#9c27b0', group: 'main', short: 'Аномалия в голове Аки.', short_en: 'Anomaly in Aki\'s head.', full: 'Пытается склонить Аки на свою сторону.', full_en: 'Tries to win Aki over.', tags: ['Аномалия', 'Сезон 8'], tags_en: ['Anomaly', 'Season 8'] },
+            { id: 'unknown_observer', name: 'Неизвестный', name_en: 'The Unknown', emoji: '👁️', role: 'Наблюдатель', role_en: 'Observer', age: 'неизвестно', status: 'unknown', statusText: '🟡 Личность не установлена', statusText_en: '🟡 Identity unknown', color: '#777777', group: 'main', short: 'Появляется на отдельных кадрах камер и в отражениях. Личность и мотивы неизвестны.', short_en: 'Appears in selected camera frames and reflections. Identity and motives are unknown.', full: 'В архивных записях иногда обнаруживается силуэт, которого не замечали при первом просмотре. Его присутствие не подтверждено вне этих фрагментов. Имя, происхождение и цели Неизвестного не установлены.', full_en: 'A silhouette sometimes appears in archived footage, despite not being noticed during the initial review. Its presence has not been confirmed beyond these fragments. The Unknown’s name, origin, and motives have not been established.', tags: ['Наблюдатель', 'Личность неизвестна', 'Архивные записи'], tags_en: ['Observer', 'Identity unknown', 'Archived footage'] },
             { id: 'zein', name: 'Зейн', name_en: 'Zane', emoji: '🕵️', role: 'Лидер Свидетелей', role_en: 'Witnesses Leader', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#c0182b', group: 'witnesses', short: 'Холодный, расчётливый. Врёт Аки.', short_en: 'Cold, calculating.', full: 'Бывший агент Эпсилона. Использует Аки для своих целей.', full_en: 'Former Epsilon agent.', tags: ['Лидер', 'Свидетели', 'Предатель'], tags_en: ['Leader', 'Witnesses', 'Traitor'] },
             { id: 'mira', name: 'Мира', name_en: 'Mira', emoji: '💉', role: 'Свидетель-медик', role_en: 'Medic', age: 'неизвестно', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#00bfa5', group: 'witnesses', short: 'Добрая, но сломленная.', short_en: 'Kind but broken.', full: 'Одна из немногих Свидетелей, кто не давит на Аки.', full_en: 'Doesn\'t pressure Aki.', tags: ['Свидетели', 'Медик'], tags_en: ['Witnesses', 'Medic'] },
             { id: 'korv', name: 'Корв', name_en: 'Korv', emoji: '💻', role: 'Свидетель-техник', role_en: 'Technician', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#00e676', group: 'witnesses', short: 'Гений-параноик.', short_en: 'Genius-paranoid.', full: 'Давит на Аки: «Правда не важна. Важно действие».', full_en: 'Pressures Aki.', tags: ['Свидетели', 'Техник'], tags_en: ['Witnesses', 'Technician'] },
             { id: 'ten', name: 'Тень', name_en: 'Shadow', emoji: '🌑', role: 'Свидетель-стиратель', role_en: 'Eraser', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#424242', group: 'witnesses', short: 'Молчаливый, опасный.', short_en: 'Silent, dangerous.', full: 'Бывший «стиратель» памяти Эпсилона.', full_en: 'Former memory eraser.', tags: ['Свидетели', 'Стиратель'], tags_en: ['Witnesses', 'Eraser'] },
             { id: 'sevrан', name: 'Севран', name_en: 'Sevran', emoji: '🜏', role: 'Архонт культа', role_en: 'Cult Archon', age: 'неизвестно', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#9d7bce', group: 'temple', short: 'Лидер Ордена Последней Печати. Верит, что сущность под храмом — бог, которого нужно пробудить.', short_en: 'Leader of the Order of the Last Seal. Believes the entity beneath the temple must awaken.', full: 'Севран руководит тайным культом, который веками охранял забытый храм. Он знает, что печать слабеет, и считает Аки ключом к её открытию. Неясно, хочет ли он освободить сущность или занять её место.', full_en: 'Sevran leads the secret cult guarding the forgotten temple. He believes Aki is the key to opening the weakening seal. It is unclear whether he wants to free the entity or take its place.', tags: ['Сезон 9', 'Культ', 'Архонт', 'Печать'], tags_en: ['Season 9', 'Cult', 'Archon', 'Seal'] },
             { id: 'iona', name: 'Иона', name_en: 'Iona', emoji: '🕯️', role: 'Голос храма', role_en: 'Voice of the Temple', age: '24 года', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#b8a16a', group: 'temple', short: 'Молодая служительница, слышащая шёпот из-под алтаря.', short_en: 'A young acolyte who hears whispers beneath the altar.', full: 'Иона проводит обряды Ордена Последней Печати, но тайно боится того, чему поклоняются остальные. Шёпот иногда называет ей события, которые ещё не произошли. Она может стать проводником Аки внутрь храма — или привести его в ловушку.', full_en: 'Iona performs the Order’s rituals but secretly fears what the others worship. Whispers tell her things that have not happened yet. She may guide Aki into the temple—or lead him into a trap.', tags: ['Сезон 9', 'Послушница', 'Предчувствия'], tags_en: ['Season 9', 'Acolyte', 'Premonitions'] },
-            { id: 'elias', name: 'Элиас', name_en: 'Elias', emoji: '🗝️', role: 'Изгнанный хранитель', role_en: 'Exiled Keeper', age: '61 год', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#648b83', group: 'temple', short: 'Последний хранитель, отказавшийся служить культу.', short_en: 'The last keeper who refused to serve the cult.', full: 'Элиас десятилетиями защищал печать, пока Орден не решил использовать Аки для ритуала. Он исчез после пожара в архиве и оставил карту тайных проходов у госпиталя. Никто не знает, жив ли он и почему символ печати похож на метку аномалии.', full_en: 'Elias guarded the seal for decades until the Order decided to use Aki in a ritual. He vanished after an archive fire, leaving a map of hidden passages near the hospital. No one knows if he is alive or why the seal resembles an anomaly mark.', tags: ['Сезон 9', 'Хранитель', 'Тайная карта'], tags_en: ['Season 9', 'Keeper', 'Secret Map'] },
-            { id: 'veil', name: 'Доктор Вейл', name_en: 'Dr. Vale', emoji: '🧬', role: 'Главный научный сотрудник', role_en: 'Chief Research Scientist', age: '47 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#65c9d8', group: 'epsilon', short: 'Учёный Эпсилона, который знает больше, чем рассказывает.', short_en: 'Epsilon scientist who knows more than he tells.', full: 'Доктор Вейл руководит исследованиями аномалий и изучает их влияние на человеческую память. Он редко делится результатами целиком и хранит отдельный архив экспериментов. Его настоящие мотивы остаются предметом споров даже среди руководства.', full_en: 'Dr. Vale leads anomaly research and studies their effects on human memory. He rarely shares complete results and keeps a private archive of experiments. Even the leadership questions his true motives.', tags: ['Эпсилон', 'Учёный', 'Аномалии'], tags_en: ['Epsilon', 'Scientist', 'Anomalies'] },
-            { id: 'reina', name: 'Рейна', name_en: 'Reina', emoji: '🎯', role: 'Руководитель разведки', role_en: 'Head of Intelligence', age: '32 года', status: 'alive', statusText: '🟢 Жива', statusText_en: '🟢 Alive', color: '#bd8cff', group: 'epsilon', short: 'Холодная и расчётливая. Контролирует разведывательную сеть Эпсилона.', short_en: 'Cold and calculating. Oversees Epsilon intelligence.', full: 'Рейна руководит сбором информации, наблюдением и проверкой источников. Она почти не показывает эмоций и предпочитает проверять каждый факт лично. Считает, что секреты организации иногда опаснее самих аномалий.', full_en: 'Reina oversees intelligence gathering, surveillance, and source verification. She rarely shows emotion and prefers to verify every fact herself. She believes the organization’s secrets can be more dangerous than the anomalies.', tags: ['Эпсилон', 'Разведка', 'Операции'], tags_en: ['Epsilon', 'Intelligence', 'Operations'] },
-            { id: 'nox', name: 'Нокс', name_en: 'Nox', emoji: '🛡️', role: 'Боец спецподразделения', role_en: 'Special Operations Soldier', age: '29 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#9b9da8', group: 'epsilon', short: 'Молчаливый боец, которому поручают самые опасные задания.', short_en: 'A quiet operative assigned to the most dangerous missions.', full: 'Нокс служит в специальном подразделении Эпсилона. Он немногословен, дисциплинирован и всегда доводит задание до конца. За бронёй скрывается человек, который не любит оставлять товарищей позади.', full_en: 'Nox serves in Epsilon’s special operations unit. He is quiet, disciplined, and always completes his assignments. Behind the armor is someone who refuses to leave teammates behind.', tags: ['Эпсилон', 'Спецотряд', 'Боец'], tags_en: ['Epsilon', 'Special Unit', 'Operative'] },
-            { id: 'zero_entity', name: 'Нулевой', name_en: 'The Zero', emoji: '👁️', role: 'Неизвестная сущность', role_en: 'Unknown Entity', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#ff3547', group: 'witnesses', short: 'Фигура, которая появляется на записях камер в закрытых секторах.', short_en: 'A figure appearing on camera footage in restricted sectors.', full: 'Нулевой впервые был замечен на нескольких записях наблюдения. Камеры фиксируют его в местах, куда никто не входил, а после появления фигуры записи повреждаются. Неизвестно, является ли он существом, человеком или ошибкой системы.', full_en: 'The Zero was first noticed in several surveillance recordings. Cameras capture the figure in places no one entered, and footage becomes corrupted afterward. It is unknown whether it is a creature, a person, or a system error.', tags: ['Аномалия', 'Наблюдение', 'Тайна'], tags_en: ['Anomaly', 'Surveillance', 'Mystery'] },
-            { id: 'stranger', name: 'Незнакомец', name_en: 'The Stranger', emoji: '🎭', role: 'Неизвестный наблюдатель', role_en: 'Unknown Observer', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#8c7b9f', group: 'witnesses', short: 'Появляется перед важными событиями и будто знает будущее.', short_en: 'Appears before major events and seems to know the future.', full: 'Незнакомец не называет своего имени и никогда не остаётся надолго. Он появляется рядом с местами будущих происшествий и оставляет короткие предупреждения. Ни Эпсилону, ни Свидетелям пока не удалось установить его личность.', full_en: 'The Stranger never gives a name and never stays long. They appear near locations of future incidents and leave brief warnings. Neither Epsilon nor the Witnesses have identified them.', tags: ['Загадка', 'Наблюдатель', 'Предупреждения'], tags_en: ['Mystery', 'Observer', 'Warnings'] },
-            { id: 'echo_entity', name: 'Эхо', name_en: 'Echo', emoji: '🪞', role: 'Аномальная сущность', role_en: 'Anomalous Entity', age: 'неизвестно', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#65a6c9', group: 'witnesses', short: 'Копирует голоса и внешность людей, с которыми сталкивается.', short_en: 'Mimics the voices and appearances of people it encounters.', full: 'Эхо способно воспроизводить знакомые голоса с пугающей точностью. Свидетели утверждают, что иногда оно принимает облик конкретного человека. Неясно, понимает ли Эхо, кем притворяется, и может ли отличить копию от оригинала.', full_en: 'Echo can reproduce familiar voices with frightening accuracy. Witnesses claim it sometimes takes the appearance of a specific person. It is unclear whether Echo understands its disguises or can distinguish copies from originals.', tags: ['Аномалия', 'Мимикрия', 'Эхо'], tags_en: ['Anomaly', 'Mimicry', 'Echo'] },
-            { id: 'victor', name: 'Виктор', name_en: 'Victor', emoji: '⚖️', role: 'Глава секретного подразделения', role_en: 'Head of a Secret Division', age: '52 года', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#c5a46d', group: 'epsilon', short: 'Руководит подразделением, о котором почти нет сведений.', short_en: 'Leads a division that barely appears in official records.', full: 'Виктор возглавляет закрытое подразделение Эпсилона. Его сотрудники получают задания напрямую и не фигурируют в обычных отчётах. Виктор редко вмешивается лично, но его решения способны изменить ход крупной операции.', full_en: 'Victor leads a closed Epsilon division. Its personnel receive assignments directly and do not appear in ordinary reports. Victor rarely intervenes personally, but his decisions can change the course of a major operation.', tags: ['Эпсилон', 'Руководство', 'Секретное подразделение'], tags_en: ['Epsilon', 'Leadership', 'Secret Division'] },
-            { id: 'cipher', name: 'Сайфер', name_en: 'Cipher', emoji: '💻', role: 'Специалист по кибербезопасности', role_en: 'Cybersecurity Specialist', age: '26 лет', status: 'alive', statusText: '🟢 Жив', statusText_en: '🟢 Alive', color: '#54d6c8', group: 'main', short: 'Хакер, который умеет находить слабые места даже в закрытых системах.', short_en: 'A hacker who finds weaknesses in even the most secure systems.', full: 'Сайфер специализируется на цифровых следах, шифрах и проникновении в защищённые сети. Он может помочь Аки восстановить удалённые данные, но никогда не раскрывает, откуда получает инструменты и доступы.', full_en: 'Cipher specializes in digital traces, encryption, and secure network intrusion. He can help Aki recover deleted data, but never reveals where his tools and access come from.', tags: ['Хакер', 'Технологии', 'Расследования'], tags_en: ['Hacker', 'Technology', 'Investigations'] },
-            { id: 'astra', name: 'Астра', name_en: 'Astra', emoji: '✨', role: 'Девушка с предвидением', role_en: 'Precognitive', age: '21 год', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#9b8cff', group: 'main', short: 'Утверждает, что видит фрагменты событий до того, как они происходят.', short_en: 'Claims to see fragments of events before they happen.', full: 'Астра рассказывает о коротких видениях будущего. Иногда её предупреждения сбываются, иногда приводят команду к ложному следу. Она сама не понимает, откуда берутся видения, и боится, что каждое вмешательство меняет увиденный исход.', full_en: 'Astra describes brief visions of the future. Sometimes her warnings come true; other times they lead the team astray. She does not understand where the visions come from and fears that every intervention changes the outcome.', tags: ['Предвидение', 'Тайна', 'Союзник'], tags_en: ['Precognition', 'Mystery', 'Ally'] },
+            { id: 'elias', name: 'Элиас', name_en: 'Elias', emoji: '🗝️', role: 'Изгнанный хранитель', role_en: 'Exiled Keeper', age: '61 год', status: 'unknown', statusText: '🟡 Неизвестно', statusText_en: '🟡 Unknown', color: '#648b83', group: 'temple', short: 'Последний хранитель, отказавшийся служить культу.', short_en: 'The last keeper who refused to serve the cult.', full: 'Элиас десятилетиями защищал печать, пока Орден не решил использовать Аки для ритуала. Он исчез после пожара в архиве и оставил карту тайных проходов у госпиталя. Никто не знает, жив ли он и почему символ печати похож на метку аномалии.', full_en: 'Elias guarded the seal for decades until the Order decided to use Aki in a ritual. He vanished after an archive fire, leaving a map of hidden passages near the hospital. No one knows if he is alive or why the seal resembles an anomaly mark.', tags: ['Сезон 9', 'Хранитель', 'Тайная карта'], tags_en: ['Season 9', 'Keeper', 'Secret Map'] }
         ];
         let currentCharFilter = 'all';
         function renderCharacters() {
@@ -4477,7 +4574,14 @@ button:active, [role="button"]:active { filter: brightness(.94); }
             { icon: '🌅', title: 'Сезон 6: «Новая эра»', title_en: 'Season 6', body: '<p><strong>Финал истории.</strong></p><ul><li>Арка 21: Аки и Лира сбегают из штаба.</li><li>Арка 22: Советник Холт приказывает уничтожить Свидетелей.</li><li>Арка 23: Анастасия атакует базу.</li><li>Арка 24: Аки встречает Влада.</li><li>Арка 25: Аки уничтожает чип и становится свободным.</li></ul>', body_en: '<p><strong>Finale.</strong></p><ul><li>Arc 21: Aki and Lira escape.</li><li>Arc 22: Holt orders destruction.</li><li>Arc 23: Anastasia attacks.</li><li>Arc 24: Aki meets Vlad.</li><li>Arc 25: Aki destroys chip.</li></ul>' },
             { icon: '🏚️', title: 'Сезон 7: «Эхо прошлого»', title_en: 'Season 7', body: '<p>После падения Эпсилона появляется <strong>Синдикат</strong>, а журналист <strong>Маркус</strong> начинает расследовать его деятельность.</p><ul><li>Арка 26: Руины, файлы о проекте «Иерихон».</li><li>Арка 27: Аки встречает Маркуса.</li><li>Арка 28: Аки встречает Иерихона.</li><li>Арка 29: Аки объединяется с Джесс.</li><li>Арка 30: Аки создаёт новый Эпсилон.</li></ul>', body_en: '<p>After Epsilon falls, the Syndicate emerges, and journalist Markus begins investigating its activities.</p><ul><li>Arc 26: Ruins.</li><li>Arc 27: Markus.</li><li>Arc 28: Jericho.</li><li>Arc 29: Jess.</li><li>Arc 30: New Epsilon.</li></ul>' },
             { icon: '🪞', title: 'Сезон 8: «Тёмное отражение»', title_en: 'Season 8: “Dark Reflection”', body: '<p>Даже без чипов организация может стать монстром. Появляется <strong>Психотерапевт</strong>.</p><ul><li>Арка 31: Тёмное отражение.</li><li>Арка 32: Кукловод.</li><li>Арка 33: Голоса в голове.</li><li>Арка 34: Агент Ноль и Вера.</li><li>Арка 35: Финальная жертва.</li></ul>', body_en: '<p>Even without chips, an organization can become a monster. The <strong>Therapist</strong> appears.</p><ul><li>Arc 31: Dark Reflection.</li><li>Arc 32: Puppeteer.</li><li>Arc 33: Voices in the Head.</li><li>Arc 34: Agent Zero and Vera.</li><li>Arc 35: Final Sacrifice.</li></ul>' },
-            { icon: '⛩️', title: 'Сезон 9: «Эпсилон: Печать забытого храма»', title_en: 'Season 9: “Epsilon — The Seal of the Forgotten Temple”', body: '<p>После событий восьмого сезона Эпсилон обнаруживает заброшенный храм неподалёку от госпиталя «Мира». Под его древним алтарём скрыта <strong>запечатанная сущность</strong>. Никто не знает, кто или что находится внутри печати — и почему рядом с госпиталем пытались стереть все следы храма.</p><ul><li>Аки и команда находят проход под руинами.</li><li>На стенах обнаруживаются символы, похожие на знаки аномалии.</li><li>Печать начинает реагировать на приближение Аки, но её тайна пока остаётся нераскрытой.</li></ul>', body_en: '<p>After the events of Season 8, Epsilon discovers an abandoned temple near Mira Hospital. Beneath its ancient altar lies a <strong>sealed entity</strong>. No one knows what is inside the seal—or why all traces of the temple were erased.</p><ul><li>Aki and the team discover a passage beneath the ruins.</li><li>Symbols resembling anomaly marks cover the walls.</li><li>The seal reacts to Aki, but its secret remains unknown.</li></ul>' }
+            { icon: '⛩️', title: 'Сезон 9: «Эпсилон: Печать забытого храма»', title_en: 'Season 9: “Epsilon — The Seal of the Forgotten Temple”', body: '<p>После событий восьмого сезона Эпсилон обнаруживает заброшенный храм неподалёку от госпиталя «Мира». Под его древним алтарём скрыта <strong>запечатанная сущность</strong>. Никто не знает, кто или что находится внутри печати — и почему рядом с госпиталем пытались стереть все следы храма.</p><ul><li>Аки и команда находят проход под руинами.</li><li>На стенах обнаруживаются символы, похожие на знаки аномалии.</li><li>Печать начинает реагировать на приближение Аки, но её тайна пока остаётся нераскрытой.</li></ul>', body_en: '<p>After the events of Season 8, Epsilon discovers an abandoned temple near Mira Hospital. Beneath its ancient altar lies a <strong>sealed entity</strong>. No one knows what is inside the seal—or why all traces of the temple were erased.</p><ul><li>Aki and the team discover a passage beneath the ruins.</li><li>Symbols resembling anomaly marks cover the walls.</li><li>The seal reacts to Aki, but its secret remains unknown.</li></ul>' },
+            { icon: '👁️', title: 'Неизвестный наблюдатель', title_en: 'Unknown Observer', body: '<p>В разных архивах обнаруживаются одинаковые помехи. На нескольких кадрах заметен силуэт, которого не было при первоначальном просмотре записей.</p><p><em>Личность, мотивы и происхождение неизвестны.</em></p>', body_en: '<p>The same interference appears in separate archives. Several frames contain a silhouette that was not visible during the original review.</p><p><em>Identity, motives and origin unknown.</em></p>' },
+            { icon: '🌌', title: 'Вселенная без координат', title_en: 'Universe Without Coordinates', body: '<p>В старых навигационных таблицах найден пробел. Система не признаёт его координатами, но иногда оттуда поступают сигналы.</p><p><em>Статус сектора не подтверждён.</em></p>', body_en: '<p>A gap has been found in old navigation charts. The system does not recognize it as a location, yet signals occasionally arrive from it.</p><p><em>Sector status unconfirmed.</em></p>' },
+            { icon: '📼', title: 'Запись с неизвестной датой', title_en: 'Recording With No Known Date', body: '<p>В архиве обнаружен видеофайл с повреждённой временной меткой. На записи — знакомый голос, обращающийся к тому, кто ещё не должен был увидеть этот файл.</p><p><em>Источник записи не установлен.</em></p>', body_en: '<p>A video file with a corrupted timestamp has appeared in the archive. A familiar voice addresses someone who should not have seen the file yet.</p><p><em>Recording source unidentified.</em></p>' },
+            { icon: '🧭', title: 'Несовпадение реальностей', title_en: 'Reality Mismatch', body: '<p>В нескольких отчётах описаны события, которые не совпадают с известной историей. Некоторые имена отсутствуют в одних документах и встречаются в других.</p><p><em>Причина расхождений неизвестна.</em></p>', body_en: '<p>Several reports describe events that do not match the accepted record. Certain names are absent from some documents and present in others.</p><p><em>Cause of the discrepancies unknown.</em></p>' },
+            { icon: '🧠', title: 'Фрагменты чужой памяти', title_en: 'Fragments of Another Memory', body: '<p>В журналах наблюдения зафиксированы воспоминания, не имеющие подтверждения в личных делах. Их происхождение пока невозможно установить.</p><p><em>Совпадения проверяются.</em></p>', body_en: '<p>Observation logs contain memories with no confirmation in personal records. Their origin cannot yet be established.</p><p><em>Possible matches are being checked.</em></p>' },
+            { icon: '✉️', title: 'Письмо без отправителя', title_en: 'Letter With No Sender', body: '<p>В закрытом архиве найден конверт с материалами о наблюдении за одним из независимых расследователей. Данные об отправителе отсутствуют.</p><p><em>Доступ к приложенным материалам ограничен.</em></p>', body_en: '<p>An envelope has been found in a restricted archive, containing material related to the surveillance of an independent investigator. Sender details are missing.</p><p><em>Access to the attached material is restricted.</em></p>' },
+            { icon: '🔒', title: 'Запечатанный источник', title_en: 'Sealed Origin', body: '<p>Один из участников проекта располагает сведениями о ранней истории Эпсилона. Запрос на раскрытие информации отклонён.</p><p><em>Причина отказа не указана.</em></p>', body_en: '<p>One project member possesses information about Epsilon’s early history. A request to disclose it has been denied.</p><p><em>No reason for the refusal was provided.</em></p>' }
         ];
         function renderLore() {
             const wrapper = document.getElementById('loreAccordion');
@@ -4841,7 +4945,8 @@ const messages=[
 function award(id){if(state.achievements.includes(id))return;state.achievements.push(id);persist();renderAchievements();showToast('🏆 Достижение открыто: '+({firstClue:'Первый след',allClues:'Собиратель улик',caseSolved:'Дело закрыто',glitchSeen:'Наблюдатель',allIntercepts:'Перехватчик'}[id]||id));}
 function renderAchievements(){const box=document.getElementById('epsilonAchievementCards');if(!box)return;const all=[['firstClue','🔎','Первый след','Изучи первую улику'],['allClues','🧩','Собиратель улик','Изучи все три улики'],['glitchSeen','👁️','Наблюдатель','Заметь вмешательство системы'],['allIntercepts','📻','Перехватчик','Прослушай все входящие сообщения'],['caseSolved','📁','Дело закрыто','Сделай обоснованный вывод']];box.innerHTML=all.map(a=>`<div class="evidence-card ${state.achievements.includes(a[0])?'inspected':''}"><span>${state.achievements.includes(a[0])?a[1]:'🔒'}</span><b>${state.achievements.includes(a[0])?a[2]:'???'}</b><small>${state.achievements.includes(a[0])?a[3]:'Условие засекречено'}</small></div>`).join('')}
 function showToast(text){let t=document.getElementById('epsilonFeatureToast');if(!t){t=document.createElement('div');t.id='epsilonFeatureToast';document.body.appendChild(t)}t.textContent=text;t.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.classList.remove('show'),3200)}
-window.inspectEvidence=function(i){const item=evidence[i];if(!item)return;if(!state.inspected.includes(i))state.inspected.push(i);document.querySelectorAll('.evidence-card').forEach((el,n)=>el.classList.toggle('inspected',n===i));const out=document.getElementById('evidenceReadout');if(out)out.textContent=item.title+'\n'+item.text;if(state.inspected.length>=1)award('firstClue');if(state.inspected.length===3)award('allClues');persist()};
+window.inspectEvidence=function(i){const item=evidence[i];if(!item)return;if(!state.inspected.includes(i))state.inspected.push(i);document.querySelectorAll('.evidence-card').forEach((el,n)=>el.classList.toggle('inspected',n===i));const out=document.getElementById('evidenceReadout');if(out)out.textContent=item.title+'
+'+item.text;if(state.inspected.length>=1)award('firstClue');if(state.inspected.length===3)award('allClues');persist()};
 window.submitInvestigationTheory=function(choice){const out=document.getElementById('investigationResult');if(state.inspected.length<2){out.textContent='ДОСТУП К ВЫВОДУ ОТКЛОНЁН: изучи хотя бы две улики.';return}if(choice==='unknown'){state.solved=true;out.textContent='ВЫВОД ПРИНЯТ. Источник сигнала пока не установлен. Доказательств недостаточно, чтобы обвинить лабораторию или подтвердить заранее записанное сообщение. +1 запись в журнал расследования.';award('caseSolved');}else{out.textContent='ГИПОТЕЗА СОХРАНЕНА, НО НЕ ПОДТВЕРЖДЕНА. Улики указывают на расхождения во времени, однако не доказывают выбранную версию.'}persist()};
 window.toggleInterceptPanel=function(force){const panel=document.getElementById('interceptDropdown'),btn=document.getElementById('interceptDockTrigger');if(!panel)return;const open=typeof force==='boolean'?force:panel.hidden;panel.hidden=!open;btn?.setAttribute('aria-expanded',String(open));if(open){document.getElementById('interceptUnread').textContent='0';document.getElementById('interceptDock').classList.remove('has-new');if(!state.achievements.includes('glitchSeen'))award('glitchSeen')}};
 window.nextInterceptMessage=function(){messageIndex=(messageIndex+1)%messages.length;const m=messages[messageIndex],el=document.getElementById('interceptMessageContent');el.innerHTML='<strong></strong><p></p><small></small>';el.querySelector('strong').textContent=m[0];el.querySelector('p').textContent=m[1];el.querySelector('small').textContent=m[2];if(!state.seenMessages.includes(messageIndex))state.seenMessages.push(messageIndex);if(state.seenMessages.length>=messages.length)award('allIntercepts');document.getElementById('interceptUnread').textContent='1';document.getElementById('interceptDock').classList.add('has-new');persist()};
@@ -4871,11 +4976,19 @@ setTimeout(()=>{if(Math.random()<.7)triggerGlitch();},9000);setInterval(()=>{if(
       </div>
       <button id="profileDailyBtn" type="button" class="profile-daily-btn modal-btn" onclick="claimProfileDailyReward()" style="margin-top:14px"><strong id="profileDailyText">Забрать бонус оперативника · +20 XP</strong></button>
     </div>
+    <section class="profile-section nickname-editor" style="margin-top:16px;padding:14px;border:1px solid var(--border-soft);border-radius:12px;background:var(--bg)">
+      <h3 style="margin:0 0 8px">✏️ Никнейм</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input id="profileNicknameInput" type="text" maxlength="20" autocomplete="nickname" placeholder="Новый никнейм" style="flex:1;min-width:150px;padding:11px 12px;border-radius:9px;border:1px solid var(--border-soft);background:var(--panel);color:var(--text);font:inherit">
+        <button type="button" class="modal-btn" onclick="changeProfileNickname()" style="width:auto;margin:0;padding:10px 14px">Изменить</button>
+      </div>
+      <small style="display:block;color:var(--text-muted);margin-top:7px">3–20 символов: латинские буквы, цифры и _ . -</small>
+    </section>
     <div class="xp-container"><div class="xp-header"><span class="xp-level">Прогресс оперативника</span><span id="xpLevelText">XP</span></div><div class="xp-bar-bg"><div id="xpBarFill" class="xp-bar-fill"></div></div><div id="xpText" class="xp-text">0 XP</div></div>
     <section class="profile-section" style="margin-top:18px"><h3 style="margin-bottom:8px">🎨 Цвет имени</h3><div id="colorOptions" class="color-options"></div></section>
     <section class="profile-section" style="margin-top:18px"><h3 style="margin-bottom:8px">🛡️ Рамка аватара</h3><div id="frameOptions" class="frame-options"></div></section>
     <section class="profile-section" style="margin-top:18px"><h3 style="margin-bottom:8px">🏷️ Статус оперативника</h3><div id="statusOptions" class="status-options"></div></section>
-    <section class="profile-section" style="margin-top:18px"><h3 style="margin-bottom:8px">🖱️ Курсор сайта</h3><div id="cursorOptions" class="cursor-options"></div><input id="customCursorUrl" type="url" placeholder="Ссылка на свой курсор (если выбран пользовательский)" style="width:100%;margin-top:8px;padding:10px;border-radius:9px;border:1px solid var(--border-soft);background:var(--bg);color:var(--text)"></section>
+    <section class="profile-section" style="margin-top:18px"><h3 style="margin-bottom:8px">🖱️ Курсор сайта</h3><div id="cursorOptions" class="cursor-options"></div><div style="display:flex;gap:8px;margin-top:9px;flex-wrap:wrap"><input id="customCursorUrl" type="url" placeholder="Ссылка на PNG / SVG / CUR" style="flex:1;min-width:150px;padding:10px;border-radius:9px;border:1px solid var(--border-soft);background:var(--bg);color:var(--text)"><button type="button" class="cursor-custom-input button" onclick="applyCustomCursor()">Применить</button><button type="button" class="cursor-custom-input button" onclick="resetCursor()">Сбросить</button></div></section>
     <section class="profile-section" style="margin-top:18px"><h3 style="margin-bottom:8px">🏆 Достижения</h3><div id="achievementsGrid" class="achievements-grid"></div></section>
     <button type="button" class="modal-btn" onclick="saveProfileCustomization()">Сохранить профиль</button>
   </div>
@@ -4896,6 +5009,7 @@ setTimeout(()=>{if(Math.random()<.7)triggerGlitch();},9000);setInterval(()=>{if(
   dot.setAttribute('aria-hidden', 'true');
   document.body.append(ring, dot);
   document.body.classList.add('epsilon-cursor-enabled');
+  if (!document.body.dataset.cursorTheme) document.body.dataset.cursorTheme = 'default';
 
   let x = -100, y = -100, raf = 0;
   const move = (event) => {
