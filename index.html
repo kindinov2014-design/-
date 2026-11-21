@@ -6,18 +6,26 @@
     python3 apply_fixes.py index.html            # создаст index.fixed.html
     python3 apply_fixes.py index.html out.html   # свой файл результата
 
+Флаги:
+    --no-exam   не добавлять викторину «Экзамен Эпсилона» (только исправления)
+
+Если сайт ведёт себя странно, откройте его с адресом вида  index.html?debug=1 —
+сверху появится красная панель с текстом первой JS-ошибки.
+
 Исходный файл не изменяется. В конце скрипт печатает, какие правки применены,
 а какие не найдены (если вы уже правили этот участок вручную).
 """
 import re
 import sys
 
-if len(sys.argv) < 2:
+flags = {a for a in sys.argv[1:] if a.startswith('--')}
+args = [a for a in sys.argv[1:] if not a.startswith('--')]
+if not args:
     print(__doc__)
     sys.exit(1)
 
-src = sys.argv[1]
-dst = sys.argv[2] if len(sys.argv) > 2 else re.sub(r'(\.html?)?$', '.fixed.html', src, count=1)
+src = args[0]
+dst = args[1] if len(args) > 1 else re.sub(r'(\.html?)?$', '.fixed.html', src, count=1)
 
 with open(src, encoding='utf-8', newline='') as f:
     s = f.read().replace('\r\n', '\n')
@@ -40,6 +48,31 @@ def rep_re(pattern, func, label, flags=re.S):
     s, n = re.subn(pattern, func, s, count=1, flags=flags)
     report.append(('OK (1)' if n else 'НЕ НАЙДЕНО', label))
 
+
+
+# ---------------------------------------------------------------------------
+# 0. Диагностика: при открытии страницы с ?debug показывает первую JS-ошибку
+# ---------------------------------------------------------------------------
+DEBUG_JS = r"""<script>
+(function(){
+  if(!/[?&]debug\b/.test(location.search))return;
+  function show(msg){
+    var b=document.getElementById('__dbg');
+    if(!b){b=document.createElement('pre');b.id='__dbg';
+      b.style.cssText='position:fixed;left:0;right:0;top:0;z-index:2147483647;margin:0;padding:10px 14px;max-height:40vh;overflow:auto;background:#7a0014;color:#fff;font:12px/1.5 monospace;white-space:pre-wrap';
+      (document.body||document.documentElement).appendChild(b);}
+    b.textContent+=msg+'\n';
+  }
+  window.addEventListener('error',function(e){show('JS-ОШИБКА: '+e.message+'  (строка '+e.lineno+', столбец '+e.colno+')');});
+  window.addEventListener('unhandledrejection',function(e){show('PROMISE: '+(e.reason&&e.reason.message||e.reason));});
+})();
+</script>
+"""
+if '<head>' in s and '__dbg' not in s:
+    s = s.replace('<head>', '<head>\n' + DEBUG_JS, 1)
+    report.append(('OK (1)', '0. Добавлена диагностика (?debug)'))
+else:
+    report.append(('ПРОПУЩЕНО', '0. Диагностика: нет тега <head> или уже добавлена'))
 
 # ---------------------------------------------------------------------------
 # 1. Лишний текст «\n» на странице перед окном профиля
@@ -475,13 +508,13 @@ EXAM_JS = r'''<script id="epsilon-exam-script">
 </script>
 '''
 
-rep('</head>', EXAM_CSS + '</head>', '11a. Экзамен: стили')
-rep('<div class="page" id="page-characters">', EXAM_PAGE + '<div class="page" id="page-characters">', '11b. Экзамен: страница')
-rep('<button class="nav-btn" onclick="showPage(\'coop\')" data-i18n="nav_coop">',
-    '<button class="nav-btn" onclick="showPage(\'exam\')">🧠 Экзамен</button>\n            <button class="nav-btn" onclick="showPage(\'coop\')" data-i18n="nav_coop">',
-    '11c. Экзамен: кнопка в меню')
-rep('</body>', EXAM_JS + '</body>', '11d. Экзамен: скрипт')
-
+if '--no-exam' not in flags:
+    rep('</head>', EXAM_CSS + '</head>', '11a. Экзамен: стили')
+    rep('<div class="page" id="page-characters">', EXAM_PAGE + '<div class="page" id="page-characters">', '11b. Экзамен: страница')
+    rep('<button class="nav-btn" onclick="showPage(\'coop\')" data-i18n="nav_coop">',
+        '<button class="nav-btn" onclick="showPage(\'exam\')">🧠 Экзамен</button>\n            <button class="nav-btn" onclick="showPage(\'coop\')" data-i18n="nav_coop">',
+        '11c. Экзамен: кнопка в меню')
+    rep('</body>', EXAM_JS + '</body>', '11d. Экзамен: скрипт')
 
 with open(dst, 'w', encoding='utf-8', newline='') as f:
     f.write(s)
@@ -491,3 +524,28 @@ for status, label in report:
     print('%-12s %s' % (status, label))
 if any(st == 'НЕ НАЙДЕНО' for st, _ in report):
     print('\nПравки со статусом «НЕ НАЙДЕНО» не применены — вероятно, этот участок уже изменён.')
+
+# ---------------------------------------------------------------------------
+# Проверка синтаксиса всех встроенных <script> (нужен Node.js; без него пропускается)
+# ---------------------------------------------------------------------------
+import os, shutil, subprocess, tempfile
+node = shutil.which('node')
+if node:
+    bad = 0
+    for m in re.finditer(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>', s, re.S):
+        code = m.group(1)
+        if not code.strip():
+            continue
+        line = s.count('\n', 0, m.start(1)) + 1
+        with tempfile.NamedTemporaryFile('w', suffix='.js', delete=False, encoding='utf-8') as tf:
+            tf.write(code)
+        r = subprocess.run([node, '--check', tf.name], capture_output=True, text=True)
+        os.unlink(tf.name)
+        if r.returncode != 0:
+            bad += 1
+            first = [l for l in r.stderr.splitlines() if 'Error' in l]
+            print('\n⚠ СИНТАКСИЧЕСКАЯ ОШИБКА в <script>, начинающемся со строки %d итогового файла:' % line)
+            print('  ' + (first[0] if first else r.stderr.strip()[:300]))
+    print('\nПроверка JS: %s' % ('ошибок нет ✓' if not bad else 'найдено проблемных блоков: %d' % bad))
+else:
+    print('\nNode.js не найден — проверка синтаксиса JS пропущена. Откройте сайт с ?debug.')
